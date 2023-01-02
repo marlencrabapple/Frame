@@ -1,0 +1,10 @@
+#!/usr/bin/env perl
+
+use utf8;
+use v5.36;
+use autodie;
+
+use Frame::App;
+
+my $app = Frame::App->new;
+$app->cmd(@ARGV)
