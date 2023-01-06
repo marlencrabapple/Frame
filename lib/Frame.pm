@@ -36,6 +36,7 @@ method handler ($env) {
   $req->stash = {};
   $res = $req->new_response;
   $self->dispatch;
+  
   $res->finalize
 }
 

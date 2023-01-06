@@ -35,22 +35,35 @@ method stash {
   $self->app->req ? $self->app->req->stash : croak 'Stash not available until route dispatch.'
 }
 
-method render ($content, $status = 200, $content_type = 'text/html; charset=utf-8') {
+method render ($content, $status = 200, $content_type = 'text/html; charset=utf-8', $headers = [], $cookies = {}) {
   my $app = $self->app;
-  $app->res->status($status);
+  my $res = $app->res;
+  my $res_headers = $res->headers;
+
+  $res->status($status);
+
+  foreach my $header (@$headers) {
+    $res_headers->push_header(%$header)
+  }
+
+  $res->cookies->@{keys %$cookies} = values %$cookies;
 
   if(ref $content eq 'HASH') {
-    $app->res->content_type('application/json; charset=utf-8');
-    $app->res->body(encode_json($content))
+    $res->content_type('application/json; charset=utf-8');
+    $res->body(encode_json($content))
   }
   else {
-    $app->res->content_type($content_type);
-    $app->res->body($content)
+    $res->content_type($content_type);
+    $res->body($content)
   }
 }
 
 method render_404 {
   $self->render('Page not found', 404)
+}
+
+method redirect ($url, $status = 302) {
+  $self->app->res->redirect($url, $status)
 }
 
 1

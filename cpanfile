@@ -2,8 +2,6 @@ requires 'perl', 'v5.36';
 
 requires 'Plack', '1.0050';
 requires 'Plack::App::File';
-requires 'Plack::Builder';
-requires 'Plack::Middleware::Static';
 requires 'Plack::Util';
 
 requires 'Path::Tiny', '0.144';
@@ -35,14 +33,6 @@ requires 'Text::Xslate', 'v3.5.9';
 requires 'Net::SSLeay', '1.92';
 requires 'IO::Socket::SSL', '2.075';
 requires 'HTTP::Tinyish', '0.18';
-
-requires 'Image::ExifTool', '12.42';
-requires 'GD', '2.76';
-
-requires 'Time::Piece', '1.3401';
-requires 'Time::Seconds', '1.3401';
-requires 'Time::Moment', '0.44';
-requires 'DateTime::TimeZone', '2.57';
 
 on develop => sub {
   recommends 'App::perlimports', '0.000049';

@@ -11,7 +11,7 @@ use autodie;
 use Data::Dumper;
 use Scalar::Util 'blessed';
 
-state $rere = qr/^regexp$/i; Dumper(\$rere);
+state $rere = qr/^regexp$/i;
 
 field @routes :reader;
 field $tree :reader; # Not really a tree
@@ -61,7 +61,7 @@ method match ($req) {
   
   pop @path if $path[-1] eq '';
 
-  my $branches = $$tree{$req->method}{scalar @path} || return 0;
+  my $branches = $$tree{$req->method}{scalar @path} || return undef;
   my $barren = {};
 
   NEXT_BRANCH:

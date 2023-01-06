@@ -1,15 +1,15 @@
 use Object::Pad;
 
 package Frame::Routes::Pattern;
+class Frame::Routes::Pattern :does(Frame::Base);
 
+use utf8;
 use v5.36;
 use autodie;
 
-use Data::Dumper;
+field $pattern :param :reader;
+field $filters :reader;
 
-class Frame::Routes::Pattern :does(Frame::Base) {
-  field $pattern :param :reader;
-  field $filters :reader;
+ADJUSTPARAMS ( $params ) { $filters = $$params{filters} // {} }
 
-  ADJUSTPARAMS ( $params ) { $filters = $$params{filters} // {} }
-}
+1
