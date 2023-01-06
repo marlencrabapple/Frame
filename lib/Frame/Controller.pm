@@ -7,6 +7,7 @@ use utf8;
 use v5.36;
 use autodie;
 
+use Carp;
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
@@ -17,6 +18,8 @@ state $tx_default = Text::Xslate->new(
   path => ['view']
 );
 
+# field $req :reader;
+# field $res :reader;
 # field $tx :accessor;
 
 # BUILD {
@@ -26,6 +29,10 @@ state $tx_default = Text::Xslate->new(
 method template :common {
   my @args = @_;
   $tx_default->render($class, @args)
+}
+
+method stash {
+  $self->app->req ? $self->app->req->stash : croak 'Stash not available until route dispatch.'
 }
 
 method render ($content, $status = 200, $content_type = 'text/html; charset=utf-8') {

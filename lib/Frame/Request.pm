@@ -14,10 +14,15 @@ use Data::Dumper;
 field @placeholders_ord :reader;
 field $placeholders :reader;
 field @placeholder_values_ord :reader;
+field $stash :mutator;
 
 # sub BUILDARGS {
 #   my ($class, $env) = @_;
 #   $class->SUPER::new($env)
+# }
+
+# ADJUST {
+#   $stash //= {};
 # }
 
 method placeholder ($key, $value = undef) {
@@ -33,7 +38,6 @@ method placeholder ($key, $value = undef) {
 
 method set_placeholders (@placeholders) {
   foreach my $placeholder (@placeholders) {
-    say Dumper($placeholder);
     $self->placeholder(%$placeholder)
   }
 }

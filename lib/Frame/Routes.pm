@@ -1,9 +1,7 @@
 use Object::Pad;
 
 package Frame::Routes;
-
 use Frame::Routes::Route;
-
 class Frame::Routes :does(Frame::Routes::Route::Factory);
 
 use utf8;
@@ -15,8 +13,9 @@ use Scalar::Util 'blessed';
 
 state $rere = qr/^regexp$/i; Dumper(\$rere);
 
-field $tree; # Not really a tree
-field $patterns;
+field @routes :reader;
+field $tree :reader; # Not really a tree
+field $patterns :reader;
 
 ADJUSTPARAMS ( $params ) {
   $tree = {};
@@ -40,7 +39,7 @@ method _add_route($route) {
       my $placeholder_key = $1;
       my $filter = $route->pattern->filters->{$placeholder_key};
       
-      $$patterns{\$filter} = { key => $placeholder_key, filter => $filter };
+      $$patterns{\$filter} = { $placeholder_key => $filter };
       $last_key = \$filter
     }
     else {
@@ -51,12 +50,17 @@ method _add_route($route) {
     $curr = $$prev{$last_key}
   }
 
-  $$prev{$last_key} = $route
+  $$prev{$last_key} = $route;
+  push @routes, $route
 }
 
-method match {
-  my $req = $self->app->req;
-  my @path = $req->path eq '/' ? '/' : grep { $_ } split '/', $req->path;
+method match ($req) {
+  my @path = $req->path eq '/'
+    ? '/'
+    : split '/', substr($req->path, 1), -1;
+  
+  pop @path if $path[-1] eq '';
+
   my $branches = $$tree{$req->method}{scalar @path} || return 0;
   my $barren = {};
 
@@ -76,17 +80,18 @@ method match {
     }
     else {
       PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
-        next unless $$patterns{$key}{key} && !$$barren{$i}{$key};
+        next unless $$patterns{$key} && !$$barren{$i}{$key};
+        my ($placeholder_key, $placeholder_filter) = $$patterns{$key}->%*;
 
-        $match = ref $$patterns{$key}{filter} eq 'CODE'
-          ? $$patterns{$key}{filter}($part) ? 1 : 0
-          : ref($$patterns{$key}{filter}) =~ $rere
-            ? $part =~ $$patterns{$key}{filter} ? 1 : 0
-            : defined $$patterns{$key}{filter} ? 0 : 1;
+        $match = ref $placeholder_filter eq 'CODE'
+          ? $placeholder_filter->($part) ? 1 : 0
+          : ref($placeholder_filter) =~ $rere
+            ? $part =~ $placeholder_filter ? 1 : 0
+            : defined $placeholder_filter ? 0 : $part ne '';
 
         if($match) {
           $match = $key;
-          push @placeholder_matches, { $$patterns{$key}{key} => $part };
+          push @placeholder_matches, { $placeholder_key => $part };
           last
         }
       }
@@ -117,7 +122,7 @@ method match {
     return $curr
   }
 
-  0
+  undef
 }
 
 method under {
