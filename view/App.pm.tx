@@ -1,0 +1,28 @@
+use Object::Pad;
+
+package <: $app :>
+class <: $app :> :does(Frame);
+
+use utf8;
+use v5.36;
+use autodie;
+
+use YAML::Tiny;
+
+ADJUST {
+  $config = YAML::Tiny->read($ENV{<: $app :>_CONFIG_FILE} || 'config.yml')->[0];
+}
+
+method startup {
+  my $r = $self->routes;
+
+  $r->get('/', 'index');
+  $r->get('/example', 'example#default_view');
+  $r->get('/example/:asdf', 'example#default_view')
+}
+
+method index {
+  $self->render('Hello, World!')
+}
+
+1

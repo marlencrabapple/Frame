@@ -1,0 +1,7 @@
+: cascade "layout/default.html.tx"
+
+: override content -> {
+  <div class="container py-2 px-3 text-center">
+    <h1><: $asdf :></h1>
+  </div>
+}
