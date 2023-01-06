@@ -26,6 +26,7 @@ role Frame::Example::Db {
     my $dbh = DBI->connect_cached($self->app->config->{db}->@{qw/source username auth attr/});
 
     if(!$dbh_old || $dbh != $dbh_old) {
+      say Dumper({ stale => $dbh_old, fresh => $dbh });
       $dbh->do("PRAGMA foreign_keys = ON");
       $dbh_old = $dbh
     }

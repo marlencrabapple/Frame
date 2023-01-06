@@ -29,6 +29,10 @@ class Frame::Example :does(Frame) :does(Frame::Example::Db) {
       $self->render({ asdf => $asdf, fdas => $fdas, ddd => $ddd })
     });
 
+    $r->get('/self', sub ($self) {
+      $self->render('<pre>' . Dumper($self) . '</pre>')
+    });
+
     $r->post('/add', 'default#add_item')
   }
 }

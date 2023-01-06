@@ -11,7 +11,6 @@ use Frame::Routes::Match;
 class Frame::Routes::Route :does(Frame::Base) {
   field $method :param :reader;
   field $pattern :param :reader;
-  field $filters :param :reader = undef;
   field $dest :reader :param;
 
   method route($req, $res) {

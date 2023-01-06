@@ -1,27 +1,41 @@
 use Object::Pad;
 
 package Frame::Request;
+class Frame::Request :isa(Plack::Request) :does(Frame::Base);
 
-use v5.36;
 use utf8;
+use v5.36;
 use autodie;
-
-use Plack::Request;
 
 use Data::Dumper;
 
-class Frame::Request :isa(Plack::Request) {
-  field @placeholders_ord :reader;
-  field $placeholders :reader;
-  field @placeholder_values_ord :reader;
-  
-  method placeholder ($key, $value = undef) {
-    if($value && !$$placeholders{$key}) {
-      push @placeholders_ord, { $key => $value };
-      push @placeholder_values_ord, $value;
-      $$placeholders{$key} = $placeholders_ord[-1]
-    }
+# field $env :param;
+# field $app :param;
+field @placeholders_ord :reader;
+field $placeholders :reader;
+field @placeholder_values_ord :reader;
 
-    $$placeholders{$key}
+# sub BUILDARGS {
+#   my ($class, $env) = @_;
+#   $class->SUPER::new($env)
+# }
+
+method placeholder ($key, $value = undef) {
+  if($value && !$$placeholders{$key}) {
+    push @placeholders_ord, { $key => $value };
+    push @placeholder_values_ord, $value;
+    #$$placeholders{$key} = $placeholders_ord[-1]
+    $$placeholders{$key} = $value
+  }
+
+  $$placeholders{$key}
+}
+
+method set_placeholders (@placeholders) {
+  foreach my $placeholder (@placeholders) {
+    say Dumper($placeholder);
+    $self->placeholder(%$placeholder)
   }
 }
+
+1

@@ -2,101 +2,126 @@ use Object::Pad;
 
 package Frame::Routes;
 
+use Frame::Routes::Route;
+
+class Frame::Routes :does(Frame::Routes::Route::Factory);
+
+use utf8;
 use v5.36;
 use autodie;
-
-use Frame::Routes::Route;
 
 use Data::Dumper;
 use Scalar::Util 'blessed';
 
-# This can (and maybe should?) be done with AUTO instead of roles
-class Frame::Routes :does(Frame::Routes::Route::Factory) {
-  #field $app :param :weak :accessor; # This is temporary hopefully
-  field $routes;
-  field $patterns;
+state $rere = qr/^regexp$/i; Dumper(\$rere);
 
-  ADJUSTPARAMS ( $params ) {
-    $routes = {};
-    $patterns = {};
+field $tree; # Not really a tree
+field $patterns;
 
-    $self->app($$params{app}) # THIS is temporary hopefully
-                              # Because I'm gonna have to redo a lot of things otherwise potentially...
-  }
+ADJUSTPARAMS ( $params ) {
+  $tree = {};
+  $patterns = {};
+  $self->app($$params{app}) # TODO: Remember why this worried me and fix it
+}
 
-  method _add_route($route) {
-    my @pattern = $route->pattern->pattern =~ /([^\/]+)(?:\/)?/g;
-    my $curr = $$routes{$route->method} //= {};
-    my $prev;
-    my $last_key;
-    
-    foreach my $part (@pattern) {
-      $prev = $curr;
+method _add_route($route) {
+  my @pattern = $route->pattern->pattern eq '/' ? '/' : $route->pattern->pattern =~ /([^\/]+)(?:\/)?/g;
+  my $depth = scalar @pattern;
+  my $branches = $$tree{$route->method}{$depth} //= {};
+  my $curr = $branches;
 
-      if($part =~ /^\:(.+)$/) {
-        my $placeholder_key = $1;
-        my $filter = $route->pattern->filters->{$placeholder_key};
-        
-        $$patterns{\$filter} = { key => $placeholder_key, filter => $filter };
-        $last_key = \$filter
-      }
-      else {
-        $last_key = $part
-      }
+  my $prev;
+  my $last_key;
+  
+  foreach my $part (@pattern) {
+    $prev = $curr;
 
-      $$prev{$last_key} = {};
-      $curr = $$prev{$last_key}
+    if($part =~ /^\:(.+)$/) {
+      my $placeholder_key = $1;
+      my $filter = $route->pattern->filters->{$placeholder_key};
+      
+      $$patterns{\$filter} = { key => $placeholder_key, filter => $filter };
+      $last_key = \$filter
+    }
+    else {
+      $last_key = $part
     }
 
-    $route->pattern->pattern eq '/'
-      ? $$curr{'/'} = $route
-      : $$prev{$last_key} = $route
+    $$prev{$last_key} = {};
+    $curr = $$prev{$last_key}
   }
 
-  method match($req) {
-    my @path = $req->path eq '/' ? '/' : grep { $_ } split '/', $req->path;
-    
-    my $routes = $$routes{$req->method};
-    my $last_hit = $routes;
-    my %placeholders;
+  $$prev{$last_key} = $route
+}
 
-    foreach my $part (@path) {
-      $self->app->fatal($self->app->render_404)
-        if blessed $last_hit eq 'Frame::Routes::Route';
+method match {
+  my $req = $self->app->req;
+  my @path = $req->path eq '/' ? '/' : grep { $_ } split '/', $req->path;
+  my $branches = $$tree{$req->method}{scalar @path} || return 0;
+  my $barren = {};
 
-      if($$last_hit{$part}) {
-        $last_hit = $$last_hit{$part}
-      }
-      else {
-        foreach my $key (keys %$last_hit) {
-          if($$patterns{$key}) {
-            my $part_matches = 0;
+  NEXT_BRANCH:
+  my $i = 0;
+  my $curr = $branches;
+  my $prev = undef;
+  my $prev_key = undef; # Maybe $curr_key (or $prev_curr_key? $curr_prev_key? $prev__path_to_curr?) is a better name
+  my @placeholder_matches = ();
+  
+  PATH_PART: foreach my $part (@path) {
+    my $match;
 
-            if(ref $$patterns{$key}{filter} eq 'CODE') {
-              $part_matches = 1 if $$patterns{$key}{filter}($part)
-            }
-            elsif(ref($$patterns{$key}{filter}) =~ /^regexp$/i) {
-              $part_matches = 1 if $part =~ $$patterns{$key}{filter}
-            }
-            elsif(!$$patterns{$key}{filter}) {
-              $part_matches = 1
-            }
+    if($$curr{$part}) {
+      last if $$barren{$i}{$part};
+      $match = $part
+    }
+    else {
+      PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
+        next unless $$patterns{$key}{key} && !$$barren{$i}{$key};
 
-            if($part_matches) {
-              $req->placeholder($$patterns{$key}{key}, $part);
-              $last_hit = $$last_hit{$key};
-              last
-            }
-          }
+        $match = ref $$patterns{$key}{filter} eq 'CODE'
+          ? $$patterns{$key}{filter}($part) ? 1 : 0
+          : ref($$patterns{$key}{filter}) =~ $rere
+            ? $part =~ $$patterns{$key}{filter} ? 1 : 0
+            : defined $$patterns{$key}{filter} ? 0 : 1;
+
+        if($match) {
+          $match = $key;
+          push @placeholder_matches, { $$patterns{$key}{key} => $part };
+          last
         }
       }
     }
-    
-    return $last_hit if blessed $last_hit eq 'Frame::Routes::Route';
-    $self->app->fatal($self->app->render_404)
+
+    if($match) {
+      $prev = $curr;
+      $prev_key = $match;
+      $curr = $$curr{$match};
+      next
+    }
+    else {
+      if($prev) {
+        $$barren{$i > 0 ? $i - 1 : 0}{$prev_key} = 1;
+        goto NEXT_BRANCH
+      }
+      else {
+        last
+      }
+    }
+  }
+  continue {
+    $i++
   }
 
-  method under {
-
+  if(defined blessed $curr && blessed $curr eq 'Frame::Routes::Route') {
+    $req->set_placeholders(@placeholder_matches);
+    return $curr
   }
+
+  0
 }
+
+method under {
+
+}
+
+1
