@@ -38,5 +38,11 @@ on develop => sub {
   recommends 'App::perlimports', '0.000049';
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
-  recommends 'Perl::Critic::Community', 'v1.0.3'
+  recommends 'Perl::Critic::Community', 'v1.0.3';
+  recommends 'Dist::Milla';
+  recommends 'Carmel'
+};
+
+on test => sub {
+    requires 'Test::More', '0.96'
 }

@@ -38,7 +38,7 @@ package Frame::Routes::Route::Factory {
         $route_args{dest} = { %$dest }
       }
       elsif(ref $dest eq 'CODE') {
-        $route_args{dest}->{sub} = $dest
+        $route_args{dest}{sub} = $dest
       }
       else {
         my ($c, $sub) = $dest =~ /^(?:([\w\-]+)(?:#))?([\w]+)$/;

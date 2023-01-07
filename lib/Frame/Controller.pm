@@ -13,10 +13,12 @@ use Text::Xslate;
 use JSON::MaybeXS;
 use Data::Dumper;
 
-state $tx_default = Text::Xslate->new(
+state $tx_default_state = Text::Xslate->new(
   cache => $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development' ? 0 : 1,
   path => ['view']
 );
+
+our $tx_default = $tx_default_state;
 
 # field $req :reader;
 # field $res :reader;
@@ -32,7 +34,7 @@ method template :common {
 }
 
 method stash {
-  $self->app->req ? $self->app->req->stash : croak 'Stash not available until route dispatch.'
+  $self->app->req ? $self->app->req->stash : croak 'Stash not available until route dispatch'
 }
 
 method render ($content, $status = 200, $content_type = 'text/html; charset=utf-8', $headers = [], $cookies = {}) {

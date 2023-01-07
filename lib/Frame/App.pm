@@ -8,10 +8,12 @@ use v5.36;
 use autodie;
 
 use Frame;
+use Frame::Example;
 
 use Path::Tiny;
 
-my $app = Frame->new;
+my $app = Frame::Example->new; 
+my $tx = $Frame::Controller::tx_default;
 my $psgi = $app->to_psgi;
 
 state %dispatch = (
@@ -24,7 +26,8 @@ method cmd(@argv) {
 }
 
 method new_app($package) {
-  ...
+  our $tx;
+  my $dir = path($package)->mkdir;
 }
 
 1

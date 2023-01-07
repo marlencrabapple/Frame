@@ -1,0 +1,101 @@
+{
+   "abstract" : "Blah blah blah",
+   "author" : [
+      "Ian P Bradley <ian.bradley@studiocrabapple.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Milla version v1.0.21, Dist::Zilla version 6.029, CPAN::Meta::Converter version 2.150010",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : 2
+   },
+   "name" : "Frame",
+   "no_index" : {
+      "directory" : [
+         "eg",
+         "examples",
+         "inc",
+         "share",
+         "t",
+         "xt"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build::Tiny" : "0.034"
+         }
+      },
+      "develop" : {
+         "recommends" : {
+            "App::perlimports" : "0.000049",
+            "Carmel" : "0",
+            "Dist::Milla" : "0",
+            "Perl::Critic" : "1.144",
+            "Perl::Critic::Community" : "v1.0.3",
+            "Perl::Tidy" : "20221112"
+         },
+         "requires" : {
+            "Dist::Milla" : "v1.0.21",
+            "Test::Pod" : "1.41"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Cpanel::JSON::XS" : "0",
+            "DBD::SQLite" : "1.72",
+            "DBI" : "1.643",
+            "Future::AsyncAwait" : "0.62",
+            "Gazelle" : "0.49",
+            "HTTP::Parser::XS" : "0.17",
+            "HTTP::Tinyish" : "0.18",
+            "IO::Async" : "0.802",
+            "IO::Async::SSL" : "0.23",
+            "IO::Socket::SSL" : "2.075",
+            "JSON::MaybeXS" : "0",
+            "List::AllUtils" : "0.19",
+            "Net::Async::HTTP::Server" : "0.13",
+            "Net::SSLeay" : "1.92",
+            "Object::Pad" : "0.77",
+            "Parallel::Prefork" : "0.18",
+            "Path::Tiny" : "0.144",
+            "Plack" : "1.0050",
+            "Plack::App::File" : "0",
+            "Plack::Util" : "0",
+            "SQL::Abstract" : "2.000001",
+            "Server::Starter" : "0.35",
+            "Starlet" : "0.31",
+            "Syntax::Keyword::Dynamically" : "0.11",
+            "Text::Xslate" : "v3.5.9",
+            "YAML::Tiny" : "0",
+            "perl" : "v5.36.0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0.96"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/marlencrabapple/Frame/issues"
+      },
+      "homepage" : "https://github.com/marlencrabapple/Frame",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/marlencrabapple/Frame.git",
+         "web" : "https://github.com/marlencrabapple/Frame"
+      }
+   },
+   "version" : "0.01",
+   "x_generated_by_perl" : "v5.36.0",
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.32",
+   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
+   "x_static_install" : 1
+}
+

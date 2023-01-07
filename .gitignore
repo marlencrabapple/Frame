@@ -4,3 +4,10 @@
 .vscode/
 local/
 *.sqlite3
+/Frame-*
+/.build
+/_build*
+/Build
+MYMETA.*
+!META.json
+/.prove
