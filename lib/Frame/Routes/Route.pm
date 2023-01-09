@@ -6,13 +6,56 @@ package Frame::Routes::Route {
     use v5.36;
     use autodie;
 
+    use Data::Dumper;
+
+    state $placeholder_re = qr/^\:(.+)$/;
+
     field $method :param :reader;
     field $pattern :param :reader;
     field $dest :param :reader;
 
+    field $tree :reader;
+    field @pattern_arr :reader;
+    field @placeholders: reader;
+
+    ADJUSTPARAMS ($params) {
+      @pattern_arr = $pattern->pattern eq '/'
+        ? '/'
+        : $pattern->pattern =~ /([^\/]+)(?:\/)?/g;
+
+      my $depth = scalar @pattern_arr;
+      my $branches = $$tree{$method}{$depth} //= {};
+      my $curr = $branches;
+
+      my $prev;
+      my $last_key;
+      
+      foreach my $part (@pattern_arr) {
+        $prev = $curr;
+
+        if(my $placeholder = $self->is_placeholder($part)) {
+          my $filter = $pattern->filters->{$placeholder};
+          $last_key = $filter;
+          push @placeholders, $placeholder
+        }
+        else {
+          $last_key = $part
+        }
+
+        $$prev{$last_key} = {};
+        $curr = $$prev{$last_key}
+      }
+
+      $$prev{$last_key} = $self;
+    }
+
     method route($req, $res) {
       my ($c, $sub) = @$dest{qw(c sub)};
       $c->$sub($req->placeholder_values_ord)
+    }
+
+    method is_placeholder ($pathstr) {
+      ($pathstr =~ $placeholder_re)[0]
     }
   }
 }
@@ -27,6 +70,14 @@ package Frame::Routes::Route::Factory {
 
     use Data::Dumper;
     use Scalar::Util 'blessed';
+
+    field $patterns :reader;
+    field $tree :reader;
+
+    ADJUSTPARAMS ($params) {
+      $patterns //= {};
+      $tree //= {}
+    }
 
     method _add_route ($route);
 
@@ -69,6 +120,7 @@ package Frame::Routes::Route::Factory {
           $route_args{filter} = $arg
         }
         elsif(ref $arg eq 'HASH') {
+          @$patterns{(values %$arg)} = (values %$arg);
           $route_args{pattern} = Frame::Routes::Pattern->new(
             pattern => $pattern,
             filters => $arg

@@ -9,48 +9,47 @@ use v5.36;
 use autodie;
 
 use Data::Dumper;
-use Scalar::Util 'blessed';
+use Scalar::Util qw/blessed refaddr/;
 
 state $rere = qr/^regexp$/i;
 
 field @routes :reader;
-field $tree :reader; # Not really a tree
-field $patterns :reader;
 
 ADJUSTPARAMS ( $params ) {
-  $tree = {};
-  $patterns = {};
   $self->app($$params{app}) # TODO: Remember why this worried me and fix it
 }
 
 method _add_route($route) {
-  my @pattern = $route->pattern->pattern eq '/' ? '/' : $route->pattern->pattern =~ /([^\/]+)(?:\/)?/g;
-  my $depth = scalar @pattern;
-  my $branches = $$tree{$route->method}{$depth} //= {};
-  my $curr = $branches;
+  # my @pattern = $route->pattern_arr;
+  # my $depth = scalar @pattern;
+  # my $branches = $self->tree->{$route->method}{$depth} //= {};
+  # my $curr = $branches;
 
-  my $prev;
-  my $last_key;
+  # my $prev;
+  # my $last_key;
   
-  foreach my $part (@pattern) {
-    $prev = $curr;
+  # foreach my $part (@pattern) {
+  #   $prev = $curr;
 
-    if($part =~ /^\:(.+)$/) {
-      my $placeholder_key = $1;
-      my $filter = $route->pattern->filters->{$placeholder_key};
-      
-      $$patterns{\$filter} = { $placeholder_key => $filter };
-      $last_key = \$filter
-    }
-    else {
-      $last_key = $part
-    }
+  #   if(my $placeholder = $route->is_placeholder($part)) {
+  #     my $filter = $route->pattern->filters->{$placeholder};
+  #     $last_key = $filter;
+  #   }
+  #   else {
+  #     $last_key = $part
+  #   }
 
-    $$prev{$last_key} = {};
-    $curr = $$prev{$last_key}
-  }
+  #   $$prev{$last_key} = {};
+  #   $curr = $$prev{$last_key}
+  # }
 
-  $$prev{$last_key} = $route;
+  # $$prev{$last_key} = $route;
+
+  my $branch = $route->tree->{$route->method}{scalar $route->pattern_arr};
+  my $branches = $self->tree->{$route->method}{scalar $route->pattern_arr} //= {};
+
+  $branches->@{keys %$branch} = (values %$branch);
+
   push @routes, $route
 }
 
@@ -61,7 +60,9 @@ method match ($req) {
   
   pop @path if $path[-1] eq '';
 
-  my $branches = $$tree{$req->method}{scalar @path} || return undef;
+  # die Dumper($self->tree);
+
+  my $branches = $self->tree->{$req->method}{scalar @path} || return undef;
   my $barren = {};
 
   NEXT_BRANCH:
@@ -80,18 +81,17 @@ method match ($req) {
     }
     else {
       PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
-        next unless $$patterns{$key} && !$$barren{$i}{$key};
-        my ($placeholder_key, $placeholder_filter) = $$patterns{$key}->%*;
+        next unless $self->patterns->{$key} && !$$barren{$i}{$key};
 
-        $match = ref $placeholder_filter eq 'CODE'
-          ? $placeholder_filter->($part) ? 1 : 0
-          : ref($placeholder_filter) =~ $rere
-            ? $part =~ $placeholder_filter ? 1 : 0
-            : defined $placeholder_filter ? 0 : $part ne '';
+        $match = ref $self->patterns->{$key} eq 'CODE'
+          ? $self->patterns->{$key}->($self->app, $part) ? 1 : 0
+          : ref($self->patterns->{$key}) =~ $rere
+            ? $part =~ $self->patterns->{$key} ? 1 : 0
+            : defined $self->patterns->{$key} ? 0 : $part ne '';
 
         if($match) {
           $match = $key;
-          push @placeholder_matches, { $placeholder_key => $part };
+          push @placeholder_matches, $part;
           last
         }
       }
@@ -118,6 +118,10 @@ method match ($req) {
   }
 
   if(defined blessed $curr && blessed $curr eq 'Frame::Routes::Route') {
+    for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
+      $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
+    }
+
     $req->set_placeholders(@placeholder_matches);
     return $curr
   }
