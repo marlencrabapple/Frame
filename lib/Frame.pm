@@ -20,6 +20,7 @@ use Frame::Controller;
 field $req :reader;
 field $res :reader;
 field $routes :reader;
+field $charset :mutator = 'utf-8';
 field $request_class :mutator = 'Frame::Request';
 
 ADJUSTPARAMS ( $params ) {
@@ -35,7 +36,9 @@ method handler ($env) {
   # $req->app($self);
   
   $req = Frame::Request->new($env);
+  $req->app($self->app);
   $req->stash = {};
+
   $res = $req->new_response;
   $self->dispatch;
   
