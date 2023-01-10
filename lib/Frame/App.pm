@@ -12,9 +12,15 @@ use Frame::Example;
 
 use Path::Tiny;
 
-my $app = Frame::Example->new; 
-my $tx = $Frame::Controller::tx_default;
-my $psgi = $app->to_psgi;
+field $app;
+field $tx;
+field $psgi;
+
+ADJUST {
+  $app = Frame::Example->new; 
+  $tx = $Frame::Controller::tx_default;
+  $psgi = $app->to_psgi;
+}
 
 state %dispatch = (
   new => 'new_app',

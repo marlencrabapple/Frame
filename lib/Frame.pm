@@ -33,8 +33,6 @@ method to_psgi { sub { $self->handler(shift) } }
 
 method handler ($env) {
   # $req = $request_class->new($env);
-  # $req->app($self);
-  
   $req = Frame::Request->new($env);
   $req->app($self->app);
   $req->stash = {};
@@ -50,13 +48,10 @@ method dispatch {
   $route ? $route->route($req, $res) : $self->render_404
 }
 
-method fatal {
-  die Dumper(@_);
-}
-
 method startup;
 
-1;
+1
+
 __END__
 
 =encoding utf-8

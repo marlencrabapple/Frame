@@ -1,6 +1,7 @@
 ._*
 .DS_Store
 .carmel/
+cpanfile.snapshot
 .vscode/
 local/
 *.sqlite3

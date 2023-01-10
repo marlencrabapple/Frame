@@ -20,35 +20,8 @@ ADJUSTPARAMS ( $params ) {
 }
 
 method _add_route($route) {
-  # my @pattern = $route->pattern_arr;
-  # my $depth = scalar @pattern;
-  # my $branches = $self->tree->{$route->method}{$depth} //= {};
-  # my $curr = $branches;
-
-  # my $prev;
-  # my $last_key;
-  
-  # foreach my $part (@pattern) {
-  #   $prev = $curr;
-
-  #   if(my $placeholder = $route->is_placeholder($part)) {
-  #     my $filter = $route->pattern->filters->{$placeholder};
-  #     $last_key = $filter;
-  #   }
-  #   else {
-  #     $last_key = $part
-  #   }
-
-  #   $$prev{$last_key} = {};
-  #   $curr = $$prev{$last_key}
-  # }
-
-  # $$prev{$last_key} = $route;
-
   my $branch = $route->tree->{$route->method}{scalar $route->pattern_arr};
-  my $branches = $self->tree->{$route->method}{scalar $route->pattern_arr} //= {};
-
-  $branches->@{keys %$branch} = (values %$branch);
+  $self->tree->{$route->method}{scalar $route->pattern_arr}->@{keys %$branch} = (values %$branch);
 
   push @routes, $route
 }
@@ -59,8 +32,6 @@ method match ($req) {
     : split '/', substr($req->path, 1), -1;
   
   pop @path if $path[-1] eq '';
-
-  # die Dumper($self->tree);
 
   my $branches = $self->tree->{$req->method}{scalar @path} || return undef;
   my $barren = {};
