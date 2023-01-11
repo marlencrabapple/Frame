@@ -23,7 +23,8 @@ ADJUST {
 }
 
 state %dispatch = (
-  new => 'new_app',
+  new => \&new_app,
+  synth => \&synth
 );
 
 method cmd(@argv) {
@@ -31,9 +32,13 @@ method cmd(@argv) {
   $self->$dest(@argv)
 }
 
-method new_app($package) {
-  our $tx;
-  my $dir = path($package)->mkdir;
+method new_app (@args) {
+  # our $tx;
+  # my $dir = path($package)->mkdir;
+}
+
+method synth (@args) {
+
 }
 
 1

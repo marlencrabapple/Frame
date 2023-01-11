@@ -10,6 +10,7 @@ use utf8;
 use v5.36;
 
 # use Frame::Server;
+use Net::Async::HTTP::Server::PSGI;
 use IO::Async::Loop;
 use Parallel::Prefork;
 use Server::Starter ();
@@ -34,13 +35,15 @@ ADJUSTPARAMS ($params) {
   # $err_respawn_interval = 
   $ioloop = IO::Async::Loop->new;
 
-  say Dumper($params);
+  say Dumper($params, $self) if $ENV{FRAME_DEBUG};
 
   $self->{is_multiprocess} = 1;
+  $self->{multiprocess} = 1;
+  $self->{'psgi.multiprocess'} = 1;
   $self->{max_workers} = $max_workers
 }
 
-method run ($app) {
+method register_service ($app) {
   my $queuesize = $self->{queuesize} || 10;
 
   foreach my $listen ($$self{listen}->@*) {
@@ -48,7 +51,7 @@ method run ($app) {
       app => $app
     );
 
-    $ioloop->add( $httpserver );
+    $ioloop->add($httpserver);
 
     my ($host, $path);
 
@@ -98,7 +101,7 @@ method run ($app) {
       $httpserver->listen(
         host     => $host,
         service  => $service,
-        socktype => "stream",
+        socktype => 'stream',
         queuesize => $queuesize,
 
         %SSL_args,
@@ -146,7 +149,7 @@ method run ($app) {
 
     my $timeout = $spawn_interval ? $spawn_interval * $max_workers : 1;
 
-    while($pm->wat_all_children($timeout)) {
+    while($pm->wait_all_children($timeout)) {
       $pm->signal_all_children('TERM')
     }
   }
@@ -157,10 +160,6 @@ method run ($app) {
       $ioloop->run
     }
   }
-}
-
-method register_service ($app) {
-
 }
 
 1

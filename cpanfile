@@ -1,7 +1,11 @@
+# 1. 
+# TODO: Figure out why these aren't getting installed w/ the dists they're supposed to be included in
+# (Usually the one right above)
+
 requires 'perl', 'v5.36';
 
 requires 'Plack', '1.0050';
-requires 'Plack::App::File';
+requires 'Plack::App::File'; # (1)
 requires 'Plack::Util';
 
 requires 'Path::Tiny', '0.144';
@@ -17,6 +21,7 @@ requires 'Syntax::Keyword::Dynamically', '0.11';
 requires 'Starlet', '0.31';
 requires 'Gazelle', '0.49';
 requires 'Net::Async::HTTP::Server', '0.13';
+requires 'Net::Async::HTTP::Server::PSGI'; # (1)
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
 requires 'Parallel::Prefork', '0.18';
