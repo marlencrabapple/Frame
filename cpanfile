@@ -18,8 +18,6 @@ requires 'Object::Pad', '0.77';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
 
-requires 'Starlet', '0.31';
-requires 'Gazelle', '0.49';
 requires 'Net::Async::HTTP::Server', '0.13';
 requires 'Net::Async::HTTP::Server::PSGI'; # (1)
 requires 'HTTP::Parser::XS', '0.17';
@@ -49,5 +47,5 @@ on develop => sub {
 };
 
 on test => sub {
-    requires 'Test::More', '0.96'
+  requires 'Test::More', '0.96'
 }
