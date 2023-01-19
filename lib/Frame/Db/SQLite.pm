@@ -5,6 +5,7 @@ role Frame::Db::SQLite :does(Frame::Db);
 
 use utf8;
 use v5.36;
+use autodie;
 
 use DBI;
 use DBD::SQLite::Constants ':dbd_sqlite_string_mode';
@@ -19,7 +20,7 @@ ADJUST {
 }
 
 method dbh {
-  my $dbh = DBI->connect_cached($self->app->config->{db}->@{qw/source username auth attr/});
+  my $dbh = $self->_dbh;
 
   if(!$dbh_old || $dbh != $dbh_old) {
     $dbh->do("PRAGMA foreign_keys = ON");
