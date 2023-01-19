@@ -5,7 +5,6 @@ class Frame::Example::Controller::Default :does(Frame::Controller);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use Data::Dumper;
 

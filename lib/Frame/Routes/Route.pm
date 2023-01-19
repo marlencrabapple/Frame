@@ -5,7 +5,6 @@ class Frame::Routes::Route :does(Frame::Base);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use Data::Dumper;
 
@@ -36,7 +35,7 @@ ADJUSTPARAMS ($params) {
 
     if(my $placeholder = $self->is_placeholder($part)) {
       my $filter = $pattern->filters->{$placeholder};
-      $last_key = $filter;
+      $last_key = $filter ? $filter : $$dest{c}->app;
       push @placeholders, $placeholder
     }
     else {

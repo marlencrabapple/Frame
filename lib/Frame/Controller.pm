@@ -5,16 +5,15 @@ role Frame::Controller :does(Frame::Base);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use Carp;
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
 use Data::Dumper;
-#use Exporter 'import';
+# use Exporter 'import';
 
-#our @EXPORT = qw(template);
+# our @EXPORT = qw(template);
 
 state $template_vars_state = {};
 our $template_vars = $template_vars_state;
@@ -44,9 +43,7 @@ method template :common { # Class is template filename
 #   $tx_default->render($template, { %$template_vars, %$vars })
 # }
 
-method stash {
-  $self->app->req ? $self->app->req->stash : croak 'Stash not available until route dispatch'
-}
+method stash { $self->app->req->stash }
 
 method render ($content, $status = 200, $content_type = undef, $headers = [], $cookies = {}) {
   my $app = $self->app;

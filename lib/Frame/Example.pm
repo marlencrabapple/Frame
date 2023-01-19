@@ -1,19 +1,16 @@
 use Object::Pad;
 
 package Frame::Example;
-class Frame::Example :does(Frame) :does(Frame::Example::Db);
+class Frame::Example :does(Frame) :does(Frame::Db::SQLite);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use YAML::Tiny;
 use Data::Dumper;
 
-field $config :reader;
-
 ADJUST {
-  $config = YAML::Tiny->read('share/example/config.yml')->[0];
+  $self->config = YAML::Tiny->read('share/example/config.yml')->[0];
   $self->init_db
 }
 

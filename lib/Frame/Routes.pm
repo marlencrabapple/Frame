@@ -6,7 +6,6 @@ class Frame::Routes :does(Frame::Routes::Route::Factory);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use Data::Dumper;
 use Scalar::Util qw/blessed refaddr/;
@@ -15,7 +14,7 @@ state $rere = qr/^regexp$/i;
 
 field @routes :reader;
 
-ADJUSTPARAMS ( $params ) {
+ADJUSTPARAMS ($params) {
   $self->app($$params{app}) # TODO: Remember why this worried me and fix it
 }
 
@@ -45,14 +44,15 @@ method match ($req) {
   
   PATH_PART: foreach my $part (@path) {
     my $match;
+    my $wildcard;
 
-    if($$curr{$part}) {
+    if($part ne '' && $$curr{$part} && !$self->patterns->{$part}) {
       last if $$barren{$i}{$part};
       $match = $part
     }
     else {
       PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
-        next unless $self->patterns->{$key} && !$$barren{$i}{$key};
+        next unless !$$barren{$i}{$key}; # && $self->patterns->{$key};
 
         $match = ref $self->patterns->{$key} eq 'CODE'
           ? $self->patterns->{$key}->($self->app, $part) ? 1 : 0
@@ -61,10 +61,21 @@ method match ($req) {
             : defined $self->patterns->{$key} ? 0 : $part ne '';
 
         if($match) {
+          if($key eq $self->app) {
+            $wildcard = 1;
+            $match = 0; # This is probably unnecessary
+            next
+          }
+
           $match = $key;
           push @placeholder_matches, $part;
           last
         }
+      }
+
+      if(!$match && $wildcard) {
+        $match = $self->app;
+        push @placeholder_matches, $part
       }
     }
 
@@ -93,7 +104,7 @@ method match ($req) {
       $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
     }
 
-    $req->set_placeholders(@placeholder_matches);
+    $req->set_placeholders(@placeholder_matches); say Dumper(\@placeholder_matches);
     return $curr
   }
 

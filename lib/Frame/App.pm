@@ -5,7 +5,6 @@ class Frame::App :does(Frame::Base);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use Frame;
 use Frame::Example;

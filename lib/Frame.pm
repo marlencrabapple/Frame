@@ -7,25 +7,34 @@ our $VERSION  = '0.01';
 
 use utf8;
 use v5.36;
-use autodie;
 
-use Carp;
-use Plack;
+use YAML::Tiny;
 use Data::Dumper;
 
 use Frame::Routes;
 use Frame::Request;
-use Frame::Controller;
 
 field $req :reader;
 field $res :reader;
 field $routes :reader;
+field $config :mutator;
+field $config_defaults :reader;
 field $charset :mutator = 'utf-8';
+# field $request_class_prefix
 field $request_class :mutator = 'Frame::Request';
+# field $controller_class_prefix
+# field $controller_class :mutator = 'Frame::Controller';
 
 ADJUSTPARAMS ( $params ) {
   $self->app($self);
+  
+  $config_defaults = YAML::Tiny->read('config-defaults.yml')->[0] // { charset => 'utf-8' };
+  $config = YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] // {};
+  $config = {%$config_defaults, %$config};
+
+  $charset = $$config{charset} // 'utf-8';
   $routes = Frame::Routes->new(app => $self);
+
   $self->startup
 }
 

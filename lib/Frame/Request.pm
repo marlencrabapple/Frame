@@ -32,7 +32,7 @@ field @ajax_headers;
 # }
 
 method placeholder ($key, $value = undef) {
-  if($value && !$$placeholders{$key}) {
+  if(defined $value && !$$placeholders{$key}) {
     push @placeholders_ord, { $key => $value };
     push @placeholder_values_ord, $value;
     $$placeholders{$key} = $value
