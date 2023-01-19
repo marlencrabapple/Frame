@@ -21,11 +21,11 @@ ADJUSTPARAMS ($params) {
 method _add_route($route) {
   my $branch = $route->tree->{$route->method}{scalar $route->pattern_arr};
   $self->tree->{$route->method}{scalar $route->pattern_arr}->@{keys %$branch} = (values %$branch);
-
   push @routes, $route
 }
 
 method match ($req) {
+  # TODO: why does $req->path eq '/' when req url is //asdf? Is it Frame::Server issue? Plack issue? Browser doing its thing?
   my @path = $req->path eq '/'
     ? '/'
     : split '/', substr($req->path, 1), -1;
@@ -58,15 +58,16 @@ method match ($req) {
           ? $self->patterns->{$key}->($self->app, $part) ? 1 : 0
           : ref($self->patterns->{$key}) =~ $rere
             ? $part =~ $self->patterns->{$key} ? 1 : 0
-            : defined $self->patterns->{$key} ? 0 : $part ne '';
+            : defined $self->patterns->{$key} ? 0 : $part ne '' ? 2 : 0;
 
-        if($match) {
+        if($match == 2) {
           if($key eq $self->app) {
             $wildcard = 1;
             $match = 0; # This is probably unnecessary
             next
           }
-
+        }
+        elsif($match == 1) {
           $match = $key;
           push @placeholder_matches, $part;
           last
@@ -100,11 +101,13 @@ method match ($req) {
   }
 
   if(defined blessed $curr && blessed $curr eq 'Frame::Routes::Route') {
+    return undef unless $i == scalar @path;
+
     for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
       $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
     }
 
-    $req->set_placeholders(@placeholder_matches); say Dumper(\@placeholder_matches);
+    $req->set_placeholders(@placeholder_matches);
     return $curr
   }
 
@@ -112,7 +115,7 @@ method match ($req) {
 }
 
 method under {
-
+  ...
 }
 
 1

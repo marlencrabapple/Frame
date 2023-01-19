@@ -34,6 +34,10 @@ our $tx_default = $tx_default_state;
 #   $tx = $tx_default
 # }
 
+ADJUSTPARAMS ($params) {
+  $self->app($$params{app})
+}
+
 method template :common { # Class is template filename
   my ($vars, @args) = @_;
   $tx_default->render($class, { %$template_vars, %$vars })

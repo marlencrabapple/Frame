@@ -72,12 +72,14 @@ use Frame::Routes::Pattern;
 use Data::Dumper;
 use Scalar::Util 'blessed';
 
+field $controllers :reader;
 field $patterns :reader;
 field $tree :reader;
 
 ADJUSTPARAMS ($params) {
+  $controllers //= {};
   $patterns //= {};
-  $tree //= {}
+  $tree //= {};
 }
 
 method _add_route ($route);
@@ -107,8 +109,7 @@ method any ($methods, $pattern, @args) {
   if($route_args{dest}{c}) {
     my $c = blessed($self->app) . '::Controller::' . $route_args{dest}{c};
     eval "require $c; 1";
-    $route_args{dest}{c} = $c->new(app => $self->app);
-    $route_args{dest}{c}->app($self->app)
+    $route_args{dest}{c} = $$controllers{$c} // $c->new(app => $self->app);
   }
   else {
     $route_args{dest}{c} = $self->app
