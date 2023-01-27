@@ -6,10 +6,10 @@ role Frame::Base;
 use utf8;
 use v5.36;
 
-# use Data::Dumper ();
+field $app :mutator :weak;
 
-field $app :accessor :weak;
-
-# method Dumper :common { Data::Dumper::Dumper(@_) }
+ADJUSTPARAMS ($params) {
+  $app //= $$params{app} if $$params{app}
+}
 
 1
