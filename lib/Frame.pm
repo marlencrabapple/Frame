@@ -60,7 +60,6 @@ method handler ($env) {
 }
 
 method dispatch {
-  return $self->render('<pre>' . Dumper($self) . '</pre>');
   my $route = $routes->match($req);
   $route ? $self->route($route) : $self->render_404
 }

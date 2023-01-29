@@ -1,7 +1,7 @@
 use Object::Pad;
 
 package Plack::Handler::Frame::Server;
-class Plack::Handler::Frame::Server :isa(Plack::Handler::Net::Async::HTTP::Server);
+class Plack::Handler::Frame::Server;
 
 use utf8;
 use v5.36;

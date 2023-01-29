@@ -9,6 +9,7 @@ use v5.36;
 use Carp;
 use Plack::Util;
 use Data::Dumper;
+use Stream::Buffered;
 use Scalar::Util 'weaken';
 use HTTP::Parser::XS 'parse_http_request';
 

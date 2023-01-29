@@ -35,7 +35,7 @@ ADJUSTPARAMS ($params) {
 
     if(my $placeholder = $self->is_placeholder($part)) {
       my $filter = $pattern->filters->{$placeholder};
-      $last_key = $filter ? $filter : $$dest{c}->app;
+      $last_key = $filter ? $filter : $$params{factory}->app;
       push @placeholders, $placeholder
     }
     else {
@@ -49,11 +49,6 @@ ADJUSTPARAMS ($params) {
   $$prev{$last_key} = $self
 }
 
-method route ($req, $res) {
-  my ($c, $sub) = @$dest{qw(c sub)};
-  $c->$sub($req->placeholder_values_ord)
-}
-
 method is_placeholder ($pathstr) {
   ($pathstr =~ $placeholder_re)[0]
 }
@@ -65,7 +60,6 @@ role Frame::Routes::Route::Factory :does(Frame::Base);
 
 use utf8;
 use v5.36;
-use autodie;
 
 use Frame::Routes::Pattern;
 
@@ -82,10 +76,10 @@ ADJUSTPARAMS ($params) {
   $tree //= {};
 }
 
-method _add_route ($route);
+method _add_route :required ($route);
 
 method any ($methods, $pattern, @args) {
-  my %route_args;
+  my %route_args = ( factory => $self->app );
   my $dest = pop @args;
 
   if(ref $dest eq 'HASH' && scalar @$dest{qw(c sub)}) {
@@ -107,12 +101,10 @@ method any ($methods, $pattern, @args) {
   }
 
   if($route_args{dest}{c}) {
-    my $c = blessed($self->app) . '::Controller::' . $route_args{dest}{c};
+    my $c = $self->app->controller_namespace . '::' . $route_args{dest}{c};
     eval "require $c; 1";
-    $route_args{dest}{c} = $$controllers{$c} // $c->new(app => $self->app);
-  }
-  else {
-    $route_args{dest}{c} = $self->app
+    $$controllers{$c} //= $c->new(app => $self->app);
+    $route_args{dest}{c} = $c
   }
 
   die "Invalid route destination '$dest'" unless $route_args{dest}{sub};

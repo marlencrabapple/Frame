@@ -1,12 +1,8 @@
-# 1. 
-# TODO: Figure out why these aren't getting installed w/ the dists they're supposed to be included in
-# (Usually the one right above)
-
 requires 'perl', 'v5.36';
 
+requires 'Stream::Buffered', '0.03';
+
 requires 'Plack', '1.0050';
-requires 'Plack::App::File'; # (1)
-requires 'Plack::Util';
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';
@@ -19,7 +15,6 @@ requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
 
 requires 'Net::Async::HTTP::Server', '0.13';
-requires 'Net::Async::HTTP::Server::PSGI'; # (1)
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
 requires 'Parallel::Prefork', '0.18';
@@ -28,9 +23,9 @@ requires 'DBI', '1.643';
 requires 'DBD::SQLite', '1.72';
 requires 'SQL::Abstract', '2.000001';
 
-requires 'JSON::MaybeXS';
-requires 'Cpanel::JSON::XS';
-requires 'YAML::Tiny';
+requires 'JSON::MaybeXS', '1.004004';
+requires 'Cpanel::JSON::XS', '4.32';
+requires 'YAML::Tiny', '1.73';
 requires 'Text::Xslate', 'v3.5.9';
 
 requires 'Net::SSLeay', '1.92';
@@ -42,8 +37,8 @@ on develop => sub {
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
   recommends 'Perl::Critic::Community', 'v1.0.3';
-  recommends 'Dist::Milla';
-  recommends 'Carmel'
+  recommends 'Dist::Milla', 'v1.0.21';
+  recommends 'Carmel', 'v0.1.56'
 };
 
 on test => sub {
