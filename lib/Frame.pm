@@ -9,6 +9,7 @@ use utf8;
 use v5.36;
 
 use YAML::Tiny;
+use Feature::Compat::Try;
 
 use Frame::Tx;
 use Frame::Routes;
@@ -26,6 +27,7 @@ field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
 ADJUSTPARAMS ($params) {
+  unshift @INC, $INC[1];
   $self->app = $self;
   
   $config_defaults = YAML::Tiny->read('config-defaults.yml')->[0] // { charset => 'utf-8' };
@@ -40,7 +42,10 @@ ADJUSTPARAMS ($params) {
 
   my $class = __CLASS__;
 
-  if(eval "require $class\::Controller; 1") {
+  # if(eval "require $class\::Controller; say 'asdf'; 1") {
+  try {
+    require "$class/Controller.pm";
+
     my $meta = Object::Pad::MOP::Class->create_class("Frame::Controller::For::$class"
       , isa => $default_controller_class);
 
@@ -50,8 +55,9 @@ ADJUSTPARAMS ($params) {
     $default_controller_meta = $meta;
     $default_controller_class = $meta->name
   }
-  else {
-    dmsg $@ 
+  # else {
+  catch ($e) {
+    dmsg $e #$e
   }
 
   $request_class = $$params{request_class}

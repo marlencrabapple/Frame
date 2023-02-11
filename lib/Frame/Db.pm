@@ -9,6 +9,8 @@ use autodie;
 
 field $sqla :reader;
 
+dmsg "asdf";
+
 ADJUST {
   $sqla = SQL::Abstract->new
 }

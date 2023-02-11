@@ -20,6 +20,7 @@ ADJUST {
 }
 
 method dbh {
+  dmsg 'asdf';
   my $dbh = $self->_dbh;
 
   if(!$dbh_old || $dbh != $dbh_old) {
