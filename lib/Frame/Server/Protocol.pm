@@ -26,7 +26,7 @@ method on_read ($buffref, $eof) {
     REMOTE_ADDR => $readh->peerhost,
     REMOTE_PORT => $readh->peerport || 0,
     'psgi.version' => [ 1, 1 ],
-    'psgi.errors'  => *STDERR,
+    'psgi.errors'  => \*STDERR,
     'psgi.url_scheme' => $$self{ssl} ? 'https' : 'http',
     'psgi.run_once'     => Plack::Util::FALSE,
     'psgi.multithread'  => Plack::Util::FALSE,

@@ -13,6 +13,9 @@ requires 'IO::Async::SSL', '0.23';
 requires 'Object::Pad', '0.77';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
+requires 'Feature::Compat::Try', '0.05';
+requires 'namespace::autoclean', '0.29';
+requires 'Devel::StackTrace::WithLexicals', '2.01';
 
 requires 'Net::Async::HTTP::Server', '0.13';
 requires 'HTTP::Parser::XS', '0.17';

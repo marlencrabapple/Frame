@@ -6,52 +6,38 @@ role Frame::Controller :does(Frame::Base);
 use utf8;
 use v5.36;
 
-use Carp;
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
-use Data::Dumper;
 # use Exporter 'import';
+use Feature::Compat::Try;
 
-# our @EXPORT = qw(template);
+state $template_vars = {};
 
-state $template_vars_state = {};
-our $template_vars = $template_vars_state;
-
-state $tx_default_state = Text::Xslate->new(
+state $tx_default = Text::Xslate->new(
   cache => $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development' ? 0 : 1,
   path => ['view']
 );
 
-our $tx_default = $tx_default_state;
+field $app :param :weak;
+field $req :param :reader :weak;
+field $res :reader; # :weak;
 
-# field $req :reader;
-# field $res :reader;
-# field $tx :accessor;
-# field $charset;
-
-# BUILD {
-#   $tx = $tx_default
-# }
+ADJUSTPARAMS ($params) {
+  $res = $req->new_response;
+  dmsg 'asdf'
+}
 
 method template :common { # Class is template filename
   my ($vars, @args) = @_;
   $tx_default->render($class, { %$template_vars, %$vars })
 }
 
-# sub template ($template, $vars, @args) {
-#   $tx_default->render($template, { %$template_vars, %$vars })
-# }
-
-method stash { $self->app->req->stash }
+method stash { $req->stash }
 
 method render ($content, $status = 200, $content_type = undef, $headers = [], $cookies = {}) {
-  my $app = $self->app;
-  my $res = $app->res;
   my $res_headers = $res->headers;
-
   my $charset = $app->charset;
-  $content_type //= "text/html; charset=$charset";
 
   $res->status($status);
 
@@ -62,13 +48,16 @@ method render ($content, $status = 200, $content_type = undef, $headers = [], $c
   $res->cookies->@{keys %$cookies} = values %$cookies;
 
   if(ref $content eq 'HASH') {
-    $res->content_type("application/json; charset=$charset");
+    $res->content_type($res->content_type || "application/json; charset=$charset");
     $res->body(encode_json($content))
   }
   else {
+    $content_type //= $res->content_type || "text/html; charset=$charset";
     $res->content_type($content_type);
     $res->body($content)
   }
+
+  $res
 }
 
 method render_404 {
@@ -76,7 +65,7 @@ method render_404 {
 }
 
 method redirect ($url, $status = 302) {
-  $self->app->res->redirect($url, $status)
+  $res->redirect($url, $status)
 }
 
 1

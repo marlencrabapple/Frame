@@ -1,7 +1,7 @@
-use Object::Pad;
+use Object::Pad qw/:experimental(mop)/;
 
 package Frame;
-role Frame :does(Frame::Controller);
+role Frame :does(Frame::Base);
 
 our $VERSION  = '0.01';
 
@@ -9,21 +9,21 @@ use utf8;
 use v5.36;
 
 use YAML::Tiny;
-use Data::Dumper;
 
 use Frame::Tx;
 use Frame::Routes;
 use Frame::Request;
+# use Frame::Controller;
+use Frame::Controller::Default;
 
-field $tx :reader;
-field $req :reader;
-field $res :reader;
 field $routes :reader;
-field $config :mutator;
+field $config :reader;
 field $config_defaults :reader;
 field $charset :mutator = 'utf-8';
 field $request_class :mutator = 'Frame::Request';
 field $controller_namespace :mutator;
+field $default_controller_class = 'Frame::Controller::Default';
+field $default_controller_meta;
 
 ADJUSTPARAMS ($params) {
   $self->app = $self;
@@ -32,15 +32,32 @@ ADJUSTPARAMS ($params) {
   $config = YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] // {};
   $config = {%$config_defaults, %$config};
 
+  $charset = $$config{charset} // 'utf-8';
+
   $controller_namespace = $$params{controller_namespace}
     // $$config{controller_namespace}
     // __CLASS__ . '::Controller';
+
+  my $class = __CLASS__;
+
+  if(eval "require $class\::Controller; 1") {
+    my $meta = Object::Pad::MOP::Class->create_class("Frame::Controller::For::$class"
+      , isa => $default_controller_class);
+
+    $meta->add_role(__CLASS__ . '::Controller');
+    $meta->seal;
+
+    $default_controller_meta = $meta;
+    $default_controller_class = $meta->name
+  }
+  else {
+    dmsg $@ 
+  }
 
   $request_class = $$params{request_class}
     // $$config{request_class}
     // $request_class;
 
-  $charset = $$config{charset} // 'utf-8';
   $routes = Frame::Routes->new(app => $self);
 
   $self->startup
@@ -49,25 +66,24 @@ ADJUSTPARAMS ($params) {
 method to_psgi { sub { $self->handler(shift) } }
 
 method handler ($env) {
-  $req = $request_class->new($env);
-  $req->app = $self->app;
-  $req->stash = {};
-
-  $res = $req->new_response;
-  $self->dispatch;
-  
-  $res->finalize
+  my $req = $request_class->new(app => $self->app, env => $env);
+  $self->dispatch($req)
 }
 
-method dispatch {
+method dispatch ($req) {
   my $route = $routes->match($req);
-  $route ? $self->route($route) : $self->render_404
+  $route ? $self->route($route, $req) : $self->render_404($req)
 }
 
-method route ($route) {
+method route ($route, $req) {
   my ($c, $sub) = $route->dest->@{qw(c sub)};
-  $c = $c ? $routes->controllers->{$c} : $self->app;
-  $c->$sub($req->placeholder_values_ord)
+  $c = ($c || $default_controller_class)->new(app => $self, req => $req);
+  $c->$sub($req->placeholder_values_ord);
+  $c->res->finalize
+}
+
+method render_404 ($req) {
+  $default_controller_class->new(app => $self, req => $req)->render_404->finalize
 }
 
 method startup;

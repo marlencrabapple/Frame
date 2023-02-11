@@ -48,6 +48,8 @@
             "Cpanel::JSON::XS" : "4.32",
             "DBD::SQLite" : "1.72",
             "DBI" : "1.643",
+            "Devel::StackTrace::WithLexicals" : "2.01",
+            "Feature::Compat::Try" : "0.05",
             "Future::AsyncAwait" : "0.62",
             "HTTP::Parser::XS" : "0.17",
             "HTTP::Tinyish" : "0.18",
@@ -68,6 +70,7 @@
             "Syntax::Keyword::Dynamically" : "0.11",
             "Text::Xslate" : "v3.5.9",
             "YAML::Tiny" : "1.73",
+            "namespace::autoclean" : "0.29",
             "perl" : "v5.36.0"
          }
       },
