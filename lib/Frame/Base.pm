@@ -1,4 +1,4 @@
-use Object::Pad qw/:experimental(mop)/;
+use Object::Pad qw(:experimental(mop));
 
 package Frame::Base;
 role Frame::Base;
@@ -6,228 +6,140 @@ role Frame::Base;
 use utf8;
 use v5.36;
 
-use parent 'Exporter';
-
 use Time::Piece;
 use Data::Dumper;
-use Feature::Compat::Try;
-use Syntax::Keyword::Dynamically;
-use List::Util qw(any none uniq);
+use Exporter 'import';
+use List::Util 'uniq';
 use Devel::StackTrace::WithLexicals;
 
+use subs 'dmsg';
+
 our @EXPORT = qw(dmsg);
-use subs qw(dmsg _dmsg);
+
+our $dev_mode = $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development';
+our $frame_debug = defined $ENV{'FRAME_DEBUG'};
 
 BEGIN {
-  use Frame::Base;
-
-  use subs qw(dmsg _dmsg);
-  our @EXPORT = qw(dmsg);
-
-  # {
-  #   no strict 'refs';
-  #   no warnings 'redefine';
-  #   *{__PACKAGE__ . '::dmsg'} = \&_dmsg
-  # }
+  my $exports = sub ($sub, @vars) {
+    foreach my $export (@EXPORT) {
+      return 0 unless $sub->($export, @vars)
+    }
+    1
+  };
 
   unshift @INC, sub ($coderef, $filename) {
-    BEGIN {
-      use subs 'dmsg';
-    }
-    # say $filename;
     state @nsarr = qw(Frame);
     state $nspat = 'Frame';
-    
-    my $caller = [caller];
+    state %seen;
 
-    #if($$caller[0] =~ /^Frame((\/.+)?\.pm|::.+)?$/) {
-    if($$caller[0] =~ /^($nspat)(::.+)?$/ || $filename =~ /^($nspat)(\/.+)?\.pm$/) {
-      if($$caller[0] !~ /^Frame/) {
-        my ($tlns) = ($$caller[0] =~ /^([^:]+)(::.+)?$/);
-        @nsarr = uniq(@nsarr, $tlns);
-        $nspat = join '|', @nsarr
-      }
+    my @caller = caller 0;
+    return undef if $seen{$caller[0]}
+      || $seen{$filename}
+      # || $caller[0]->can('dmsg');
+      || $exports->(sub { $caller[0]->can($_[0]) });
 
-      my @pkgs;
-      my $meta = Object::Pad::MOP::Class->for_class($$caller[0]);
-      push @pkgs, $meta;
- 
-      no strict 'refs';
-      no warnings 'redefine';
-
-      # TODO: Check if is Object::Pad class
-      *{$$caller[0] . '::dmsg'} = \&_dmsg;# if $meta->is_role;
-      # "$$caller[0]::import"->(__PACKAGE__);
-
-      if($filename =~ /^($nspat).*/) {
-        $filename =~ s/\//::/g;
-        $filename = substr $filename, 0, -3;
-        #say *{$filename . '::dmsg'};
-
-        *{$filename . '::dmsg'} = \&_dmsg;
-
-        my @INC_ = @INC;
-        #say Dumper @INC_[1, -1];
-        say $INC[0], __LINE__;
-
-        try {
-          local @INC = @INC_[1 .. (scalar @INC_ - 1)];
-          say $INC[0], __LINE__;
-          #say Dumper \@INC;
-          eval "require $filename";
-          say $@;
-          my $meta = Object::Pad::MOP::Class->for_class($filename);
-          push @pkgs, $meta
-        }
-        catch ($e) {
-          warn $e
-        }
-
-        # if $meta->is_role;
-        # "$filename\::import"->(__PACKAGE__);
-
-        # &{"$filename\::dmsg"}
-      }
-
-      foreach my $pkg (@pkgs) {
-        foreach my $role ($pkg->all_roles) {
-          *{$role->name . '::dmsg'} = \&_dmsg;
-          ($pkg->name . "::import")->(__PACKAGE__);
-          # say *{$role->name . '::dmsg'}
-        }
-      }
-
-      Exporter::import __PACKAGE__;
+    if($caller[0] =~ /^($nspat)(::.+)?$/ || $filename =~ /^($nspat)(\/.+)?\.pm$/) {
+      $seen{$caller[0]} //= 0;
+      $seen{$caller[0]}++;
 
       # {
-      #   eval "package $$caller[0]; use subs 'dmsg'; use Frame::Base;";
-      #   use Frame::Base;
-      #   say __PACKAGE__;
-      #   use subs 'dmsg'
+      #   no strict 'refs';
+      #   no warnings 'redefine';
+      #   *{$caller[0] . '::dmsg'} = \&dmsg;
+      #   # warn *{$caller[0] . '::dmsg'}
       # }
 
-      # say Dumper $filename, \@nsarr, $nspat, $$caller[0];
-      # say *{$$caller[0] . '::dmsg'}
+      $exports->(sub {
+        {
+          no strict 'refs';
+          no warnings 'redefine';
+          *{"$caller[0]\::$_[0]"} = \&{"$_[0]"};
+          # warn *{"$caller[0]\::$_[0]"}
+        }
+      }, \@caller, __LINE__);
+
+      if($caller[0] !~ /^$nspat|Plack/) {
+        my ($tlns) = ($caller[0] =~ /^([^:]+)(::.+)?$/);
+        @nsarr = uniq(@nsarr, $tlns);
+        $nspat = join '|', @nsarr;
+      }
+
+      if($filename =~ /^($nspat).*/) {
+        $seen{$filename} //= 0;
+        $seen{$filename}++;
+
+        $filename =~ s/\//::/g;
+        $filename = substr $filename, 0, -3;
+
+        $exports->(sub {
+          {
+            no strict 'refs';
+            no warnings 'redefine';
+            *{"$filename\::$_[0]"} = \&{"$_[0]"};
+            # warn *{"$filename\::$_[0]"}
+          }
+        }, $filename, __LINE__);
+      }
+
+      my $i = 1;
+      while(my @caller = caller $i) {
+        $seen{$caller[0]} //= 0;
+        next if $seen{$caller[0]} || $caller[0] eq 'main';
+        $seen{$caller[0]}++;
+
+        if(($caller[0] =~ /^($nspat)(::.+)?$/) || ($caller[6] && $caller[6] =~ /^($nspat).pm$/)) {
+          next if $caller[0] =~ /^Plack/;
+
+          $exports->(sub {
+            {
+              no strict 'refs';
+              no warnings 'redefine';
+              *{"$caller[0]\::$_[0]"} = \&{"$_[0]"};
+              # warn *{"$caller[0]\::$_[0]"}
+            }
+          }, \@caller, $nspat);
+
+          if($caller[0] !~ /^$nspat/) {
+            my ($tlns) = ($caller[0] =~ /^([^:]+)(::.+)?$/);
+            @nsarr = uniq(@nsarr, $tlns);
+            $nspat = join '|', @nsarr
+          }
+        }
+      }
+      continue { $i++ }
     }
 
     return undef
   }
 }
 
-our $dev_mode = $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development';
-our $frame_debug = defined $ENV{'FRAME_DEBUG'};
-
-# our $AUTOLOAD;
-
 field $app :mutator :weak;
-
-# {
-#   no strict 'refs';
-#   no warnings 'redefine';
-
-#   *{__PACKAGE__ . '::dmsg'} = sub (@msgs) {
-#     our $dev_mode;
-#     return undef unless $dev_mode;
-
-#     my $caller = [caller];
-
-#     my $out = "*** " . localtime->datetime . " - DEBUG MESSAGE ***\n\n";
-#     { local $Data::Dumper::Pad = "  "; $out .= scalar @msgs > 1 ? Dumper(@msgs) . "\n": "  $msgs[0]\n\n"; }
-
-#     $out .= $frame_debug ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
-#       indent => 1,
-#       skip_frames => 1
-#     )->as_string : "at $$caller[1]:$$caller[2]";
-
-#     say STDERR "$out\n";
-#     $out
-#   };
-# }
-
-# BEGIN {
-#   no strict 'refs';
-#   no warnings 'redefine';
-#   *{__PACKAGE__ . '::dmsg'} = \&_dmsg;
-# }
-
-BUILD {
-  {
-    no strict 'refs';
-    no warnings 'redefine';
-    
-    my $meta = Object::Pad::MOP::Class->for_class(__CLASS__);
-    my @roles = $meta->all_roles;
-
-    *{__CLASS__ . '::dmsg'} = \&_dmsg;
-    *{[caller]->[0] . '::dmsg'} = \&_dmsg;
-
-    foreach my $pkg ($meta, @roles) {
-      # dmsg $pkg->name;
-      *{$pkg->name . "::dmsg"} = \&_dmsg
-    }
-  }
-
-  use subs qw(dmsg _dmsg); # Vaguely (very) confused about what namespace this is running in
-
-  Exporter::import __PACKAGE__;
-  __CLASS__->import(__PACKAGE__);
-  # Exporter::export_to_level(1, @_)
-}
 
 ADJUSTPARAMS ($params) {
   $app //= $$params{app} if $$params{app}
 }
 
-method import :common {
-  {
-    no strict 'refs';
-    no warnings 'redefine';
+sub dmsg (@msgs) {
+    our $dev_mode;
+    return undef unless $dev_mode;
+
+    my @caller = caller 0;
+
+    my $out = "*** " . localtime->datetime . " - DEBUG MESSAGE ***\n\n";
     
-    my $meta = Object::Pad::MOP::Class->for_class($class);
-    my @roles = $meta->all_roles;
-
-    *{$class . '::dmsg'} = \&_dmsg;
-    *{[caller]->[0] . '::dmsg'} = \&_dmsg;
-
-    #say *{$class . '::dmsg'};
-    #say *{[caller]->[0] . '::dmsg'};
-
-    foreach my $pkg ($meta, @roles) {
-      #say *{$pkg->name . "::dmsg"};
-      *{$pkg->name . "::dmsg"} = \&_dmsg
+    {
+      local $Data::Dumper::Pad = "  ";
+      $out .= scalar @msgs > 1 ? Dumper(@msgs) : ref $msgs[0] ? Dumper(@msgs) : "  $msgs[0]\n";
+      $out .= "\n"
     }
-  }
 
-  Exporter::import __PACKAGE__;
-  # Exporter::export_to_level(1, @_)
+    $out .= $frame_debug ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
+      indent => 1,
+      skip_frames => 1
+    )->as_string : "at $caller[1]:$caller[2]";
+
+    say STDERR "$out\n";
+    $out
 }
-
-
-# method dmsg :common :override (@msgs) { die "Its not good that you're here" }; # "Placeholder" method
-# method dmsg :common;
-
-sub _dmsg (@msgs) {
-  our $dev_mode;
-  return undef unless $dev_mode;
-
-  my $caller = [caller];
-
-  my $out = "*** " . localtime->datetime . " - DEBUG MESSAGE ***\n\n";
-  { local $Data::Dumper::Pad = "  "; $out .= scalar @msgs > 1 ? Dumper(@msgs) . "\n": "  $msgs[0]\n\n"; }
-
-  $out .= $frame_debug ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
-    indent => 1,
-    skip_frames => 1
-  )->as_string : "at $$caller[1]:$$caller[2]";
-
-  say STDERR "$out\n";
-  $out
-}
-
-# {
-#   no strict 'refs';
-#   no warnings 'redefine';
-#   *{__PACKAGE__ . '::dmsg'} = \&_dmsg
-# }
 
 1

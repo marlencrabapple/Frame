@@ -24,8 +24,7 @@ field $req :param :reader :weak;
 field $res :reader; # :weak;
 
 ADJUSTPARAMS ($params) {
-  $res = $req->new_response;
-  dmsg 'asdf'
+  $res = $req->new_response
 }
 
 method template :common { # Class is template filename
