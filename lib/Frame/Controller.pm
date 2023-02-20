@@ -12,6 +12,8 @@ use JSON::MaybeXS;
 # use Exporter 'import';
 use Feature::Compat::Try;
 
+use vars qw/$template_vars $tx_default/;
+
 state $template_vars = {};
 
 state $tx_default = Text::Xslate->new(
@@ -19,7 +21,7 @@ state $tx_default = Text::Xslate->new(
   path => ['view']
 );
 
-field $app :param :weak;
+# field $app :param :weak;
 field $req :param :reader :weak;
 field $res :reader; # :weak;
 
@@ -36,7 +38,7 @@ method stash { $req->stash }
 
 method render ($content, $status = 200, $content_type = undef, $headers = [], $cookies = {}) {
   my $res_headers = $res->headers;
-  my $charset = $app->charset;
+  my $charset = $self->app->charset;
 
   $res->status($status);
 

@@ -1,4 +1,4 @@
-use Object::Pad qw(:experimental(mop));
+use Object::Pad;
 
 package Frame::Base;
 role Frame::Base;
@@ -11,7 +11,6 @@ use parent 'Exporter';
 use Time::Piece;
 use Data::Dumper;
 use List::Util 'uniq';
-use Feature::Compat::Try;
 use Devel::StackTrace::WithLexicals;
 
 use subs qw(dmsg import_on_compose);
@@ -21,7 +20,9 @@ our @EXPORT = qw(dmsg);
 our $dev_mode = $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development';
 our $frame_debug = defined $ENV{'FRAME_DEBUG'};
 
-field $app :mutator :weak;
+$^H{__PACKAGE__ . '/user'} = 1;
+
+field $app :weak :param :mutator = undef;
 
 ADJUSTPARAMS ($params) {
   $app //= $$params{app} if $$params{app}
@@ -67,12 +68,14 @@ method import_on_compose :common {
 
       my @caller = caller 0;
 
-     return undef if $seen{$caller[0]}
-       || $seen{$filename}
-       || $exports->(sub { $caller[0]->can($_[0]) });
+      return undef if $seen{$caller[0]}
+        || $seen{$filename}
+        || $exports->(sub { $caller[0]->can($_[0]) });
 
-      if($caller[0] =~ /^($nspat)(::.+)?$/ || $filename =~ /^($nspat)(\/.+)?\.pm$/) {
-
+      if($caller[0] =~ /^($nspat)(::.+)?$/
+        || $filename =~ /^($nspat)(\/.+)?\.pm$/
+        || $caller[10] && $caller[10]->{__PACKAGE__ . '/user'})
+      {
         $seen{$caller[0]} //= 0;
         $seen{$caller[0]}++;
 
@@ -88,7 +91,7 @@ method import_on_compose :common {
         if($caller[0] !~ /^$nspat|Plack/) {
           my ($tlns) = ($caller[0] =~ /^([^:]+)(::.+)?$/);
           @nsarr = uniq(@nsarr, $tlns);
-          $nspat = join '|', @nsarr;
+          $nspat = join '|', @nsarr
         }
 
         if($filename =~ /^($nspat).*/) {
@@ -105,7 +108,7 @@ method import_on_compose :common {
               *{"$filename\::$_[0]"} = \&{"$_[0]"};
               warn *{"$filename\::$_[0]"} if $ENV{FRAME_DEBUG}
             }
-          }, $filename, __LINE__);
+          }, $filename, __LINE__)
         }
 
         my $i = 1;
@@ -113,6 +116,8 @@ method import_on_compose :common {
           $seen{$caller[0]} //= 0;
           next if $seen{$caller[0]} || $caller[0] eq 'main';
           $seen{$caller[0]}++;
+
+          # warn 'asdf', $caller[0];
 
           if(($caller[0] =~ /^($nspat)(::.+)?$/)
             || ($caller[6] && $caller[6] =~ /^($nspat).pm$/)

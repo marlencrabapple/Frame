@@ -14,7 +14,6 @@ use Feature::Compat::Try;
 use Frame::Tx;
 use Frame::Routes;
 use Frame::Request;
-# use Frame::Controller;
 use Frame::Controller::Default;
 
 field $routes :reader;
