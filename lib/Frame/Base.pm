@@ -1,3 +1,7 @@
+# BEGIN {
+#   $ENV{FRAME_DEBUG} = 1
+# }
+
 use Object::Pad;
 
 package Frame::Base;
@@ -8,17 +12,19 @@ use v5.36;
 
 use parent 'Exporter';
 
+use PadWalker qw(peek_my peek_our);
+use Feature::Compat::Try;
 use Time::Piece;
 use Data::Dumper;
 use List::Util 'uniq';
 use Devel::StackTrace::WithLexicals;
 
-use subs qw(dmsg import_on_compose);
+use subs qw(dmsg);
 
 our @EXPORT = qw(dmsg);
 
-our $dev_mode = $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development';
-our $frame_debug = defined $ENV{'FRAME_DEBUG'};
+our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+our $frame_debug = defined $ENV{FRAME_DEBUG};
 
 $^H{__PACKAGE__ . '/user'} = 1;
 
@@ -29,8 +35,8 @@ ADJUSTPARAMS ($params) {
 }
 
 sub dmsg (@msgs) {
-  our $dev_mode;
-  return undef unless $dev_mode;
+  # our $dev_mode;
+  return '' unless $dev_mode;
 
   my @caller = caller 0;
 
@@ -52,21 +58,62 @@ sub dmsg (@msgs) {
 }
 
 method import_on_compose :common {
-  sub {
+  state @nsarr = qw(Frame);
+  state $nspat = 'Frame';
+
+  # This doesn't work and the solution is to basically do this all at once
+  # Its unclear when each anon sub is being run/where it is in @INC
+  return sub {
     my $exports = sub ($sub, @vars) {
       no strict 'refs';
-      foreach my $export (@{"$class\::EXPORT"}) {
+      
+      # local $Data::Dumper::Indent = 0;
+      
+      foreach my $export (${"$class\::"}{EXPORT}->@*) {
+        # warn $export;
         return 0 unless $sub->($export, @vars)
       }
       1
     };
 
     unshift @INC, sub ($coderef, $filename) {
-      state @nsarr = qw(Frame);
-      state $nspat = 'Frame';
       state %seen;
 
       my @caller = caller 0;
+
+      # local $Data::Dumper::Indent = 0;
+      # warn Dumper $class, $nspat, \%seen unless $class eq 'Frame::Base';
+      
+      # {
+      #   no strict 'refs';
+
+      #   state $ii = 0;
+      #   my $i = 0;
+
+      #   while(my @caller = caller $i) {
+      #       local $Data::Dumper::Indent = 0;
+      #       # warn "$ii-$i: ", Dumper $class, $filename, \@caller, \%{"$caller[0]\::"}, peek_my($i), peek_our($i);
+
+      #       try {
+      #         warn "$ii-$i: ", Dumper $class, $filename, \@caller, \%{"$caller[0]\::"}, keys %{peek_my($i)}, keys %{peek_our($i)}
+      #       }
+      #       catch ($e) {
+      #       }
+      #     # try {
+      #     #   local $Data::Dumper::Indent = 0;
+      #     #   warn "$ii-$i: ", Dumper $class, $filename, \@caller, \%{"$caller[0]\::"}, peek_my($i), peek_our($i);
+      #     # }
+      #     # catch ($e) {
+      #     #   local $Data::Dumper::Indent = 0;
+      #     #   # warn "$ii-$i: ", Dumper $class, $filename, \@caller, \${"$caller[0]\::"}, $e;
+      #     # }
+      #   }
+      #   continue {
+      #     $i++
+      #   }
+
+      #   $ii++
+      # }
 
       return undef if $seen{$caller[0]}
         || $seen{$filename}
@@ -74,7 +121,7 @@ method import_on_compose :common {
 
       if($caller[0] =~ /^($nspat)(::.+)?$/
         || $filename =~ /^($nspat)(\/.+)?\.pm$/
-        || $caller[10] && $caller[10]->{__PACKAGE__ . '/user'})
+        || $caller[10] && $caller[10]->{$class . '/user'})
       {
         $seen{$caller[0]} //= 0;
         $seen{$caller[0]}++;
@@ -83,8 +130,8 @@ method import_on_compose :common {
           {
             no strict 'refs';
             no warnings 'redefine';
-            *{"$caller[0]\::$_[0]"} = \&{"$_[0]"};
-            warn *{"$caller[0]\::$_[0]"} if $ENV{FRAME_DEBUG}
+            *{"$caller[0]\::$_[0]"} = \&{"$class\::$_[0]"};
+            # warn *{"$caller[0]\::$_[0]"} if $frame_debug
           }
         }, \@caller, __LINE__);
 
@@ -105,8 +152,8 @@ method import_on_compose :common {
             {
               no strict 'refs';
               no warnings 'redefine';
-              *{"$filename\::$_[0]"} = \&{"$_[0]"};
-              warn *{"$filename\::$_[0]"} if $ENV{FRAME_DEBUG}
+              *{"$filename\::$_[0]"} = \&{"$class\::$_[0]"};
+              # warn *{"$filename\::$_[0]"} if $frame_debug
             }
           }, $filename, __LINE__)
         }
@@ -117,10 +164,9 @@ method import_on_compose :common {
           next if $seen{$caller[0]} || $caller[0] eq 'main';
           $seen{$caller[0]}++;
 
-          # warn 'asdf', $caller[0];
-
           if(($caller[0] =~ /^($nspat)(::.+)?$/)
             || ($caller[6] && $caller[6] =~ /^($nspat).pm$/)
+            || ($caller[10] && $caller[10]->{$class . '/user'})
             || { eval "no strict 'refs'; %{[caller $i]->[0] . '::'}" }->{dmsg})
           {
             next if $caller[0] =~ /^Plack/;
@@ -129,8 +175,8 @@ method import_on_compose :common {
               {
                 no strict 'refs';
                 no warnings 'redefine';
-                *{"$caller[0]\::$_[0]"} = \&{"$_[0]"};
-                warn *{"$caller[0]\::$_[0]"} if $ENV{FRAME_DEBUG}
+                *{"$caller[0]\::$_[0]"} = \&{"$class\::$_[0]"};
+                # warn *{"$caller[0]\::$_[0]"} if $frame_debug
               }
             }, \@caller, $nspat);
 

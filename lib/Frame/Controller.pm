@@ -6,33 +6,42 @@ role Frame::Controller :does(Frame::Base);
 use utf8;
 use v5.36;
 
+use parent 'Exporter';
+
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
-# use Exporter 'import';
 use Feature::Compat::Try;
 
-use vars qw/$template_vars $tx_default/;
+use subs qw(template);
 
-state $template_vars = {};
+our @EXPORT = qw(template);
 
-state $tx_default = Text::Xslate->new(
+our $template_vars = {};
+
+our $tx_default = Text::Xslate->new(
   cache => $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development' ? 0 : 1,
   path => ['view']
 );
 
-# field $app :param :weak;
+$^H{__PACKAGE__ . '/user'} = 1;
+
 field $req :param :reader :weak;
 field $res :reader; # :weak;
+# field $tx :reader;
 
 ADJUSTPARAMS ($params) {
   $res = $req->new_response
 }
 
-method template :common { # Class is template filename
-  my ($vars, @args) = @_;
-  $tx_default->render($class, { %$template_vars, %$vars })
+sub template ($name, $vars = {}, @args) {
+  $tx_default->render($name, { %$template_vars, %$vars })
 }
+
+# method template :common { # $class is template filename
+#   my ($vars, @args) = @_;
+#   $tx_default->render($class, { %$template_vars, %$vars })
+# }
 
 method stash { $req->stash }
 
@@ -68,5 +77,9 @@ method render_404 {
 method redirect ($url, $status = 302) {
   $res->redirect($url, $status)
 }
+
+# BEGIN {
+#   Frame::Base::import_on_compose(__PACKAGE__)->()
+# }
 
 1
