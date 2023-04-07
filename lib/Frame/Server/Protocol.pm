@@ -8,112 +8,22 @@ use v5.36;
 
 use Carp;
 use Plack::Util;
-use Stream::Buffered;
+use List::Util 'any';
 use Scalar::Util 'weaken';
 use HTTP::Parser::XS 'parse_http_request';
 
-state $CRLF = "\x0d\x0a";
-state $headre = qr/^(.*?$CRLF$CRLF)/s;
-state $protore = qr/^HTTP/;
+use constant MAX_REQUEST_SIZE => 131072;
+use constant CHUNK_SIZE => 64 * 1024;
+use constant HEADRE => qr/^(.*?\r\n)/s;
 
-# method on_read ($buffref, $eof) {
-#   return 0 if $eof;
-#   my $readh = $self->read_handle;
-
-#   my %env = (
-#     SERVER_PORT => $readh->sockport,
-#     SERVER_NAME => $readh->sockhost,
-#     SCRIPT_NAME => '',
-#     REMOTE_ADDR => $readh->peerhost,
-#     REMOTE_PORT => $readh->peerport || 0,
-#     'psgi.version' => [ 1, 1 ],
-#     'psgi.errors'  => \*STDERR,
-#     'psgi.url_scheme' => $$self{ssl} ? 'https' : 'http',
-#     'psgi.run_once'     => Plack::Util::FALSE,
-#     'psgi.multithread'  => Plack::Util::FALSE,
-#     'psgi.multiprocess' => Plack::Util::TRUE,
-#     'psgi.streaming'    => Plack::Util::TRUE,
-#     'psgi.nonblocking'  => Plack::Util::TRUE,
-#     # 'psgix.harakiri'    => Plack::Util::TRUE,
-#     'psgix.input.buffered' => Plack::Util::TRUE,
-#     'psgix.io'          => $readh
-#   );
-
-#   my $on_read = sub ($, $buffref, $eof) {
-#     dmsg 'on_read $eof:', $eof;
-#     return 0 if $eof;
-#     my $reqlen = parse_http_request($$buffref, \%env);
-
-#     if($reqlen < 0) {
-#       $self->close_now if $reqlen == -1;
-#       return 0
-#     }
-#     elsif($reqlen >= 0) {
-#       if(my $cl = $env{CONTENT_LENGTH}) {
-#         my $buffer = Stream::Buffered->new($env{CONTENT_LEGNTH});
-#         $$buffref = substr $$buffref, $reqlen;
-
-#         my $read_chunked = sub ($, $buffref, $eof) {
-#           dmsg 'read_chunked $eof:', $eof;
-#           return 0 if $eof;
-#           my $chunk;
-
-#           if(length $$buffref) {
-#             $chunk = $$buffref;
-#             $$buffref = ''
-#           }
-#           else {
-#             return undef
-#           }
-
-#           dmsg $cl, length $chunk;
-
-#           $buffer->print($chunk);
-#           $cl -= length $chunk;
-
-#           dmsg $cl;
-
-#           return 0 if $cl > 0;
-
-#           dmsg 'asdf';
-
-#           $env{'psgi.input'} = $buffer->rewind;
-          
-#           undef
-#         };
-
-#         my $rcret = $read_chunked->(undef, $buffref, $eof);
-#         dmsg $rcret, defined $rcret, ref $rcret;
-
-#         return $read_chunked if defined $rcret
-#       }
-#       else {
-#         open my $stdin, '<', \substr $$buffref, 0, $reqlen, "";
-#         $env{'psgi.input'} = $stdin
-#       }
-#     }
-
-#     undef
-#   };
-
-#   my $orret = $on_read->(undef, $buffref, $eof);
-#   dmsg $orret, defined $orret, ref $orret;
-
-#   if(defined $orret) {
-#     return $orret if ref $orret eq 'CODE';
-#     return $on_read
-#   }
-
-#   my $req = $self->parent->make_request($self, \%env);
-
-#   push $self->{requests}->@*, $req;
-#   weaken($self->{requests}[-1]);
-
-#   $self->parent->_received_request($req)
-# }
+use constant CHUNKRE => (
+  qr/^(([0-9a-fA-F]+).*\r\n)/,
+  qr/^\r\n/
+);
 
 method on_read ($buffref, $eof) {
-  return 0 if $eof || $$buffref !~ $headre;
+  return 0 if $eof
+    || $$buffref !~ HEADRE; # TODO: See if this is faster than letting it hit parse_http_request
 
   my $readh = $self->read_handle;
   
@@ -131,7 +41,7 @@ method on_read ($buffref, $eof) {
     'psgi.multiprocess' => Plack::Util::TRUE,
     'psgi.streaming'    => Plack::Util::TRUE,
     'psgi.nonblocking'  => Plack::Util::TRUE,
-    # 'psgix.harakiri'    => Plack::Util::TRUE,
+    'psgix.harakiri'    => Plack::Util::TRUE,
     'psgix.input.buffered' => Plack::Util::TRUE,
     'psgix.io'          => $readh
   );
@@ -143,24 +53,54 @@ method on_read ($buffref, $eof) {
     return 0
   }
 
-  my $cl = $env{CONTENT_LENGTH} // 0;
   $$buffref = substr $$buffref, $reqlen;
 
-  sub ($, $buffref, $eof) {
-    return 0 unless length $$buffref >= $cl;
+  $self->write("HTTP/1.1 100 Continue\r\n\r\n")
+    if $env{HTTP_EXPECT} && lc $env{HTTP_EXPECT} eq '100-continue';
 
-    open my $stdin, '<', \substr $$buffref, 0, $cl, "";
-    $env{'psgi.input'} = $stdin;
+  if($env{HTTP_TRANSFER_ENCODING} && lc delete $env{HTTP_TRANSFER_ENCODING} eq 'chunked') {
+    my $chunkbuff = '';
+    $env{CONTENT_LENGTH} = 0;
 
-    my $req = $self->parent->make_request($self, \%env);
+    return sub ($, $buffref, $eof) {
+      while ($$buffref =~ s/@{[CHUNKRE]}[0]//) {
+        my ($trailer, $chunklen) = ($1, hex $2);
 
-    push $self->{requests}->@*, $req;
-    weaken($self->{requests}[-1]);
+        return $self->make_request(\$chunkbuff, \%env, $env{CONTENT_LENGTH}) if $chunklen == 0;
 
-    $self->parent->_received_request($req);
+        if(length $$buffref < $chunklen + 2) {
+          $$buffref = "$trailer$$buffref";
+          last
+        }
 
-    return undef
+        $chunkbuff .= substr $$buffref, 0, $chunklen, '';
+        $$buffref =~ s/@{[CHUNKRE]}[1]//;
+        $env{CONTENT_LENGTH} += $chunklen
+      }
+
+      0
+    }
   }
+
+  my $cl = $env{CONTENT_LENGTH} // 0;
+
+  sub ($, $buffref, $eof) {
+    length $$buffref >= $cl ? $self->make_request($buffref, \%env, $cl) : 0
+  }
+}
+
+method make_request ($buffref, $env, $length) {
+  open my $stdin, '<', \substr $$buffref, 0, $length, '';
+  $$env{'psgi.input'} = $stdin;
+
+  my $req = $self->parent->make_request($self, $env);
+
+  push $self->{requests}->@*, $req;
+  weaken $self->{requests}[-1];
+
+  $self->parent->_received_request($req);
+
+  undef
 }
 
 1
