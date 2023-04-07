@@ -14,7 +14,7 @@ use Data::Dumper;
 use Frame::Server::Request;
 use Frame::Server::Protocol;
 
-my $CRLF = "\x0d\x0a";
+use constant CRLF => "\r\n";
 
 method _init :override ($params) {
   $$params{handle_class} = "Frame::Server::Protocol";
@@ -47,7 +47,7 @@ sub _responder ($req, $res) {
       $use_chunked_transfer++;
     }
 
-    $req->write( $response->as_string( $CRLF ) );
+    $req->write( $response->as_string( CRLF ) );
 
     return $use_chunked_transfer ?
       Net::Async::HTTP::Server::PSGI::ChunkWriterStream->new( $req ) :
@@ -63,7 +63,7 @@ sub _responder ($req, $res) {
       $response->content_length( $len );
     }
 
-    $req->write( $response->as_string( $CRLF ) );
+    $req->write( $response->as_string( CRLF ) );
 
     $req->write( $_ ) for @$body;
     $req->done;
@@ -74,7 +74,7 @@ sub _responder ($req, $res) {
       $use_chunked_transfer++;
     }
 
-    $req->write( $response->as_string( $CRLF ) );
+    $req->write( $response->as_string( CRLF ) );
 
     if( $use_chunked_transfer ) {
       $req->write( sub {
@@ -88,11 +88,11 @@ sub _responder ($req, $res) {
 
         # Form HTTP chunks out of it
         defined $buffer and
-          return sprintf( "%X$CRLF%s$CRLF", length $buffer, $buffer );
+          return sprintf( "%X${\CRLF}%s${\CRLF}", length $buffer, $buffer );
 
         $body->close;
         undef $body;
-        return "0$CRLF$CRLF";
+        return "0${\CRLF}${\CRLF}";
       } );
     }
     else {
@@ -123,7 +123,7 @@ method on_request ($req) {
     : ref $responder eq 'CODE' ? $res->($responder)
     : die "Bad response: $res";
 
-  return
+  $$env{'io.async.loop'}->stop if $$env{'psgix.harakiri.commit'}
 }
 
 1

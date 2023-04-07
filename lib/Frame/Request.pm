@@ -6,13 +6,11 @@ class Frame::Request :isa(Plack::Request) :does(Frame::Base);
 use utf8;
 use v5.36;
 
-# use Plack::Request;
 use List::Util 'any';
 
-state @ajax_headers_default = ('X-Robo-Req');
+state @ajax_headers_default = qw(X-Robo-Req);
 
 field @ajax_headers :reader;
-# field $req :reader;
 field $placeholders :reader;
 field @placeholders_ord :reader;
 field @placeholder_values_ord :reader;
@@ -26,25 +24,6 @@ ADJUSTPARAMS ($params) {
   $stash = {};
   @ajax_headers = $$params{ajax_headers}->@* if ref $$params{ajax_headers} eq 'ARRAY';
 }
-
-# method AUTOLOAD {
-#   (my $sub = our $AUTOLOAD) =~ s/.*:://;
-#   return if $sub eq 'DESTROY';
-#   $req->$sub(@_)
-# }
-
-# method refresh ($env = undef) {
-#   $req = undef;
-#   $stash = {};
-#   $placeholders = {};
-#   @placeholders_ord = ();
-#   @placeholder_values_ord = ();
-
-#   return unless $env;
-
-#   $req = Plack::Request->new($env);
-#   $req->new_response
-# }
 
 method placeholder ($key, $value = undef) {
   if(defined $value && !$$placeholders{$key}) {
@@ -62,7 +41,9 @@ method set_placeholders (@placeholders) {
   }
 }
 
-method is_ajax { $self->header($ajax_headers_default[0]) ? 1 : 0 }
+method is_ajax ($fuzzy = 0) {
+  $fuzzy ? $self->maybe_ajax : $self->header($ajax_headers_default[0]) ? 1 : 0
+}
 
 method maybe_ajax (@headers) {
   $self->is_xhr

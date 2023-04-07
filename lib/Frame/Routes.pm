@@ -43,7 +43,7 @@ method match ($req) {
       my ($match, $wildcard_ne, $has_placeholder);
 
       # dmsg "hi", $barren;
-      dmsg $prev, $curr, $barren, $i, $part;
+      # dmsg $prev, $curr, $barren, $i, $part;
 
       if($part ne '' && $$curr{$part} && !$$barren{$i}{$part} && !$self->patterns->{$part}) {
         $match = $part;

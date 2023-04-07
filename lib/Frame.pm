@@ -41,7 +41,6 @@ ADJUSTPARAMS ($params) {
 
   my $class = __CLASS__;
 
-  # if(eval "require $class\::Controller; say 'asdf'; 1") {
   try {
     require "$class/Controller.pm";
 
@@ -54,9 +53,8 @@ ADJUSTPARAMS ($params) {
     $default_controller_meta = $meta;
     $default_controller_class = $meta->name
   }
-  # else {
   catch ($e) {
-    dmsg $e #$e
+    dmsg $e
   }
 
   $request_class = $$params{request_class}
