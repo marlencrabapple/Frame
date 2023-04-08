@@ -26,58 +26,68 @@ method _init :override ($params) {
 sub _responder ($req, $res) {
   my ($status, $headers, $body) = @$res;
 
-  my $response = HTTP::Response->new( $status );
-  $response->protocol( $req->protocol );
+  my @lines = ("@{[ $req->protocol ]} $status @{[ HTTP::Status::status_message($status) ]}");
+  my %res_headers;
+
+  my $write_headers = sub {
+    my $c = $req->keep_alive ? 'keep-alive' : 'close';
+    
+    push @lines, sprintf "Connection: $c"
+      unless $req->protocol eq 'HTTP/1.1' && $c eq 'keep-alive';
+
+    $req->write(join CRLF, (@lines, CRLF))
+  };
 
   my $has_content_length = 0;
   my $use_chunked_transfer;
 
-  while( my ( $key, $value ) = splice @$headers, 0, 2 ) {
-    $response->header( $key, $value );
+  while(my ($key, $val) = splice @$headers, 0, 2) {
+    $res_headers{$key} = $val;
+    push @lines, "$key: $val";
 
     $has_content_length = 1 if $key eq "Content-Length";
-    $use_chunked_transfer++ if $key eq "Transfer-Encoding" and $value eq "chunked";
+    $use_chunked_transfer++ if $key eq "Transfer-Encoding" and $val eq "chunked"
   }
 
   if(!defined $body) {
-    croak "Responder given no body in void context" unless defined wantarray;
+    croak 'Responder given no body in void context' unless defined wantarray;
 
-    unless( $has_content_length ) {
-      $response->header( "Transfer-Encoding" => "chunked" );
-      $use_chunked_transfer++;
+    unless($has_content_length) {
+      push @lines, 'Transfer-Encoding: chunked';
+      $use_chunked_transfer++
     }
 
-    $req->write( $response->as_string( CRLF ) );
+    $write_headers->();
 
     return $use_chunked_transfer ?
-      Net::Async::HTTP::Server::PSGI::ChunkWriterStream->new( $req ) :
-      Net::Async::HTTP::Server::PSGI::WriterStream->new( $req );
+      Net::Async::HTTP::Server::PSGI::ChunkWriterStream->new($req) :
+      Net::Async::HTTP::Server::PSGI::WriterStream->new($req)
   }
-  elsif( ref $body eq "ARRAY" ) {
-    unless( $has_content_length ) {
+  elsif(ref $body eq 'ARRAY') {
+    unless($has_content_length) {
       my $len = 0;
       my $found_undef;
       $len += length( $_ // ( $found_undef++, "" ) ) for @$body;
       carp "Found undefined value in PSGI body" if $found_undef;
 
-      $response->content_length( $len );
+      push @lines, "Content-Length: $len"
     }
 
-    $req->write( $response->as_string( CRLF ) );
+    $write_headers->();
 
-    $req->write( $_ ) for @$body;
-    $req->done;
+    $req->write($_) for @$body;
+    $req->done
   }
   else {
-    unless( $has_content_length ) {
-      $response->header( "Transfer-Encoding" => "chunked" );
+    unless($has_content_length) {
+      push @lines, 'Transfer-Encoding: chunked';
       $use_chunked_transfer++;
     }
 
-    $req->write( $response->as_string( CRLF ) );
+    $write_headers->();
 
-    if( $use_chunked_transfer ) {
-      $req->write( sub {
+    if($use_chunked_transfer) {
+      $req->write(sub {
         # We can't return the EOF chunk and set undef in one go
         # What we'll have to do is send the EOF chunk then clear $body,
         # which indicates end
@@ -88,32 +98,31 @@ sub _responder ($req, $res) {
 
         # Form HTTP chunks out of it
         defined $buffer and
-          return sprintf( "%X${\CRLF}%s${\CRLF}", length $buffer, $buffer );
+          return sprintf("%X${\CRLF}%s${\CRLF}", length $buffer, $buffer);
 
         $body->close;
         undef $body;
-        return "0${\CRLF}${\CRLF}";
-      } );
+        return "0${\CRLF}${\CRLF}"
+      })
     }
     else {
-      $req->write( sub {
+      $req->write(sub {
         local $/ = \8192;
         my $buffer = $body->getline;
 
         defined $buffer and return $buffer;
 
         $body->close;
-        return undef;
-      } );
+        return undef
+      })
     }
 
-    $req->done;
+    $req->done
   }
 }
 
 method on_request ($req) {
   my $env = $$req{req};
-
   $$env{'io.async.loop'} = $self->get_loop;
 
   my $res = Plack::Util::run_app $$self{app}, $env;

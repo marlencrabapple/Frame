@@ -55,7 +55,9 @@ method on_read ($buffref, $eof) {
 
   $$buffref = substr $$buffref, $reqlen;
 
-  $self->write("HTTP/1.1 100 Continue\r\n\r\n")
+  my $bytes_written;
+
+  $self->write("HTTP/1.1 100 Continue\r\n\r\n", on_write => sub { $bytes_written = $_[1] })
     if $env{HTTP_EXPECT} && lc $env{HTTP_EXPECT} eq '100-continue';
 
   if($env{HTTP_TRANSFER_ENCODING} && lc delete $env{HTTP_TRANSFER_ENCODING} eq 'chunked') {
@@ -63,37 +65,52 @@ method on_read ($buffref, $eof) {
     $env{CONTENT_LENGTH} = 0;
 
     return sub ($, $buffref, $eof) {
-      while ($$buffref =~ s/@{[CHUNKRE]}[0]//) {
-        my ($trailer, $chunklen) = ($1, hex $2);
+      # while ($$buffref =~ s/@{[CHUNKRE]}[0]//) {
+      #   my ($trailer, $chunklen) = ($1, hex $2);
 
-        return $self->make_request(\$chunkbuff, \%env, $env{CONTENT_LENGTH}) if $chunklen == 0;
+      #   return $self->make_request(\$chunkbuff, \%env, $env{CONTENT_LENGTH}, $bytes_written) if $chunklen == 0;
 
-        if(length $$buffref < $chunklen + 2) {
-          $$buffref = "$trailer$$buffref";
-          last
-        }
+      #   if(length $$buffref < $chunklen + 2) {
+      #     $$buffref = "$trailer$$buffref";
+      #     last
+      #   }
 
-        $chunkbuff .= substr $$buffref, 0, $chunklen, '';
-        $$buffref =~ s/@{[CHUNKRE]}[1]//;
-        $env{CONTENT_LENGTH} += $chunklen
+      #   $chunkbuff .= substr $$buffref, 0, $chunklen, '';
+      #   $$buffref =~ s/@{[CHUNKRE]}[1]//;
+      #   $env{CONTENT_LENGTH} += $chunklen
+      # }
+
+      return 0 unless $$buffref =~ s/@{[CHUNKRE]}[0]//;
+      my ($trailer, $chunklen) = ($1, hex $2);
+
+      return $self->make_request(\$chunkbuff, \%env, $env{CONTENT_LENGTH}, $bytes_written) if $chunklen == 0;
+
+      if(length $$buffref < $chunklen + 2) {
+        $$buffref = "$trailer$$buffref";
+        return 0
       }
 
-      0
+      $chunkbuff .= substr $$buffref, 0, $chunklen, '';
+      $$buffref =~ s/@{[CHUNKRE]}[1]//;
+      $env{CONTENT_LENGTH} += $chunklen;
+
+      1
     }
   }
 
   my $cl = $env{CONTENT_LENGTH} // 0;
 
   sub ($, $buffref, $eof) {
-    length $$buffref >= $cl ? $self->make_request($buffref, \%env, $cl) : 0
+    length $$buffref >= $cl ? $self->make_request($buffref, \%env, $cl, $bytes_written) : 0
   }
 }
 
-method make_request ($buffref, $env, $length) {
+method make_request ($buffref, $env, $length, $bytes_written = 0) {
   open my $stdin, '<', \substr $$buffref, 0, $length, '';
   $$env{'psgi.input'} = $stdin;
 
   my $req = $self->parent->make_request($self, $env);
+  $$req{bytes_written} += $bytes_written // 0; # I shouldn't have to check for undef here...
 
   push $self->{requests}->@*, $req;
   weaken $self->{requests}[-1];
