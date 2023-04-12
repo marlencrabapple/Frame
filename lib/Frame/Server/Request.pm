@@ -16,8 +16,8 @@ method method :override {
 
 method keep_alive {
   my $c = lc ($self->{req}{HTTP_CONNECTION} // '');
-  return 0 if $c eq 'close';
   return 1 if $c eq 'keep-alive' && $self->protocol eq 'HTTP/1.0';
+  return 0 if $c eq 'close' || $self->protocol eq 'HTTP/1.0';
   1
 }
 
@@ -41,6 +41,11 @@ method _write_to_stream :override ($stream) {
   ) if $self->{is_done};
 
   $self->{is_done}
+}
+
+method done :override {
+  $self->{conn}->inactivity_timeout->stop;
+  $self->SUPER::done
 }
 
 1

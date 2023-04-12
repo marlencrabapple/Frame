@@ -10,6 +10,7 @@ use Carp;
 use Plack::Util;
 use List::Util 'any';
 use Scalar::Util 'weaken';
+use IO::Async::Timer::Countdown;
 use HTTP::Parser::XS 'parse_http_request';
 
 use constant MAX_REQUEST_SIZE => 131072;
@@ -21,13 +22,22 @@ use constant CHUNKRE => (
   qr/^\r\n/
 );
 
+field %env :reader;
+field $bytes_written :mutator = 0;
+field $read_timeout :mutator;
+field $req_header_timeout :mutator;
+field $keep_alive_timeout :mutator;
+field $inactivity_timeout :mutator;
+
 method on_read ($buffref, $eof) {
   return 0 if $eof
     || $$buffref !~ HEADRE; # TODO: See if this is faster than letting it hit parse_http_request
+  
+  $inactivity_timeout->reset;
 
   my $readh = $self->read_handle;
   
-  my %env = (
+  %env = (
     SERVER_PORT => $readh->sockport,
     SERVER_NAME => $readh->sockhost,
     SCRIPT_NAME => '',
@@ -53,37 +63,27 @@ method on_read ($buffref, $eof) {
     return 0
   }
 
+  $req_header_timeout->stop;
+  $keep_alive_timeout->stop;
+  
   $$buffref = substr $$buffref, $reqlen;
 
-  my $bytes_written;
+  my $req = $self->parent->make_request($self, \%env);
 
-  $self->write("HTTP/1.1 100 Continue\r\n\r\n", on_write => sub { $bytes_written = $_[1] })
+  $self->write("HTTP/1.1 100 Continue\r\n\r\n", on_write => sub { $bytes_written += $_[1] })
     if $env{HTTP_EXPECT} && lc $env{HTTP_EXPECT} eq '100-continue';
-
+  
   if($env{HTTP_TRANSFER_ENCODING} && lc delete $env{HTTP_TRANSFER_ENCODING} eq 'chunked') {
     my $chunkbuff = '';
     $env{CONTENT_LENGTH} = 0;
 
     return sub ($, $buffref, $eof) {
-      # while ($$buffref =~ s/@{[CHUNKRE]}[0]//) {
-      #   my ($trailer, $chunklen) = ($1, hex $2);
-
-      #   return $self->make_request(\$chunkbuff, \%env, $env{CONTENT_LENGTH}, $bytes_written) if $chunklen == 0;
-
-      #   if(length $$buffref < $chunklen + 2) {
-      #     $$buffref = "$trailer$$buffref";
-      #     last
-      #   }
-
-      #   $chunkbuff .= substr $$buffref, 0, $chunklen, '';
-      #   $$buffref =~ s/@{[CHUNKRE]}[1]//;
-      #   $env{CONTENT_LENGTH} += $chunklen
-      # }
+      $inactivity_timeout->reset;
 
       return 0 unless $$buffref =~ s/@{[CHUNKRE]}[0]//;
       my ($trailer, $chunklen) = ($1, hex $2);
 
-      return $self->make_request(\$chunkbuff, \%env, $env{CONTENT_LENGTH}, $bytes_written) if $chunklen == 0;
+      return $self->handle_request($req, \$chunkbuff, \%env, $env{CONTENT_LENGTH}) if $chunklen == 0;
 
       if(length $$buffref < $chunklen + 2) {
         $$buffref = "$trailer$$buffref";
@@ -101,23 +101,29 @@ method on_read ($buffref, $eof) {
   my $cl = $env{CONTENT_LENGTH} // 0;
 
   sub ($, $buffref, $eof) {
-    length $$buffref >= $cl ? $self->make_request($buffref, \%env, $cl, $bytes_written) : 0
+    $inactivity_timeout->reset;
+    length $$buffref >= $cl ? $self->handle_request($req, $buffref, \%env, $cl) : 0
   }
 }
 
-method make_request ($buffref, $env, $length, $bytes_written = 0) {
+method handle_request ($req, $buffref, $env, $length) {
   open my $stdin, '<', \substr $$buffref, 0, $length, '';
   $$env{'psgi.input'} = $stdin;
-
-  my $req = $self->parent->make_request($self, $env);
-  $$req{bytes_written} += $bytes_written // 0; # I shouldn't have to check for undef here...
+  
+  $$req{bytes_written} += $bytes_written;
 
   push $self->{requests}->@*, $req;
   weaken $self->{requests}[-1];
 
   $self->parent->_received_request($req);
+  $read_timeout->stop;
 
   undef
+}
+
+method write :override ($data, %params) {
+  $inactivity_timeout->reset;
+  $self->SUPER::write($data, %params)
 }
 
 1

@@ -6,20 +6,25 @@ class Plack::Handler::Frame::Server;
 use utf8;
 use v5.36;
 
-use Data::Dumper;
+use Frame::Server;
 use IO::Async::Loop;
 use Parallel::Prefork;
 use Server::Starter ();
+use List::AllUtils qw(any first);
 
-use Frame::Server;
+use constant SIGRERE => qr/^(TERM|USR1)$/;
 
 field $host :param;
 field $port :param;
+field $req_header_timeout :reader :param = 2;
+field $keep_alive_timeout :reader :param = 2;
+field $read_timeout :reader :param = 300;
+field $inactivity_timeout :reader :param = 30;
+field $max_workers :param = 10;
+field $queue_size :param = 10;
+field $ssl :param = undef;
 
-field $max_workers = 10;
-field $queue_size = 10;
 field @listen;
-field $ssl :reader;
 field %ssl_args;
 field %pm_args;
 field $loop;
@@ -28,9 +33,6 @@ field $server_ready;
 ADJUSTPARAMS ($params) {
   # TODO: Server::Starter stuff
   # ...
-
-  $max_workers = $$params{max_workers} // $max_workers;
-  $queue_size = $$params{queue_size} // $queue_size;
   
   $server_ready = $$params{server_ready}
     if $$params{server_ready} && ref $$params{server_ready} eq 'CODE';
@@ -54,15 +56,10 @@ ADJUSTPARAMS ($params) {
   $pm_args{err_respawn_interval} = $$params{err_respawn_interval}
     if $$params{err_respawn_interval};
 
-  if($ssl = $$params{ssl}) {
+  if($ssl || any { /^ssl_/ } keys %$params) {
     require IO::Async::SSL;
-    $ssl_args{extensions} = [qw(SSL)]
-  }
-
-  foreach my $key (grep { /^ssl_/ } keys %$params) {
-    my $val = $$params{$key};
-    $key =~ s/^ssl/SSL/;
-    $ssl_args{$key} = $val
+    $ssl_args{extensions} = ['SSL'];
+    %ssl_args = map { $_ =~ s/^ssl/SSL/r, $$params{$_} } grep { /^ssl_/ } keys %$params
   }
 
   $loop = IO::Async::Loop->new
@@ -74,9 +71,7 @@ method run ($app) {
   if($max_workers > 0) {
     my $pm = Parallel::Prefork->new(\%pm_args);
 
-    state $sigrere = qr/^(TERM|USR1)$/;
-
-    while($pm->signal_received !~ $sigrere) {
+    while($pm->signal_received !~ SIGRERE) {
       $pm->start and next;
       srand((rand() * 2 ** 30) ^ $$ ^ time);
       $loop->run;
@@ -96,28 +91,37 @@ method run ($app) {
   }
 }
 
-# Mostly copied from $self->SUPER::run
 method register_service ($app) {
-  foreach my $listen (@listen) {
+  foreach my $interface (@listen) {
     my $server = Frame::Server->new(app => $app);
+    $server->plack_handler = $self;
     $loop->add($server);
 
-    my ($host, $path);
+    my @patterns = (qr/^\[([0-9a-f:]+)\]:/i, qr/^([^:]+?):/, qr/^:/);
+    my $host;
 
-    if($listen =~ s/^\[([0-9a-f:]+)\]://i) {
-      $host = $1
-    }
-    elsif($listen =~ s/^([^:]+?)://) {
-      $host = $1
-    }
-    elsif($listen =~ s/^://) {
-      # OK
-    }
-    else {
-      $path = $listen
-    }
+    if(any { $interface =~ s/$_// ? eval { $host = $1; 1 } : 0 } @patterns) {
+      my ($service, $is_ssl) = split m/:/, $interface;
 
-    if(defined $path) {
+      $server->listen(
+        host => $host,
+        service => $service,
+        socktype => "stream",
+        queuesize => $queue_size,
+
+        %ssl_args,
+
+        on_notifier => sub {
+          $server_ready->({
+            host => $host,
+            port => $service,
+            proto => $is_ssl || $ssl ? "https" : "http",
+            server_software => ref $self
+          }) if $server_ready;
+        }
+      )->get
+    }
+    elsif(my $path = $interface) {
       require IO::Socket::UNIX;
 
       unlink $path if -e $path;
@@ -127,29 +131,7 @@ method register_service ($app) {
         Listen => $queue_size,
       ) or die "Cannot listen on $path - $!";
 
-      $server->configure(handle => $socket);
-    }
-    else {
-      my ($service, $ssl) = split m/:/, $listen;
-      $ssl ||= $self->ssl;
-
-      $server->listen(
-        host     => $host,
-        service  => $service,
-        socktype => "stream",
-        queuesize => $queue_size,
-
-        %ssl_args,
-
-        on_notifier => sub {
-          $server_ready->({
-            host            => $host,
-            port            => $service,
-            proto           => $ssl ? "https" : "http",
-            server_software => ref $self
-          }) if $server_ready;
-        }
-      )->get
+      $server->configure(handle => $socket)
     }
   }
 }

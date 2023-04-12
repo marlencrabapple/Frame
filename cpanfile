@@ -1,7 +1,5 @@
 requires 'perl', 'v5.36';
 
-requires 'Stream::Buffered', '0.03';
-
 requires 'Plack', '1.0050';
 
 requires 'Path::Tiny', '0.144';

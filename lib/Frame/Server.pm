@@ -16,6 +16,12 @@ use Frame::Server::Protocol;
 
 use constant CRLF => "\r\n";
 
+field $plack_handler :mutator;
+
+# method BUILDARGS :common (%args) {
+#   (app => delete $args{app})
+# }
+
 method _init :override ($params) {
   $$params{handle_class} = "Frame::Server::Protocol";
   $$params{request_class} = "Frame::Server::Request";
@@ -30,8 +36,14 @@ sub _responder ($req, $res) {
   my %res_headers;
 
   my $write_headers = sub {
-    my $c = $req->keep_alive ? 'keep-alive' : 'close';
-    
+    my $c = 'close';
+
+    if($req->keep_alive) {
+      $c = 'keep-alive';
+      my $timer = $req->{conn}->keep_alive_timeout;
+      $timer->is_running ? $timer->reset : $timer->start
+    }
+
     push @lines, sprintf "Connection: $c"
       unless $req->protocol eq 'HTTP/1.1' && $c eq 'keep-alive';
 
@@ -121,9 +133,40 @@ sub _responder ($req, $res) {
   }
 }
 
+method on_accept ($conn) {
+  $self->SUPER::on_accept($conn);
+
+  my %timer_args_base = (
+    remove_on_expire => 1,
+    on_expire => sub ($self) {
+      dmsg "$conn", "$self", $self;
+      # $conn->write("Connection: close", on_write => sub { $conn->{bytes_written} += $_[1] });
+      $conn->close
+    }
+  );
+
+  foreach my $timeout (qw/req_header read keep_alive inactivity/) {
+    eval qq{
+      \$conn->$timeout\_timeout = IO::Async::Timer::Countdown->new(
+        \%timer_args_base,
+        delay => \$self->plack_handler->$timeout\_timeout,
+        notifier_name => "$timeout\_timeout"
+      );
+
+      \$self->loop->add(\$conn->$timeout\_timeout);
+      \$conn->$timeout\_timeout->start unless \$timeout eq 'keep_alive';
+
+      my \$asdf = \$conn->$timeout\_timeout;
+      dmsg "\$conn", "\$asdf", \$asdf->notifier_name
+    }
+  }
+
+  $conn
+}
+
 method on_request ($req) {
   my $env = $$req{req};
-  $$env{'io.async.loop'} = $self->get_loop;
+  $$env{'io.async.loop'} = $self->loop;
 
   my $res = Plack::Util::run_app $$self{app}, $env;
   my $responder = sub { _responder($req, $res) };

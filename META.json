@@ -66,7 +66,6 @@
             "Plack" : "1.0050",
             "SQL::Abstract" : "2.000001",
             "Server::Starter" : "0.35",
-            "Stream::Buffered" : "0.03",
             "Syntax::Keyword::Dynamically" : "0.11",
             "Text::Xslate" : "v3.5.9",
             "YAML::Tiny" : "1.73",
