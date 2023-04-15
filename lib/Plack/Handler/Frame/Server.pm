@@ -1,7 +1,7 @@
 use Object::Pad;
 
 package Plack::Handler::Frame::Server;
-class Plack::Handler::Frame::Server;
+class Plack::Handler::Frame::Server :does(Frame::Base);
 
 use utf8;
 use v5.36;

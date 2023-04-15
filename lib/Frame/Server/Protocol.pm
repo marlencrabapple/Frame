@@ -16,28 +16,33 @@ use HTTP::Parser::XS 'parse_http_request';
 use constant MAX_REQUEST_SIZE => 131072;
 use constant CHUNK_SIZE => 64 * 1024;
 use constant HEADRE => qr/^(.*?\r\n)/s;
+# use constant PIPELINERE => qr/^(?:GET|HEAD)/;
 
 use constant CHUNKRE => (
   qr/^(([0-9a-fA-F]+).*\r\n)/,
   qr/^\r\n/
 );
 
-field %env :reader;
-field $bytes_written :mutator = 0;
 field $read_timeout :mutator;
 field $req_header_timeout :mutator;
 field $keep_alive_timeout :mutator;
 field $inactivity_timeout :mutator;
+field $reset_req_header_timeout = 0; # Gotta think of a better name for this
 
 method on_read ($buffref, $eof) {
   return 0 if $eof
     || $$buffref !~ HEADRE; # TODO: See if this is faster than letting it hit parse_http_request
   
-  $inactivity_timeout->reset;
+  if($reset_req_header_timeout) {
+    $self->restart_timeout(qw/req_header read/);
+    $reset_req_header_timeout = 0;
+  }
 
+  $inactivity_timeout->reset;
+  
   my $readh = $self->read_handle;
   
-  %env = (
+  my %env = (
     SERVER_PORT => $readh->sockport,
     SERVER_NAME => $readh->sockhost,
     SCRIPT_NAME => '',
@@ -63,14 +68,14 @@ method on_read ($buffref, $eof) {
     return 0
   }
 
-  $req_header_timeout->stop;
+  $req_header_timeout->stop; $reset_req_header_timeout = 1;
   $keep_alive_timeout->stop;
   
   $$buffref = substr $$buffref, $reqlen;
 
   my $req = $self->parent->make_request($self, \%env);
 
-  $self->write("HTTP/1.1 100 Continue\r\n\r\n", on_write => sub { $bytes_written += $_[1] })
+  $self->write("HTTP/1.1 100 Continue\r\n\r\n", on_write => sub { $$req{bytes_written} += $_[1] })
     if $env{HTTP_EXPECT} && lc $env{HTTP_EXPECT} eq '100-continue';
   
   if($env{HTTP_TRANSFER_ENCODING} && lc delete $env{HTTP_TRANSFER_ENCODING} eq 'chunked') {
@@ -109,14 +114,11 @@ method on_read ($buffref, $eof) {
 method handle_request ($req, $buffref, $env, $length) {
   open my $stdin, '<', \substr $$buffref, 0, $length, '';
   $$env{'psgi.input'} = $stdin;
-  
-  $$req{bytes_written} += $bytes_written;
 
   push $self->{requests}->@*, $req;
   weaken $self->{requests}[-1];
 
   $self->parent->_received_request($req);
-  $read_timeout->stop;
 
   undef
 }
@@ -124,6 +126,13 @@ method handle_request ($req, $buffref, $env, $length) {
 method write :override ($data, %params) {
   $inactivity_timeout->reset;
   $self->SUPER::write($data, %params)
+}
+
+method restart_timeout (@names) {
+  foreach my $name (scalar @names ? @names : qw/req_header keep_alive read inactivity/) {
+    my $field = "$name\_timeout";
+    $self->$field->is_running ? $self->$field->reset : $self->$field->start
+  }
 }
 
 1

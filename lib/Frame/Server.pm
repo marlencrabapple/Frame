@@ -40,8 +40,9 @@ sub _responder ($req, $res) {
 
     if($req->keep_alive) {
       $c = 'keep-alive';
-      my $timer = $req->{conn}->keep_alive_timeout;
-      $timer->is_running ? $timer->reset : $timer->start
+      # my $timer = $req->{conn}->keep_alive_timeout;
+      # $timer->is_running ? $timer->reset : $timer->start
+      $req->{conn}->restart_timeout('keep_alive');
     }
 
     push @lines, sprintf "Connection: $c"
@@ -139,26 +140,25 @@ method on_accept ($conn) {
   my %timer_args_base = (
     remove_on_expire => 1,
     on_expire => sub ($self) {
-      dmsg "$conn", "$self", $self;
-      # $conn->write("Connection: close", on_write => sub { $conn->{bytes_written} += $_[1] });
+      dmsg "$conn", "$self", $self if $ENV{FRAME_DEBUG};
       $conn->close
     }
   );
 
-  foreach my $timeout (qw/req_header read keep_alive inactivity/) {
-    eval qq{
-      \$conn->$timeout\_timeout = IO::Async::Timer::Countdown->new(
-        \%timer_args_base,
-        delay => \$self->plack_handler->$timeout\_timeout,
-        notifier_name => "$timeout\_timeout"
-      );
+  foreach my $key (qw/req_header read keep_alive inactivity/) {
+    my $field = "$key\_timeout";
 
-      \$self->loop->add(\$conn->$timeout\_timeout);
-      \$conn->$timeout\_timeout->start unless \$timeout eq 'keep_alive';
+    $conn->$field = IO::Async::Timer::Countdown->new(
+      %timer_args_base,
+      delay => $plack_handler->$field,
+      notifier_name => $field
+    );
 
-      my \$asdf = \$conn->$timeout\_timeout;
-      dmsg "\$conn", "\$asdf", \$asdf->notifier_name
-    }
+    $self->loop->add($conn->$field);
+    $conn->$field->start unless $key eq 'keep_alive';
+
+    my $asdf = $conn->$field;
+    dmsg "$conn", "$asdf", $asdf->notifier_name if $ENV{FRAME_DEBUG}
   }
 
   $conn
