@@ -2,6 +2,10 @@
 #   $ENV{FRAME_DEBUG} = 1
 # }
 
+BEGIN {
+  $^H{__PACKAGE__ . '/user'} = 1;
+}
+
 use Object::Pad;
 
 package Frame::Base;
@@ -24,11 +28,15 @@ use subs qw(dmsg);
 our @EXPORT = qw(dmsg);
 
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-our $frame_debug = defined $ENV{FRAME_DEBUG};
+our $frame_debug = $ENV{FRAME_DEBUG};
 
 $^H{__PACKAGE__ . '/user'} = 1;
 
 field $app :weak :param :mutator = undef;
+
+ADJUST {
+  $^H{__CLASS__ . '/user'} = 1;
+}
 
 ADJUSTPARAMS ($params) {
   $app //= $$params{app} if $$params{app}
@@ -48,7 +56,7 @@ sub dmsg (@msgs) {
     $out .= "\n"
   }
 
-  $out .= $frame_debug ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
+  $out .= $frame_debug == 2 ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
     indent => 1,
     skip_frames => 1
   )->as_string : "at $caller[1]:$caller[2]";
