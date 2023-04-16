@@ -23,10 +23,10 @@ use constant CHUNKRE => (
   qr/^\r\n/
 );
 
-field $read_timeout :mutator;
-field $req_header_timeout :mutator;
-field $keep_alive_timeout :mutator;
-field $inactivity_timeout :mutator;
+field $read_timeout :accessor :weak;
+field $req_header_timeout :accessor :weak;
+field $keep_alive_timeout :accessor :weak;
+field $inactivity_timeout :accessor :weak;
 field $reset_req_header_timeout = 0; # Gotta think of a better name for this
 
 method on_read ($buffref, $eof) {
@@ -126,6 +126,15 @@ method handle_request ($req, $buffref, $env, $length) {
 method write :override ($data, %params) {
   $inactivity_timeout->reset;
   $self->SUPER::write($data, %params)
+}
+
+method on_closed :override {
+  foreach my $name (qw/req_header keep_alive read inactivity/) {
+    my $field = "$name\_timeout";
+    $self->$field->remove_from_parent
+  }
+
+  $self->SUPER::on_closed
 }
 
 method restart_timeout (@names) {

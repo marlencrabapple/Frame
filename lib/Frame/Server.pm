@@ -141,6 +141,7 @@ method on_accept ($conn) {
     remove_on_expire => 1,
     on_expire => sub ($self) {
       dmsg "$conn", "$self", $self if $ENV{FRAME_DEBUG};
+      $conn->_flush_requests; # TODO: See if this makes pipeline reqs work correctly or breaks things
       $conn->close
     }
   );
@@ -148,11 +149,11 @@ method on_accept ($conn) {
   foreach my $key (qw/req_header read keep_alive inactivity/) {
     my $field = "$key\_timeout";
 
-    $conn->$field = IO::Async::Timer::Countdown->new(
+    $conn->$field(IO::Async::Timer::Countdown->new(
       %timer_args_base,
       delay => $plack_handler->$field,
       notifier_name => $field
-    );
+    ));
 
     $self->loop->add($conn->$field);
     $conn->$field->start unless $key eq 'keep_alive';
