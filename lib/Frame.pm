@@ -27,7 +27,7 @@ field $default_controller_meta;
 
 ADJUSTPARAMS ($params) {
   unshift @INC, $INC[1];
-  $self->app = $self;
+  $self->app($self);
   
   $config_defaults = YAML::Tiny->read('config-defaults.yml')->[0] // { charset => 'utf-8' };
   $config = YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] // {};

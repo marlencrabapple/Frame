@@ -59,7 +59,7 @@ method render ($content, $status = 200, $content_type = undef, $headers = [], $c
 
   if(ref $content eq 'HASH') {
     $res->content_type($res->content_type || "application/json; charset=$charset");
-    $res->body(encode_json($content))
+    $res->body(json->encode($content))
   }
   else {
     $content_type //= $res->content_type || "text/html; charset=$charset";

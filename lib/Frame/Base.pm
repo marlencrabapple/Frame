@@ -16,30 +16,35 @@ use v5.36;
 
 use parent 'Exporter';
 
+use Devel::StackTrace::WithLexicals;
 use PadWalker qw(peek_my peek_our);
 use Feature::Compat::Try;
-use Time::Piece;
-use Data::Dumper;
 use List::Util 'uniq';
-use Devel::StackTrace::WithLexicals;
+use JSON::MaybeXS;
+use Data::Dumper;
+use Time::Piece;
 
-use subs qw(dmsg);
+use subs qw(dmsg json);
 
-our @EXPORT = qw(dmsg);
+our @EXPORT = qw(dmsg json);
 
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 our $frame_debug = $ENV{FRAME_DEBUG};
+our $json_default = JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
 
 $^H{__PACKAGE__ . '/user'} = 1;
 
-field $app :weak :param :mutator = undef;
-
-ADJUST {
-  $^H{__CLASS__ . '/user'} = 1;
-}
+field $app :weak :param :accessor = undef;
+field $json :accessor(_json);
 
 ADJUSTPARAMS ($params) {
-  $app //= $$params{app} if $$params{app}
+  # $app //= $$params{app} if $$params{app};
+  $json //= JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
+  $^H{__CLASS__ . '/user'} = 1
+}
+
+sub json ($self = undef) {
+  $self ? $self->_json : $json_default
 }
 
 sub dmsg (@msgs) {
