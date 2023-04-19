@@ -29,9 +29,9 @@ ADJUSTPARAMS ($params) {
   unshift @INC, $INC[1];
   $self->app($self);
   
-  $config_defaults = YAML::Tiny->read('config-defaults.yml')->[0] // { charset => 'utf-8' };
-  $config = YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] // {};
-  $config = {%$config_defaults, %$config};
+  $config_defaults = eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
+  $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] } // {};
+  $config = { %$config_defaults, %$config };
 
   $charset = $$config{charset} // 'utf-8';
 
@@ -44,7 +44,7 @@ ADJUSTPARAMS ($params) {
   try {
     require "$class/Controller.pm";
 
-    my $meta = Object::Pad::MOP::Class->create_class("Frame::Controller::For::$class"
+    my $meta = Object::Pad::MOP::Class->create_class("$class\::Controller::$self"
       , isa => $default_controller_class);
 
     $meta->add_role(__CLASS__ . '::Controller');
