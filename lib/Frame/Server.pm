@@ -9,7 +9,6 @@ use utf8;
 use v5.36;
 
 use Carp;
-use Data::Dumper;
 
 use Frame::Server::Request;
 use Frame::Server::Protocol;
@@ -40,8 +39,6 @@ sub _responder ($req, $res) {
 
     if($req->keep_alive) {
       $c = 'keep-alive';
-      # my $timer = $req->{conn}->keep_alive_timeout;
-      # $timer->is_running ? $timer->reset : $timer->start
       $req->{conn}->restart_timeout('keep_alive');
     }
 

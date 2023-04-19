@@ -54,7 +54,7 @@ ADJUSTPARAMS ($params) {
     $default_controller_class = $meta->name
   }
   catch ($e) {
-    dmsg $e
+    dmsg $e if $ENV{FRAME_DEBUG}
   }
 
   $request_class = $$params{request_class}

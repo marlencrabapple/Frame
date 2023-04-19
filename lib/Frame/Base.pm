@@ -29,7 +29,7 @@ use subs qw(dmsg json);
 our @EXPORT = qw(dmsg json);
 
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-our $frame_debug = $ENV{FRAME_DEBUG};
+our $frame_debug = $ENV{FRAME_DEBUG} // 0;
 our $json_default = JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
 
 $^H{__PACKAGE__ . '/user'} = 1;
