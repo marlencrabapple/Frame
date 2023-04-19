@@ -3,24 +3,21 @@
 Frame - Bare-bones, real-time web framework (WIP)
 
 # SYNOPSIS
-```
-use utf8;
-use v5.36;
 
-use Object::Pad;
+    use utf8;
+    use v5.36;
 
-class FrameApp :does(Frame) {
-  method startup {
-    my $r = $self->routes;
+    use Object::Pad;
 
-    $r->get('/', sub ($c) {
-      $c->render('Frame works!')
-    })
-  }
-}
+    class FrameApp :does(Frame) {
+      method startup {
+        my $r = $self->routes;
 
-FrameApp->new->to_psgi
-```
+        $r->get('/', sub ($c) {
+          $c->render('Frame works!')
+        })
+      }
+    }
 
 # DESCRIPTION
 

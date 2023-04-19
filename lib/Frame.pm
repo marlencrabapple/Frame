@@ -99,11 +99,24 @@ __END__
 
 =head1 NAME
 
-Frame - Blah blah blah
+Frame - Bare-bones, real-time web framework (WIP)
 
 =head1 SYNOPSIS
 
-  use Frame;
+  use utf8;
+  use v5.36;
+
+  use Object::Pad;
+
+  class FrameApp :does(Frame) {
+    method startup {
+      my $r = $self->routes;
+
+      $r->get('/', sub ($c) {
+        $c->render('Frame works!')
+      })
+    }
+  }
 
 =head1 DESCRIPTION
 
