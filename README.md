@@ -19,6 +19,8 @@ Frame - Bare-bones, real-time web framework (WIP)
       }
     }
 
+    FrameApp->new->to_psgi
+
 # DESCRIPTION
 
 Frame is
