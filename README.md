@@ -1,10 +1,26 @@
 # NAME
 
-Frame - Blah blah blah
+Frame - Bare-bones, real-time web framework (WIP)
 
 # SYNOPSIS
+```
+use utf8;
+use v5.36;
 
-    use Frame;
+use Object::Pad;
+
+class FrameApp :does(Frame) {
+  method startup {
+    my $r = $self->routes;
+
+    $r->get('/', sub ($c) {
+      $c->render('Frame works!')
+    })
+  }
+}
+
+FrameApp->new->to_psgi
+```
 
 # DESCRIPTION
 
