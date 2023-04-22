@@ -21,6 +21,7 @@ method _add_route ($route) {
 
 method match ($req) {
   # TODO: why does $req->path eq '/' when req url is //asdf? Is it Frame::Server issue? Plack issue? Browser doing its thing?
+  # And why do things sometimes 404 and other times hit the right route? (seeing it in wildcards right nwo)
   my @path = $req->path eq '/'
     ? '/'
     : split '/', substr($req->path, 1), -1;
@@ -29,21 +30,19 @@ method match ($req) {
 
   my $branches = $self->tree->{$req->method}{scalar @path}
     || return undef;
-
-  my $curr;
-  my $prev = {};
+  
   my $i = 0;
+  my $prev = {};
   my $barren = {};
   my @placeholder_matches;
 
-  BRANCH: while($curr = $$prev{branch} // $branches) {
+  BRANCH: while(my $curr = $$prev{branch} // $branches) {
     $prev = {};
 
     PATH_PART: foreach my $part (@path) {
       my ($match, $wildcard_ne, $has_placeholder);
 
-      # dmsg "hi", $barren;
-      # dmsg $prev, $curr, $barren, $i, $part;
+      dmsg $prev, $curr, $barren, $i, $part if $ENV{FRAME_DEBUG};
 
       if($part ne '' && $$curr{$part} && !$$barren{$i}{$part} && !$self->patterns->{$part}) {
         $match = $part;
@@ -52,7 +51,7 @@ method match ($req) {
       }
       else {
         PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
-          # dmsg $key, $$barren{$i}, $$barren{$i}{$key};
+          # dmsg $key, $$barren{$i}, $$barren{$i}{$key} if $ENV{FRAME_DEBUG};
 
           next if $$barren{$i}{$key};
 
@@ -63,8 +62,8 @@ method match ($req) {
               : defined $self->patterns->{$key} ? 0
                 : $part ne '' && $key eq $self->app ? 2 : 0;
 
-          # dmsg $curr, $key, $self->patterns->{$key}, $match;
-          # dmsg $part, $key, $self->patterns, $self->patterns->{$key}, $match, $prev, $barren;
+          dmsg $part, $key, $self->patterns, $self->patterns->{$key}, $match, $prev, $barren
+            if $ENV{FRAME_DEBUG};
 
           if($match == 2) {
             $wildcard_ne = 1;
@@ -77,9 +76,9 @@ method match ($req) {
           }
         }
 
-        # dmsg $match, $wildcard_ne;
+        dmsg $match, $wildcard_ne if $ENV{FRAME_DEBUG};
 
-        if($has_placeholder = ($match // $wildcard_ne)) {
+        if($has_placeholder = ($match || $wildcard_ne)) {
           $match = $self->app unless $match;
           push @placeholder_matches, $part
         }
@@ -94,7 +93,7 @@ method match ($req) {
         next PATH_PART
       }
       else {
-        # dmsg $prev, $barren;
+        dmsg $prev, $barren if $ENV{FRAME_DEBUG};
         last unless $$prev{branch};
         $$barren{$$prev{i}}{$$prev{key}} = 1;
         next BRANCH
@@ -119,7 +118,9 @@ method match ($req) {
       return $curr
     }
 
-    # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*], [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)];# die;
+    dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]
+      , [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)] if $ENV{FRAME_DEBUG};# die;
+
     last BRANCH unless uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*);
 
     pop @placeholder_matches if $$prev{has_placeholder};
