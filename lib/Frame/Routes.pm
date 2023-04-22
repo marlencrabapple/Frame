@@ -60,11 +60,13 @@ method match ($req) {
             ? $self->patterns->{$key}->($req, $part) ? 1 : 0
             : ref($self->patterns->{$key}) =~ $rere
               ? $part =~ $self->patterns->{$key} ? 1 : 0
-              : defined $self->patterns->{$key} ? 0 : $part ne '' ? 2 : 0;
+              : defined $self->patterns->{$key} ? 0
+                : $part ne '' && $key eq $self->app ? 2 : 0;
 
           # dmsg $curr, $key, $self->patterns->{$key}, $match;
+          # dmsg $part, $key, $self->patterns, $self->patterns->{$key}, $match, $prev, $barren;
 
-          if($match == 2 && $key eq $self->app) {
+          if($match == 2) {
             $wildcard_ne = 1;
             $match = undef;
             next PLACEHOLDER_RESTRICTION
@@ -92,6 +94,7 @@ method match ($req) {
         next PATH_PART
       }
       else {
+        # dmsg $prev, $barren;
         last unless $$prev{branch};
         $$barren{$$prev{i}}{$$prev{key}} = 1;
         next BRANCH
@@ -101,7 +104,7 @@ method match ($req) {
       $i++
     }
 
-    die dmsg $barren, $curr, $prev, \@path, $i if $i > 10
+    # die dmsg $barren, $curr, $prev, \@path, $i if $i > 10
   }
   continue {
     # dmsg $barren, $curr, $prev, \@path, $i;
@@ -116,6 +119,7 @@ method match ($req) {
       return $curr
     }
 
+    # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*], [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)];# die;
     last BRANCH unless uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*);
 
     pop @placeholder_matches if $$prev{has_placeholder};

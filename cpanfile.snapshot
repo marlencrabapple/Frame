@@ -821,10 +821,10 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.006001
       version 0.87
-  Module-Build-Tiny-0.039
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.039.tar.gz
+  Module-Build-Tiny-0.043
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.043.tar.gz
     provides:
-      Module::Build::Tiny 0.039
+      Module::Build::Tiny 0.043
     requirements:
       CPAN::Meta 0
       DynaLoader 0
