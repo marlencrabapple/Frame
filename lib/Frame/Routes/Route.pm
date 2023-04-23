@@ -6,9 +6,7 @@ class Frame::Routes::Route :does(Frame::Base);
 use utf8;
 use v5.36;
 
-use Data::Dumper;
-
-state $placeholder_re = qr/^\:(.+)$/;
+use constant PLACEHOLDER_RE => qr/^\:(.+)$/;
 
 field $method :param :reader;
 field $pattern :param :reader;
@@ -50,7 +48,7 @@ ADJUSTPARAMS ($params) {
 }
 
 method is_placeholder ($pathstr) {
-  ($pathstr =~ $placeholder_re)[0]
+  ($pathstr =~ PLACEHOLDER_RE)[0]
 }
 
 1

@@ -9,7 +9,7 @@ use v5.36;
 use List::Util 'uniq';
 use Scalar::Util qw/blessed refaddr/;
 
-state $rere = qr/^regexp$/i;
+use constant RERE => qr/^regexp$/i;
 
 field @routes :reader;
 
@@ -20,8 +20,6 @@ method _add_route ($route) {
 }
 
 method match ($req) {
-  # TODO: why does $req->path eq '/' when req url is //asdf? Is it Frame::Server issue? Plack issue? Browser doing its thing?
-  # And why do things sometimes 404 and other times hit the right route? (seeing it in wildcards right nwo)
   my @path = $req->path eq '/'
     ? '/'
     : split '/', substr($req->path, 1), -1;
@@ -47,17 +45,14 @@ method match ($req) {
       if($part ne '' && $$curr{$part} && !$$barren{$i}{$part} && !$self->patterns->{$part}) {
         $match = $part;
         $has_placeholder = undef
-        # delete $$prev{has_placeholder}
       }
       else {
         PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
-          # dmsg $key, $$barren{$i}, $$barren{$i}{$key} if $ENV{FRAME_DEBUG};
-
           next if $$barren{$i}{$key};
 
           $match = ref $self->patterns->{$key} eq 'CODE'
             ? $self->patterns->{$key}->($req, $part) ? 1 : 0
-            : ref($self->patterns->{$key}) =~ $rere
+            : ref($self->patterns->{$key}) =~ RERE
               ? $part =~ $self->patterns->{$key} ? 1 : 0
               : defined $self->patterns->{$key} ? 0
                 : $part ne '' && $key eq $self->app ? 2 : 0;
@@ -102,12 +97,8 @@ method match ($req) {
     continue {
       $i++
     }
-
-    # die dmsg $barren, $curr, $prev, \@path, $i if $i > 10
   }
   continue {
-    # dmsg $barren, $curr, $prev, \@path, $i;
-
     if($i == scalar @path && defined blessed $curr && blessed $curr eq 'Frame::Routes::Route') {
       for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
         $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
@@ -119,7 +110,7 @@ method match ($req) {
     }
 
     dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]
-      , [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)] if $ENV{FRAME_DEBUG};# die;
+      , [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)] if $ENV{FRAME_DEBUG};
 
     last BRANCH unless uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*);
 
