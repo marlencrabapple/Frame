@@ -426,6 +426,21 @@ DISTRIBUTIONS
       XS::Parse::Sublike 0.14
       XS::Parse::Sublike::Builder 0.14
       perl 5.016
+  HTTP-Cookies-6.10
+    pathname: O/OA/OALDERS/HTTP-Cookies-6.10.tar.gz
+    provides:
+      HTTP::Cookies 6.10
+      HTTP::Cookies::Microsoft 6.10
+      HTTP::Cookies::Netscape 6.10
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      HTTP::Date 6
+      HTTP::Headers::Util 6
+      HTTP::Request 0
+      locale 0
+      perl 5.008001
+      strict 0
   HTTP-Date-6.05
     pathname: O/OA/OALDERS/HTTP-Date-6.05.tar.gz
     provides:
@@ -661,10 +676,10 @@ DISTRIBUTIONS
       IPC::Signal 1.00
     requirements:
       ExtUtils::MakeMaker 0
-  JSON-MaybeXS-1.004004
-    pathname: E/ET/ETHER/JSON-MaybeXS-1.004004.tar.gz
+  JSON-MaybeXS-1.004005
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.004005.tar.gz
     provides:
-      JSON::MaybeXS 1.004004
+      JSON::MaybeXS 1.004005
     requirements:
       Carp 0
       Cpanel::JSON::XS 2.3310
@@ -776,28 +791,28 @@ DISTRIBUTIONS
       List::Util 1.29
       Module::Build 0.4004
       perl 5.014
-  Module-Build-0.4232
-    pathname: L/LE/LEONT/Module-Build-0.4232.tar.gz
+  Module-Build-0.4234
+    pathname: L/LE/LEONT/Module-Build-0.4234.tar.gz
     provides:
-      Module::Build 0.4232
-      Module::Build::Base 0.4232
-      Module::Build::Compat 0.4232
-      Module::Build::Config 0.4232
-      Module::Build::Cookbook 0.4232
-      Module::Build::Dumper 0.4232
-      Module::Build::Notes 0.4232
-      Module::Build::PPMMaker 0.4232
-      Module::Build::Platform::Default 0.4232
-      Module::Build::Platform::MacOS 0.4232
-      Module::Build::Platform::Unix 0.4232
-      Module::Build::Platform::VMS 0.4232
-      Module::Build::Platform::VOS 0.4232
-      Module::Build::Platform::Windows 0.4232
-      Module::Build::Platform::aix 0.4232
-      Module::Build::Platform::cygwin 0.4232
-      Module::Build::Platform::darwin 0.4232
-      Module::Build::Platform::os2 0.4232
-      Module::Build::PodParser 0.4232
+      Module::Build 0.4234
+      Module::Build::Base 0.4234
+      Module::Build::Compat 0.4234
+      Module::Build::Config 0.4234
+      Module::Build::Cookbook 0.4234
+      Module::Build::Dumper 0.4234
+      Module::Build::Notes 0.4234
+      Module::Build::PPMMaker 0.4234
+      Module::Build::Platform::Default 0.4234
+      Module::Build::Platform::MacOS 0.4234
+      Module::Build::Platform::Unix 0.4234
+      Module::Build::Platform::VMS 0.4234
+      Module::Build::Platform::VOS 0.4234
+      Module::Build::Platform::Windows 0.4234
+      Module::Build::Platform::aix 0.4234
+      Module::Build::Platform::cygwin 0.4234
+      Module::Build::Platform::darwin 0.4234
+      Module::Build::Platform::os2 0.4234
+      Module::Build::PodParser 0.4234
     requirements:
       CPAN::Meta 2.142060
       Cwd 0
@@ -821,10 +836,10 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.006001
       version 0.87
-  Module-Build-Tiny-0.043
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.043.tar.gz
+  Module-Build-Tiny-0.045
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.045.tar.gz
     provides:
-      Module::Build::Tiny 0.043
+      Module::Build::Tiny 0.045
     requirements:
       CPAN::Meta 0
       DynaLoader 0
@@ -954,6 +969,35 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
+  Net-Async-HTTP-0.48
+    pathname: P/PE/PEVANS/Net-Async-HTTP-0.48.tar.gz
+    provides:
+      Net::Async::HTTP 0.48
+      Net::Async::HTTP::Connection 0.48
+      Net::Async::HTTP::StallTimer 0.48
+    requirements:
+      Future 0.28
+      Future::Utils 0.16
+      HTTP::Cookies 0
+      HTTP::Request 0
+      HTTP::Request::Common 0
+      HTTP::Response 0
+      IO::Async::Loop 0.59
+      IO::Async::Stream 0.59
+      IO::Async::Test 0
+      IO::Async::Timer::Countdown 0
+      List::Util 1.29
+      Metrics::Any 0.05
+      Module::Build 0.4004
+      Socket 2.010
+      Struct::Dumb 0.07
+      Test::Identity 0
+      Test::Metrics::Any 0
+      Test::More 0.88
+      Test::Refcount 0
+      Time::HiRes 0
+      URI 0
+      perl 5.010
   Net-Async-HTTP-Server-0.13
     pathname: P/PE/PEVANS/Net-Async-HTTP-Server-0.13.tar.gz
     provides:
@@ -1368,6 +1412,32 @@ DISTRIBUTIONS
       Test::Builder 0
       Test::More 0.96
       perl 5.012
+  Test-Identity-0.01
+    pathname: P/PE/PEVANS/Test-Identity-0.01.tar.gz
+    provides:
+      Test::Identity 0.01
+    requirements:
+      Scalar::Util 0
+      Test::Builder::Tester 0
+      Test::More 0
+  Test-Metrics-Any-0.01
+    pathname: P/PE/PEVANS/Test-Metrics-Any-0.01.tar.gz
+    provides:
+      Test::Metrics::Any 0.01
+    requirements:
+      Metrics::Any::Adapter 0
+      Metrics::Any::Adapter::Test 0
+      Module::Build 0.4004
+      Test::Builder::Module 0
+  Test-Refcount-0.10
+    pathname: P/PE/PEVANS/Test-Refcount-0.10.tar.gz
+    provides:
+      Test::Refcount 0.10
+    requirements:
+      B 0
+      Module::Build 0.4004
+      Scalar::Util 0
+      Test::Builder 0
   Test-Requires-0.11
     pathname: T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
     provides:
@@ -1391,81 +1461,81 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-Simple-1.302194
-    pathname: E/EX/EXODIST/Test-Simple-1.302194.tar.gz
+  Test-Simple-1.302195
+    pathname: E/EX/EXODIST/Test-Simple-1.302195.tar.gz
     provides:
-      Test2 1.302194
-      Test2::API 1.302194
-      Test2::API::Breakage 1.302194
-      Test2::API::Context 1.302194
-      Test2::API::Instance 1.302194
-      Test2::API::InterceptResult 1.302194
-      Test2::API::InterceptResult::Event 1.302194
-      Test2::API::InterceptResult::Facet 1.302194
-      Test2::API::InterceptResult::Hub 1.302194
-      Test2::API::InterceptResult::Squasher 1.302194
-      Test2::API::Stack 1.302194
-      Test2::Event 1.302194
-      Test2::Event::Bail 1.302194
-      Test2::Event::Diag 1.302194
-      Test2::Event::Encoding 1.302194
-      Test2::Event::Exception 1.302194
-      Test2::Event::Fail 1.302194
-      Test2::Event::Generic 1.302194
-      Test2::Event::Note 1.302194
-      Test2::Event::Ok 1.302194
-      Test2::Event::Pass 1.302194
-      Test2::Event::Plan 1.302194
-      Test2::Event::Skip 1.302194
-      Test2::Event::Subtest 1.302194
-      Test2::Event::TAP::Version 1.302194
-      Test2::Event::V2 1.302194
-      Test2::Event::Waiting 1.302194
-      Test2::EventFacet 1.302194
-      Test2::EventFacet::About 1.302194
-      Test2::EventFacet::Amnesty 1.302194
-      Test2::EventFacet::Assert 1.302194
-      Test2::EventFacet::Control 1.302194
-      Test2::EventFacet::Error 1.302194
-      Test2::EventFacet::Hub 1.302194
-      Test2::EventFacet::Info 1.302194
-      Test2::EventFacet::Info::Table 1.302194
-      Test2::EventFacet::Meta 1.302194
-      Test2::EventFacet::Parent 1.302194
-      Test2::EventFacet::Plan 1.302194
-      Test2::EventFacet::Render 1.302194
-      Test2::EventFacet::Trace 1.302194
-      Test2::Formatter 1.302194
-      Test2::Formatter::TAP 1.302194
-      Test2::Hub 1.302194
-      Test2::Hub::Interceptor 1.302194
-      Test2::Hub::Interceptor::Terminator 1.302194
-      Test2::Hub::Subtest 1.302194
-      Test2::IPC 1.302194
-      Test2::IPC::Driver 1.302194
-      Test2::IPC::Driver::Files 1.302194
-      Test2::Tools::Tiny 1.302194
-      Test2::Util 1.302194
-      Test2::Util::ExternalMeta 1.302194
-      Test2::Util::Facets2Legacy 1.302194
-      Test2::Util::HashBase 1.302194
-      Test2::Util::Trace 1.302194
-      Test::Builder 1.302194
-      Test::Builder::Formatter 1.302194
+      Test2 1.302195
+      Test2::API 1.302195
+      Test2::API::Breakage 1.302195
+      Test2::API::Context 1.302195
+      Test2::API::Instance 1.302195
+      Test2::API::InterceptResult 1.302195
+      Test2::API::InterceptResult::Event 1.302195
+      Test2::API::InterceptResult::Facet 1.302195
+      Test2::API::InterceptResult::Hub 1.302195
+      Test2::API::InterceptResult::Squasher 1.302195
+      Test2::API::Stack 1.302195
+      Test2::Event 1.302195
+      Test2::Event::Bail 1.302195
+      Test2::Event::Diag 1.302195
+      Test2::Event::Encoding 1.302195
+      Test2::Event::Exception 1.302195
+      Test2::Event::Fail 1.302195
+      Test2::Event::Generic 1.302195
+      Test2::Event::Note 1.302195
+      Test2::Event::Ok 1.302195
+      Test2::Event::Pass 1.302195
+      Test2::Event::Plan 1.302195
+      Test2::Event::Skip 1.302195
+      Test2::Event::Subtest 1.302195
+      Test2::Event::TAP::Version 1.302195
+      Test2::Event::V2 1.302195
+      Test2::Event::Waiting 1.302195
+      Test2::EventFacet 1.302195
+      Test2::EventFacet::About 1.302195
+      Test2::EventFacet::Amnesty 1.302195
+      Test2::EventFacet::Assert 1.302195
+      Test2::EventFacet::Control 1.302195
+      Test2::EventFacet::Error 1.302195
+      Test2::EventFacet::Hub 1.302195
+      Test2::EventFacet::Info 1.302195
+      Test2::EventFacet::Info::Table 1.302195
+      Test2::EventFacet::Meta 1.302195
+      Test2::EventFacet::Parent 1.302195
+      Test2::EventFacet::Plan 1.302195
+      Test2::EventFacet::Render 1.302195
+      Test2::EventFacet::Trace 1.302195
+      Test2::Formatter 1.302195
+      Test2::Formatter::TAP 1.302195
+      Test2::Hub 1.302195
+      Test2::Hub::Interceptor 1.302195
+      Test2::Hub::Interceptor::Terminator 1.302195
+      Test2::Hub::Subtest 1.302195
+      Test2::IPC 1.302195
+      Test2::IPC::Driver 1.302195
+      Test2::IPC::Driver::Files 1.302195
+      Test2::Tools::Tiny 1.302195
+      Test2::Util 1.302195
+      Test2::Util::ExternalMeta 1.302195
+      Test2::Util::Facets2Legacy 1.302195
+      Test2::Util::HashBase 1.302195
+      Test2::Util::Trace 1.302195
+      Test::Builder 1.302195
+      Test::Builder::Formatter 1.302195
       Test::Builder::IO::Scalar 2.114
-      Test::Builder::Module 1.302194
-      Test::Builder::Tester 1.302194
-      Test::Builder::Tester::Color 1.302194
-      Test::Builder::Tester::Tie 1.302194
-      Test::Builder::TodoDiag 1.302194
-      Test::More 1.302194
-      Test::Simple 1.302194
-      Test::Tester 1.302194
-      Test::Tester::Capture 1.302194
-      Test::Tester::CaptureRunner 1.302194
-      Test::Tester::Delegate 1.302194
-      Test::use::ok 1.302194
-      ok 1.302194
+      Test::Builder::Module 1.302195
+      Test::Builder::Tester 1.302195
+      Test::Builder::Tester::Color 1.302195
+      Test::Builder::Tester::Tie 1.302195
+      Test::Builder::TodoDiag 1.302195
+      Test::More 1.302195
+      Test::Simple 1.302195
+      Test::Tester 1.302195
+      Test::Tester::Capture 1.302195
+      Test::Tester::CaptureRunner 1.302195
+      Test::Tester::Delegate 1.302195
+      Test::use::ok 1.302195
+      ok 1.302195
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -1580,53 +1650,53 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  URI-5.17
-    pathname: O/OA/OALDERS/URI-5.17.tar.gz
+  URI-5.19
+    pathname: S/SI/SIMBABQUE/URI-5.19.tar.gz
     provides:
-      URI 5.17
-      URI::Escape 5.17
-      URI::Heuristic 5.17
-      URI::IRI 5.17
-      URI::QueryParam 5.17
-      URI::Split 5.17
-      URI::URL 5.17
-      URI::WithBase 5.17
-      URI::data 5.17
-      URI::file 5.17
-      URI::file::Base 5.17
-      URI::file::FAT 5.17
-      URI::file::Mac 5.17
-      URI::file::OS2 5.17
-      URI::file::QNX 5.17
-      URI::file::Unix 5.17
-      URI::file::Win32 5.17
-      URI::ftp 5.17
-      URI::gopher 5.17
-      URI::http 5.17
-      URI::https 5.17
-      URI::ldap 5.17
-      URI::ldapi 5.17
-      URI::ldaps 5.17
-      URI::mailto 5.17
-      URI::mms 5.17
-      URI::news 5.17
-      URI::nntp 5.17
-      URI::nntps 5.17
-      URI::pop 5.17
-      URI::rlogin 5.17
-      URI::rsync 5.17
-      URI::rtsp 5.17
-      URI::rtspu 5.17
-      URI::sftp 5.17
-      URI::sip 5.17
-      URI::sips 5.17
-      URI::snews 5.17
-      URI::ssh 5.17
-      URI::telnet 5.17
-      URI::tn3270 5.17
-      URI::urn 5.17
-      URI::urn::isbn 5.17
-      URI::urn::oid 5.17
+      URI 5.19
+      URI::Escape 5.19
+      URI::Heuristic 5.19
+      URI::IRI 5.19
+      URI::QueryParam 5.19
+      URI::Split 5.19
+      URI::URL 5.19
+      URI::WithBase 5.19
+      URI::data 5.19
+      URI::file 5.19
+      URI::file::Base 5.19
+      URI::file::FAT 5.19
+      URI::file::Mac 5.19
+      URI::file::OS2 5.19
+      URI::file::QNX 5.19
+      URI::file::Unix 5.19
+      URI::file::Win32 5.19
+      URI::ftp 5.19
+      URI::gopher 5.19
+      URI::http 5.19
+      URI::https 5.19
+      URI::ldap 5.19
+      URI::ldapi 5.19
+      URI::ldaps 5.19
+      URI::mailto 5.19
+      URI::mms 5.19
+      URI::news 5.19
+      URI::nntp 5.19
+      URI::nntps 5.19
+      URI::pop 5.19
+      URI::rlogin 5.19
+      URI::rsync 5.19
+      URI::rtsp 5.19
+      URI::rtspu 5.19
+      URI::sftp 5.19
+      URI::sip 5.19
+      URI::sips 5.19
+      URI::snews 5.19
+      URI::ssh 5.19
+      URI::telnet 5.19
+      URI::tn3270 5.19
+      URI::urn 5.19
+      URI::urn::isbn 5.19
+      URI::urn::oid 5.19
     requirements:
       Carp 0
       Cwd 0

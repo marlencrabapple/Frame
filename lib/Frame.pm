@@ -8,14 +8,18 @@ our $VERSION  = '0.01';
 use utf8;
 use v5.36;
 
+use Data::Dumper;
 use YAML::Tiny;
+use IO::Async::Loop;
+use Net::Async::HTTP;
 use Feature::Compat::Try;
 
-use Frame::Tx;
 use Frame::Routes;
 use Frame::Request;
 use Frame::Controller::Default;
 
+field $loop :reader;
+field $ua :reader;
 field $routes :reader;
 field $config :reader;
 field $config_defaults :reader;
@@ -28,7 +32,11 @@ field $default_controller_meta;
 ADJUSTPARAMS ($params) {
   unshift @INC, $INC[1];
   $self->app($self);
-  
+
+  $loop = IO::Async::Loop->new; # This grabs the existing loop
+  $ua = Net::Async::HTTP->new;
+  $loop->add($ua);
+
   $config_defaults = eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
   $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] } // {};
   $config = { %$config_defaults, %$config };
@@ -81,7 +89,10 @@ method dispatch ($req) {
 method route ($route, $req) {
   my ($c, $sub) = $route->dest->@{qw(c sub)};
   $c = ($c || $default_controller_class)->new(app => $self, req => $req);
-  $c->$sub($req->placeholder_values_ord);
+
+  my $res = $c->$sub($req->placeholder_values_ord);
+  $res = $res->get if $res isa 'Future';
+
   $c->res->finalize
 }
 

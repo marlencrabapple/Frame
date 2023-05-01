@@ -164,7 +164,6 @@ method on_accept ($conn) {
 
 method on_request ($req) {
   my $env = $$req{req};
-  $$env{'io.async.loop'} = $self->loop;
 
   my $res = Plack::Util::run_app $$self{app}, $env;
   my $responder = sub { _responder($req, $res) };
@@ -173,7 +172,7 @@ method on_request ($req) {
     : ref $responder eq 'CODE' ? $res->($responder)
     : die "Bad response: $res";
 
-  $$env{'io.async.loop'}->stop if $$env{'psgix.harakiri.commit'}
+  $self->loop->stop if $$env{'psgix.harakiri.commit'}
 }
 
 1

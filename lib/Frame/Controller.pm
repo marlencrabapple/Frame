@@ -31,6 +31,7 @@ field $res :reader; # :weak;
 # field $tx :reader;
 
 ADJUSTPARAMS ($params) {
+  Exporter::import(__CLASS__);
   $res = $req->new_response
 }
 
@@ -41,6 +42,21 @@ sub template ($name, $vars = {}, @args) {
 # method template :common { # $class is template filename
 #   my ($vars, @args) = @_;
 #   $tx_default->render($class, { %$template_vars, %$vars })
+# }
+
+# method template :common ($name, $vars = {}, @args) {
+#   $tx_default->render($name, { %$template_vars, %$vars })
+# }
+
+# sub template ($self, $name, $vars = {}, @args) {
+#   $tx_default->render($name, { %$template_vars, %$vars })
+# }
+
+# {
+#   no strict 'refs';
+#   no warnings 'redefine';
+
+#   *{"template"} = sub { $class->$sub->(@_) };
 # }
 
 method stash { $req->stash }

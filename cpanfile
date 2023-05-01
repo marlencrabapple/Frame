@@ -9,6 +9,7 @@ requires 'IO::Async', '0.802';
 requires 'IO::Async::SSL', '0.23';
 
 requires 'Object::Pad', '0.77';
+requires 'Future', '0.50';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
 requires 'Feature::Compat::Try', '0.05';
@@ -31,7 +32,8 @@ requires 'Text::Xslate', 'v3.5.9';
 
 requires 'Net::SSLeay', '1.92';
 requires 'IO::Socket::SSL', '2.075';
-requires 'HTTP::Tinyish', '0.18';
+requires 'HTTP::Tinyish', '0.18'; # TODO: Write a HTTP::Tiny compatible wrapper for Net::Async::HTTP
+requires 'Net::Async::HTTP', '0.48';
 
 on develop => sub {
   recommends 'App::perlimports', '0.000049';
