@@ -5,7 +5,7 @@ role Frame::Db :does(Frame::Base);
 
 use utf8;
 use v5.36;
-use autodie;
+# use autodie;
 
 field $sqla :reader;
 

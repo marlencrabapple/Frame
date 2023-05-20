@@ -644,18 +644,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.081
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.081.tar.gz
+  IO-Socket-SSL-2.083
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.083.tar.gz
     provides:
-      IO::Socket::SSL 2.081
+      IO::Socket::SSL 2.083
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.081
-      IO::Socket::SSL::OCSP_Resolver 2.081
+      IO::Socket::SSL::OCSP_Cache 2.083
+      IO::Socket::SSL::OCSP_Resolver 2.083
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.081
-      IO::Socket::SSL::SSL_HANDLE 2.081
-      IO::Socket::SSL::Session_Cache 2.081
-      IO::Socket::SSL::Trace 2.081
+      IO::Socket::SSL::SSL_Context 2.083
+      IO::Socket::SSL::SSL_HANDLE 2.083
+      IO::Socket::SSL::Session_Cache 2.083
+      IO::Socket::SSL::Trace 2.083
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -1025,16 +1025,16 @@ DISTRIBUTIONS
       Text::Wrap 0
       constant 0
       perl 5.008001
-  Object-Pad-0.78
-    pathname: P/PE/PEVANS/Object-Pad-0.78.tar.gz
+  Object-Pad-0.79
+    pathname: P/PE/PEVANS/Object-Pad-0.79.tar.gz
     provides:
-      Object::Pad 0.78
-      Object::Pad::ExtensionBuilder 0.78
-      Object::Pad::MOP::Class 0.78
-      Object::Pad::MOP::Field 0.78
-      Object::Pad::MOP::FieldAttr 0.78
-      Object::Pad::MOP::Method 0.78
-      Object::Pad::MetaFunctions 0.78
+      Object::Pad 0.79
+      Object::Pad::ExtensionBuilder 0.79
+      Object::Pad::MOP::Class 0.79
+      Object::Pad::MOP::Field 0.79
+      Object::Pad::MOP::FieldAttr 0.79
+      Object::Pad::MOP::Method 0.79
+      Object::Pad::MetaFunctions 0.79
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004

@@ -5,7 +5,7 @@ role Frame::Db::SQLite :does(Frame::Db);
 
 use utf8;
 use v5.36;
-use autodie;
+# use autodie;
 
 use DBI;
 use DBD::SQLite::Constants ':dbd_sqlite_string_mode';
