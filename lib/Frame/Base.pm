@@ -7,10 +7,6 @@ use Object::Pad ':experimental(mop)';
 package Frame::Base;
 role Frame::Base;
 
-BEGIN {
-  $^H{__PACKAGE__ . '/user'} = 1;
-}
-
 use utf8;
 use v5.36;
 
@@ -31,10 +27,13 @@ our $prefix = '';
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 our $frame_debug = $ENV{FRAME_DEBUG} // 0;
 our $json_default = JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
+our %seen_users;
 
 use subs @EXPORT_DOES;
 
 $^H{__PACKAGE__ . '/user'} = 1;
+
+# __PACKAGE__->import_on_compose;
 
 field $app :weak :param :accessor = undef;
 # field $json :accessor(_json);
@@ -104,19 +103,8 @@ method monkey_patch :common ($package, $sub, %args) {
 }
 
 method exports :common ($cb, @vars) {
-  {
-    no strict 'refs';
-
-    foreach my $export (@EXPORT_DOES) {
-      # my $sub = defined *{"$class\::_$prefix\_$export"}
-      #   && ref \&{"$class\::_$prefix\_$export"} eq 'CODE'
-      #     ? "_$prefix\_$export"
-      #     : $export;
-
-      use strict 'refs';
-      # return 0 unless $cb->($export, $sub, @vars)
-      return 0 unless $cb->($export, $export, @vars)
-    }
+  foreach my $export (@EXPORT_DOES) {
+    return 0 unless $cb->($export, $export, @vars)
   }
 
   1
@@ -134,7 +122,10 @@ method compose :common ($caller, %args) {
 
   __PACKAGE__->exports(sub ($export, $realsub, @vars) {
     $class->monkey_patch($$caller[0], $export)
-  })
+  });
+
+  # $seen_users{pkg}{$$caller[0]} = 1;
+  # $seen_users{fn}{__pkgfn__($$caller[0])} = 1
 }
 
 method import :common  {
@@ -147,11 +138,20 @@ method import :common  {
   use v5.36;
 
   $^H{__PACKAGE__ . '/user'} = 1;
-  $caller->[10]{__PACKAGE__ . '/user'} = 1;
+  $$caller[10]{__PACKAGE__ . '/user'} = 1;
+
+  {
+    local $Data::Dumper::Indent = 0;
+    # warn Dumper($caller, \%{"$$caller[0]\::"}) if $$caller[0] =~ /^(Frame|Momiji)/
+    # warn Dumper($caller, [caller 0]) if $$caller[0] =~ /^(Frame|Momiji)/
+  }
 
   __PACKAGE__->exports(sub ($export, $realsub, @vars) {
     $class->monkey_patch($$caller[0], $export)
   });
+
+  $seen_users{pkg}{$$caller[0]} = 1;
+  $seen_users{fn}{__pkgfn__($$caller[0])} = 1;
   
   __PACKAGE__->export_to_level(1, $class, @_)
 }
@@ -168,7 +168,7 @@ method import_on_compose :common {
   });
 
   my $import_on_compose = sub ($coderef, $filename, $i = -1) {
-    state $seen_users = { pkg => { $class => 1 }, fn => { $filename => 1 } };
+    # state $seen_users = { pkg => { $class => 1 }, fn => { $filename => 1 } };
     state @seen;
     state @prev;
 
@@ -178,6 +178,12 @@ method import_on_compose :common {
     my ($prev_pkgname, $pkgname) = map {
       join '::', ($_ =~ /([^\/]+)(?:\/|\.pm)/g);
     } ($prev_filename, $filename);
+
+    if($prev_pkgname) {
+      no strict 'refs';
+      local $Data::Dumper::Indent = 0;
+      # warn Dumper($prev_pkgname, \%{"$prev_pkgname\::"}) if $prev_pkgname =~ /^(Frame|Momiji)/
+    }
 
     my @curr = ($filename);
 
@@ -191,19 +197,22 @@ method import_on_compose :common {
         # next if any { 0 == scalar singleton @$_, @$caller[0..9] } @seen;
 
         if ($i >= 0) {
-          push @curr, $caller;
-          # local $Data::Dumper::Indent = 0;
-          # warn Dumper($caller, \%{"$$caller[0]\::"})
+          push @curr, $caller
         }
         # elsif (1 == scalar (@prev)) {
         else {
           # push @seen, [@$caller[0..9]]
         }
 
+        {
+          local $Data::Dumper::Indent = 0;
+          # warn Dumper($caller, \%{"$$caller[0]\::"}) if $$caller[0] =~ /^(Frame|Momiji)/
+        }
+
         if (${"$$caller[0]\::"}{META} && (my $meta = $$caller[0]->META())) {
           foreach my $pkg ($meta->all_roles, $meta->superclasses) {
             $$caller[10]{"$class/user"} = 1
-              if any { $pkg->name eq $_ } ($class, keys $$seen_users{pkg}->%*)
+              if any { $pkg->name eq $_ } ($class, keys $seen_users{pkg}->%*)
           }
         }
 
@@ -216,8 +225,8 @@ method import_on_compose :common {
         ) {
           # return unless ${"$$caller[0]\::"}{ISA};
 
-          $$seen_users{pkg}{$$caller[0]} = 1;
-          $$seen_users{fn}{__pkgfn__($$caller[0])} = 1;
+          $seen_users{pkg}{$$caller[0]} = 1;
+          $seen_users{fn}{__pkgfn__($$caller[0])} = 1;
 
           $class->exports(sub ($export, $realsub, @vars) {
             $class->monkey_patch($$caller[0], $export)
@@ -240,8 +249,6 @@ method import_on_compose :common {
     $INC{$filename} = $pkgpath;
     open my $fh, '<', $pkgpath or die "$! $@";
 
-    # say Dumper($seen_users);
-
     my $prepend = qq{{
       use utf8;
       use v5.36;
@@ -249,10 +256,11 @@ method import_on_compose :common {
       my \$caller = [caller 0];
       my \$compose = 0;
 
-      # local \$Data::Dumper::Indent = 0;
+      local \$Data::Dumper::Indent = 0;
 
       no strict 'refs';
-      # warn Data::Dumper::Dumper('$pkgname', \\%{'$pkgname' . '::'}, \\%{__PACKAGE__ . '::'}, \$caller, \\%^H);
+      # warn Data::Dumper::Dumper('$pkgname', \\%{'$pkgname' . '::'}, \\%{__PACKAGE__ . '::'}, \$caller, \\%^H)
+      #   if List::Util::any { \$_ =~ /^(Frame|Momiji)/ } ('$pkgname', __PACKAGE__);
 
       foreach my \$pkg (__PACKAGE__, '$pkgname') {
         no strict 'refs';
@@ -269,7 +277,9 @@ method import_on_compose :common {
         }
       }
 
-      if (\$^H{'$class/user'} || \$compose) {
+      \$compose = 1 if List::Util::any { \$_ =~ /$class/ } (\%{__PACKAGE__ . '::'});
+
+      if (\$^H{'$class/user'} || \$caller->[10]{'$class/user'} || \$compose) {
         use utf8;
         use v5.36;
 
@@ -279,17 +289,62 @@ method import_on_compose :common {
       }
     }};
 
-    #\$prepend, $fh
+    # local $Data::Dumper::Indent = 0;
+    # warn Dumper($seen_users{pkg});
+
+    my $prev;
+    my $compose_str = qq{
+      my \@caller = (caller 0);
+      my \$compose;
+
+      use utf8;
+      use v5.36;
+      use $class;
+      \$^H{'$class\/user'} = 1;
+      \$caller[10]->{'$class\/user'} = 1;
+
+      {
+        no strict 'refs';
+        if (\${"\$caller[0]\::"}{META}) {
+          my \$meta = \${"\$caller[0]\::"}{META}();
+          \$compose = 1 if \$meta->is_role;
+        }
+      }
+
+      # my \$i = 0;
+      # while (my (\@caller) = caller(\$i)) {
+      #   no strict 'refs';
+      #   local \$Data::Dumper::Indent = 0;
+      #   warn Data::Dumper::Dumper(\\\@caller, \\%{"\$caller[0]\::"});
+      #   \$i++;
+      # }
+
+      $class->compose(\\\@caller) if \$compose;
+
+      1;
+    };
+
+    # This is really slow, maybe only return source filter sub if package is in certain dir(s)?
+    \$prepend, $fh, sub ($, $prev = undef) {
+      my $line = \$_;
+      foreach my $user (keys $seen_users{pkg}->%*) {
+        if ($$line =~ /\:does\($user\)/) {
+          $seen_users{pkg}{$pkgname} = 1;
+          $seen_users{fn}{$filename} = 1;
+          $$line .= $compose_str;
+        }
+      }
+      
+      $$line ? 1 : 0
+    }, $prev
     # $fh
-    undef
+    # undef
   };
 
-  $import_on_compose->($import_on_compose, __pkgfn__, 0);
-  unshift @INC, $import_on_compose
+  $import_on_compose->($import_on_compose, scalar @EXPORT_DOES ? __pkgfn__ : $class->__pkgfn__, 0);
+  unshift @INC, $import_on_compose;
+
+  1
 }
 
-# BEGIN {
-  __PACKAGE__->import_on_compose;
-# }
-
-1
+__PACKAGE__->import_on_compose
