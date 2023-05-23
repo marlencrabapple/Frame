@@ -7,6 +7,8 @@ use utf8;
 use v5.36;
 # use autodie;
 
+use SQL::Abstract;
+
 field $sqla :reader;
 
 ADJUST {

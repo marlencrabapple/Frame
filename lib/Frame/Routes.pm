@@ -40,7 +40,7 @@ method match ($req) {
     PATH_PART: foreach my $part (@path) {
       my ($match, $wildcard_ne, $has_placeholder);
 
-      dmsg $prev, $curr, $barren, $i, $part if $ENV{FRAME_DEBUG};
+      # dmsg $prev, $curr, $barren, $i, $part if $ENV{FRAME_DEBUG};
 
       if($part ne '' && $$curr{$part} && !$$barren{$i}{$part} && !$self->patterns->{$part}) {
         $match = $part;
@@ -57,8 +57,8 @@ method match ($req) {
               : defined $self->patterns->{$key} ? 0
                 : $part ne '' && $key eq $self->app ? 2 : 0;
 
-          dmsg $part, $key, $self->patterns, $self->patterns->{$key}, $match, $prev, $barren
-            if $ENV{FRAME_DEBUG};
+          # dmsg $part, $key, $self->patterns, $self->patterns->{$key}, $match, $prev, $barren
+          #   if $ENV{FRAME_DEBUG};
 
           if($match == 2) {
             $wildcard_ne = 1;
@@ -71,7 +71,7 @@ method match ($req) {
           }
         }
 
-        dmsg $match, $wildcard_ne if $ENV{FRAME_DEBUG};
+        # dmsg $match, $wildcard_ne if $ENV{FRAME_DEBUG};
 
         if($has_placeholder = ($match || $wildcard_ne)) {
           $match = $self->app unless $match;
@@ -88,7 +88,7 @@ method match ($req) {
         next PATH_PART
       }
       else {
-        dmsg $prev, $barren if $ENV{FRAME_DEBUG};
+        # dmsg $prev, $barren if $ENV{FRAME_DEBUG};
         last unless $$prev{branch};
         $$barren{$$prev{i}}{$$prev{key}} = 1;
         next BRANCH
@@ -109,8 +109,8 @@ method match ($req) {
       return $curr
     }
 
-    dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]
-      , [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)] if $ENV{FRAME_DEBUG};
+    # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]
+    #   , [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)] if $ENV{FRAME_DEBUG};
 
     last BRANCH unless uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*);
 
