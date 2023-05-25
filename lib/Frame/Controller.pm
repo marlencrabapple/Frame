@@ -6,16 +6,14 @@ role Frame::Controller :does(Frame::Base);
 use utf8;
 use v5.36;
 
-use parent 'Exporter';
+# use parent 'Exporter';
 
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
 use Feature::Compat::Try;
 
-use subs qw(template);
-
-our @EXPORT = qw(template);
+our @EXPORT_DOES = qw(template);
 
 our $template_vars = {};
 
@@ -26,38 +24,19 @@ our $tx_default = Text::Xslate->new(
 
 $^H{__PACKAGE__ . '/user'} = 1;
 
+Frame::Base->compose(__PACKAGE__, [caller 0], patch_self => 1);
+
 field $req :param :reader :weak;
 field $res :reader; # :weak;
 # field $tx :reader;
 
 ADJUSTPARAMS ($params) {
-  Exporter::import(__CLASS__);
   $res = $req->new_response
 }
 
-sub template ($name, $vars = {}, @args) {
+method template :common ($name, $vars = {}, @args) {
   $tx_default->render($name, { %$template_vars, %$vars })
 }
-
-# method template :common { # $class is template filename
-#   my ($vars, @args) = @_;
-#   $tx_default->render($class, { %$template_vars, %$vars })
-# }
-
-# method template :common ($name, $vars = {}, @args) {
-#   $tx_default->render($name, { %$template_vars, %$vars })
-# }
-
-# sub template ($self, $name, $vars = {}, @args) {
-#   $tx_default->render($name, { %$template_vars, %$vars })
-# }
-
-# {
-#   no strict 'refs';
-#   no warnings 'redefine';
-
-#   *{"template"} = sub { $class->$sub->(@_) };
-# }
 
 method stash { $req->stash }
 
@@ -93,9 +72,5 @@ method render_404 {
 method redirect ($url, $status = 302) {
   $res->redirect($url, $status)
 }
-
-# BEGIN {
-#   Frame::Base::import_on_compose(__PACKAGE__)->()
-# }
 
 1

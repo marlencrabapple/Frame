@@ -10,8 +10,9 @@ role Frame::Base;
 use utf8;
 use v5.36;
 
-use parent 'Exporter';
+# use parent 'Exporter';
 
+use Carp;
 use Devel::StackTrace::WithLexicals;
 use PadWalker qw(peek_my peek_our);
 use Feature::Compat::Try;
@@ -34,7 +35,7 @@ use subs @EXPORT_DOES;
 $^H{__PACKAGE__ . '/user'} = 1;
 
 __PACKAGE__->import_on_compose;
-__PACKAGE__->compose([caller 0]);
+__PACKAGE__->compose(__PACKAGE__, [caller 0]);
 
 field $app :weak :param :accessor = undef;
 # field $json :accessor(_json);
@@ -99,21 +100,55 @@ method monkey_patch :common ($package, $sub, %args) {
   1
 }
 
-method exports :common ($cb, @vars) {
-  foreach my $export (@EXPORT_DOES) {
-    return 0 unless $cb->($export, $export, @vars)
+method exports :common ($src, $cb, @vars) {
+  {
+    no strict 'refs';
+    foreach my $export (@{"$src\::EXPORT_DOES"}) {
+      use strict 'refs';
+      return 0 unless $cb->($export, $export, @vars)
+    }
   }
 
   1
 }
 
-method compose :common ($caller, %args) {
-  no strict 'refs';
-  # return unless ${"$$caller[0]\::"}{ISA};
+# $dest was formerly $caller but it might not be an array ref with the
+# return value of the caller function
+method compose :common ($src, $dest, %args) {
+  if ($args{patch_self}) {
+    my $meta = $src->META();
+    
+    $class->exports($src, sub ($export, $realsub, @vars) {
+      my $og_sub = eval { no strict 'refs'; \&{"$src\::$export"} };
+      my $wrapper;
 
-  use utf8;
-  use v5.36;
+      try {
+        my $method_meta = $meta->get_method($export);
 
+        if ($method_meta->is_common) {
+          $wrapper = sub {
+            unshift @_, $src;
+            goto $og_sub
+          }
+        }
+        else {
+          my $caller_vars = peek_my(1);
+          say Dumper($caller_vars);
+
+          $wrapper = sub {
+            ...
+          }
+        }
+
+        $class->monkey_patch($src, $wrapper, name => $export)
+      }
+      catch ($e) {
+        # Not sure if anything needs to be done in this case
+      }
+    })
+  }
+
+  # Maybe this should only accept a package name?
   my $compose = sub ($caller) {
     return if $seen_users{pkg}{$$caller[0]};
 
@@ -121,13 +156,16 @@ method compose :common ($caller, %args) {
       no strict 'refs';
       return unless ${"$$caller[0]\::"}{META};
     }
+    
+    use utf8;
+    use v5.36;
 
-    $^H{__PACKAGE__ . '/user'} = 1;
-    $$caller[10]{__PACKAGE__ . '/user'} = 1;
+    $^H{$class . '/user'} = 1;
+    # $$caller[10]{$class . '/user'} = 1;
 
     my $meta = $$caller[0]->META();
 
-    __PACKAGE__->exports(sub ($export, $realsub, @vars) {
+    $class->exports($src, sub ($export, $realsub, @vars) {
       $class->monkey_patch($$caller[0], $export)
     }) if $meta->is_role;
 
@@ -135,7 +173,7 @@ method compose :common ($caller, %args) {
     $seen_users{fn}{__pkgfn__($$caller[0])} = 1
   };
 
-  $compose->($caller);
+  $compose->($dest);
 
   my $i = 0;
   while (my (@caller) = (caller $i)) {
@@ -148,7 +186,6 @@ method compose :common ($caller, %args) {
 
     $is_user = 1 if any {
       my $seen = $_;
-
       return 1 if $caller[0]->DOES($seen);
       return 1 if any { ${"$seen\::"}{$_} =~ /$caller[0]/ } keys %{"$seen\::"};
       0
@@ -160,6 +197,8 @@ method compose :common ($caller, %args) {
   } continue { $i++ }
 }
 
+# TODO: Double check if I like this as is, can't delete it now because
+# it breaks things, but I'm suspicious its suspect
 method import :common  {
   my $caller = eval "[caller 1]";
 
@@ -172,26 +211,20 @@ method import :common  {
   $^H{__PACKAGE__ . '/user'} = 1;
   $$caller[10]{__PACKAGE__ . '/user'} = 1;
 
-  {
-    local $Data::Dumper::Indent = 0;
-    # warn Dumper($caller, \%{"$$caller[0]\::"}) if $$caller[0] =~ /^(Frame|Momiji)/
-    # warn Dumper($caller, [caller 0]) if $$caller[0] =~ /^(Frame|Momiji)/
-  }
-
-  __PACKAGE__->exports(sub ($export, $realsub, @vars) {
+  __PACKAGE__->exports(__PACKAGE__, sub ($export, $realsub, @vars) {
     $class->monkey_patch($$caller[0], $export)
   });
 
   $seen_users{pkg}{$$caller[0]} = 1;
   $seen_users{fn}{__pkgfn__($$caller[0])} = 1;
   
-  __PACKAGE__->export_to_level(1, $class, @_)
+  # __PACKAGE__->export_to_level(1, $class, @_)
 }
 
 method import_on_compose :common {
   state @og_INC = @INC;
 
-  $class->exports(sub ($export, $realsub, @vars) {
+  $class->exports($class, sub ($export, $realsub, @vars) {
     my $og_sub = \&{"$class\::$export"};
     $class->monkey_patch($class, sub {
       unshift @_, $class;
@@ -209,52 +242,6 @@ method import_on_compose :common {
 
     $INC{$filename} = $pkgpath;
     open my $fh, '<', $pkgpath or die "$! $@";
-
-    # my $prepend = qq{{
-    #   use utf8;
-    #   use v5.36;
-
-    #   my \$caller = [caller 0];
-    #   my \$compose;
-
-    #   foreach my \$pkg (__PACKAGE__, '$pkgname') {
-    #     no strict 'refs';
-    #     next unless \${\$pkg . '::'}{META};
-    #     use strict 'refs';
-
-    #     my \$meta = \$pkg->META();
-
-    #     foreach my \$role (\$meta->all_roles) {
-    #       if (\$role eq '$class') {
-    #         \$compose = 1;
-    #         last
-    #       }
-    #     }
-    #   }
-      
-    #   {
-    #     no strict 'refs';
-    #     \$compose = 1 if List::Util::any { \${__PACKAGE__ . '::'}{\$_} =~ /$class/ } (keys \%{__PACKAGE__ . '::'})
-    #   }
-
-    #   \$compose = 1 if \$^H{'$class/user'} || \$caller->[10]{'$class/user'};
-
-    #   if (\$compose) {
-    #     use utf8;
-    #     use v5.36;
-
-    #     # {
-    #     #   no strict 'refs';
-    #     #   local \$Data::Dumper::Indent = 0;
-    #     #   warn Data::Dumper::Dumper(\$caller, \\%{"\$\$caller[0]\::"}, \\%^H);
-    #     # }
-
-    #     \$^H{'$class/user'} = 1;
-    #     \$caller->[10]{'$class/user'} = 1;
-        
-    #     $class->compose(\$caller)
-    #   }
-    # }};
 
     my $prev;
     my $compose_str = qq{
@@ -275,14 +262,13 @@ method import_on_compose :common {
         }
       }
 
-      $class->compose(\\\@caller) if \$compose;
+      $class->compose('$class', \\\@caller) if \$compose;
 
       1;
     };
 
     state %doesre = ();
     
-    # \$prepend, $fh, sub ($, $prev = undef) {
     $fh, sub ($, $prev = undef) {
       my $line = \$_;
       foreach my $user (keys $seen_users{pkg}->%*) {
@@ -302,10 +288,6 @@ method import_on_compose :common {
   unshift @INC, $import_on_compose;
 
   1
-}
-
-BEGIN {
-  __PACKAGE__->compose([caller 0])
 }
 
 1
