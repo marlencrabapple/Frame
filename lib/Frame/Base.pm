@@ -66,7 +66,10 @@ method dmsg :common (@msgs) {
   
   {
     local $Data::Dumper::Pad = "  ";
-    $out .= scalar @msgs > 1 ? Dumper(@msgs) : ref $msgs[0] ? Dumper(@msgs) : "  $msgs[0]\n";
+
+    $out .= scalar @msgs > 1 ? Dumper(@msgs) : ref $msgs[0]
+      ? Dumper(@msgs) : eval { my $s = $msgs[0] // 'undef'; "  $s\n" };
+
     $out .= "\n"
   }
 
@@ -232,6 +235,9 @@ method import_on_compose :common {
 
   $class->exports($class, sub ($export, $realsub, @vars) {
     my $og_sub = \&{"$class\::$export"};
+
+    # If we wrap our wrapper sub in a string eval maybe we could make
+    # it a lexical named sub instead of an anon sub (for better hints)
     $class->monkey_patch($class, sub {
       unshift @_, $class;
       goto $og_sub
