@@ -9,14 +9,18 @@ use v5.36;
 
 use DBI;
 use DBD::SQLite::Constants ':dbd_sqlite_string_mode';
+use Hash::Util qw(unlock_hashref_recurse lock_hashref_recurse);
 
 field $dbh_old;
 
 ADJUST {
-  my $config = $self->app->config;
-  
-  $config->{db}{attr}->@{qw/AutoCommit RaiseError sqlite_string_mode/}
-    = (1, 1, DBD_SQLITE_STRING_MODE_UNICODE_STRICT)
+  my $config = $self->app->config->{db};
+  unlock_hashref_recurse($config);
+
+  $$config{attr}->@{qw/AutoCommit RaiseError sqlite_string_mode/}
+    = (1, 1, DBD_SQLITE_STRING_MODE_UNICODE_STRICT);
+
+  lock_hashref_recurse($config)
 }
 
 method dbh {

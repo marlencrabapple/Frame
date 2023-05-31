@@ -8,11 +8,11 @@ our $VERSION  = '0.01';
 use utf8;
 use v5.36;
 
-use Data::Dumper;
 use YAML::Tiny;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Feature::Compat::Try;
+use Hash::Util 'lock_hashref_recurse';
 
 use Frame::Routes;
 use Frame::Request;
@@ -38,13 +38,16 @@ ADJUSTPARAMS ($params) {
   $loop->add($ua);
 
   $config_defaults = eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
+  lock_hashref_recurse($config_defaults);
+
   $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] } // {};
   $config = { %$config_defaults, %$config };
+  lock_hashref_recurse($config);
 
   $charset = $$config{charset} // 'utf-8';
 
   $controller_namespace = $$params{controller_namespace}
-    // $$config{controller_namespace}
+    // exists $$config{controller_namespace} ? $$config{controller_namespace} : undef
     // __CLASS__ . '::Controller';
 
   my $class = __CLASS__;
@@ -66,7 +69,7 @@ ADJUSTPARAMS ($params) {
   }
 
   $request_class = $$params{request_class}
-    // $$config{request_class}
+    // exists $$config{request_class} ? $$config{request_class} : undef
     // $request_class;
 
   $routes = Frame::Routes->new(app => $self);

@@ -28,12 +28,13 @@ our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 our $frame_debug = $ENV{FRAME_DEBUG} // 0;
 our $json_default = JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
 our $package = __PACKAGE__;
-our %seen_users = (fn => { __PACKAGE__->__pkgfn__ => 1}, pkg => { $package => 1 });
+our %seen_users = (fn => { __PACKAGE__->__pkgfn__ => 1 }, pkg => { $package => 1 });
 
 use subs @EXPORT_DOES;
 
 $^H{__PACKAGE__ . '/user'} = 1;
 
+#__PACKAGE__->compose(__PACKAGE__, [caller 0], patch_self => 1);
 __PACKAGE__->import_on_compose;
 __PACKAGE__->compose(__PACKAGE__, [caller 0]);
 
@@ -113,11 +114,13 @@ method exports :common ($src, $cb, @vars) {
 }
 
 # $dest was formerly $caller but it might not be an array ref with the
-# return value of the caller function
+# return value of the caller depending on how this shapes  up
 method compose :common ($src, $dest, %args) {
+  my %plain_subs;
+
   if ($args{patch_self}) {
     my $meta = $src->META();
-    
+
     $class->exports($src, sub ($export, $realsub, @vars) {
       my $og_sub = eval { no strict 'refs'; \&{"$src\::$export"} };
       my $wrapper;
@@ -143,7 +146,7 @@ method compose :common ($src, $dest, %args) {
         $class->monkey_patch($src, $wrapper, name => $export)
       }
       catch ($e) {
-        # Not sure if anything needs to be done in this case
+        $plain_subs{$export} = 1
       }
     })
   }
@@ -167,13 +170,16 @@ method compose :common ($src, $dest, %args) {
 
     $class->exports($src, sub ($export, $realsub, @vars) {
       $class->monkey_patch($$caller[0], $export)
-    }) if $meta->is_role;
+        if $meta->is_role || $plain_subs{$export}
+    });
 
     $seen_users{pkg}{$$caller[0]} = 1;
     $seen_users{fn}{__pkgfn__($$caller[0])} = 1
   };
 
+  return if $args{patch_self};
   $compose->($dest);
+  # return if $args{patch_self};
 
   my $i = 0;
   while (my (@caller) = (caller $i)) {
@@ -232,6 +238,8 @@ method import_on_compose :common {
     }, name => $export)
   });
 
+  # __PACKAGE__->compose(__PACKAGE__, [caller 0], patch_self => 1);
+
   my $import_on_compose = sub ($coderef, $filename) {
     my $pkgname = join '::', ($filename =~ /([^\/]+)(?:\/|\.pm)/g);
 
@@ -254,12 +262,9 @@ method import_on_compose :common {
       \$^H{'$class\/user'} = 1;
       \$caller[10]{'$class\/user'} = 1;
 
-      {
-        no strict 'refs';
-        if (\${"\$caller[0]\::"}{META}) {
-          my \$meta = \${"\$caller[0]\::"}{META}();
-          \$compose = 1 if \$meta->is_role
-        }
+      if (eval { no strict 'refs'; \${"\$caller[0]\::"}{META} }) {
+        my \$meta = \$caller[0]->META;
+        \$compose = 1 if \$meta->is_role
       }
 
       $class->compose('$class', \\\@caller) if \$compose;
