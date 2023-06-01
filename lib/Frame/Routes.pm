@@ -51,7 +51,7 @@ method match ($req) {
           next if $$barren{$i}{$key};
 
           $match = ref $self->patterns->{$key} eq 'CODE'
-            ? $self->patterns->{$key}->($req, $part) ? 1 : 0
+            ? $self->patterns->{$key}->($self->app, $req, $part) ? 1 : 0
             : ref($self->patterns->{$key}) =~ RERE
               ? $part =~ $self->patterns->{$key} ? 1 : 0
               : defined $self->patterns->{$key} ? 0
