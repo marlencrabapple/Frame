@@ -80,7 +80,7 @@ ADJUSTPARAMS ($params) {
 method to_psgi { sub { $self->handler(shift) } }
 
 method handler ($env) {
-  my $req = $request_class->new(app => $self->app, env => $env);
+  my $req = $request_class->new(app => $self, env => $env);
   $self->dispatch($req)
 }
 

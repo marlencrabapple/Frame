@@ -16,7 +16,8 @@ requires 'Feature::Compat::Try', '0.05';
 requires 'namespace::autoclean', '0.29';
 requires 'Devel::StackTrace::WithLexicals', '2.01';
 
-requires 'Net::Async::HTTP::Server', '0.13';
+requires 'Net::Async::HTTP::Server', '0.14';
+requires 'Net::Async::WebSocket', '0.13';
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
 requires 'Parallel::Prefork', '0.18';

@@ -9,6 +9,7 @@ use utf8;
 use v5.36;
 
 use Carp;
+use Hash::MultiValue;
 
 use Frame::Server::Request;
 use Frame::Server::Protocol;
@@ -32,7 +33,7 @@ sub _responder ($req, $res) {
   my ($status, $headers, $body) = @$res;
 
   my @lines = ("@{[ $req->protocol ]} $status @{[ HTTP::Status::status_message($status) ]}");
-  my %res_headers;
+  my $res_headers = Hash::MultiValue->new;
 
   my $write_headers = sub {
     my $c = 'close';
@@ -45,6 +46,10 @@ sub _responder ($req, $res) {
     push @lines, sprintf "Connection: $c"
       unless $req->protocol eq 'HTTP/1.1' && $c eq 'keep-alive';
 
+    foreach my $key ($res_headers->keys) {
+      push @lines, "$key: " . join ',', $res_headers->get_all($key)
+    }
+
     $req->write(join CRLF, (@lines, CRLF))
   };
 
@@ -52,8 +57,8 @@ sub _responder ($req, $res) {
   my $use_chunked_transfer;
 
   while(my ($key, $val) = splice @$headers, 0, 2) {
-    $res_headers{$key} = $val;
-    push @lines, "$key: $val";
+    $res_headers->set($key => $val);
+    # push @lines, "$key: $val";
 
     $has_content_length = 1 if $key eq "Content-Length";
     $use_chunked_transfer++ if $key eq "Transfer-Encoding" and $val eq "chunked"
