@@ -1,7 +1,3 @@
-# BEGIN {
-#   $ENV{FRAME_DEBUG} = 1
-# }
-
 use Object::Pad ':experimental(mop)';
 
 package Frame::Base;
@@ -25,8 +21,10 @@ use Module::Metadata;
 
 our @EXPORT_DOES = qw(dmsg json __pkgfn__);
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-our $frame_debug = $ENV{FRAME_DEBUG} // 0;
-our $json_default = JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
+
+sub _json_default { JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ()) }
+state $json_default = _json_default;
+
 our $package = __PACKAGE__;
 our %seen_users = (fn => { __PACKAGE__->__pkgfn__ => 1 }, pkg => { $package => 1 });
 
@@ -39,18 +37,20 @@ __PACKAGE__->import_on_compose;
 __PACKAGE__->compose(__PACKAGE__, [caller 0]);
 
 field $app :weak :param :accessor = undef;
-# field $json :accessor(_json);
+field $json;
 
 ADJUSTPARAMS ($params) {
-  # $app //= $$params{app} if $$params{app};
-  # $json //= JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ());
-  $^H{__CLASS__ . '/user'} = 1
+  # $^H{__CLASS__ . '/user'} = 1
 }
 
-sub json ($self = undef) {
-  # $self ? $self->_json : $json_default
-  $json_default
+method json ($_json = undef) {
+  $json = $_json if $_json;
+  $json // $json_default
 }
+
+# method json :common {
+#   $json_default
+# }
 
 method __pkgfn__ :common ($pkgname = undef) {
   $pkgname //= $class;
@@ -73,10 +73,12 @@ method dmsg :common (@msgs) {
     $out .= "\n"
   }
 
-  $out .= $frame_debug == 2 ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
-    indent => 1,
-    skip_frames => 1
-  )->as_string : "at $caller[1]:$caller[2]";
+  $out .= $ENV{FRAME_DEBUG} == 2
+    ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
+        indent => 1,
+        skip_frames => 1
+      )->as_string
+    : "at $caller[1]:$caller[2]";
 
   say STDERR "$out\n";
   $out
@@ -86,16 +88,20 @@ method monkey_patch :common ($package, $sub, %args) {
   {
     no strict 'refs';
     no warnings 'redefine';
-    
-    return -1 if ${"$package\::"}{$sub};# || $package->can($sub);
 
+    # say Dumper($args{name} // $sub);
+    
     if (ref $sub eq 'CODE') {
       return -1 unless $args{name};
+      return -1 if ${"$package\::"}{$args{name}} && !$args{patch_self};
       *{"$package\::$args{name}"} = $sub
     }
     else {
-      *{"$package\::$sub"} = \&{$class . "::$sub"};
+      return -1 if ${"$package\::"}{$sub} && !$args{patch_self};
+      *{"$package\::$sub"} = \&{$class . "::$sub"}
     }
+
+    # say Dumper($args{name} // $sub)
   }
 
   $args{on_patch}($args{on_patch_args})
@@ -116,43 +122,74 @@ method exports :common ($src, $cb, @vars) {
   1
 }
 
+method patch_self :common ($src, $plain_subs) {
+  my $meta = $src->META();
+
+  $class->exports($src, sub ($export, $realsub, @vars) {
+    use strict 'refs';
+    my $og_sub = eval { no strict 'refs'; \&{"$src\::$export"} };
+    my $wrapper;
+
+    try {
+      my $method_meta = $meta->get_method($export);
+      # say Dumper($method_meta->name);
+
+      if ($method_meta->is_common) {
+        $wrapper = sub {
+          unshift @_, $src;
+          goto $og_sub
+        }
+      }
+      else {
+        $wrapper = sub {
+          my @caller = caller 0;
+          my $caller_vars = peek_my(1);
+          my $_self = $$caller_vars{'$self'}->$*;
+          my $_class = ref $_self;
+          my $_meta = $_self->META();
+        
+          # {
+          #   no strict 'refs';
+          #   say Dumper($_class, \%{"$_class\::"})
+          # }
+
+          # my $i = 0;
+          # while (my @caller = caller $i) {
+          #   {
+          #     no strict 'refs';
+          #     local $Data::Dumper::Indent = 0;
+          #     warn Dumper([caller($i)])
+          #   }
+          # } continue { $i++ }
+          
+          $og_sub = eval {
+            no strict 'refs';
+          #   # local *{"$_class\::$export"} = *{"$src\::$export"};
+          #   ${"$_class\::"}{"$export"};
+            \&{"$caller[0]\::$export"};
+          };
+          # $og_sub = \&$export;
+
+          unshift @_, $_self;
+          # $og_sub->(@_)
+          goto $og_sub
+        }
+      }
+
+      $class->monkey_patch($src, $wrapper, name => $export, patch_self => 1)
+    }
+    catch ($e) {
+      $$plain_subs{$export} = 1
+    }
+  })
+}
+
 # $dest was formerly $caller but it might not be an array ref with the
 # return value of the caller depending on how this shapes  up
 method compose :common ($src, $dest, %args) {
   my %plain_subs;
 
-  if ($args{patch_self}) {
-    my $meta = $src->META();
-
-    $class->exports($src, sub ($export, $realsub, @vars) {
-      my $og_sub = eval { no strict 'refs'; \&{"$src\::$export"} };
-      my $wrapper;
-
-      try {
-        my $method_meta = $meta->get_method($export);
-
-        if ($method_meta->is_common) {
-          $wrapper = sub {
-            unshift @_, $src;
-            goto $og_sub
-          }
-        }
-        else {
-          my $caller_vars = peek_my(1);
-          say Dumper($caller_vars);
-
-          $wrapper = sub {
-            ...
-          }
-        }
-
-        $class->monkey_patch($src, $wrapper, name => $export)
-      }
-      catch ($e) {
-        $plain_subs{$export} = 1
-      }
-    })
-  }
+  $class->patch_self($src, \%plain_subs) if ($args{patch_self});
 
   # Maybe this should only accept a package name?
   my $compose = sub ($caller) {
@@ -232,18 +269,21 @@ method import :common  {
 
 method import_on_compose :common {
   state @og_INC = @INC;
+  my %plain_subs;
 
-  $class->exports($class, sub ($export, $realsub, @vars) {
-    my $og_sub = \&{"$class\::$export"};
+  # $class->exports($class, sub ($export, $realsub, @vars) {
+  #   my $og_sub = \&{"$class\::$export"};
 
-    # If we wrap our wrapper sub in a string eval maybe we could make
-    # it a lexical named sub instead of an anon sub (for better hints)
-    $class->monkey_patch($class, sub {
-      unshift @_, $class;
-      goto $og_sub
-    }, name => $export)
-  });
+  #   # If we wrap our wrapper sub in a string eval maybe we could make
+  #   # it a lexical named sub instead of an anon sub (for better hints)
+  #   $class->monkey_patch($class, sub {
+  #     unshift @_, $class;
+  #     goto $og_sub
+  #   }, name => $export)
+  # });
 
+  $class->patch_self($class, \%plain_subs);
+  # say Dumper($class, \%plain_subs);
   # __PACKAGE__->compose(__PACKAGE__, [caller 0], patch_self => 1);
 
   my $import_on_compose = sub ($coderef, $filename) {

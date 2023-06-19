@@ -1477,14 +1477,6 @@ DISTRIBUTIONS
       Test::Builder 0
       Test::More 0.96
       perl 5.012
-  Test-Identity-0.01
-    pathname: P/PE/PEVANS/Test-Identity-0.01.tar.gz
-    provides:
-      Test::Identity 0.01
-    requirements:
-      Scalar::Util 0
-      Test::Builder::Tester 0
-      Test::More 0
   Test-Metrics-Any-0.01
     pathname: P/PE/PEVANS/Test-Metrics-Any-0.01.tar.gz
     provides:
@@ -1494,15 +1486,6 @@ DISTRIBUTIONS
       Metrics::Any::Adapter::Test 0
       Module::Build 0.4004
       Test::Builder::Module 0
-  Test-Refcount-0.10
-    pathname: P/PE/PEVANS/Test-Refcount-0.10.tar.gz
-    provides:
-      Test::Refcount 0.10
-    requirements:
-      B 0
-      Module::Build 0.4004
-      Scalar::Util 0
-      Test::Builder 0
   Test-Requires-0.11
     pathname: T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
     provides:
@@ -1944,24 +1927,24 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
-  XS-Parse-Keyword-0.33
-    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.33.tar.gz
+  XS-Parse-Keyword-0.34
+    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.34.tar.gz
     provides:
-      XS::Parse::Infix 0.33
-      XS::Parse::Infix::Builder 0.33
-      XS::Parse::Keyword 0.33
-      XS::Parse::Keyword::Builder 0.33
+      XS::Parse::Infix 0.34
+      XS::Parse::Infix::Builder 0.34
+      XS::Parse::Keyword 0.34
+      XS::Parse::Keyword::Builder 0.34
     requirements:
       ExtUtils::CBuilder 0
       ExtUtils::CChecker 0.11
       ExtUtils::ParseXS 3.16
       Module::Build 0.4004
       perl 5.014
-  XS-Parse-Sublike-0.17
-    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.17.tar.gz
+  XS-Parse-Sublike-0.18
+    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.18.tar.gz
     provides:
-      XS::Parse::Sublike 0.17
-      XS::Parse::Sublike::Builder 0.17
+      XS::Parse::Sublike 0.18
+      XS::Parse::Sublike::Builder 0.18
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
