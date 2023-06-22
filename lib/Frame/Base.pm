@@ -43,14 +43,14 @@ ADJUSTPARAMS ($params) {
   # $^H{__CLASS__ . '/user'} = 1
 }
 
-method json ($_json = undef) {
-  $json = $_json if $_json;
-  $json // $json_default
-}
-
-# method json :common {
-#   $json_default
+# method json ($_json = undef) {
+#   $json = $_json if $_json;
+#   $json // $json_default
 # }
+
+method json :common {
+  $json_default
+}
 
 method __pkgfn__ :common ($pkgname = undef) {
   $pkgname //= $class;
