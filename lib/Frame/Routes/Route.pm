@@ -1,18 +1,22 @@
 use Object::Pad;
 
 package Frame::Routes::Route;
-class Frame::Routes::Route :does(Frame::Base);
+class Frame::Routes::Route :does(Frame::Routes::Route::Factory);
 
 use utf8;
 use v5.36;
 
 use constant PLACEHOLDER_RE => qr/^\:(.+)$/;
 
-field $method :param :reader;
+# field $method :param :reader;
+field $methods :param :reader;
 field $pattern :param :reader;
-field $dest :param :reader;
+field $dest :param :reader = undef;
+field $routes :param :reader;
+# field $under_route :param :reader = undef;
+field $prev_stop :param :reader = undef;
 
-field $tree :reader;
+field $limb :reader;
 field @pattern_arr :reader;
 field @placeholders: reader;
 
@@ -22,33 +26,46 @@ ADJUSTPARAMS ($params) {
     : $pattern->pattern =~ /([^\/]+)(?:\/)?/g;
 
   my $depth = scalar @pattern_arr;
-  my $branches = $$tree{$method}{$depth} //= {};
-  my $curr = $branches;
+  my $i = 0; 
 
-  my $prev;
-  my $last_key;
-  
-  foreach my $part (@pattern_arr) {
-    $prev = $curr;
+  foreach my $method (@$methods) {
+    my $branches = $$limb{$method}{$depth} //= {};
+    my $curr = $branches;
 
-    if(my $placeholder = $self->is_placeholder($part)) {
-      my $filter = $pattern->filters->{$placeholder};
-      $last_key = $filter ? $filter : $$params{factory}->app;
-      push @placeholders, $placeholder
+    my $prev;
+    my $last_key;
+    
+    foreach my $part (@pattern_arr) {
+      $prev = $curr;
+
+      if (my $placeholder = $self->is_placeholder($part)) {
+        my $filter = $pattern->filters->{$placeholder};
+        $last_key = $filter ? $filter : $$params{factory}->app;
+        push @placeholders, $placeholder unless $i
+      }
+      else {
+        $last_key = $part
+      }
+
+      $$prev{$last_key} = {};
+      $curr = $$prev{$last_key}
     }
-    else {
-      $last_key = $part
-    }
 
-    $$prev{$last_key} = {};
-    $curr = $$prev{$last_key}
+    $$prev{$last_key} = $self
   }
+  continue { $i++ }
+}
 
-  $$prev{$last_key} = $self
+method _add_route {
+  $routes->_add_route(@_)
 }
 
 method is_placeholder ($pathstr) {
   ($pathstr =~ PLACEHOLDER_RE)[0]
+}
+
+method under {
+
 }
 
 1

@@ -66,6 +66,7 @@ method dmsg :common (@msgs) {
   
   {
     local $Data::Dumper::Pad = "  ";
+    local $Data::Dumper::Indent = 1;
 
     $out .= scalar @msgs > 1 ? Dumper(@msgs) : ref $msgs[0]
       ? Dumper(@msgs) : eval { my $s = $msgs[0] // 'undef'; "  $s\n" };

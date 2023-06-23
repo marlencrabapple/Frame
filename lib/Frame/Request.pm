@@ -7,6 +7,7 @@ use utf8;
 use v5.36;
 
 use List::Util 'any';
+use Hash::Util 'lock_hashref_recurse';
 
 state @ajax_headers_default = qw(X-Robo-Req);
 
@@ -39,6 +40,9 @@ method set_placeholders (@placeholders) {
   foreach my $placeholder (@placeholders) {
     $self->placeholder(%$placeholder)
   }
+  
+  # TODO: Benchmark this against Struct::Dumb solution (defined in route, init'd here)
+  # lock_hashref_recurse($placeholders)
 }
 
 method is_ajax ($fuzzy = 0) {
