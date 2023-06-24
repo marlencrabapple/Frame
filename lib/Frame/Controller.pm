@@ -70,7 +70,8 @@ method render_404 {
 }
 
 method redirect ($url, $status = 302) {
-  $res->redirect($url, $status)
+  $res->redirect($url, $status);
+  $res
 }
 
 1
