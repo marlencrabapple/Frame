@@ -87,7 +87,7 @@ method handler ($env) {
 
 method dispatch ($req) {
   my $route = $routes->match($req);
-  $route ? $self->route($route, $req) : $self->render_404($req)
+  $route ? $self->route($route, $req)->finalize : $self->render_404($req)
 }
 
 method route ($route, $req) {
@@ -97,7 +97,7 @@ method route ($route, $req) {
   my $res = $c->$sub($req->placeholder_values_ord);
   $res = $res->get if $res isa 'Future';
 
-  $c->res->finalize
+  $res
 }
 
 method render_404 ($req) {

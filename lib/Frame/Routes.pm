@@ -12,6 +12,9 @@ use Frame::Routes::Pattern;
 use List::Util 'uniq';
 use Scalar::Util qw/blessed refaddr/;
 
+use constant METHODS => qw/GET POST UPDATE DELETE PUT PATCH/;
+my $ptn = join '|', METHODS;
+use constant METHRE => qr/^ptn$/i;
 use constant RERE => qr/^regexp$/i;
 
 field $patterns :reader;
@@ -23,8 +26,10 @@ ADJUSTPARAMS {
   $tree //= {}
 }
 
-method _add_route ($methods, $pattern, @args) {
+method add ($methods, $pattern, @args) {
   my %route_args = ( factory => $self->app );
+  my $opts = ref $args[$#args] eq 'HASH' ? pop @args : {};
+
   my $dest = $args[$#args];
 
   if (ref $dest eq 'HASH' && scalar @$dest{qw(c sub)}) {
@@ -33,14 +38,17 @@ method _add_route ($methods, $pattern, @args) {
   elsif (ref $dest eq 'CODE') {
     $route_args{dest}{sub} = $dest
   }
-  else {
+  elsif ($dest) {
     my ($c, $sub) = $dest =~ /^(?:([\w\-]+)(?:#))?([\w]+)$/;
-    $c = join '::', map { ucfirst $_ } split '-', $c;
+    
+    if ($c) {
+      $c = join '::', map { ucfirst $_ } split '-', $c;
 
-    if($sub) {
-      $route_args{dest} = {
-        sub => $sub,
-        c => $c
+      if ($sub) {
+        $route_args{dest} = {
+          sub => $sub,
+          c => $c
+        }
       }
     }
   }
@@ -58,8 +66,6 @@ method _add_route ($methods, $pattern, @args) {
 
   my $has_dest = $route_args{dest}{sub} ? 1 : 0;
   my $has_args;
-  
-  # die "Invalid route destination '$dest'" if !$route_args{dest}{sub} && scalar @args == 1;
 
   foreach my $arg (@args) {
     if (ref $arg eq 'CODE') {
@@ -74,15 +80,20 @@ method _add_route ($methods, $pattern, @args) {
       );
       $has_args = 1
     }
+    elsif (ref $arg eq 'ARRAY' && scalar @$methods == 0) {
+      next unless $$arg[0] =~ METHRE;
+      $route_args{methods} = $arg;
+      $has_args = 1
+    }
   }
 
   die "Invalid route destination '$dest'"
     if !$has_args && !$has_dest && scalar @args == 1;
-
-  # TODO: Everything preceding this line is probably better left to something like Syntax::Keyword::MultiSub
   
   $route_args{pattern} //= Frame::Routes::Pattern->new(pattern => $pattern);
-  my $route = Frame::Routes::Route->new(%route_args, methods => $methods, routes => $self);
+  $methods = [ METHODS ] unless scalar @$methods;
+
+  my $route = Frame::Routes::Route->new(%route_args, methods => $methods, routes => $self, %$opts);
   
   foreach my $method (@$methods) {
     my $branch = $route->limb->{$method}{scalar $route->pattern_arr};
@@ -173,14 +184,26 @@ method match ($req) {
     }
   }
   continue {
-    if($i == scalar @path && defined blessed $curr && blessed $curr eq 'Frame::Routes::Route') {
-      for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
-        $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
+    if ($curr isa 'Frame::Routes::Route') {
+      # dmsg $curr;
+      if ($i == scalar @path) {
+        return undef if $curr->has_stops;
+
+        for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
+          $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
+        }
+        
+        $req->set_placeholders(@placeholder_matches);
+        return $curr
       }
-
-      $req->set_placeholders(@placeholder_matches);
-
-      return $curr
+      else {
+        if ($curr->has_stops) {
+          dmsg $curr;
+          if($curr->dest) {
+            $self->app->route($curr, $req);
+          }
+        }
+      }
     }
 
     # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]

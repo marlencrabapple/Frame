@@ -6,34 +6,41 @@ role Frame::Routes::Route::Factory :does(Frame::Base);
 use utf8;
 use v5.36;
 
-method _add_route :required ($route);
+field $prev_stop :param :accessor :weak = undef;
+field $has_stops :param :accessor = undef;
 
-method any ($methods, $pattern, @args) {
-  $self->_add_route($methods, $pattern, @args)
+method add :required;
+
+method any ($pattern, @args) {
+  $self->add([], $pattern, @args)
 }
 
 method get ($pattern, @args) {
-  $self->any(['GET'], $pattern, @args)
+  $self->add(['GET'], $pattern, @args)
 }
 
 method post ($pattern, @args) {
-  $self->any(['POST'], $pattern, @args)
+  $self->add(['POST'], $pattern, @args)
 }
 
 method put ($pattern, @args) {
-  $self->any(['PUT'], $pattern, @args)
+  $self->add(['PUT'], $pattern, @args)
 }
 
 method patch ($pattern, @args) {
-  $self->any(['PATCH'], $pattern, @args)
+  $self->add(['PATCH'], $pattern, @args)
 }
 
 method delete ($pattern, @args) {
-  $self->any(['DELETE'], $pattern, @args)
+  $self->add(['DELETE'], $pattern, @args)
 }
 
 method update ($pattern, @args) {
-  $self->any(['UPDATE'], $pattern, @args)
+  $self->add(['UPDATE'], $pattern, @args)
+}
+
+method under ($pattern, @args) {
+  $self->any($pattern, @args, { has_stops => 1 })
 }
 
 1
