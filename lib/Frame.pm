@@ -86,22 +86,28 @@ method handler ($env) {
 }
 
 method dispatch ($req) {
-  my $route = $routes->match($req);
-  $route ? $self->route($route, $req)->finalize : $self->render_404($req)
+  if (my $match = $routes->match($req)) {
+    if ($match isa 'Plack::Response') {
+      return $match->finalize
+    }
+    elsif ($match isa 'Frame::Routes::Route') {
+      return $self->route($match, $req)->finalize
+    }
+  }
+
+  $default_controller_class->new(app => $self, req => $req)->render_404->finalize
 }
 
-method route ($route, $req) {
+method route ($route, $req, $placeholder_dummies = []) {
+  dmsg $placeholder_dummies;
+
   my ($c, $sub) = $route->dest->@{qw(c sub)};
   $c = ($c || $default_controller_class)->new(app => $self, req => $req);
 
-  my $res = $c->$sub($req->placeholder_values_ord);
+  my $res = $c->$sub(@$placeholder_dummies, $req->placeholder_values_ord);
   $res = $res->get if $res isa 'Future';
 
   $res
-}
-
-method render_404 ($req) {
-  $default_controller_class->new(app => $self, req => $req)->render_404->finalize
 }
 
 method startup;

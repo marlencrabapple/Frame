@@ -12,7 +12,7 @@ use constant PLACEHOLDER_RE => qr/^\:(.+)$/;
 field $methods :param :reader;
 field $pattern :param :reader;
 field $dest :param :reader = undef;
-field $routes :param :reader :weak;
+field $root :param :reader :weak;
 field $limb :reader;
 field @pattern_arr :reader;
 field @placeholders: reader;
@@ -54,7 +54,7 @@ ADJUSTPARAMS ($params) {
 }
 
 method add ($methods, $pattern, @args) {
-  $routes->add($methods, $self->pattern->pattern . $pattern, @args, { prev_stop => $self })
+  $root->add($methods, $self->pattern->pattern . $pattern, @args, { prev_stop => $self, has_stops => $self->has_stops })
 }
 
 method is_placeholder ($pathstr) {

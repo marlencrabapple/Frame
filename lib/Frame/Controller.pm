@@ -65,8 +65,12 @@ method render ($content, $status = 200, $content_type = undef, $headers = [], $c
   $res
 }
 
-method render_404 {
-  $self->render('Page not found', 404)
+method render_404 ($content = '404 - Page not found') {
+  $self->render($content, 404)
+}
+
+method render_403 ($content = '403 - Forbidden') {
+  $self->render($content, 403)
 }
 
 method redirect ($url, $status = 302) {

@@ -8,6 +8,18 @@ use v5.36;
 
 field $prev_stop :param :accessor :weak = undef;
 field $has_stops :param :accessor = undef;
+field $patterns :accessor;
+field $tree :accessor;
+
+field $routes :reader;
+field $stops :reader :param = undef;
+
+ADJUST {
+  $routes //= [];
+  $stops //= [];
+  $patterns //= {};
+  $tree //= {}
+}
 
 method add :required;
 

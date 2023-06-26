@@ -17,15 +17,6 @@ my $ptn = join '|', METHODS;
 use constant METHRE => qr/^ptn$/i;
 use constant RERE => qr/^regexp$/i;
 
-field $patterns :reader;
-field $tree :reader;
-field @routes :reader;
-
-ADJUSTPARAMS {
-  $patterns //= {};
-  $tree //= {}
-}
-
 method add ($methods, $pattern, @args) {
   my %route_args = ( factory => $self->app );
   my $opts = ref $args[$#args] eq 'HASH' ? pop @args : {};
@@ -73,7 +64,7 @@ method add ($methods, $pattern, @args) {
       $has_args = 1
     }
     elsif (ref $arg eq 'HASH') {
-      @$patterns{(values %$arg)} = (values %$arg);
+      $self->patterns->@{(values %$arg)} = (values %$arg);
       $route_args{pattern} = Frame::Routes::Pattern->new(
         pattern => $pattern,
         filters => $arg
@@ -93,12 +84,26 @@ method add ($methods, $pattern, @args) {
   $route_args{pattern} //= Frame::Routes::Pattern->new(pattern => $pattern);
   $methods = [ METHODS ] unless scalar @$methods;
 
-  my $route = Frame::Routes::Route->new(%route_args, methods => $methods, routes => $self, %$opts);
+  if ($$opts{prev_stop}) {
+    my @stops;
+    my $prev_stop = $$opts{prev_stop};
+    while ($prev_stop) {
+      unshift @stops, $prev_stop;
+      $prev_stop = $prev_stop->prev_stop
+    }
+    $route_args{stops} = \@stops;
+  }
+
+  my $route = Frame::Routes::Route->new(
+    %route_args, %$opts,
+    methods => $methods,
+    root => $self
+  );
   
   foreach my $method (@$methods) {
     my $branch = $route->limb->{$method}{scalar $route->pattern_arr};
-    $tree->{$method}{scalar $route->pattern_arr}->@{keys %$branch} = (values %$branch);
-    push @routes, $route
+    $self->tree->{$method}{scalar $route->pattern_arr}->@{keys %$branch} = (values %$branch);
+    push $self->routes->@*, $route
   }
 
   $route
@@ -170,6 +175,16 @@ method match ($req) {
         $$prev{branch} = $curr;
         $$prev{has_placeholder} = $has_placeholder;
         $curr = $$curr{$match};
+
+        # if ($curr isa 'Frame::Routes::Route' && $curr->has_stops) {
+        #   dmsg $curr;
+        #   foreach my $stop ($curr->stops->@*) {
+        #     if ($stop->dest) {
+        #       $self->app->route($stop, $req, (undef) x scalar $stop->placeholders);
+        #     }
+        #   }
+        # }
+
         next PATH_PART
       }
       else {
@@ -184,26 +199,24 @@ method match ($req) {
     }
   }
   continue {
-    if ($curr isa 'Frame::Routes::Route') {
-      # dmsg $curr;
-      if ($i == scalar @path) {
-        return undef if $curr->has_stops;
-
-        for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
-          $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
-        }
-        
-        $req->set_placeholders(@placeholder_matches);
-        return $curr
-      }
-      else {
-        if ($curr->has_stops) {
-          dmsg $curr;
-          if($curr->dest) {
-            $self->app->route($curr, $req);
+    if ($curr isa 'Frame::Routes::Route' && $i == scalar @path) {
+      if ($curr->has_stops) {
+        dmsg $curr->pattern;
+        foreach my $stop ($curr->stops->@*) {
+          dmsg $stop->pattern;
+          if ($stop->dest) {
+            my $res = $self->app->route($stop, $req, ((undef) x scalar $stop->placeholders));
+            return $res unless $res == 1;
           }
         }
       }
+
+      for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
+        $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
+      }
+      
+      $req->set_placeholders(@placeholder_matches);
+      return $curr
     }
 
     # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]
