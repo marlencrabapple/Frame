@@ -8,6 +8,7 @@ use v5.36;
 
 # use parent 'Exporter';
 
+use Carp;
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
@@ -27,6 +28,7 @@ $^H{__PACKAGE__ . '/user'} = 1;
 Frame::Base->compose(__PACKAGE__, [caller 0], patch_self => 1);
 
 field $req :param :reader :weak;
+field $route :param :reader = undef;
 field $res :reader; # :weak;
 # field $tx :reader;
 
@@ -76,6 +78,22 @@ method render_403 ($content = '403 - Forbidden') {
 method redirect ($url, $status = 302) {
   $res->redirect($url, $status);
   $res
+}
+
+method url_for ($name = undef, %vals) {
+  my @path_arr;
+
+  foreach my $path_var ($route->pattern_arr) {
+    if (my $key = $route->is_placeholder($path_var)) {
+      croak unless $vals{$key};
+      push @path_arr, $vals{$key}
+    }
+    else {
+      push @path_arr, $path_var
+    }
+  }
+
+  join '/', @path_arr
 }
 
 1

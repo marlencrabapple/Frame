@@ -33,14 +33,10 @@ method add ($methods, $pattern, @args) {
     my ($c, $sub) = $dest =~ /^(?:([\w\-]+)(?:#))?([\w]+)$/;
     
     if ($c) {
-      $c = join '::', map { ucfirst $_ } split '-', $c;
-
-      if ($sub) {
-        $route_args{dest} = {
-          sub => $sub,
-          c => $c
-        }
-      }
+      $route_args{dest} = {
+        sub => $sub,
+        c => join '::', map { ucfirst $_ } split '-', $c
+      } if $sub
     }
   }
 
@@ -140,6 +136,8 @@ method match ($req) {
         PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
           next if $$barren{$i}{$key};
 
+          # dmsg $key, $self->patterns, $self->patterns->{$key};
+
           $match = ref $self->patterns->{$key} eq 'CODE'
             ? $self->patterns->{$key}->($self->app, $req, $part) ? 1 : 0
             : ref($self->patterns->{$key}) =~ RERE
@@ -201,9 +199,9 @@ method match ($req) {
   continue {
     if ($curr isa 'Frame::Routes::Route' && $i == scalar @path) {
       if ($curr->has_stops) {
-        dmsg $curr->pattern;
+        # dmsg $curr->pattern;
         foreach my $stop ($curr->stops->@*) {
-          dmsg $stop->pattern;
+          # dmsg $stop->pattern;
           if ($stop->dest) {
             my $res = $self->app->route($stop, $req, ((undef) x scalar $stop->placeholders));
             return $res unless $res == 1;

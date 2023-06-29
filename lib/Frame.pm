@@ -24,9 +24,9 @@ field $ua :reader;
 field $routes :reader;
 field $config :reader;
 field $config_defaults :reader;
-field $charset :mutator = 'utf-8';
-field $request_class :mutator = 'Frame::Request';
-field $controller_namespace :mutator;
+field $charset :reader = 'utf-8';
+field $request_class :param = 'Frame::Request';
+field $controller_namespace :param :reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
@@ -43,20 +43,18 @@ ADJUSTPARAMS ($params) {
 
   $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] } // {};
   $config = { %$config_defaults, %$config };
+
+  $charset = $$config{charset} if $$config{charset};
+  $request_class = $$config{request_class} if $$config{request_class};
+  $controller_namespace //= $$config{controller_namespace} || __CLASS__ . '::Controller';
+
   lock_hashref_recurse($config);
 
-  $charset = $$config{charset} // 'utf-8';
-
-  $controller_namespace = $$params{controller_namespace}
-    // exists $$config{controller_namespace} ? $$config{controller_namespace} : undef
-    // __CLASS__ . '::Controller';
-
-  my $class = __CLASS__;
-
   try {
-    require "$class/Controller.pm";
+    my $fn = __CLASS__ . '/Controller.pm';
+    require "$fn";
 
-    my $meta = Object::Pad::MOP::Class->create_class("$class\::Controller::$self"
+    my $meta = Object::Pad::MOP::Class->create_class(__CLASS__ . "::Controller::$self"
       , isa => $default_controller_class);
 
     $meta->add_role(__CLASS__ . '::Controller');
@@ -68,11 +66,7 @@ ADJUSTPARAMS ($params) {
   catch ($e) {
     dmsg $e if $ENV{FRAME_DEBUG}
   }
-
-  $request_class = $$params{request_class}
-    // exists $$config{request_class} ? $$config{request_class} : undef
-    // $request_class;
-
+  
   $routes = Frame::Routes->new(app => $self);
 
   $self->startup
@@ -99,10 +93,8 @@ method dispatch ($req) {
 }
 
 method route ($route, $req, $placeholder_dummies = []) {
-  dmsg $placeholder_dummies;
-
   my ($c, $sub) = $route->dest->@{qw(c sub)};
-  $c = ($c || $default_controller_class)->new(app => $self, req => $req);
+  $c = ($c || $default_controller_class)->new(app => $self, req => $req, route => $route);
 
   my $res = $c->$sub(@$placeholder_dummies, $req->placeholder_values_ord);
   $res = $res->get if $res isa 'Future';

@@ -6,12 +6,15 @@ class Frame::Routes::Route :does(Frame::Routes::Route::Factory);
 use utf8;
 use v5.36;
 
+use constant PATTERN_RE => qr/([^\/]+)(?:\/)?/;
 use constant PLACEHOLDER_RE => qr/^\:(.+)$/;
+use constant NAME_RE => qr/[\W]/;
 
 # field $method :param :reader;
 field $methods :param :reader;
 field $pattern :param :reader;
 field $dest :param :reader = undef;
+field $name :param :accessor = undef;
 field $root :param :reader :weak;
 field $limb :reader;
 field @pattern_arr :reader;
@@ -20,10 +23,12 @@ field @placeholders: reader;
 ADJUSTPARAMS ($params) {
   @pattern_arr = $pattern->pattern eq '/'
     ? '/'
-    : $pattern->pattern =~ /([^\/]+)(?:\/)?/g;
+    : $pattern->pattern =~ /@{[PATTERN_RE]}/g;
+
+  $name //= $pattern->pattern =~ s/@{[NAME_RE]}//gr;
 
   my $depth = scalar @pattern_arr;
-  my $i = 0; 
+  my $i = 0;
 
   foreach my $method (@$methods) {
     my $branches = $$limb{$method}{$depth} //= {};

@@ -9,6 +9,6 @@ use v5.36;
 field $pattern :param :reader;
 field $filters :reader;
 
-ADJUSTPARAMS ( $params ) { $filters = $$params{filters} // {} }
+ADJUST { $filters //= {} }
 
 1
