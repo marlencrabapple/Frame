@@ -4,7 +4,7 @@ package Frame::Base;
 role Frame::Base;
 
 use utf8;
-use v5.36;
+use v5.38;
 
 # use parent 'Exporter';
 
@@ -19,14 +19,14 @@ use Time::Piece;
 use Plack::Util;
 use Module::Metadata;
 
-our @EXPORT_DOES = qw(dmsg json __pkgfn__);
+our @EXPORT_DOES = qw(dmsg json __pkgfn__ callstack);
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 
 sub _json_default { JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ()) }
 state $json_default = _json_default;
 
 our $package = __PACKAGE__;
-our %seen_users = (fn => { __PACKAGE__->__pkgfn__ => 1 }, pkg => { $package => 1 });
+our %seen_users = ($package => { fn => { __PACKAGE__->__pkgfn__ => 1 }, pkg => { $package => 1 } });
 
 use subs @EXPORT_DOES;
 
@@ -55,6 +55,23 @@ method json :common {
 method __pkgfn__ :common ($pkgname = undef) {
   $pkgname //= $class;
   "$pkgname.pm" =~ s/::/\//rg
+}
+
+method callstack :common {
+  my @callstack;
+  my $i = 0;
+
+  while (my @caller = caller $i) {
+    {
+      no strict 'refs';
+      push @caller, \%{"$caller[0]\::"};
+      push @caller, $caller[0]->META() if ${"$caller[0]\::"}{META}
+    }
+    
+    push @callstack, \@caller
+  } continue { $i++ }
+
+  @callstack
 }
 
 method dmsg :common (@msgs) {
@@ -126,6 +143,32 @@ method exports :common ($src, $cb, @vars) {
 method patch_self :common ($src, $plain_subs) {
   my $meta = $src->META();
 
+  dmsg $src;
+
+  my $old_hook = ${^HOOK}{require__after};
+
+  $seen_users{$src}{pkg}{$src} = 1;
+  $seen_users{$src}{fn}{__pkgfn__($src)} = 1;
+
+  ${^HOOK}{require__after} = sub ($name) {
+    $old_hook->($name) if $old_hook;
+
+    if (any { $name eq $_ } keys $seen_users{$src}{fn}->%*) {
+      use utf8;
+      use v5.38;
+
+      $^H{"$src/user"} = 1;
+
+      my $caller = [ caller 1 ];
+      $caller->[10]{"$src/user"} = 1;
+
+      __PACKAGE__->compose($src, $caller);
+      dmsg $$caller[0], $seen_users{$src};
+    }
+
+    # warn "$name $src"
+  };
+
   $class->exports($src, sub ($export, $realsub, @vars) {
     use strict 'refs';
     my $og_sub = eval { no strict 'refs'; \&{"$src\::$export"} };
@@ -190,11 +233,32 @@ method patch_self :common ($src, $plain_subs) {
 method compose :common ($src, $dest, %args) {
   my %plain_subs;
 
-  $class->patch_self($src, \%plain_subs) if ($args{patch_self});
+  $class->patch_self($src, \%plain_subs) if $args{patch_self};
 
   # Maybe this should only accept a package name?
-  my $compose = sub ($caller) {
-    return if $seen_users{pkg}{$$caller[0]};
+  my $compose = sub ($caller, $top = undef) {
+    return if $seen_users{$src}{pkg}{$$caller[0]};
+
+    # if ($top) {
+    #   my $old_hook = ${^HOOK}{require__after};
+
+    #   ${^HOOK}{require__after} = sub ($name) {
+    #     $old_hook->($name) if $old_hook;
+
+    #     if (any { $name eq $_ } keys $seen_users{$class}{fn}->%*) {
+    #       use utf8;
+    #       use v5.38;
+
+    #       $^H{"$class/user"} = 1;
+
+    #       my $caller = [ caller 0 ];
+    #       $caller->[10]{"$class/user"} = 1;
+
+    #       __PACKAGE__->compose($class, $caller);
+    #       dmsg $class;
+    #     }
+    #   }
+    # }
 
     {
       no strict 'refs';
@@ -202,7 +266,7 @@ method compose :common ($src, $dest, %args) {
     }
     
     use utf8;
-    use v5.36;
+    use v5.38;
 
     $^H{$class . '/user'} = 1;
     # $$caller[10]{$class . '/user'} = 1;
@@ -214,20 +278,23 @@ method compose :common ($src, $dest, %args) {
         if $meta->is_role || $plain_subs{$export}
     });
 
-    $seen_users{pkg}{$$caller[0]} = 1;
-    $seen_users{fn}{__pkgfn__($$caller[0])} = 1
+    dmsg $src, $$caller[0];
+
+    $seen_users{$src}{pkg}{$$caller[0]} = 1;
+    $seen_users{$src}{fn}{__pkgfn__($$caller[0])} = 1
   };
 
   return if $args{patch_self};
-  $compose->($dest);
+
+  $compose->($dest, 1);
   # return if $args{patch_self};
 
-  my $i = 0;
+  my $i = 1;
   while (my (@caller) = (caller $i)) {
     no strict 'refs';
     
     next unless ${"$caller[0]\::"}{META};
-    next if $seen_users{pkg}{$caller[0]};
+    next if $seen_users{$src}{pkg}{$caller[0]};
 
     my $is_user;
 
@@ -236,11 +303,14 @@ method compose :common ($src, $dest, %args) {
       return 1 if $caller[0]->DOES($seen);
       return 1 if any { ${"$seen\::"}{$_} =~ /$caller[0]/ } keys %{"$seen\::"};
       0
-    } keys $seen_users{pkg}->%*;
+    } keys $seen_users{$src}{pkg}->%*;
 
-    $is_user = 1 if any { $caller[7] && $caller[6] eq $_ } keys $seen_users{fn}->%*;
+    $is_user = 1 if any { $caller[7] && $caller[6] eq $_ } keys $seen_users{$src}{fn}->%*;
+
+    # dmsg($caller[7], $caller[6], [ keys $seen_users{$src}{fn}->%* ]) if $is_user;
 
     $compose->(\@caller) if $is_user;
+    # last
   } continue { $i++ }
 }
 
@@ -253,17 +323,17 @@ method import :common  {
   return unless ${"$$caller[0]\::"}{ISA};
 
   use utf8;
-  use v5.36;
+  use v5.38;
 
-  $^H{__PACKAGE__ . '/user'} = 1;
-  $$caller[10]{__PACKAGE__ . '/user'} = 1;
+  # $^H{__PACKAGE__ . '/user'} = 1;
+  # $$caller[10]{__PACKAGE__ . '/user'} = 1;
 
   __PACKAGE__->exports(__PACKAGE__, sub ($export, $realsub, @vars) {
     $class->monkey_patch($$caller[0], $export)
   });
 
-  $seen_users{pkg}{$$caller[0]} = 1;
-  $seen_users{fn}{__pkgfn__($$caller[0])} = 1;
+  # $seen_users{$class}{pkg}{$$caller[0]} = 1;
+  # $seen_users{$class}{fn}{__pkgfn__($$caller[0])} = 1;
   
   # __PACKAGE__->export_to_level(1, $class, @_)
 }
@@ -304,7 +374,7 @@ method import_on_compose :common {
       my \$compose;
 
       use utf8;
-      use v5.36;
+      use v5.38;
       use $class;
       \$^H{'$class\/user'} = 1;
       \$caller[10]{'$class\/user'} = 1;
@@ -319,15 +389,18 @@ method import_on_compose :common {
       1;
     };
 
+    use constant LBRE => qr/\R/;
+    $compose_str =~ s/@{[LBRE]}//g;
+
     state %doesre = ();
     
     $fh, sub ($, $prev = undef) {
       my $line = \$_;
-      foreach my $user (keys $seen_users{pkg}->%*) {
+      foreach my $user (keys $seen_users{$class}{pkg}->%*) {
         $doesre{$user} //= qr/\:does\($user\)/;
         if ($$line =~ $doesre{$user}) {
-          $seen_users{pkg}{$pkgname} = 1;
-          $seen_users{fn}{$filename} = 1;
+          $seen_users{$class}{pkg}{$pkgname} = 1;
+          $seen_users{$class}{fn}{$filename} = 1;
           $$line .= $compose_str
         }
       }

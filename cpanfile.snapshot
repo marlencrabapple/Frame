@@ -80,10 +80,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.36
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.36.tar.gz
+  Cpanel-JSON-XS-4.37
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.37.tar.gz
     provides:
-      Cpanel::JSON::XS 4.36
+      Cpanel::JSON::XS 4.37
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -441,10 +441,10 @@ DISTRIBUTIONS
       locale 0
       perl 5.008001
       strict 0
-  HTTP-Date-6.05
-    pathname: O/OA/OALDERS/HTTP-Date-6.05.tar.gz
+  HTTP-Date-6.06
+    pathname: O/OA/OALDERS/HTTP-Date-6.06.tar.gz
     provides:
-      HTTP::Date 6.05
+      HTTP::Date 6.06
     requirements:
       Exporter 0
       ExtUtils::MakeMaker 0
@@ -782,18 +782,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Metrics-Any-0.09
-    pathname: P/PE/PEVANS/Metrics-Any-0.09.tar.gz
+  Metrics-Any-0.10
+    pathname: P/PE/PEVANS/Metrics-Any-0.10.tar.gz
     provides:
-      Metrics::Any 0.09
-      Metrics::Any::Adapter 0.09
-      Metrics::Any::Adapter::File 0.09
-      Metrics::Any::Adapter::Null 0.09
-      Metrics::Any::Adapter::Stderr 0.09
-      Metrics::Any::Adapter::Tee 0.09
-      Metrics::Any::Adapter::Test 0.09
-      Metrics::Any::AdapterBase::Stored 0.09
-      Metrics::Any::Collector 0.09
+      Metrics::Any 0.10
+      Metrics::Any::Adapter 0.10
+      Metrics::Any::Adapter::File 0.10
+      Metrics::Any::Adapter::Null 0.10
+      Metrics::Any::Adapter::Stderr 0.10
+      Metrics::Any::Adapter::Tee 0.10
+      Metrics::Any::Adapter::Test 0.10
+      Metrics::Any::AdapterBase::Stored 0.10
+      Metrics::Any::Collector 0.10
     requirements:
       List::Util 1.29
       Module::Build 0.4004
@@ -969,10 +969,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20221114
-    pathname: H/HA/HAARG/Mozilla-CA-20221114.tar.gz
+  Mozilla-CA-20230801
+    pathname: L/LW/LWP/Mozilla-CA-20230801.tar.gz
     provides:
-      Mozilla::CA 20221114
+      Mozilla::CA 20230801
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
@@ -1927,13 +1927,13 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
-  XS-Parse-Keyword-0.34
-    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.34.tar.gz
+  XS-Parse-Keyword-0.36
+    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.36.tar.gz
     provides:
-      XS::Parse::Infix 0.34
-      XS::Parse::Infix::Builder 0.34
-      XS::Parse::Keyword 0.34
-      XS::Parse::Keyword::Builder 0.34
+      XS::Parse::Infix 0.36
+      XS::Parse::Infix::Builder 0.36
+      XS::Parse::Keyword 0.36
+      XS::Parse::Keyword::Builder 0.36
     requirements:
       ExtUtils::CBuilder 0
       ExtUtils::CChecker 0.11

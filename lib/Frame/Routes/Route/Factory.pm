@@ -6,7 +6,7 @@ role Frame::Routes::Route::Factory :does(Frame::Base);
 use utf8;
 use v5.36;
 
-field $is_endpoint :param: accessor = undef;
+field $eol :param :accessor = undef;
 field $prev_stop :param :accessor :weak = undef;
 field $has_stops :param :accessor = undef;
 field $stops :reader :param = undef;

@@ -23,14 +23,15 @@ method add ($methods, $pattern, @args) {
 
   my $dest = $args[$#args];
 
-  if (ref $dest eq 'HASH' && scalar @$dest{qw(c sub)}) {
-    $route_args{dest} = { %$dest }
-  }
-  elsif (ref $dest eq 'CODE') {
+  # if (ref $dest eq 'HASH' && scalar @$dest{qw(c sub)}) {
+  #   $route_args{dest} = { %$dest }
+  # }
+  if (ref $dest eq 'CODE') {
     $route_args{dest}{sub} = $dest
   }
-  elsif ($dest) {
-    my ($c, $sub) = $dest =~ /^(?:([\w\-]+)(?:#))?([\w]+)$/;
+  elsif ($dest && !ref($dest)) {
+    use constant DESTRE => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
+    my ($c, $sub) = $dest =~ DESTRE;
     
     if ($c) {
       $route_args{dest} = {
@@ -89,6 +90,8 @@ method add ($methods, $pattern, @args) {
     }
     $route_args{stops} = \@stops;
   }
+
+  $route_args{eol} = 1 unless $$opts{has_stops};
 
   my $route = Frame::Routes::Route->new(
     %route_args, %$opts,
@@ -214,7 +217,10 @@ method match ($req) {
       }
       
       $req->set_placeholders(@placeholder_matches);
-      return $curr
+      dmsg $curr->eol, $curr->has_stops, $curr->prev_stop, $curr->stops;
+      return $curr if $curr->eol;
+
+      $$barren{$$prev{i}}{$$prev{key}} = 1
     }
 
     # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]

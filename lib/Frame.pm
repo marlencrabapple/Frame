@@ -6,7 +6,7 @@ role Frame :does(Frame::Base);
 our $VERSION  = '0.01';
 
 use utf8;
-use v5.36;
+use v5.38;
 
 use YAML::Tiny;
 use IO::Async::Loop;

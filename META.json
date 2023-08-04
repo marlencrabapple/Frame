@@ -73,7 +73,7 @@
             "Text::Xslate" : "v3.5.9",
             "YAML::Tiny" : "1.73",
             "namespace::autoclean" : "0.29",
-            "perl" : "v5.36.0"
+            "perl" : "v5.38.0"
          }
       },
       "test" : {
@@ -95,7 +95,7 @@
       }
    },
    "version" : "0.01",
-   "x_generated_by_perl" : "v5.36.1",
+   "x_generated_by_perl" : "v5.38.0",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.36",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
    "x_static_install" : 1
