@@ -52,6 +52,7 @@
             "Feature::Compat::Try" : "0.05",
             "Future" : "0.50",
             "Future::AsyncAwait" : "0.62",
+            "HTML::Escape" : "1.11",
             "HTTP::Parser::XS" : "0.17",
             "HTTP::Tinyish" : "0.18",
             "IO::Async" : "0.802",

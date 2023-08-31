@@ -7,8 +7,6 @@ use utf8;
 use v5.36;
 
 field $pattern :param :reader;
-field $filters :reader;
-
-ADJUST { $filters //= {} }
+field $filters :param :reader = {};
 
 1

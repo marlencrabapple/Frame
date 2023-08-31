@@ -7,6 +7,7 @@ use utf8;
 use v5.36;
 
 field $eol :param :accessor = undef;
+field $inline :param :accessor = undef;
 field $prev_stop :param :accessor :weak = undef;
 field $has_stops :param :accessor = undef;
 field $stops :reader :param = undef;
@@ -62,7 +63,8 @@ method ws ($pattern, @args) {
 method websocket { $self->ws(@_) }
 
 method under ($pattern, @args) {
-  $self->any($pattern, @args, { has_stops => 1 })
+  my $opts = ref $args[$#args] eq 'HASH' ? pop @args : {};
+  $self->any($pattern, @args, { has_stops => 1, inline => 1, %$opts })
 }
 
 1

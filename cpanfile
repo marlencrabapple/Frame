@@ -26,6 +26,7 @@ requires 'DBI', '1.643';
 requires 'DBD::SQLite', '1.72';
 requires 'SQL::Abstract', '2.000001';
 
+requires 'HTML::Escape', '1.11';
 requires 'JSON::MaybeXS', '1.004004';
 requires 'Cpanel::JSON::XS', '4.32';
 requires 'YAML::Tiny', '1.73';

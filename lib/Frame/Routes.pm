@@ -52,8 +52,8 @@ method add ($methods, $pattern, @args) {
     $route_args{dest}{c} = $c
   }
 
-  my $has_dest = $route_args{dest}{sub} ? 1 : 0;
   my $has_args;
+  $route_args{eol} = $route_args{dest}{sub} && !$$opts{inline} ? 1 : 0;
 
   foreach my $arg (@args) {
     if (ref $arg eq 'CODE') {
@@ -66,7 +66,7 @@ method add ($methods, $pattern, @args) {
         pattern => $pattern,
         filters => $arg
       );
-      $has_args = 1
+      $has_args = 1;
     }
     elsif (ref $arg eq 'ARRAY' && scalar @$methods == 0) {
       next unless $$arg[0] =~ METHRE;
@@ -76,7 +76,7 @@ method add ($methods, $pattern, @args) {
   }
 
   die "Invalid route destination '$dest'"
-    if !$has_args && !$has_dest && scalar @args == 1;
+    if !$has_args && !$route_args{eol} && scalar @args == 1;
   
   $route_args{pattern} //= Frame::Routes::Pattern->new(pattern => $pattern);
   $methods = [ METHODS ] unless scalar @$methods;
@@ -88,11 +88,9 @@ method add ($methods, $pattern, @args) {
       unshift @stops, $prev_stop;
       $prev_stop = $prev_stop->prev_stop
     }
-    $route_args{stops} = \@stops;
+    $route_args{stops} = \@stops
   }
-
-  $route_args{eol} = 1 unless $$opts{has_stops};
-
+  
   my $route = Frame::Routes::Route->new(
     %route_args, %$opts,
     methods => $methods,
@@ -123,23 +121,19 @@ method match ($req) {
   my $barren = {};
   my @placeholder_matches;
 
-  BRANCH: while(my $curr = $$prev{branch} // $branches) {
+  BRANCH: while (my $curr = $$prev{branch} // $branches) {
     $prev = {};
 
     PATH_PART: foreach my $part (@path) {
       my ($match, $wildcard_ne, $has_placeholder);
 
-      # dmsg $prev, $curr, $barren, $i, $part if $ENV{FRAME_DEBUG};
-
-      if($part ne '' && $$curr{$part} && !$$barren{$i}{$part} && !$self->patterns->{$part}) {
+      if ($part ne '' && $$curr{$part} && !$$barren{$i}{$part} && !$self->patterns->{$part}) {
         $match = $part;
         $has_placeholder = undef
       }
       else {
         PLACEHOLDER_RESTRICTION: foreach my $key (keys %$curr) {
           next if $$barren{$i}{$key};
-
-          # dmsg $key, $self->patterns, $self->patterns->{$key};
 
           $match = ref $self->patterns->{$key} eq 'CODE'
             ? $self->patterns->{$key}->($self->app, $req, $part) ? 1 : 0
@@ -148,21 +142,16 @@ method match ($req) {
               : defined $self->patterns->{$key} ? 0
                 : $part ne '' && $key eq $self->app ? 2 : 0;
 
-          # dmsg $part, $key, $self->patterns, $self->patterns->{$key}, $match, $prev, $barren
-          #   if $ENV{FRAME_DEBUG};
-
-          if($match == 2) {
+          if ($match == 2) {
             $wildcard_ne = 1;
             $match = undef;
             next PLACEHOLDER_RESTRICTION
           }
-          elsif($match == 1) {
+          elsif ($match == 1) {
             $match = $key;
             last PLACEHOLDER_RESTRICTION
           }
         }
-
-        # dmsg $match, $wildcard_ne if $ENV{FRAME_DEBUG};
 
         if($has_placeholder = ($match || $wildcard_ne)) {
           $match = $self->app unless $match;
@@ -170,26 +159,17 @@ method match ($req) {
         }
       }
 
-      if($match) {
+      if ($match) {
         $$prev{i} = $i;
         $$prev{key} = $match;
         $$prev{branch} = $curr;
         $$prev{has_placeholder} = $has_placeholder;
-        $curr = $$curr{$match};
 
-        # if ($curr isa 'Frame::Routes::Route' && $curr->has_stops) {
-        #   dmsg $curr;
-        #   foreach my $stop ($curr->stops->@*) {
-        #     if ($stop->dest) {
-        #       $self->app->route($stop, $req, (undef) x scalar $stop->placeholders);
-        #     }
-        #   }
-        # }
+        $curr = $$curr{$match};
 
         next PATH_PART
       }
       else {
-        # dmsg $prev, $barren if $ENV{FRAME_DEBUG};
         last unless $$prev{branch};
         $$barren{$$prev{i}}{$$prev{key}} = 1;
         next BRANCH
@@ -202,13 +182,9 @@ method match ($req) {
   continue {
     if ($curr isa 'Frame::Routes::Route' && $i == scalar @path) {
       if ($curr->has_stops) {
-        # dmsg $curr->pattern;
-        foreach my $stop ($curr->stops->@*) {
-          # dmsg $stop->pattern;
-          if ($stop->dest) {
-            my $res = $self->app->route($stop, $req, ((undef) x scalar $stop->placeholders));
-            return $res unless $res == 1;
-          }
+        foreach my $stop (grep { $_->dest } $curr->stops->@*) {
+          my $res = $self->app->route($stop, $req, ((undef) x scalar $stop->placeholders));
+          return $res unless $res == 1
         }
       }
 
@@ -217,14 +193,10 @@ method match ($req) {
       }
       
       $req->set_placeholders(@placeholder_matches);
-      dmsg $curr->eol, $curr->has_stops, $curr->prev_stop, $curr->stops;
       return $curr if $curr->eol;
 
       $$barren{$$prev{i}}{$$prev{key}} = 1
     }
-
-    # dmsg $i, $prev, $barren, [keys $$prev{branch}->%*], [keys $$barren{$i}->%*]
-    #   , [uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*)] if $ENV{FRAME_DEBUG};
 
     last BRANCH unless uniq (keys $$prev{branch}->%*, keys $$barren{$i}->%*);
 
