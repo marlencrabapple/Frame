@@ -13,6 +13,7 @@ use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
 use Feature::Compat::Try;
+use Frame::Request;
 
 our @EXPORT_DOES = qw(template);
 
@@ -42,37 +43,54 @@ method template :common ($name, $vars = {}, @args) {
 
 method stash { $req->stash }
 
-method render ($content, $status = 200, $content_type = undef, $headers = [], $cookies = {}) {
-  my $res_headers = $res->headers;
-  my $charset = $self->app->charset;
-
-  $res->status($status);
+method render ($content, $status = 200, $content_type = undef, $headers = [], $cookies = {}, %opts) {
+  my $res = $opts{noop} ? $req->new_response : $self->res;
+  $content_type = $res->content_type;
+  $opts{charset} //= $self->app->charset;
 
   foreach my $header (@$headers) {
-    $res_headers->push_header(%$header)
+    $res->headers->push_header(%$header)
   }
 
   $res->cookies->@{keys %$cookies} = values %$cookies;
 
-  if(ref $content eq 'HASH') {
-    $res->content_type($res->content_type || "application/json; charset=$charset");
-    $res->body(json->encode($content))
+  if (ref $content) {
+    $content_type //= "application/json; charset=$opts{charset}";
+
+    try {
+      $res->content_type($content_type);
+      $res->body(json->encode($content))
+    }
+    catch ($e) {
+      $self->render_500(undef, $content_type, $headers, $cookies, %opts)
+    }
   }
   else {
-    $content_type //= $res->content_type || "text/html; charset=$charset";
-    $res->content_type($content_type);
+    $res->content_type($content_type // "text/html; charset=$opts{charset}");
     $res->body($content)
   }
 
+  $res->status($status);
   $res
 }
 
-method render_404 ($content = '404 - Page not found') {
-  $self->render($content, 404)
+method render_error ($content, $status, $content_type = undef, @args) {
+  $content = { status => $status, msg => $content }
+    if ($content_type // $req->maybe_ajax) =~ Frame::Request::JSONRE;
+
+  $self->render($content, $status, $content_type, @args)
 }
 
-method render_403 ($content = '403 - Forbidden') {
-  $self->render($content, 403)
+method render_500 ($content = '500 - Internal server error', @args) {
+  $self->render_error($content, 500, @args)
+}
+
+method render_404 ($content = '404 - Page not found', @args) {
+  $self->render_error($content, 404, @args)
+}
+
+method render_403 ($content = '403 - Forbidden', @args) {
+  $self->render_error($content, 403, @args)
 }
 
 method redirect ($url, $status = 302) {

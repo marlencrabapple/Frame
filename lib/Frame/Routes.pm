@@ -1,19 +1,19 @@
 use Object::Pad;
 
 package Frame::Routes;
-class Frame::Routes :does(Frame::Routes::Route::Factory);
+class Frame::Routes :does(Frame::Routes::Common);
 
 use utf8;
 use v5.36;
 
 use Frame::Routes::Route;
 use Frame::Routes::Pattern;
+use Frame::Request::Placeholder::Dummy;
 
 use List::Util 'uniq';
 use Scalar::Util qw/blessed refaddr/;
 
-use constant METHODS => qw/GET POST UPDATE DELETE PUT PATCH/;
-my $ptn = join '|', METHODS;
+my $ptn = join '|', Frame::Routes::Common::METHODS;
 use constant METHRE => qr/^ptn$/i;
 use constant RERE => qr/^regexp$/i;
 
@@ -79,7 +79,7 @@ method add ($methods, $pattern, @args) {
     if !$has_args && !$route_args{eol} && scalar @args == 1;
   
   $route_args{pattern} //= Frame::Routes::Pattern->new(pattern => $pattern);
-  $methods = [ METHODS ] unless scalar @$methods;
+  $methods = [ Frame::Routes::Common::METHODS ] unless scalar @$methods;
 
   if ($$opts{prev_stop}) {
     my @stops;
@@ -98,8 +98,8 @@ method add ($methods, $pattern, @args) {
   );
   
   foreach my $method (@$methods) {
-    my $branch = $route->limb->{$method}{scalar $route->pattern_arr};
-    $self->tree->{$method}{scalar $route->pattern_arr}->@{keys %$branch} = (values %$branch);
+    my $branch = $route->tree->{$method}[scalar $route->pattern_arr - 1];
+    $self->tree->{$method}[scalar $route->pattern_arr - 1]->@{keys %$branch} = (values %$branch);
     push $self->routes->@*, $route
   }
 
@@ -113,7 +113,7 @@ method match ($req) {
   
   pop @path if $path[-1] eq '';
 
-  my $branches = $self->tree->{$req->method}{scalar @path}
+  my $branches = $self->tree->{$req->method}[scalar @path - 1]
     || return undef;
   
   my $i = 0;
@@ -183,16 +183,17 @@ method match ($req) {
     if ($curr isa 'Frame::Routes::Route' && $i == scalar @path) {
       if ($curr->has_stops) {
         foreach my $stop (grep { $_->dest } $curr->stops->@*) {
-          my $res = $self->app->route($stop, $req, ((undef) x scalar $stop->placeholders));
+          my @dummies = ((undef) x scalar $stop->placeholders);
+          my @placeholder_matches = $self->prep_placeholders($req, $stop, @dummies);
+
+          map { tie $_, 'Frame::Request::Placeholder::Dummy' } @dummies;
+
+          my $res = $self->app->route($stop, $req);
           return $res unless $res == 1
         }
       }
 
-      for (my $i = 0; $i < scalar @placeholder_matches; $i++) {
-        $placeholder_matches[$i] = { ($curr->placeholders)[$i] => $placeholder_matches[$i] }
-      }
-      
-      $req->set_placeholders(@placeholder_matches);
+      $self->prep_placeholders($req, $curr, @placeholder_matches);
       return $curr if $curr->eol;
 
       $$barren{$$prev{i}}{$$prev{key}} = 1
@@ -205,6 +206,14 @@ method match ($req) {
   }
   
   undef
+}
+
+method prep_placeholders ($req, $route, @placeholders) {
+  for (my $i = 0; $i < scalar @placeholders; $i++) {
+    $placeholders[$i] = { ($route->placeholders)[$i] => $placeholders[$i] }
+  }
+  
+  $req->set_placeholders(@placeholders)
 }
 
 1

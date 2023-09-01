@@ -1,7 +1,7 @@
 use Object::Pad;
 
 package Frame::Routes::Route;
-class Frame::Routes::Route :does(Frame::Routes::Route::Factory);
+class Frame::Routes::Route :does(Frame::Routes::Common);
 
 use utf8;
 use v5.36;
@@ -13,10 +13,11 @@ use constant NAME_RE => qr/[\W]/;
 # field $method :param :reader;
 field $methods :param :reader;
 field $pattern :param :reader;
+field $filter :param :reader = undef;
 field $dest :param :reader = undef;
 field $name :param :accessor = undef;
 field $root :param :reader :weak;
-field $limb :reader;
+# field $limb :reader;
 field @pattern_arr :reader;
 field @placeholders: reader;
 
@@ -27,11 +28,11 @@ ADJUSTPARAMS ($params) {
 
   $name //= $pattern->pattern =~ s/@{[NAME_RE]}//gr;
 
-  my $depth = scalar @pattern_arr;
+  my $depth = scalar @pattern_arr - 1;
   my $i = 0;
 
   foreach my $method (@$methods) {
-    my $branches = $$limb{$method}{$depth} //= {};
+    my $branches = $self->tree->{$method}[$depth] //= {};
     my $curr = $branches;
 
     my $prev;

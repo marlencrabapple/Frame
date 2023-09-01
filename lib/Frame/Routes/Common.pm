@@ -1,10 +1,12 @@
 use Object::Pad;
 
-package Frame::Routes::Route::Factory;
-role Frame::Routes::Route::Factory :does(Frame::Base);
+package Frame::Routes::Common;
+role Frame::Routes::Common :does(Frame::Base);
 
 use utf8;
 use v5.36;
+
+use constant METHODS => qw/GET HEAD POST UPDATE DELETE PUT PATCH CONNECT TRACE/;
 
 field $eol :param :accessor = undef;
 field $inline :param :accessor = undef;
@@ -19,7 +21,7 @@ ADJUST {
   $routes //= [];
   $stops //= [];
   $patterns //= {};
-  $tree //= {}
+  $tree //= { map { $_ => [] } METHODS }
 }
 
 method add :required;
@@ -30,6 +32,10 @@ method any ($pattern, @args) {
 
 method get ($pattern, @args) {
   $self->add(['GET'], $pattern, @args)
+}
+
+method head ($pattern, @args) {
+  $self->add(['HEAD'], $pattern, @args)
 }
 
 method post ($pattern, @args) {
@@ -55,6 +61,15 @@ method update ($pattern, @args) {
 method options ($pattern, @args) {
   $self->add(['OPTIONS'], $pattern, @args)
 }
+
+method connect ($pattern, @args) {
+  $self->add(['CONNECT'], $pattern, @args)
+}
+
+method trace ($pattern, @args) {
+  $self->add(['TRACE'], $pattern, @args)
+}
+
 
 method ws ($pattern, @args) {
   ...

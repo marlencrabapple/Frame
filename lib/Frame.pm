@@ -92,11 +92,11 @@ method dispatch ($req) {
   $default_controller_class->new(app => $self, req => $req)->render_404->finalize
 }
 
-method route ($route, $req, $placeholder_dummies = []) {
+method route ($route, $req) {
   my ($c, $sub) = $route->dest->@{qw(c sub)};
   $c = ($c || $default_controller_class)->new(app => $self, req => $req, route => $route);
 
-  my $res = $c->$sub(@$placeholder_dummies, $req->placeholder_values_ord);
+  my $res = $c->$sub($req->placeholder_values_ord) // $c->res;
   $res = $res->get if $res isa 'Future';
 
   $res
