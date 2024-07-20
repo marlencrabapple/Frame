@@ -1,7 +1,7 @@
 package Frame::Request::Placeholder;
 
 use utf8;
-use v5.38;
+use v5.36;
 
 use Carp;
 use Tie::Scalar;

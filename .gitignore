@@ -1,3 +1,5 @@
+*.yml
+!config-defaults.yml
 ._*
 .DS_Store
 .carmel/

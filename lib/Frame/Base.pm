@@ -4,7 +4,7 @@ package Frame::Base;
 role Frame::Base;
 
 use utf8;
-use v5.38;
+use v5.36;
 
 # use parent 'Exporter';
 
@@ -143,7 +143,7 @@ method exports :common ($src, $cb, @vars) {
 method patch_self :common ($src, $plain_subs) {
   my $meta = $src->META();
 
-  dmsg $src;
+  # dmsg $src;
 
   my $old_hook = ${^HOOK}{require__after};
 
@@ -155,7 +155,7 @@ method patch_self :common ($src, $plain_subs) {
 
     if (any { $name eq $_ } keys $seen_users{$src}{fn}->%*) {
       use utf8;
-      use v5.38;
+      #se v5.38;
 
       $^H{"$src/user"} = 1;
 
@@ -163,7 +163,7 @@ method patch_self :common ($src, $plain_subs) {
       $caller->[10]{"$src/user"} = 1;
 
       __PACKAGE__->compose($src, $caller);
-      dmsg $$caller[0], $seen_users{$src};
+      # dmsg $$caller[0], $seen_users{$src};
     }
 
     # warn "$name $src"
@@ -266,7 +266,7 @@ method compose :common ($src, $dest, %args) {
     }
     
     use utf8;
-    use v5.38;
+    #use v5.38;
 
     $^H{$class . '/user'} = 1;
     # $$caller[10]{$class . '/user'} = 1;
@@ -278,7 +278,7 @@ method compose :common ($src, $dest, %args) {
         if $meta->is_role || $plain_subs{$export}
     });
 
-    dmsg $src, $$caller[0];
+    # dmsg $src, $$caller[0];
 
     $seen_users{$src}{pkg}{$$caller[0]} = 1;
     $seen_users{$src}{fn}{__pkgfn__($$caller[0])} = 1
@@ -323,7 +323,7 @@ method import :common  {
   return unless ${"$$caller[0]\::"}{ISA};
 
   use utf8;
-  use v5.38;
+  #use v5.38;
 
   # $^H{__PACKAGE__ . '/user'} = 1;
   # $$caller[10]{__PACKAGE__ . '/user'} = 1;
@@ -374,7 +374,7 @@ method import_on_compose :common {
       my \$compose;
 
       use utf8;
-      use v5.38;
+      #use v5.38;
       use $class;
       \$^H{'$class\/user'} = 1;
       \$caller[10]{'$class\/user'} = 1;

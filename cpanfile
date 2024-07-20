@@ -7,8 +7,13 @@ requires 'List::AllUtils', '0.19';
 
 requires 'IO::Async', '0.802';
 requires 'IO::Async::SSL', '0.23';
+requires 'IO::Socket::SSL', '2.074';
+requires 'Net::SSLeay', '1.92';
+requires 'Mozilla::CA', '20211001';
+requires 'LWP::UserAgent', '6.67';
+requires 'LWP::Protocol::https', '6.10';
 
-requires 'Object::Pad', '0.77';
+requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
@@ -48,4 +53,15 @@ on develop => sub {
 
 on test => sub {
   requires 'Test::More', '0.96'
-}
+};
+
+# TODO: Delete after implementing latest TLS standards, just for benchmarking
+# current app server support 
+requires 'Starlight';
+requires 'Starman';
+requires 'Starlet', '0.31';
+
+requires 'HTTP::Parser::XS', '0.17';
+requires 'Server::Starter', '0.35';
+
+

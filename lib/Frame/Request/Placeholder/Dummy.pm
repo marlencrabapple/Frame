@@ -1,63 +1,34 @@
-# use Object::Pad;
-
-# package Frame::Request::Placeholder::Dummy;
-# class Frame::Request::Placeholder::Dummy :isa(Frame::Request::Placeholder);
-
-# use utf8;
-# use v5.38;
-
-# use Carp;
-# use Tie::Scalar;
-
-# our @ISA;
-# push @ISA, 'Tie::Scalar';
-
-# ADJUSTPARAMS {
-#   tie $self->key, 'Frame::Request::Placeholder::Dummy';
-#   tie $self->value, 'Frame::Request::Placeholder::Dummy';
-# }
-
-# method inline_error {
-#   croak "Illegal usage of placeholder in inline route/stop."
-# }
-
-# sub FETCH {
-#   __CLASS__->inline_error;
-# }
-
-# sub STORE {
-#   __CLASS__->inline_error;
-# }
-
 package Frame::Request::Placeholder::Dummy;
 
 use utf8;
-use v5.38;
+use v5.36;
 
+use parent 'Exporter';
 use parent 'Frame::Request::Placeholder';
 
 our @ISA;
 push @ISA, qw(Tie::StdScalar Frame::Request::Placeholder);
 
+our @EXPORT_OK = qw(allow);
+
+
 use Carp;
 
-# our @ISA;
-# @ISA = qw(Frame::Request::Placeholder);
+our %whitelist = (); # 'foo::bar' => 'placeholder_key', ...
+                     # local ${Frame::Request::Placeholder::Dummy::whitelist}{ 'Custom::Class' => 'placeholder_key' }
+                     # local ${Frame::Request::Placeholder::Dummy::whitelist}{ \&some_sub => 'placeholder_key' }
 
-# sub TIEARRAY {
-#   @ISA = qw(Tie::StdArray);
-# }
+sub FETCH ($self) {
+  untie $self;
+  croak Frame::Request::Placeholder::ribbit('Illegal usage of placeholder in inline route.')
+    # unless (caller(1))[0] eq ...
+  # warn Frame::Request::Placeholder::ribbit('Illegal usage of placeholder in inline route.')
+}
 
-# sub TIEHASH {
-#   @ISA = qw(Tie::StdHash);
-# }
-
-# sub TIESCALAR {
-#   @ISA = qw(Tie::StdScalar);
-# }
-
-sub FETCH {
-  warn Frame::Request::Placeholder::ribbit('Illegal usage of placeholder in inline route.')
+sub allow ($scope, $placeholder_key) {
+  # Not sure if this is necessary
+  my @caller = caller(1);
+  # ("$caller[0]"::whitelist){$scope} = $placeholder_key
 }
 
 1
