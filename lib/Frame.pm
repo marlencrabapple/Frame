@@ -6,9 +6,11 @@ role Frame :does(Frame::Base);
 our $VERSION  = '0.01';
 
 use utf8;
-use v5.38;
+use v5.36;
 
+use Encode;
 use YAML::Tiny;
+use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Feature::Compat::Try;
@@ -41,7 +43,10 @@ ADJUSTPARAMS ($params) {
   $config_defaults = eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
   lock_hashref_recurse($config_defaults);
 
-  $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE} || 'config.yml')->[0] } // {};
+  $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE}
+    || 'config.yml')->[0] }
+    // {};
+  
   $config = { %$config_defaults, %$config };
 
   $charset = $$config{charset} if $$config{charset};
@@ -64,7 +69,7 @@ ADJUSTPARAMS ($params) {
     $default_controller_class = $meta->name
   }
   catch ($e) {
-    dmsg $e if $ENV{FRAME_DEBUG}
+    # dmsg $e if $ENV{FRAME_DEBUG}
   }
   
   $routes = Frame::Routes->new(app => $self);
@@ -76,20 +81,32 @@ method to_psgi { sub { $self->handler(shift) } }
 
 method handler ($env) {
   my $req = $request_class->new(app => $self, env => $env);
-  $self->dispatch($req)
+  my $res = $self->dispatch($req);
+
+  utf8::encode($res->[2][0])
+    if $res->[2][0] =~ /[^\x00-\xff]/g);
+
+  $res
 }
 
 method dispatch ($req) {
+  my $res;
+
   if (my $match = $routes->match($req)) {
     if ($match isa 'Plack::Response') {
-      return $match->finalize
+      $res = $match->finalize
     }
     elsif ($match isa 'Frame::Routes::Route') {
-      return $self->route($match, $req)->finalize
+      $res = $self->route($match, $req)->finalize
     }
   }
+  else {
+    $res = $default_controller_class
+      ->new(app => $self, req => $req)
+      ->render_404->finalize
+  }
 
-  $default_controller_class->new(app => $self, req => $req)->render_404->finalize
+  $res
 }
 
 method route ($route, $req) {
