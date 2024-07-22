@@ -22,11 +22,19 @@ use Module::Metadata;
 our @EXPORT_DOES = qw(dmsg json __pkgfn__ callstack);
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 
-sub _json_default { JSON::MaybeXS->new(utf8 => 1, $dev_mode ? (pretty => 1) : ()) }
+sub _json_default { JSON::MaybeXS->new(
+  utf8 => 1, $dev_mode ? (pretty => 1) : ())
+}
+
 state $json_default = _json_default;
 
 our $package = __PACKAGE__;
-our %seen_users = ($package => { fn => { __PACKAGE__->__pkgfn__ => 1 }, pkg => { $package => 1 } });
+our %seen_users = (
+  $package => {
+    fn => { __PACKAGE__->__pkgfn__ => 1 },
+    pkg => { $package => 1 }
+  }
+);
 
 use subs @EXPORT_DOES;
 
@@ -38,6 +46,7 @@ __PACKAGE__->compose(__PACKAGE__, [caller 0]);
 
 field $app :weak :param :accessor = undef;
 field $json;
+field $debug_mode = $ENV{FRAME_DEBUG} ? 1 : 0;
 
 ADJUSTPARAMS ($params) {
   # $^H{__CLASS__ . '/user'} = 1
@@ -91,7 +100,7 @@ method dmsg :common (@msgs) {
     $out .= "\n"
   }
 
-  $out .= $ENV{FRAME_DEBUG} == 2
+  $out .= $ENV{FRAME_DEBUG} && $ENV{FRAME_DEBUG} == 2
     ? join "\n", map { (my $line = $_) =~ s/^\t/  /; "  $line" } split /\R/, Devel::StackTrace::WithLexicals->new(
         indent => 1,
         skip_frames => 1
@@ -154,8 +163,7 @@ method patch_self :common ($src, $plain_subs) {
     $old_hook->($name) if $old_hook;
 
     if (any { $name eq $_ } keys $seen_users{$src}{fn}->%*) {
-      use utf8;
-      #se v5.38;
+      use feature ':5.40';
 
       $^H{"$src/user"} = 1;
 
