@@ -84,7 +84,7 @@ method handler ($env) {
   my $res = $self->dispatch($req);
 
   utf8::encode($res->[2][0])
-    if $res->[2][0] =~ /[^\x00-\xff]/g);
+    if $res->[2][0] =~ /[^\x00-\xff]/g;
 
   $res
 }
