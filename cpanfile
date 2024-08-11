@@ -27,6 +27,8 @@ requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
 requires 'Parallel::Prefork', '0.18';
 
+requires 'Crypt::Argon2', '0.029';
+
 requires 'DBI', '1.643';
 requires 'DBD::SQLite', '1.72';
 requires 'SQL::Abstract', '2.000001';
