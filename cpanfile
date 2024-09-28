@@ -1,4 +1,4 @@
-requires 'perl', 'v5.38';
+requires 'perl', 'v5.40';
 
 requires 'Plack', '1.0050';
 
@@ -57,13 +57,12 @@ on test => sub {
   requires 'Test::More', '0.96'
 };
 
-# TODO: Delete after implementing latest TLS standards, just for benchmarking
-# current app server support 
 requires 'Starlight';
+requires 'Thrall';
+requires 'Gazelle';
+requires 'Starlet';
 requires 'Starman';
-requires 'Starlet', '0.31';
 
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
-
 

@@ -4,7 +4,7 @@
       "Ian P Bradley <ian.bradley@studiocrabapple.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.22, Dist::Zilla version 6.031, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Dist::Milla version v1.0.22, Dist::Zilla version 6.032, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -46,12 +46,14 @@
       "runtime" : {
          "requires" : {
             "Cpanel::JSON::XS" : "4.32",
+            "Crypt::Argon2" : "0.029",
             "DBD::SQLite" : "1.72",
             "DBI" : "1.643",
             "Devel::StackTrace::WithLexicals" : "2.01",
             "Feature::Compat::Try" : "0.05",
             "Future" : "0.50",
             "Future::AsyncAwait" : "0.62",
+            "Gazelle" : "0",
             "HTML::Escape" : "1.11",
             "HTTP::Parser::XS" : "0.17",
             "HTTP::Tinyish" : "0.18",
@@ -59,22 +61,29 @@
             "IO::Async::SSL" : "0.23",
             "IO::Socket::SSL" : "2.075",
             "JSON::MaybeXS" : "1.004004",
+            "LWP::Protocol::https" : "6.10",
+            "LWP::UserAgent" : "6.67",
             "List::AllUtils" : "0.19",
+            "Mozilla::CA" : "20211001",
             "Net::Async::HTTP" : "0.48",
             "Net::Async::HTTP::Server" : "0.14",
             "Net::Async::WebSocket" : "0.13",
             "Net::SSLeay" : "1.92",
-            "Object::Pad" : "0.77",
+            "Object::Pad" : "0.808",
             "Parallel::Prefork" : "0.18",
             "Path::Tiny" : "0.144",
             "Plack" : "1.0050",
             "SQL::Abstract" : "2.000001",
             "Server::Starter" : "0.35",
+            "Starlet" : "0",
+            "Starlight" : "0",
+            "Starman" : "0",
             "Syntax::Keyword::Dynamically" : "0.11",
             "Text::Xslate" : "v3.5.9",
+            "Thrall" : "0",
             "YAML::Tiny" : "1.73",
             "namespace::autoclean" : "0.29",
-            "perl" : "v5.38.0"
+            "perl" : "v5.40.0"
          }
       },
       "test" : {
@@ -96,8 +105,8 @@
       }
    },
    "version" : "0.01",
-   "x_generated_by_perl" : "v5.38.2",
-   "x_serialization_backend" : "Cpanel::JSON::XS version 4.37",
+   "x_generated_by_perl" : "v5.40.0",
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.38",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
    "x_static_install" : 1
 }
