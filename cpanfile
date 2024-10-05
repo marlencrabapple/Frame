@@ -1,6 +1,7 @@
 requires 'perl', 'v5.40';
 
-requires 'Plack', '1.0050';
+requires 'Plack', '1.0052',
+  dist => 'CRABAPP/Plack-1.0052-TRIAL.tar.gz';
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';
@@ -18,7 +19,10 @@ requires 'Future', '0.50';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
 requires 'Feature::Compat::Try', '0.05';
-requires 'namespace::autoclean', '0.29';
+
+requires 'namespace::autoclean', '0.29',
+  dist => 'ETHER/namespace-autoclean-0.29.tar.gz';
+
 requires 'Devel::StackTrace::WithLexicals', '2.01';
 
 requires 'Net::Async::HTTP::Server', '0.14';
@@ -42,7 +46,8 @@ requires 'Text::Xslate', 'v3.5.9';
 requires 'Net::SSLeay', '1.92';
 requires 'IO::Socket::SSL', '2.075';
 requires 'HTTP::Tinyish', '0.18'; # TODO: Write a HTTP::Tiny compatible wrapper for Net::Async::HTTP
-requires 'Net::Async::HTTP', '0.48';
+requires 'Net::Async::HTTP', '0.49',
+  dist => 'PEVANS/Net-Async-HTTP-0.49.tar.gz';
 
 on develop => sub {
   recommends 'App::perlimports', '0.000049';
@@ -58,6 +63,7 @@ on test => sub {
 };
 
 requires 'Starlight';
+requires 'forks'; # Missing dependency in thrall
 requires 'Thrall';
 requires 'Gazelle';
 requires 'Starlet';

@@ -1,5 +1,12 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
+  Acme-Damn-0.08
+    pathname: I/IB/IBB/Acme-Damn-0.08.tar.gz
+    provides:
+      Acme::Damn 0.08
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.006
   Apache-LogFormat-Compiler-0.36
     pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.36.tar.gz
     provides:
@@ -340,6 +347,16 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       PadWalker 1.98
       perl 5.008001
+  Devel-Symdump-2.18
+    pathname: A/AN/ANDK/Devel-Symdump-2.18.tar.gz
+    provides:
+      Devel::Symdump 2.18
+      Devel::Symdump::Export undef
+    requirements:
+      Compress::Zlib 0
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      perl 5.004
   Dist-Build-0.015
     pathname: L/LE/LEONT/Dist-Build-0.015.tar.gz
     provides:
@@ -1606,12 +1623,12 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  Plack-1.0051
-    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
+  Plack-1.0052
+    pathname: C/CR/CRABAPP/Plack-1.0052-TRIAL.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0051
+      Plack 1.0052
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -1670,9 +1687,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0051
+      Plack::Request 1.0052
       Plack::Request::Upload undef
-      Plack::Response 1.0051
+      Plack::Response 1.0052
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
@@ -1967,6 +1984,16 @@ DISTRIBUTIONS
       XS::Parse::Keyword 0.13
       XS::Parse::Keyword::Builder 0.13
       perl 5.014
+  Sys-SigAction-0.23
+    pathname: L/LB/LBAXTER/Sys-SigAction-0.23.tar.gz
+    provides:
+      Sys::SigAction 0.23
+      Sys::SigAction::Alarm undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      POSIX 0
+      Test::More 0
+      perl 5.006000
   Test-Deep-1.204
     pathname: R/RJ/RJBS/Test-Deep-1.204.tar.gz
     provides:
@@ -2343,11 +2370,8 @@ DISTRIBUTIONS
       Thrall 0.0405
       Thrall::Server 0.0405
     requirements:
-      Module::Build 0
-      Module::CPANfile 0
+      ExtUtils::MakeMaker 0
       Plack 0.9920
-      Software::License 0
-      perl 5.008001
       threads 1.73
   TimeDate-2.33
     pathname: A/AT/ATOOMIC/TimeDate-2.33.tar.gz
@@ -2563,6 +2587,29 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  forks-0.36
+    pathname: R/RY/RYBSKEJ/forks-0.36.tar.gz
+    provides:
+      forks 0.36
+      forks::shared 0.36
+      threads::shared::array 0.36
+      threads::shared::handle 0.36
+      threads::shared::hash 0.36
+      threads::shared::scalar 0.36
+    requirements:
+      Acme::Damn 0
+      Attribute::Handlers 0
+      Devel::Symdump 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      IO::Socket 1.18
+      List::MoreUtils 0.15
+      Scalar::Util 1.11
+      Storable 0
+      Sys::SigAction 0.11
+      Test::More 0
+      Time::HiRes 0
+      if 0
   libwww-perl-6.77
     pathname: O/OA/OALDERS/libwww-perl-6.77.tar.gz
     provides:
@@ -2623,10 +2670,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  meta-0.009
-    pathname: P/PE/PEVANS/meta-0.009.tar.gz
+  meta-0.010
+    pathname: P/PE/PEVANS/meta-0.010.tar.gz
     provides:
-      meta 0.009
+      meta 0.010
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004

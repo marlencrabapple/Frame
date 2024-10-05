@@ -65,14 +65,14 @@
             "LWP::UserAgent" : "6.67",
             "List::AllUtils" : "0.19",
             "Mozilla::CA" : "20211001",
-            "Net::Async::HTTP" : "0.48",
+            "Net::Async::HTTP" : "0.49",
             "Net::Async::HTTP::Server" : "0.14",
             "Net::Async::WebSocket" : "0.13",
             "Net::SSLeay" : "1.92",
             "Object::Pad" : "0.808",
             "Parallel::Prefork" : "0.18",
             "Path::Tiny" : "0.144",
-            "Plack" : "1.0050",
+            "Plack" : "1.0052",
             "SQL::Abstract" : "2.000001",
             "Server::Starter" : "0.35",
             "Starlet" : "0",
@@ -82,6 +82,7 @@
             "Text::Xslate" : "v3.5.9",
             "Thrall" : "0",
             "YAML::Tiny" : "1.73",
+            "forks" : "0",
             "namespace::autoclean" : "0.29",
             "perl" : "v5.40.0"
          }
@@ -92,7 +93,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/marlencrabapple/Frame/issues"
