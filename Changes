@@ -2,5 +2,8 @@ Revision history for Frame
 
 {{$NEXT}}
 
+0.1.2  2024-10-18 07:59:59 PDT
+        - Frame::Controller::render: Fix undef content_type header
+
 0.01.1  2024-10-05 16:40:13 PDT
         - Initial release
