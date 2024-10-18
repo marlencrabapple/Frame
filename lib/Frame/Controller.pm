@@ -43,7 +43,8 @@ method template :common ($name, $vars = {}, @args) {
 
 method stash { $req->stash }
 
-method render ($content, $status = 200, $content_type = undef, $headers = [], $cookies = {}, %opts) {
+method render ($content, $status = 200, $content_type = undef,
+               $headers = [], $cookies = {}, %opts) {
   my $res = $opts{noop} ? $req->new_response : $self->res;
   $content_type = $res->content_type;
   $opts{charset} //= $self->app->charset;
@@ -55,7 +56,7 @@ method render ($content, $status = 200, $content_type = undef, $headers = [], $c
   $res->cookies->@{keys %$cookies} = values %$cookies;
 
   if (ref $content) {
-    $content_type //= "application/json; charset=$opts{charset}";
+    $content_type ||= "application/json; charset=$opts{charset}";
 
     try {
       $res->content_type($content_type);

@@ -15,3 +15,5 @@ MYMETA.*
 /.prove
 /vendor
 .perl-version
+.sqlite3
+*.pem

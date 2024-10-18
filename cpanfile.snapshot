@@ -357,21 +357,23 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.004
-  Dist-Build-0.015
-    pathname: L/LE/LEONT/Dist-Build-0.015.tar.gz
+  Dist-Build-0.016
+    pathname: L/LE/LEONT/Dist-Build-0.016.tar.gz
     provides:
-      Dist::Build 0.015
-      Dist::Build::Core 0.015
-      Dist::Build::Serializer 0.015
-      Dist::Build::ShareDir 0.015
-      Dist::Build::XS 0.015
-      Dist::Build::XS::Alien 0.015
-      Dist::Build::XS::Conf 0.015
-      Dist::Build::XS::Export 0.015
-      Dist::Build::XS::Import 0.015
-      Dist::Build::XS::WriteConstants 0.015
+      Dist::Build 0.016
+      Dist::Build::Core 0.016
+      Dist::Build::DynamicPrereqs 0.016
+      Dist::Build::Serializer 0.016
+      Dist::Build::ShareDir 0.016
+      Dist::Build::XS 0.016
+      Dist::Build::XS::Alien 0.016
+      Dist::Build::XS::Conf 0.016
+      Dist::Build::XS::Export 0.016
+      Dist::Build::XS::Import 0.016
+      Dist::Build::XS::WriteConstants 0.016
     requirements:
       CPAN::Meta 0
+      CPAN::Meta::Merge 0
       CPAN::Requirements::Dynamic 0
       Carp 0
       Exporter 5.57
@@ -433,24 +435,24 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
-  ExtUtils-Builder-0.012
-    pathname: L/LE/LEONT/ExtUtils-Builder-0.012.tar.gz
+  ExtUtils-Builder-0.013
+    pathname: L/LE/LEONT/ExtUtils-Builder-0.013.tar.gz
     provides:
-      ExtUtils::Builder 0.012
-      ExtUtils::Builder::Action 0.012
-      ExtUtils::Builder::Action::Code 0.012
-      ExtUtils::Builder::Action::Command 0.012
-      ExtUtils::Builder::Action::Composite 0.012
-      ExtUtils::Builder::Action::Function 0.012
-      ExtUtils::Builder::Action::Perl 0.012
-      ExtUtils::Builder::Action::Primitive 0.012
-      ExtUtils::Builder::MakeMaker 0.012
-      ExtUtils::Builder::Node 0.012
-      ExtUtils::Builder::Plan 0.012
-      ExtUtils::Builder::Planner 0.012
-      ExtUtils::Builder::Planner::Extension 0.012
-      ExtUtils::Builder::Serializer 0.012
-      ExtUtils::Builder::Util 0.012
+      ExtUtils::Builder 0.013
+      ExtUtils::Builder::Action 0.013
+      ExtUtils::Builder::Action::Code 0.013
+      ExtUtils::Builder::Action::Command 0.013
+      ExtUtils::Builder::Action::Composite 0.013
+      ExtUtils::Builder::Action::Function 0.013
+      ExtUtils::Builder::Action::Perl 0.013
+      ExtUtils::Builder::Action::Primitive 0.013
+      ExtUtils::Builder::MakeMaker 0.013
+      ExtUtils::Builder::Node 0.013
+      ExtUtils::Builder::Plan 0.013
+      ExtUtils::Builder::Planner 0.013
+      ExtUtils::Builder::Planner::Extension 0.013
+      ExtUtils::Builder::Serializer 0.013
+      ExtUtils::Builder::Util 0.013
     requirements:
       Carp 0
       Data::Dumper 0
@@ -463,7 +465,7 @@ DISTRIBUTIONS
       List::Util 1.45
       Scalar::Util 0
       parent 0
-      perl 5.006
+      perl 5.010
       strict 0
       warnings 0
   ExtUtils-Builder-Compiler-0.022
@@ -800,19 +802,19 @@ DISTRIBUTIONS
       HTTP::Date 0
       Module::Build::Tiny 0.035
       perl 5.008001
-  HTTP-Message-6.46
-    pathname: O/OA/OALDERS/HTTP-Message-6.46.tar.gz
+  HTTP-Message-7.00
+    pathname: O/OA/OALDERS/HTTP-Message-7.00.tar.gz
     provides:
-      HTTP::Config 6.46
-      HTTP::Headers 6.46
-      HTTP::Headers::Auth 6.46
-      HTTP::Headers::ETag 6.46
-      HTTP::Headers::Util 6.46
-      HTTP::Message 6.46
-      HTTP::Request 6.46
-      HTTP::Request::Common 6.46
-      HTTP::Response 6.46
-      HTTP::Status 6.46
+      HTTP::Config 7.00
+      HTTP::Headers 7.00
+      HTTP::Headers::Auth 7.00
+      HTTP::Headers::ETag 7.00
+      HTTP::Headers::Util 7.00
+      HTTP::Message 7.00
+      HTTP::Request 7.00
+      HTTP::Request::Common 7.00
+      HTTP::Response 7.00
+      HTTP::Status 7.00
     requirements:
       Carp 0
       Clone 0.46
@@ -1945,13 +1947,6 @@ DISTRIBUTIONS
       Sub::Exporter::Progressive 0.001013
     requirements:
       ExtUtils::MakeMaker 0
-  Sub-Identify-0.14
-    pathname: R/RG/RGARCIA/Sub-Identify-0.14.tar.gz
-    provides:
-      Sub::Identify 0.14
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   Sub-Install-0.929
     pathname: R/RJ/RJBS/Sub-Install-0.929.tar.gz
     provides:
@@ -2430,57 +2425,62 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  URI-5.29
-    pathname: O/OA/OALDERS/URI-5.29.tar.gz
+  URI-5.30
+    pathname: O/OA/OALDERS/URI-5.30.tar.gz
     provides:
-      URI 5.29
-      URI::Escape 5.29
-      URI::Heuristic 5.29
-      URI::IRI 5.29
-      URI::QueryParam 5.29
-      URI::Split 5.29
-      URI::URL 5.29
-      URI::WithBase 5.29
-      URI::data 5.29
-      URI::file 5.29
-      URI::file::Base 5.29
-      URI::file::FAT 5.29
-      URI::file::Mac 5.29
-      URI::file::OS2 5.29
-      URI::file::QNX 5.29
-      URI::file::Unix 5.29
-      URI::file::Win32 5.29
-      URI::ftp 5.29
-      URI::geo 5.29
-      URI::gopher 5.29
-      URI::http 5.29
-      URI::https 5.29
-      URI::icap 5.29
-      URI::icaps 5.29
-      URI::ldap 5.29
-      URI::ldapi 5.29
-      URI::ldaps 5.29
-      URI::mailto 5.29
-      URI::mms 5.29
-      URI::news 5.29
-      URI::nntp 5.29
-      URI::nntps 5.29
-      URI::otpauth 5.29
-      URI::pop 5.29
-      URI::rlogin 5.29
-      URI::rsync 5.29
-      URI::rtsp 5.29
-      URI::rtspu 5.29
-      URI::sftp 5.29
-      URI::sip 5.29
-      URI::sips 5.29
-      URI::snews 5.29
-      URI::ssh 5.29
-      URI::telnet 5.29
-      URI::tn3270 5.29
-      URI::urn 5.29
-      URI::urn::isbn 5.29
-      URI::urn::oid 5.29
+      URI 5.30
+      URI::Escape 5.30
+      URI::Heuristic 5.30
+      URI::IRI 5.30
+      URI::QueryParam 5.30
+      URI::Split 5.30
+      URI::URL 5.30
+      URI::WithBase 5.30
+      URI::data 5.30
+      URI::file 5.30
+      URI::file::Base 5.30
+      URI::file::FAT 5.30
+      URI::file::Mac 5.30
+      URI::file::OS2 5.30
+      URI::file::QNX 5.30
+      URI::file::Unix 5.30
+      URI::file::Win32 5.30
+      URI::ftp 5.30
+      URI::ftpes 5.30
+      URI::ftps 5.30
+      URI::geo 5.30
+      URI::gopher 5.30
+      URI::http 5.30
+      URI::https 5.30
+      URI::icap 5.30
+      URI::icaps 5.30
+      URI::irc 5.30
+      URI::ircs 5.30
+      URI::ldap 5.30
+      URI::ldapi 5.30
+      URI::ldaps 5.30
+      URI::mailto 5.30
+      URI::mms 5.30
+      URI::news 5.30
+      URI::nntp 5.30
+      URI::nntps 5.30
+      URI::otpauth 5.30
+      URI::pop 5.30
+      URI::rlogin 5.30
+      URI::rsync 5.30
+      URI::rtsp 5.30
+      URI::rtspu 5.30
+      URI::scp 5.30
+      URI::sftp 5.30
+      URI::sip 5.30
+      URI::sips 5.30
+      URI::snews 5.30
+      URI::ssh 5.30
+      URI::telnet 5.30
+      URI::tn3270 5.30
+      URI::urn 5.30
+      URI::urn::isbn 5.30
+      URI::urn::oid 5.30
     requirements:
       Carp 0
       Cwd 0
@@ -2562,12 +2562,12 @@ DISTRIBUTIONS
       File::ShareDir 1.00
       Module::Build 0.4004
       perl 5.014
-  XS-Parse-Sublike-0.27
-    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.27.tar.gz
+  XS-Parse-Sublike-0.29
+    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.29.tar.gz
     provides:
-      Sublike::Extended 0.27
-      XS::Parse::Sublike 0.27
-      XS::Parse::Sublike::Builder 0.27
+      Sublike::Extended 0.29
+      XS::Parse::Sublike 0.29
+      XS::Parse::Sublike::Builder 0.29
     requirements:
       ExtUtils::CBuilder 0
       File::ShareDir 1.00
@@ -2670,23 +2670,23 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  meta-0.010
-    pathname: P/PE/PEVANS/meta-0.010.tar.gz
+  meta-0.012
+    pathname: P/PE/PEVANS/meta-0.012.tar.gz
     provides:
-      meta 0.010
+      meta 0.012
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
       perl 5.014
-  namespace-autoclean-0.29
-    pathname: E/ET/ETHER/namespace-autoclean-0.29.tar.gz
+  namespace-autoclean-0.31
+    pathname: E/ET/ETHER/namespace-autoclean-0.31.tar.gz
     provides:
-      namespace::autoclean 0.29
+      namespace::autoclean 0.31
     requirements:
+      B 0
       B::Hooks::EndOfScope 0.12
       ExtUtils::MakeMaker 0
       List::Util 0
-      Sub::Identify 0
       namespace::clean 0.20
       perl 5.006
       strict 0

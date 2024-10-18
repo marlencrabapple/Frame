@@ -4,7 +4,7 @@ package Frame::Request;
 class Frame::Request :isa(Plack::Request) :does(Frame::Base);
 
 use utf8;
-use v5.36;
+use v5.40;
 
 use List::Util 'any';
 use Hash::Util 'lock_hashref_recurse';
@@ -26,7 +26,8 @@ method BUILDARGS :common (%args) {
 }
 
 ADJUSTPARAMS ($params) {
-  push @ajax_headers, $$params{ajax_headers}->@* if ref $$params{ajax_headers} eq 'ARRAY';
+  push @ajax_headers, $$params{ajax_headers}->@*
+    if ref $$params{ajax_headers} eq 'ARRAY';
 }
 
 method placeholder ($key, $value = undef) {
@@ -48,7 +49,8 @@ method set_placeholders (@placeholders) {
     $self->placeholder(%$placeholder)
   }
   
-  # TODO: Benchmark this against Struct::Dumb solution (defined in route, init'd here)
+  # TODO: Benchmark this against Struct::Dumb solution (defined in
+  # route, init'd here)
   # lock_hashref_recurse($placeholders)
 }
 
@@ -67,5 +69,3 @@ method is_xhr { ($self->header('X-Requested-With') // '') =~ XHRRE }
 method is_websocket {
   ...
 }
-
-1
