@@ -83,8 +83,8 @@ method handler ($env) {
   my $req = $request_class->new(app => $self, env => $env);
   my $res = $self->dispatch($req);
 
-  utf8::encode($res->[2][0])
-    if $res->[2][0] =~ /[^\x00-\xff]/g;
+  # utf8::encode($res->[2][0])
+  #   if $res->[2][0] =~ /[^\x00-\xff]/g;
 
   $res
 }
