@@ -2,6 +2,9 @@ Revision history for Frame
 
 {{$NEXT}}
 
+0.1.3  2024-10-28 09:29:06 PDT
+	- Sync/remove old pinned versioned dependencies
+
 0.1.2  2024-10-18 07:59:59 PDT
         - Frame::Controller::render: Fix undef content_type header
 
