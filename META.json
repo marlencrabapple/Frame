@@ -53,7 +53,6 @@
             "Feature::Compat::Try" : "0.05",
             "Future" : "0.50",
             "Future::AsyncAwait" : "0.62",
-            "Gazelle" : "0",
             "HTML::Escape" : "1.11",
             "HTTP::Parser::XS" : "0.17",
             "HTTP::Tinyish" : "0.18",
@@ -65,7 +64,7 @@
             "LWP::UserAgent" : "6.67",
             "List::AllUtils" : "0.19",
             "Mozilla::CA" : "20211001",
-            "Net::Async::HTTP" : "0.49",
+            "Net::Async::HTTP" : "0.50",
             "Net::Async::HTTP::Server" : "0.14",
             "Net::Async::WebSocket" : "0.13",
             "Net::SSLeay" : "1.92",
@@ -75,15 +74,10 @@
             "Plack" : "1.0052",
             "SQL::Abstract" : "2.000001",
             "Server::Starter" : "0.35",
-            "Starlet" : "0",
-            "Starlight" : "0",
-            "Starman" : "0",
             "Syntax::Keyword::Dynamically" : "0.11",
             "Text::Xslate" : "v3.5.9",
-            "Thrall" : "0",
             "YAML::Tiny" : "1.73",
-            "forks" : "0",
-            "namespace::autoclean" : "0.29",
+            "namespace::autoclean" : "0.31",
             "perl" : "v5.40.0"
          }
       },
@@ -105,7 +99,7 @@
          "web" : "https://github.com/marlencrabapple/Frame"
       }
    },
-   "version" : "0.1.2",
+   "version" : "0.1.3",
    "x_generated_by_perl" : "v5.40.0",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.38",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",

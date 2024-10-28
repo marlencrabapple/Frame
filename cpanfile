@@ -20,8 +20,7 @@ requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
 requires 'Feature::Compat::Try', '0.05';
 
-requires 'namespace::autoclean', '0.29',
-  dist => 'ETHER/namespace-autoclean-0.29.tar.gz';
+requires 'namespace::autoclean', '0.31';
 
 requires 'Devel::StackTrace::WithLexicals', '2.01';
 
@@ -46,8 +45,8 @@ requires 'Text::Xslate', 'v3.5.9';
 requires 'Net::SSLeay', '1.92';
 requires 'IO::Socket::SSL', '2.075';
 requires 'HTTP::Tinyish', '0.18'; # TODO: Write a HTTP::Tiny compatible wrapper for Net::Async::HTTP
-requires 'Net::Async::HTTP', '0.49',
-  dist => 'PEVANS/Net-Async-HTTP-0.49.tar.gz';
+
+requires 'Net::Async::HTTP', '0.50';
 
 on develop => sub {
   recommends 'App::perlimports', '0.000049';
@@ -62,13 +61,5 @@ on test => sub {
   requires 'Test::More', '0.96'
 };
 
-requires 'Starlight';
-requires 'forks'; # Missing dependency in thrall
-requires 'Thrall';
-requires 'Gazelle';
-requires 'Starlet';
-requires 'Starman';
-
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
-
