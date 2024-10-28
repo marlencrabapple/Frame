@@ -1,6 +1,7 @@
 Revision history for Frame
 
 {{$NEXT}}
+	- Sync/remove old pinned versioned dependencies
 
 0.01.2  2024-12-17 22:48:34 PST
 	- Sync/remove old pinned versioned dependencies
