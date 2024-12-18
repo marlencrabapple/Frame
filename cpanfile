@@ -21,7 +21,7 @@ requires 'Syntax::Keyword::Dynamically', '0.11';
 
 # Which one do we stick with?
 requires 'Feature::Compat::Try', '0.05';
-requires 'Syntax::Keyword::Tiny';
+requires 'Syntax::Keyword::Try';
 
 requires 'namespace::autoclean', '0.31';
 

@@ -98,10 +98,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.38
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.38.tar.gz
+  Cpanel-JSON-XS-4.39
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.39.tar.gz
     provides:
-      Cpanel::JSON::XS 4.38
+      Cpanel::JSON::XS 4.39
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -1385,16 +1385,16 @@ DISTRIBUTIONS
       Text::Wrap 0
       constant 0
       perl 5.008001
-  Object-Pad-0.814
-    pathname: P/PE/PEVANS/Object-Pad-0.814.tar.gz
+  Object-Pad-0.816
+    pathname: P/PE/PEVANS/Object-Pad-0.816.tar.gz
     provides:
-      Object::Pad 0.814
-      Object::Pad::ExtensionBuilder 0.814
-      Object::Pad::MOP::Class 0.814
-      Object::Pad::MOP::Field 0.814
-      Object::Pad::MOP::FieldAttr 0.814
-      Object::Pad::MOP::Method 0.814
-      Object::Pad::MetaFunctions 0.814
+      Object::Pad 0.816
+      Object::Pad::ExtensionBuilder 0.816
+      Object::Pad::MOP::Class 0.816
+      Object::Pad::MOP::Field 0.816
+      Object::Pad::MOP::FieldAttr 0.816
+      Object::Pad::MOP::Method 0.816
+      Object::Pad::MetaFunctions 0.816
     requirements:
       ExtUtils::CBuilder 0
       File::ShareDir 1.00
@@ -1755,6 +1755,17 @@ DISTRIBUTIONS
       Module::Build 0.4004
       XS::Parse::Keyword 0.13
       XS::Parse::Keyword::Builder 0.13
+      perl 5.014
+  Syntax-Keyword-Try-0.30
+    pathname: P/PE/PEVANS/Syntax-Keyword-Try-0.30.tar.gz
+    provides:
+      Syntax::Keyword::Try 0.30
+      Syntax::Keyword::Try::Deparse 0.30
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.4004
+      XS::Parse::Keyword 0.35
+      XS::Parse::Keyword::Builder 0.35
       perl 5.014
   Test-Deep-1.204
     pathname: R/RJ/RJBS/Test-Deep-1.204.tar.gz
@@ -2159,62 +2170,62 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  URI-5.30
-    pathname: O/OA/OALDERS/URI-5.30.tar.gz
+  URI-5.31
+    pathname: O/OA/OALDERS/URI-5.31.tar.gz
     provides:
-      URI 5.30
-      URI::Escape 5.30
-      URI::Heuristic 5.30
-      URI::IRI 5.30
-      URI::QueryParam 5.30
-      URI::Split 5.30
-      URI::URL 5.30
-      URI::WithBase 5.30
-      URI::data 5.30
-      URI::file 5.30
-      URI::file::Base 5.30
-      URI::file::FAT 5.30
-      URI::file::Mac 5.30
-      URI::file::OS2 5.30
-      URI::file::QNX 5.30
-      URI::file::Unix 5.30
-      URI::file::Win32 5.30
-      URI::ftp 5.30
-      URI::ftpes 5.30
-      URI::ftps 5.30
-      URI::geo 5.30
-      URI::gopher 5.30
-      URI::http 5.30
-      URI::https 5.30
-      URI::icap 5.30
-      URI::icaps 5.30
-      URI::irc 5.30
-      URI::ircs 5.30
-      URI::ldap 5.30
-      URI::ldapi 5.30
-      URI::ldaps 5.30
-      URI::mailto 5.30
-      URI::mms 5.30
-      URI::news 5.30
-      URI::nntp 5.30
-      URI::nntps 5.30
-      URI::otpauth 5.30
-      URI::pop 5.30
-      URI::rlogin 5.30
-      URI::rsync 5.30
-      URI::rtsp 5.30
-      URI::rtspu 5.30
-      URI::scp 5.30
-      URI::sftp 5.30
-      URI::sip 5.30
-      URI::sips 5.30
-      URI::snews 5.30
-      URI::ssh 5.30
-      URI::telnet 5.30
-      URI::tn3270 5.30
-      URI::urn 5.30
-      URI::urn::isbn 5.30
-      URI::urn::oid 5.30
+      URI 5.31
+      URI::Escape 5.31
+      URI::Heuristic 5.31
+      URI::IRI 5.31
+      URI::QueryParam 5.31
+      URI::Split 5.31
+      URI::URL 5.31
+      URI::WithBase 5.31
+      URI::data 5.31
+      URI::file 5.31
+      URI::file::Base 5.31
+      URI::file::FAT 5.31
+      URI::file::Mac 5.31
+      URI::file::OS2 5.31
+      URI::file::QNX 5.31
+      URI::file::Unix 5.31
+      URI::file::Win32 5.31
+      URI::ftp 5.31
+      URI::ftpes 5.31
+      URI::ftps 5.31
+      URI::geo 5.31
+      URI::gopher 5.31
+      URI::http 5.31
+      URI::https 5.31
+      URI::icap 5.31
+      URI::icaps 5.31
+      URI::irc 5.31
+      URI::ircs 5.31
+      URI::ldap 5.31
+      URI::ldapi 5.31
+      URI::ldaps 5.31
+      URI::mailto 5.31
+      URI::mms 5.31
+      URI::news 5.31
+      URI::nntp 5.31
+      URI::nntps 5.31
+      URI::otpauth 5.31
+      URI::pop 5.31
+      URI::rlogin 5.31
+      URI::rsync 5.31
+      URI::rtsp 5.31
+      URI::rtspu 5.31
+      URI::scp 5.31
+      URI::sftp 5.31
+      URI::sip 5.31
+      URI::sips 5.31
+      URI::snews 5.31
+      URI::ssh 5.31
+      URI::telnet 5.31
+      URI::tn3270 5.31
+      URI::urn 5.31
+      URI::urn::isbn 5.31
+      URI::urn::oid 5.31
     requirements:
       Carp 0
       Cwd 0
@@ -2282,13 +2293,13 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  XS-Parse-Keyword-0.46
-    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.46.tar.gz
+  XS-Parse-Keyword-0.47
+    pathname: P/PE/PEVANS/XS-Parse-Keyword-0.47.tar.gz
     provides:
-      XS::Parse::Infix 0.46
-      XS::Parse::Infix::Builder 0.46
-      XS::Parse::Keyword 0.46
-      XS::Parse::Keyword::Builder 0.46
+      XS::Parse::Infix 0.47
+      XS::Parse::Infix::Builder 0.47
+      XS::Parse::Keyword 0.47
+      XS::Parse::Keyword::Builder 0.47
     requirements:
       ExtUtils::CBuilder 0
       ExtUtils::CChecker 0.11
@@ -2307,10 +2318,10 @@ DISTRIBUTIONS
       File::ShareDir 1.00
       Module::Build 0.4004
       perl 5.016
-  YAML-Tiny-1.74
-    pathname: E/ET/ETHER/YAML-Tiny-1.74.tar.gz
+  YAML-Tiny-1.76
+    pathname: E/ET/ETHER/YAML-Tiny-1.76.tar.gz
     provides:
-      YAML::Tiny 1.74
+      YAML::Tiny 1.76
     requirements:
       B 0
       Carp 0
