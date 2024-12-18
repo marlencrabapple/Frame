@@ -18,7 +18,10 @@ requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
+
+# Which one do we stick with?
 requires 'Feature::Compat::Try', '0.05';
+requires 'Syntax::Keyword::Tiny';
 
 requires 'namespace::autoclean', '0.31';
 

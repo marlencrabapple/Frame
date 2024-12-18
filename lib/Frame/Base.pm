@@ -18,6 +18,8 @@ use Data::Dumper;
 use Time::Piece;
 use Plack::Util;
 use Module::Metadata;
+use Syntax::Keyword::Dynamically;
+use Syntax::Keyword::Try;
 
 our @EXPORT_DOES = qw(dmsg json __pkgfn__ callstack);
 our $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';

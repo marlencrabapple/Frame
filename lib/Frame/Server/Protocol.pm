@@ -79,7 +79,8 @@ method on_read ($buffref, $eof) {
   $self->write("HTTP/1.1 100 Continue\r\n\r\n", on_write => sub { $$req{bytes_written} += $_[1] })
     if $env{HTTP_EXPECT} && lc $env{HTTP_EXPECT} eq '100-continue';
   
-  if($env{HTTP_TRANSFER_ENCODING} && lc delete $env{HTTP_TRANSFER_ENCODING} eq 'chunked') {
+  if($env{HTTP_TRANSFER_ENCODING}
+     && lc delete $env{HTTP_TRANSFER_ENCODING} eq 'chunked') {
     my $chunkbuff = '';
     $env{CONTENT_LENGTH} = 0;
 
