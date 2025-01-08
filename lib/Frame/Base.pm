@@ -326,7 +326,7 @@ method compose :common ($src, $dest, %args) {
 
 # TODO: Double check if I like this as is, can't delete it now because
 # it breaks things, but I'm suspicious its suspect
-method import :common  {
+method import :common :override {
   my $caller = eval "[caller 1]";
 
   no strict 'refs';

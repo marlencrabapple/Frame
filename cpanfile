@@ -1,7 +1,7 @@
 requires 'perl', 'v5.40';
 
-requires 'Plack', '1.0052',
-  dist => 'CRABAPP/Plack-1.0052-TRIAL.tar.gz';
+requires 'Plack', '1.0053',
+  dist => 'CRABAPP/Plack-1.0053-TRIAL.tar.gz';
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';
@@ -18,12 +18,11 @@ requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
+requires 'Syntax::Keyword::MultiSub';
 
 # Which one do we stick with?
 requires 'Feature::Compat::Try', '0.05';
 requires 'Syntax::Keyword::Try';
-
-requires 'namespace::autoclean', '0.31';
 
 requires 'Devel::StackTrace::WithLexicals', '2.01';
 
@@ -58,7 +57,7 @@ on develop => sub {
   recommends 'Perl::Critic::Community', 'v1.0.3';
   recommends 'Dist::Milla', 'v1.0.21';
   recommends 'Carmel', 'v0.1.56'
-};
+}; 
 
 on test => sub {
   requires 'Test::More', '0.96'
