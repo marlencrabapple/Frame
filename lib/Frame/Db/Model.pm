@@ -1,7 +1,7 @@
 use Object::Pad qw(:experimental(:all));
 
 package Frame::Db::Model;
-role Frame::Db::Model :does(Frame::Base);
+role Frame::Db::Model :does(Frame::Db);
  
 use utf8;
 use v5.40;
@@ -10,6 +10,8 @@ use DBI;
 use DBD::SQLite;
 use Data::Printer;
 use Exporter;
+
+use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
 
 field $table :param;
 field $columns :mutator :param //= Hash::Ordered->new;
@@ -23,20 +25,19 @@ BEGIN {
 }
 
 APPLY ($mop) {
-  
   my $class = $mop->name;
-
-  $^H{"$class/dbmodel"} = 1;
+  $class->import;
+  # $^H{"$class/dbmodel"} = 1;
    
-  foreach my $colattr (qw(Type Primary Foreign Autoinc Notnull)) {
-    Object::Pad::MOP::FieldAttr->register(
-      $colattr,
-      permit_hintkey => "$class/dbmodel",
-      apply => sub { $class->$colattr }
-    )
-  }
+  # foreach my $colattr (COLUMN_ATTR) {
+  #   Object::Pad::MOP::FieldAttr->register(
+  #     $colattr,
+  #     permit_hintkey => "$class/dbmodel",
+  #     apply => sub { $class->$colattr }
+  #   )
+  # }
 
-  $^H{"$class/dbmodel"} = 1;
+  # $^H{"$class/dbmodel"} = 1;
 
   p %^H
 }
@@ -125,7 +126,7 @@ method $notnull :common ($meta, $val) {
 method import :common :override {
   $^H{"$class/dbmodel"} = 1;
 
-  foreach my $colattr (qw(Type Primary Foreign Autoinc Notnull)) {
+  foreach my $colattr (COLUMN_ATTR) {
     my $method = lc $colattr;
     Object::Pad::MOP::FieldAttr->register(
       $colattr,
