@@ -9,6 +9,7 @@ use v5.40;
 use DBI;
 use DBD::SQLite;
 use Data::Printer;
+use Hash::Ordered;
 use Exporter;
 
 use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
@@ -17,8 +18,8 @@ field $table :param;
 field $columns :mutator :param //= Hash::Ordered->new;
 field $constraints :mutator :param //= Hash::Ordered->new;
 
-field $sqla :reader :param;
-field $dbh :reader :param;
+field $sqla :param;
+field $dbh :param;
 
 BEGIN {
   $^H{__PACKAGE__ . "/dbmodel"}

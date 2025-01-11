@@ -13,6 +13,8 @@ requires 'Net::SSLeay', '1.92';
 requires 'Mozilla::CA', '20211001';
 requires 'LWP::UserAgent', '6.67';
 requires 'LWP::Protocol::https', '6.10';
+requires 'Hash::Ordered';
+requires 'Data::Printer';
 
 requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
