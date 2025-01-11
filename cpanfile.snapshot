@@ -127,8 +127,8 @@ DISTRIBUTIONS
       Test::More 0.88
       Tie::Hash 0
       perl 5.006
-  DBI-1.645
-    pathname: H/HM/HMBRAND/DBI-1.645.tgz
+  DBI-1.646
+    pathname: H/HM/HMBRAND/DBI-1.646.tar.gz
     provides:
       Bundle::DBI 12.008696
       DBD::DBM 0.08
@@ -184,7 +184,7 @@ DISTRIBUTIONS
       DBD::Sponge::dr 12.010003
       DBD::Sponge::st 12.010003
       DBDI 12.015129
-      DBI 1.645
+      DBI 1.646
       DBI::Const::GetInfo::ANSI 2.008697
       DBI::Const::GetInfo::ODBC 2.011374
       DBI::Const::GetInfoReturn 2.008697
@@ -224,7 +224,7 @@ DISTRIBUTIONS
       DBI::SQL::Nano::Table_ 1.015544
       DBI::Util::CacheMemory 0.010315
       DBI::Util::_accessor 0.009479
-      DBI::common 1.645
+      DBI::common 1.646
     requirements:
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
@@ -253,6 +253,47 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
+  Data-Printer-1.002001
+    pathname: G/GA/GARU/Data-Printer-1.002001.tar.gz
+    provides:
+      DDP 1.002001
+      Data::Printer 1.002001
+      Data::Printer::Common undef
+      Data::Printer::Config undef
+      Data::Printer::Filter undef
+      Data::Printer::Filter::ARRAY undef
+      Data::Printer::Filter::CODE undef
+      Data::Printer::Filter::ContentType undef
+      Data::Printer::Filter::DB undef
+      Data::Printer::Filter::DateTime undef
+      Data::Printer::Filter::Digest undef
+      Data::Printer::Filter::FORMAT undef
+      Data::Printer::Filter::GLOB undef
+      Data::Printer::Filter::GenericClass undef
+      Data::Printer::Filter::HASH undef
+      Data::Printer::Filter::OBJECT undef
+      Data::Printer::Filter::REF undef
+      Data::Printer::Filter::Regexp undef
+      Data::Printer::Filter::SCALAR undef
+      Data::Printer::Filter::VSTRING undef
+      Data::Printer::Filter::Web undef
+      Data::Printer::Object undef
+      Data::Printer::Profile undef
+      Data::Printer::Profile::Dumper undef
+      Data::Printer::Profile::JSON undef
+      Data::Printer::Theme undef
+      Data::Printer::Theme::Classic undef
+      Data::Printer::Theme::Material undef
+      Data::Printer::Theme::Monokai undef
+      Data::Printer::Theme::Solarized undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::Spec 0
+      File::Temp 0
+      Scalar::Util 0
+      Test::More 0
+      version 0.77
   Devel-CheckCompiler-0.07
     pathname: S/SY/SYOHEX/Devel-CheckCompiler-0.07.tar.gz
     provides:
@@ -362,24 +403,24 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
-  ExtUtils-Builder-0.013
-    pathname: L/LE/LEONT/ExtUtils-Builder-0.013.tar.gz
+  ExtUtils-Builder-0.014
+    pathname: L/LE/LEONT/ExtUtils-Builder-0.014.tar.gz
     provides:
-      ExtUtils::Builder 0.013
-      ExtUtils::Builder::Action 0.013
-      ExtUtils::Builder::Action::Code 0.013
-      ExtUtils::Builder::Action::Command 0.013
-      ExtUtils::Builder::Action::Composite 0.013
-      ExtUtils::Builder::Action::Function 0.013
-      ExtUtils::Builder::Action::Perl 0.013
-      ExtUtils::Builder::Action::Primitive 0.013
-      ExtUtils::Builder::MakeMaker 0.013
-      ExtUtils::Builder::Node 0.013
-      ExtUtils::Builder::Plan 0.013
-      ExtUtils::Builder::Planner 0.013
-      ExtUtils::Builder::Planner::Extension 0.013
-      ExtUtils::Builder::Serializer 0.013
-      ExtUtils::Builder::Util 0.013
+      ExtUtils::Builder 0.014
+      ExtUtils::Builder::Action 0.014
+      ExtUtils::Builder::Action::Code 0.014
+      ExtUtils::Builder::Action::Command 0.014
+      ExtUtils::Builder::Action::Composite 0.014
+      ExtUtils::Builder::Action::Function 0.014
+      ExtUtils::Builder::Action::Perl 0.014
+      ExtUtils::Builder::Action::Primitive 0.014
+      ExtUtils::Builder::MakeMaker 0.014
+      ExtUtils::Builder::Node 0.014
+      ExtUtils::Builder::Plan 0.014
+      ExtUtils::Builder::Planner 0.014
+      ExtUtils::Builder::Planner::Extension 0.014
+      ExtUtils::Builder::Serializer 0.014
+      ExtUtils::Builder::Util 0.014
     requirements:
       Carp 0
       Data::Dumper 0
@@ -807,6 +848,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
+  Hash-Ordered-0.014
+    pathname: D/DA/DAGOLDEN/Hash-Ordered-0.014.tar.gz
+    provides:
+      Hash::Ordered 0.014
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      constant 0
+      overload 0
+      perl 5.008
+      strict 0
+      warnings 0
   IO-Async-0.803
     pathname: P/PE/PEVANS/IO-Async-0.803.tar.gz
     provides:
@@ -2233,12 +2286,12 @@ DISTRIBUTIONS
       File::ShareDir 1.00
       Module::Build 0.4004
       perl 5.014
-  XS-Parse-Sublike-0.35
-    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.35.tar.gz
+  XS-Parse-Sublike-0.36
+    pathname: P/PE/PEVANS/XS-Parse-Sublike-0.36.tar.gz
     provides:
-      Sublike::Extended 0.35
-      XS::Parse::Sublike 0.35
-      XS::Parse::Sublike::Builder 0.35
+      Sublike::Extended 0.36
+      XS::Parse::Sublike 0.36
+      XS::Parse::Sublike::Builder 0.36
     requirements:
       ExtUtils::CBuilder 0
       File::ShareDir 1.00

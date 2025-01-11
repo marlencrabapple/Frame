@@ -9,7 +9,8 @@ use v5.40;
 use DBI;
 use DBD::SQLite;
 use Data::Printer;
-use Exporter;
+use Hash::Ordered;
+#use Exporter;
 
 use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
 
@@ -17,8 +18,9 @@ field $table :param;
 field $columns :mutator :param //= Hash::Ordered->new;
 field $constraints :mutator :param //= Hash::Ordered->new;
 
-field $sqla :reader :param;
-field $dbh :reader :param;
+field $sqla;
+field $dbh;
+#field $driver;
 
 BEGIN {
   $^H{__PACKAGE__ . "/dbmodel"}
@@ -26,25 +28,29 @@ BEGIN {
 
 APPLY ($mop) {
   my $class = $mop->name;
-  $class->import;
-  # $^H{"$class/dbmodel"} = 1;
-   
-  # foreach my $colattr (COLUMN_ATTR) {
-  #   Object::Pad::MOP::FieldAttr->register(
-  #     $colattr,
-  #     permit_hintkey => "$class/dbmodel",
-  #     apply => sub { $class->$colattr }
-  #   )
-  # }
 
-  # $^H{"$class/dbmodel"} = 1;
+
+
+  #$class->import;
+  $^H{"$class/dbmodel"} = 1;
+   
+  foreach my $colattr (COLUMN_ATTR) {
+    Object::Pad::MOP::FieldAttr->register(
+      $colattr,
+      permit_hintkey => "$class/dbmodel",
+      apply => sub { $class->$colattr }
+    )
+  }
+
+  $^H{"$class/dbmodel"} = 1;
 
   p %^H
 }
 
 ADJUST {
   $sqla = $self->app->sqla;
-  $dbh = $self->app->dbh
+  $dbh = $self->app->dbh;
+  #($driver) = $self->app->config->{db}{source} =~ /dbi:([^:]+):.+/;
 }
 
 method create_table {
@@ -123,17 +129,17 @@ method $notnull :common ($meta, $val) {
 #   $^H{"$class/dbmodel"}
 # }
 
-method import :common :override {
-  $^H{"$class/dbmodel"} = 1;
+# method import :common :override {
+#   $^H{"$class/dbmodel"} = 1;
 
-  foreach my $colattr (COLUMN_ATTR) {
-    my $method = lc $colattr;
-    Object::Pad::MOP::FieldAttr->register(
-      $colattr,
-      permit_hintkey => "$class/dbmodel",
-      apply => sub { $class->$method }
-    )
-  }
+#   foreach my $colattr (COLUMN_ATTR) {
+#     my $method = lc $colattr;
+#     Object::Pad::MOP::FieldAttr->register(
+#       $colattr,
+#       permit_hintkey => "$class/dbmodel",
+#       apply => sub { $class->$method }
+#     )
+#   }
 
-  $^H{"$class/dbmodel"} = 1
-}
+#   $^H{"$class/dbmodel"} = 1
+# }

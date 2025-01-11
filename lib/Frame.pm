@@ -48,6 +48,7 @@ ADJUSTPARAMS ($params) {
     // {};
   
   $config = { %$config_defaults, %$config };
+  $ENV{config} = $config;
 
   $charset = $$config{charset} if $$config{charset};
   $request_class = $$config{request_class} if $$config{request_class};
