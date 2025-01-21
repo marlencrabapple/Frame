@@ -127,8 +127,8 @@ DISTRIBUTIONS
       Test::More 0.88
       Tie::Hash 0
       perl 5.006
-  DBI-1.646
-    pathname: H/HM/HMBRAND/DBI-1.646.tar.gz
+  DBI-1.647
+    pathname: H/HM/HMBRAND/DBI-1.647.tgz
     provides:
       Bundle::DBI 12.008696
       DBD::DBM 0.08
@@ -184,7 +184,7 @@ DISTRIBUTIONS
       DBD::Sponge::dr 12.010003
       DBD::Sponge::st 12.010003
       DBDI 12.015129
-      DBI 1.646
+      DBI 1.647
       DBI::Const::GetInfo::ANSI 2.008697
       DBI::Const::GetInfo::ODBC 2.011374
       DBI::Const::GetInfoReturn 2.008697
@@ -224,7 +224,7 @@ DISTRIBUTIONS
       DBI::SQL::Nano::Table_ 1.015544
       DBI::Util::CacheMemory 0.010315
       DBI::Util::_accessor 0.009479
-      DBI::common 1.646
+      DBI::common 1.647
     requirements:
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
