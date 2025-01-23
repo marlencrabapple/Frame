@@ -14,18 +14,19 @@ use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Feature::Compat::Try;
-use Hash::Util 'lock_hashref_recurse';
+use Const::Fast::Exporter;
 
 # use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
 use Frame::Controller::Default;
 
+const our $config_defaults => eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
+
 field $loop :reader;
 field $ua :reader;
 field $routes :reader;
 field $config :reader;
-field $config_defaults :reader;
 field $charset :reader = 'utf-8';
 field $request_class :param = 'Frame::Request';
 field $controller_namespace :param :reader = undef;
@@ -40,15 +41,12 @@ ADJUSTPARAMS ($params) {
   $ua = Net::Async::HTTP->new;
   $loop->add($ua);
 
-  $config_defaults = eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
-  lock_hashref_recurse($config_defaults);
-
-  $config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE}
+  my $_config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE}
     || 'config.yml')->[0] }
     // {};
   
-  $config = { %$config_defaults, %$config };
-  $ENV{config} = $config;
+  const my $__config = { %$config_defaults, %$config };
+  $config //= $ENV{config} = $__config;
 
   $charset = $$config{charset} if $$config{charset};
   $request_class = $$config{request_class} if $$config{request_class};

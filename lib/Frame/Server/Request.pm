@@ -1,7 +1,8 @@
 use Object::Pad;
 
 package Frame::Server::Request;
-class Frame::Server::Request :isa(Net::Async::HTTP::Server::Request) :does(Frame::Base);
+class Frame::Server::Request :isa(Net::Async::HTTP::Server::Request)
+                             :does(Frame::Base);
 
 use utf8;
 use v5.36;
