@@ -37,13 +37,7 @@
             "Perl::Tidy" : "20221112"
          },
          "requires" : {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
             "App::FatPacker" : "0",
-=======
->>>>>>> 3e42ccd (...)
->>>>>>> fd6aacc (...)
             "Carmel" : "v0.1.56",
             "Dist::Milla" : "v1.0.22",
             "Plack::Middleware::Debug" : "0",
@@ -56,7 +50,6 @@
             "Const::Fast::Exporter" : "0",
             "Cpanel::JSON::XS" : "4.32",
             "Crypt::Argon2" : "0.029",
-            "Cwd" : "0",
             "DBD::SQLite" : "1.72",
             "DBI" : "1.643",
             "Data::Printer" : "0",
@@ -75,14 +68,12 @@
             "LWP::Protocol::https" : "6.10",
             "LWP::UserAgent" : "6.67",
             "List::AllUtils" : "0.19",
-            "Module::Refresh" : "0",
             "Mozilla::CA" : "20211001",
             "Net::Async::HTTP" : "0.50",
             "Net::Async::HTTP::Server" : "0.14",
             "Net::Async::WebSocket" : "0.13",
             "Net::SSLeay" : "1.92",
             "Object::Pad" : "0.808",
-            "PadWalker" : "0",
             "Parallel::Prefork" : "0.18",
             "Path::Tiny" : "0.144",
             "Plack" : "1.0053",
@@ -91,8 +82,8 @@
             "Syntax::Keyword::Dynamically" : "0.11",
             "Syntax::Keyword::MultiSub" : "0",
             "Syntax::Keyword::Try" : "0",
-            "TOML::Tiny" : "0",
             "Text::Xslate" : "v3.5.9",
+            "YAML::Tiny" : "1.73",
             "perl" : "v5.40.0"
          }
       },
@@ -103,7 +94,6 @@
       }
    },
    "release_status" : "testing",
-<<<<<<< HEAD
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/marlencrabapple/Frame/issues"
@@ -116,14 +106,7 @@
       }
    },
    "version" : "0.01.4",
-<<<<<<< HEAD
-   "x_generated_by_perl" : "v5.40.2",
-=======
-=======
-   "version" : "0.01.2",
->>>>>>> 3e42ccd (...)
    "x_generated_by_perl" : "v5.40.1",
->>>>>>> fd6aacc (...)
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.39",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
    "x_static_install" : 1
