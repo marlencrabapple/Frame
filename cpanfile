@@ -1,6 +1,7 @@
 requires 'perl', 'v5.40';
 
 requires 'Plack', '1.0053',
+  url => "file://$ENV{HOME}/Plack/Plack-1.0053-TRIAL.tar.gz",
   dist => 'CRABAPP/Plack-1.0053-TRIAL.tar.gz';
 
 requires 'Path::Tiny', '0.144';
@@ -15,6 +16,8 @@ requires 'LWP::UserAgent', '6.67';
 requires 'LWP::Protocol::https', '6.10';
 requires 'Hash::Ordered';
 requires 'Data::Printer';
+requires 'Const::Fast';
+requires 'Const::Fast::Exporter';
 
 requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
@@ -57,8 +60,9 @@ on develop => sub {
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
   recommends 'Perl::Critic::Community', 'v1.0.3';
-  recommends 'Dist::Milla', 'v1.0.21';
-  recommends 'Carmel', 'v0.1.56'
+  requires 'Dist::Milla', 'v1.0.21';
+  requires 'Carmel', 'v0.1.56';
+  requires 'Plack::Middleware::Debug';
 }; 
 
 on test => sub {

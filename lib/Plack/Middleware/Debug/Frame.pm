@@ -6,7 +6,6 @@ class Plack::Middleware::Debug::Frame :isa(Plack::Middleware::Debug::Base);
 use utf8;
 use v5.40;
 
-use Data::Dumper;
 use Data::Printer;
 
 method run ($env, $panel) {
