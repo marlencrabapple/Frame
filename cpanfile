@@ -1,7 +1,14 @@
+use utf8;
+use v5.40;
+
+use Cwd 'abs_path';
+
+use constant PWD => abs_path;
+
 requires 'perl', 'v5.40';
 
 requires 'Plack', '1.0053',
-  url => "file://$ENV{HOME}/Plack/Plack-1.0053-TRIAL.tar.gz",
+  url => "file://" . PWD . "/vendor/cache/Plack-1.0053-TRIAL.tar.gz",
   dist => 'CRABAPP/Plack-1.0053-TRIAL.tar.gz';
 
 requires 'Path::Tiny', '0.144';
@@ -60,6 +67,7 @@ on develop => sub {
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
   recommends 'Perl::Critic::Community', 'v1.0.3';
+  requires 'App::FatPacker';
   requires 'Dist::Milla', 'v1.0.21';
   requires 'Carmel', 'v0.1.56';
   requires 'Plack::Middleware::Debug';

@@ -1,7 +1,20 @@
 Revision history for Frame
 
 {{$NEXT}}
-	- Sync/remove old pinned versioned dependencies
+	- Begin working on a light abstraction to dealing with SQL based data-
+	  base abstraction that handles a good amount of your everyday CRUD
+	  operations, and handle schema updates and the many worse parts of
+	  database administration
+	- Fix issue in which non-variable routes written in or as your main
+	  controller class were accidentally detected as malformed on plackup
+	  launch
+	- Plack::App::Static and Plack::App::Bin and example middleware to
+	  demonstrate a few or their obvious uses
+	    - See Frame::App::Bin::cgi, Frame::Middlware::DirIndex,
+	      Frame::Middleware::File, Frame::Middlware::Archive, and
+	      Frame::Middleware::LazyMirror
+	- Revert to Dist::Milla versioning
+	- ...
 
 0.01.2  2024-12-17 22:48:34 PST
 	- Sync/remove old pinned versioned dependencies
