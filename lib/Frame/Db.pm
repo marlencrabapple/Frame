@@ -4,7 +4,7 @@ package Frame::Db;
 role Frame::Db :does(Frame::Base);
 
 use utf8;
-use v5.36;
+use v5.40;
 # use autodie;
 
 use Data::Printer;
@@ -25,8 +25,6 @@ APPLY ($mop) {
   }
 }
 
-
-
 ADJUST {
   my $mop = Object::Pad::MOP::Class->for_caller;
   my ($driver) = $self->config->{db}{source} =~ /dbi:([^:]+):.+/;
@@ -42,5 +40,3 @@ method _dbh {
 }
 
 #method dbh :required;
-
-1

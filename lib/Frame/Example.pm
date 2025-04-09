@@ -23,13 +23,14 @@ method startup {
 
   $r->post('/item/add', 'default#add_item');
 
-  $r->get('/asdf/:foo/fdsa/:bar/:baz', { foo => qr/^[a-z]+$/i }, sub ($foo, $bar, $baz) {
-    $self->render({
-      foo => $foo,
-      bar => $bar,
-      baz => $baz
-    })
-  });
+  $r->get('/asdf/:foo/fdsa/:bar/:baz', { foo => qr/^[a-z]+$/i }
+    , sub ($foo, $bar, $baz) {
+      $self->render({
+        foo => $foo,
+        bar => $bar,
+        baz => $baz
+      })
+    });
 
   $r->get('/redirect', sub {
     $self->redirect($self->req->parameters->{url})

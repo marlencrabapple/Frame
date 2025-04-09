@@ -1,27 +1,48 @@
-use Object::Pad qw/:experimental(mop)/;
+use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
 role Frame :does(Frame::Base);
 
-our $VERSION  = '0.01.2';
+our $VERSION  = '0.01.4';
 
 use utf8;
-use v5.36;
+use v5.40;
 
 use Encode;
-use YAML::Tiny;
+use TOML::Tiny qw(from_toml to_toml);
+use Path::Tiny;
 use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Feature::Compat::Try;
 use Const::Fast::Exporter;
+use Syntax::Keyword::Try;
 
 # use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
 use Frame::Controller::Default;
 
-const our $config_defaults => eval { YAML::Tiny->read('config-defaults.yml')->[0] } // { charset => 'utf-8' };
+our $_config_default;
+
+try {
+  my $error;
+  
+  ($_config_default, $error) = from_toml(
+    path($ENV{FRAME_DEFAULT_CONFIG_FILE}
+      // 'config-default.toml')
+    ->slurp_utf8);
+
+  if ($error) {
+    die $error
+  }
+}
+catch ($e) {
+  $_config_default = { charset => 'utf8' };
+  warn Dumper($e)
+}
+
+const our $config_default => { %$_config_default };
 
 field $loop :reader;
 field $ua :reader;
@@ -41,18 +62,23 @@ ADJUSTPARAMS ($params) {
   $ua = Net::Async::HTTP->new;
   $loop->add($ua);
 
-  my $_config = eval { YAML::Tiny->read($ENV{FRAME_CONFIG_FILE}
-    || 'config.yml')->[0] }
-    // {};
+  my ($_config, $error) = from_toml(path($ENV{FRAME_CONFIG_FILE}
+		// 'config.toml')->slurp_utf8);
+
+  if($error) {
+    $_config = { charset => 'utf8' }
+  }
   
-  const my $__config = { %$config_defaults, %$config };
-  $config //= $ENV{config} = $__config;
+  const my $__config = { %$config_default, %$_config };
+  $config //= $ENV{frame_config} = $__config;
 
   $charset = $$config{charset} if $$config{charset};
   $request_class = $$config{request_class} if $$config{request_class};
-  $controller_namespace //= $$config{controller_namespace} || __CLASS__ . '::Controller';
+  
+  $controller_namespace //= $$config{controller_namespace}
+    || __CLASS__ . '::Controller';
 
-  lock_hashref_recurse($config);
+  # lock_hashref_recurse($config);
 
   try {
     my $fn = __CLASS__ . '/Controller.pm';
@@ -72,7 +98,6 @@ ADJUSTPARAMS ($params) {
   }
   
   $routes = Frame::Routes->new(app => $self);
-
   $self->startup
 }
 
@@ -119,8 +144,6 @@ method route ($route, $req) {
 }
 
 method startup;
-
-1
 
 __END__
 

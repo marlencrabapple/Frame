@@ -1,7 +1,18 @@
 requires 'perl', 'v5.40';
 
+use utf8;
+use v5.40;
+
+requires 'Cwd';
+requires 'Const::Fast';
+
+use Cwd 'abs_path';
+use Const::Fast;
+
+const our $PWD => abs_path;
+
 requires 'Plack', '1.0053',
-  url => "file://$ENV{HOME}/Plack/Plack-1.0053-TRIAL.tar.gz",
+  url => "file://$PWD/vendor/Plack-1.0053-TRIAL.tar.gz",
   dist => 'CRABAPP/Plack-1.0053-TRIAL.tar.gz';
 
 requires 'Path::Tiny', '0.144';
@@ -51,9 +62,10 @@ requires 'Text::Xslate', 'v3.5.9';
 
 requires 'Net::SSLeay', '1.92';
 requires 'IO::Socket::SSL', '2.075';
-requires 'HTTP::Tinyish', '0.18'; # TODO: Write a HTTP::Tiny compatible wrapper for Net::Async::HTTP
-
+requires 'HTTP::Tinyish', '0.18';
 requires 'Net::Async::HTTP', '0.50';
+
+requires 'Module::Refresh';
 
 on develop => sub {
   recommends 'App::perlimports', '0.000049';
@@ -71,3 +83,4 @@ on test => sub {
 
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
+requires 'PadWalker'
