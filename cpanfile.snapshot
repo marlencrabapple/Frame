@@ -81,17 +81,17 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  CPAN-Changes-0.500004
-    pathname: H/HA/HAARG/CPAN-Changes-0.500004.tar.gz
+  CPAN-Changes-0.500005
+    pathname: H/HA/HAARG/CPAN-Changes-0.500005.tar.gz
     provides:
-      CPAN::Changes 0.500004
-      CPAN::Changes::Entry 0.500004
-      CPAN::Changes::Group 0.500004
-      CPAN::Changes::HasEntries 0.500004
-      CPAN::Changes::Parser 0.500004
-      CPAN::Changes::Release 0.500004
-      CPAN::Changes::Spec 0.500004
-      Test::CPAN::Changes 0.500004
+      CPAN::Changes 0.500005
+      CPAN::Changes::Entry 0.500005
+      CPAN::Changes::Group 0.500005
+      CPAN::Changes::HasEntries 0.500005
+      CPAN::Changes::Parser 0.500005
+      CPAN::Changes::Release 0.500005
+      CPAN::Changes::Spec 0.500005
+      Test::CPAN::Changes 0.500005
     requirements:
       ExtUtils::MakeMaker 0
       Module::Runtime 0
@@ -3287,10 +3287,10 @@ DISTRIBUTIONS
       File::Temp 0.19
       Path::Class 0
       Test::More 0
-  Module-Runtime-0.017
-    pathname: H/HA/HAARG/Module-Runtime-0.017.tar.gz
+  Module-Runtime-0.018
+    pathname: H/HA/HAARG/Module-Runtime-0.018.tar.gz
     provides:
-      Module::Runtime 0.017
+      Module::Runtime 0.018
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006000
@@ -3889,18 +3889,18 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  MooseX-Types-0.50
-    pathname: E/ET/ETHER/MooseX-Types-0.50.tar.gz
+  MooseX-Types-0.51
+    pathname: E/ET/ETHER/MooseX-Types-0.51.tar.gz
     provides:
-      MooseX::Types 0.50
-      MooseX::Types::Base 0.50
-      MooseX::Types::CheckedUtilExports 0.50
-      MooseX::Types::Combine 0.50
-      MooseX::Types::Moose 0.50
-      MooseX::Types::TypeDecorator 0.50
-      MooseX::Types::UndefinedType 0.50
-      MooseX::Types::Util 0.50
-      MooseX::Types::Wrapper 0.50
+      MooseX::Types 0.51
+      MooseX::Types::Base 0.51
+      MooseX::Types::CheckedUtilExports 0.51
+      MooseX::Types::Combine 0.51
+      MooseX::Types::Moose 0.51
+      MooseX::Types::TypeDecorator 0.51
+      MooseX::Types::UndefinedType 0.51
+      MooseX::Types::Util 0.51
+      MooseX::Types::Wrapper 0.51
     requirements:
       Carp 0
       Carp::Clan 6.00
@@ -3915,10 +3915,11 @@ DISTRIBUTIONS
       Sub::Exporter 0
       Sub::Exporter::ForMethods 0.100052
       Sub::Install 0
-      Sub::Name 0
+      Sub::Util 0
       base 0
       namespace::autoclean 0.16
       overload 0
+      parent 0
       perl 5.008
       strict 0
       warnings 0
@@ -5109,6 +5110,23 @@ DISTRIBUTIONS
       XS::Parse::Keyword 0.35
       XS::Parse::Keyword::Builder 0.35
       perl 5.014
+  TOML-Tiny-0.20
+    pathname: O/OA/OALDERS/TOML-Tiny-0.20.tar.gz
+    provides:
+      TOML::Tiny 0.20
+      TOML::Tiny::Grammar 0.20
+      TOML::Tiny::Parser 0.20
+      TOML::Tiny::Tokenizer 0.20
+      TOML::Tiny::Util 0.20
+      TOML::Tiny::Writer 0.20
+    requirements:
+      Carp 0
+      Data::Dumper 0
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Math::BigInt 1.999718
+      perl 5.018
   Task-Weaken-1.06
     pathname: E/ET/ETHER/Task-Weaken-1.06.tar.gz
     provides:

@@ -1,23 +1,29 @@
-use Object::Pad;
+use Object::Pad qw(:experimental(:all));
 
 package Frame::Example;
-class Frame::Example :does(Frame) :does(Frame::Db::SQLite);
+class Frame::Example :isa(Frame);
 
 use utf8;
 use v5.36;
 
-use YAML::Tiny;
+use TOML::Tiny;
 use Data::Dumper;
+use Path::Tiny;
+
+field $config_file :param(config);
+field $config;
 
 ADJUST {
-  $self->config = YAML::Tiny->read('share/example/config.yml')->[0];
+  $config = from_toml(path($ENV{FRAME_CONFIG_FILE} // 'config.toml')
+    ->slurp_utf8);
+
   $self->init_db
 }
 
 method startup {
   my $r = $self->routes;
 
-  $r->get('/', 'self');
+  $r->get('/', sub { $self->self(@_) });
   $r->get('/items', 'default#list_items');
   $r->get('/item/:id', { id => qr/^[0-9]+$/ }, 'default#view_item');
 

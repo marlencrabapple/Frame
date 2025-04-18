@@ -5,7 +5,6 @@ role Frame::Db :does(Frame::Base);
 
 use utf8;
 use v5.40;
-# use autodie;
 
 use Data::Printer;
 use SQL::Abstract;
@@ -16,8 +15,10 @@ APPLY ($mop) {
     p $ENV{config};
     
     my ($driver) = $ENV{config}->{db}{source} =~ /dbi:([^:]+):.+/;
-      my $fn = "Frame/Db/$driver.pm";
+    my $fn = "Frame/Db/$driver.pm";
+    
     require "$fn";
+    
     $mop->add_role("Frame::Db::$driver");
   }
   catch ($err) {

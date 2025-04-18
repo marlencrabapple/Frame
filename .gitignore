@@ -17,3 +17,6 @@ MYMETA.*
 .perl-version
 .sqlite3
 *.pem
+.zed/
+authors/
+

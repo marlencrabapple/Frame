@@ -1,7 +1,7 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame :does(Frame::Base);
+class Frame :abstract :does(Frame::Base);
 
 our $VERSION  = '0.01.4';
 
@@ -11,14 +11,14 @@ use v5.40;
 use Encode;
 use TOML::Tiny qw(from_toml to_toml);
 use Path::Tiny;
+use Const::Fast;
 use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Feature::Compat::Try;
-use Const::Fast::Exporter;
 use Syntax::Keyword::Try;
 
-# use Frame::Config;
+use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
 use Frame::Controller::Default;
@@ -47,7 +47,7 @@ const our $config_default => { %$_config_default };
 field $loop :reader;
 field $ua :reader;
 field $routes :reader;
-field $config :reader;
+field $config :reader :inheritable;
 field $charset :reader = 'utf-8';
 field $request_class :param = 'Frame::Request';
 field $controller_namespace :param :reader = undef;
@@ -68,17 +68,17 @@ ADJUSTPARAMS ($params) {
   if($error) {
     $_config = { charset => 'utf8' }
   }
-  
-  const my $__config = { %$config_default, %$_config };
-  $config //= $ENV{frame_config} = $__config;
+
+  const my $__config => { %$config_default, %$_config };
+  $config //= $__config;
+
+  dmsg $config, $_config, $error, $config_default;
 
   $charset = $$config{charset} if $$config{charset};
-  $request_class = $$config{request_class} if $$config{request_class};
+  $request_class = $$config{request_class} if exists $$config{request_class};
   
-  $controller_namespace //= $$config{controller_namespace}
-    || __CLASS__ . '::Controller';
-
-  # lock_hashref_recurse($config);
+  $controller_namespace //= exists $$config{controller_namespace}
+    ? $$config{controller_namespace} : __CLASS__ . '::Controller';
 
   try {
     my $fn = __CLASS__ . '/Controller.pm';
@@ -94,7 +94,7 @@ ADJUSTPARAMS ($params) {
     $default_controller_class = $meta->name
   }
   catch ($e) {
-    # dmsg $e if $ENV{FRAME_DEBUG}
+    dmsg $e if $ENV{FRAME_DEBUG}
   }
   
   $routes = Frame::Routes->new(app => $self);
