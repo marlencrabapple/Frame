@@ -81,17 +81,17 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  CPAN-Changes-0.500004
-    pathname: H/HA/HAARG/CPAN-Changes-0.500004.tar.gz
+  CPAN-Changes-0.500005
+    pathname: H/HA/HAARG/CPAN-Changes-0.500005.tar.gz
     provides:
-      CPAN::Changes 0.500004
-      CPAN::Changes::Entry 0.500004
-      CPAN::Changes::Group 0.500004
-      CPAN::Changes::HasEntries 0.500004
-      CPAN::Changes::Parser 0.500004
-      CPAN::Changes::Release 0.500004
-      CPAN::Changes::Spec 0.500004
-      Test::CPAN::Changes 0.500004
+      CPAN::Changes 0.500005
+      CPAN::Changes::Entry 0.500005
+      CPAN::Changes::Group 0.500005
+      CPAN::Changes::HasEntries 0.500005
+      CPAN::Changes::Parser 0.500005
+      CPAN::Changes::Release 0.500005
+      CPAN::Changes::Spec 0.500005
+      Test::CPAN::Changes 0.500005
     requirements:
       ExtUtils::MakeMaker 0
       Module::Runtime 0
@@ -5109,6 +5109,23 @@ DISTRIBUTIONS
       XS::Parse::Keyword 0.35
       XS::Parse::Keyword::Builder 0.35
       perl 5.014
+  TOML-Tiny-0.20
+    pathname: O/OA/OALDERS/TOML-Tiny-0.20.tar.gz
+    provides:
+      TOML::Tiny 0.20
+      TOML::Tiny::Grammar 0.20
+      TOML::Tiny::Parser 0.20
+      TOML::Tiny::Tokenizer 0.20
+      TOML::Tiny::Util 0.20
+      TOML::Tiny::Writer 0.20
+    requirements:
+      Carp 0
+      Data::Dumper 0
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Math::BigInt 1.999718
+      perl 5.018
   Task-Weaken-1.06
     pathname: E/ET/ETHER/Task-Weaken-1.06.tar.gz
     provides:

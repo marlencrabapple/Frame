@@ -57,7 +57,7 @@ requires 'SQL::Abstract', '2.000001';
 requires 'HTML::Escape', '1.11';
 requires 'JSON::MaybeXS', '1.004004';
 requires 'Cpanel::JSON::XS', '4.32';
-requires 'YAML::Tiny', '1.73';
+requires 'TOML::Tiny';
 requires 'Text::Xslate', 'v3.5.9';
 
 requires 'Net::SSLeay', '1.92';

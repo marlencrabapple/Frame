@@ -68,17 +68,17 @@ ADJUSTPARAMS ($params) {
   if($error) {
     $_config = { charset => 'utf8' }
   }
-  
-  const my $__config = { %$config_default, %$_config };
-  $config //= $ENV{frame_config} = $__config;
+
+  const my $__config => { %$config_default, %$_config };
+  $config //= $__config;
+
+  dmsg $config, $_config, $error, $config_default;
 
   $charset = $$config{charset} if $$config{charset};
-  $request_class = $$config{request_class} if $$config{request_class};
+  $request_class = $$config{request_class} if exists $$config{request_class};
   
-  $controller_namespace //= $$config{controller_namespace}
-    || __CLASS__ . '::Controller';
-
-  # lock_hashref_recurse($config);
+  $controller_namespace //= exists $$config{controller_namespace}
+    ? $$config{controller_namespace} : __CLASS__ . '::Controller';
 
   try {
     my $fn = __CLASS__ . '/Controller.pm';
@@ -94,7 +94,7 @@ ADJUSTPARAMS ($params) {
     $default_controller_class = $meta->name
   }
   catch ($e) {
-    # dmsg $e if $ENV{FRAME_DEBUG}
+    dmsg $e if $ENV{FRAME_DEBUG}
   }
   
   $routes = Frame::Routes->new(app => $self);

@@ -8,3 +8,4 @@ charset = "utf-8"
   source = "dbi:SQLite:dbname=db.sqlite3"
   username = ""
   auth = ""
+  
