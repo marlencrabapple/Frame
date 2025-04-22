@@ -1,7 +1,8 @@
 use Object::Pad;
 
 package Frame::App;
-class Frame::App :does(Frame::Base);
+
+class Frame::App : does(Frame::Base);
 
 use utf8;
 use v5.36;
@@ -16,24 +17,25 @@ field $tx;
 field $psgi;
 
 ADJUST {
-  $app = Frame::Example->new; 
-  $tx = $Frame::Controller::tx_default;
-  $psgi = $app->to_psgi;
+    $app  = Frame::Example->new;
+    $tx   = $Frame::Controller::tx_default;
+    $psgi = $app->to_psgi;
 }
 
 state %dispatch = (
-  new => \&new_app,
-  synth => \&synth
+    new   => \&new_app,
+    synth => \&synth
 );
 
 method cmd(@argv) {
-  my $dest = $dispatch{shift @argv};
-  $self->$dest(@argv)
+    my $dest = $dispatch{ shift @argv };
+    $self->$dest(@argv);
 }
 
 method new_app (@args) {
-  # our $tx;
-  # my $dir = path($package)->mkdir;
+
+    # our $tx;
+    # my $dir = path($package)->mkdir;
 }
 
 method synth (@args) {

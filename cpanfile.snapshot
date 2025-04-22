@@ -1860,22 +1860,24 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Dist-Zilla-Plugin-ReadmeFromPod-0.38
-    pathname: F/FA/FAYLAND/Dist-Zilla-Plugin-ReadmeFromPod-0.38.tar.gz
+  Dist-Zilla-Plugin-ReadmeFromPod-0.39
+    pathname: F/FA/FAYLAND/Dist-Zilla-Plugin-ReadmeFromPod-0.39.tar.gz
     provides:
-      Dist::Zilla::Plugin::ReadmeFromPod 0.38
+      Dist::Zilla::Plugin::ReadmeFromPod 0.39
     requirements:
       Dist::Zilla 6.000
       Dist::Zilla::File::InMemory 0
+      Dist::Zilla::Role::AfterBuild 0
+      Dist::Zilla::Role::AfterRelease 0
       Dist::Zilla::Role::FilePruner 0
-      Dist::Zilla::Role::InstallTool 5
       ExtUtils::MakeMaker 0
       IO::String 0
       List::Util 1.33
       Moose 0
+      Moose::Util::TypeConstraints 0
       Path::Tiny 0.004
       Pod::Readme v1.2.0
-      perl 5.006
+      perl 5.010001
   Dist-Zilla-Plugin-ReversionOnRelease-0.06
     pathname: M/MI/MIYAGAWA/Dist-Zilla-Plugin-ReversionOnRelease-0.06.tar.gz
     provides:
@@ -2072,31 +2074,31 @@ DISTRIBUTIONS
       strict 0
       version 0
       warnings 0
-  ExtUtils-Builder-Compiler-0.028
-    pathname: L/LE/LEONT/ExtUtils-Builder-Compiler-0.028.tar.gz
+  ExtUtils-Builder-Compiler-0.030
+    pathname: L/LE/LEONT/ExtUtils-Builder-Compiler-0.030.tar.gz
     provides:
-      ExtUtils::Builder::ArgumentCollector 0.028
-      ExtUtils::Builder::AutoDetect::C 0.028
-      ExtUtils::Builder::AutoDetect::Cpp 0.028
-      ExtUtils::Builder::Binary 0.028
-      ExtUtils::Builder::Compiler 0.028
-      ExtUtils::Builder::Compiler::MSVC 0.028
-      ExtUtils::Builder::Compiler::Unixy 0.028
-      ExtUtils::Builder::Compiler::VMS 0.028
-      ExtUtils::Builder::Conf 0.028
-      ExtUtils::Builder::Linker 0.028
-      ExtUtils::Builder::Linker::Ar 0.028
-      ExtUtils::Builder::Linker::COFF 0.028
-      ExtUtils::Builder::Linker::ELF::Any 0.028
-      ExtUtils::Builder::Linker::ELF::GCC 0.028
-      ExtUtils::Builder::Linker::Mach::GCC 0.028
-      ExtUtils::Builder::Linker::PE::GCC 0.028
-      ExtUtils::Builder::Linker::PE::MSVC 0.028
-      ExtUtils::Builder::Linker::Unixy 0.028
-      ExtUtils::Builder::Linker::XCOFF 0.028
-      ExtUtils::Builder::MultiLingual 0.028
-      ExtUtils::Builder::ParseXS 0.028
-      ExtUtils::Builder::Profile::Perl 0.028
+      ExtUtils::Builder::ArgumentCollector 0.030
+      ExtUtils::Builder::AutoDetect::C 0.030
+      ExtUtils::Builder::AutoDetect::Cpp 0.030
+      ExtUtils::Builder::Binary 0.030
+      ExtUtils::Builder::Compiler 0.030
+      ExtUtils::Builder::Compiler::MSVC 0.030
+      ExtUtils::Builder::Compiler::Unixy 0.030
+      ExtUtils::Builder::Compiler::VMS 0.030
+      ExtUtils::Builder::Conf 0.030
+      ExtUtils::Builder::Linker 0.030
+      ExtUtils::Builder::Linker::Ar 0.030
+      ExtUtils::Builder::Linker::COFF 0.030
+      ExtUtils::Builder::Linker::ELF::Any 0.030
+      ExtUtils::Builder::Linker::ELF::GCC 0.030
+      ExtUtils::Builder::Linker::Mach::GCC 0.030
+      ExtUtils::Builder::Linker::PE::GCC 0.030
+      ExtUtils::Builder::Linker::PE::MSVC 0.030
+      ExtUtils::Builder::Linker::Unixy 0.030
+      ExtUtils::Builder::Linker::XCOFF 0.030
+      ExtUtils::Builder::MultiLingual 0.030
+      ExtUtils::Builder::ParseXS 0.030
+      ExtUtils::Builder::Profile::Perl 0.030
     requirements:
       Carp 0
       DynaLoader 0
@@ -2633,46 +2635,46 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  IO-Async-0.803
-    pathname: P/PE/PEVANS/IO-Async-0.803.tar.gz
+  IO-Async-0.804
+    pathname: P/PE/PEVANS/IO-Async-0.804.tar.gz
     provides:
-      Future::IO::Impl::IOAsync 0.803
-      IO::Async 0.803
-      IO::Async::Channel 0.803
-      IO::Async::Debug 0.803
-      IO::Async::File 0.803
-      IO::Async::FileStream 0.803
-      IO::Async::Function 0.803
-      IO::Async::Future 0.803
-      IO::Async::Handle 0.803
-      IO::Async::Internals::ChildManager 0.803
-      IO::Async::Internals::FunctionWorker 0.803
-      IO::Async::Listener 0.803
-      IO::Async::Loop 0.803
-      IO::Async::Loop::Poll 0.803
-      IO::Async::Loop::Select 0.803
-      IO::Async::LoopTests 0.803
-      IO::Async::Metrics 0.803
-      IO::Async::Notifier 0.803
-      IO::Async::OS 0.803
-      IO::Async::OS::MSWin32 0.803
-      IO::Async::OS::cygwin 0.803
-      IO::Async::OS::linux 0.803
-      IO::Async::PID 0.803
-      IO::Async::Process 0.803
-      IO::Async::Protocol 0.803
-      IO::Async::Protocol::LineStream 0.803
-      IO::Async::Protocol::Stream 0.803
-      IO::Async::Resolver 0.803
-      IO::Async::Routine 0.803
-      IO::Async::Signal 0.803
-      IO::Async::Socket 0.803
-      IO::Async::Stream 0.803
-      IO::Async::Test 0.803
-      IO::Async::Timer 0.803
-      IO::Async::Timer::Absolute 0.803
-      IO::Async::Timer::Countdown 0.803
-      IO::Async::Timer::Periodic 0.803
+      Future::IO::Impl::IOAsync 0.804
+      IO::Async 0.804
+      IO::Async::Channel 0.804
+      IO::Async::Debug 0.804
+      IO::Async::File 0.804
+      IO::Async::FileStream 0.804
+      IO::Async::Function 0.804
+      IO::Async::Future 0.804
+      IO::Async::Handle 0.804
+      IO::Async::Internals::ChildManager 0.804
+      IO::Async::Internals::FunctionWorker 0.804
+      IO::Async::Listener 0.804
+      IO::Async::Loop 0.804
+      IO::Async::Loop::Poll 0.804
+      IO::Async::Loop::Select 0.804
+      IO::Async::LoopTests 0.804
+      IO::Async::Metrics 0.804
+      IO::Async::Notifier 0.804
+      IO::Async::OS 0.804
+      IO::Async::OS::MSWin32 0.804
+      IO::Async::OS::cygwin 0.804
+      IO::Async::OS::linux 0.804
+      IO::Async::PID 0.804
+      IO::Async::Process 0.804
+      IO::Async::Protocol 0.804
+      IO::Async::Protocol::LineStream 0.804
+      IO::Async::Protocol::Stream 0.804
+      IO::Async::Resolver 0.804
+      IO::Async::Routine 0.804
+      IO::Async::Signal 0.804
+      IO::Async::Socket 0.804
+      IO::Async::Stream 0.804
+      IO::Async::Test 0.804
+      IO::Async::Timer 0.804
+      IO::Async::Timer::Absolute 0.804
+      IO::Async::Timer::Countdown 0.804
+      IO::Async::Timer::Periodic 0.804
     requirements:
       Exporter 5.57
       File::stat 0
@@ -3934,12 +3936,11 @@ DISTRIBUTIONS
       Params::Util 0
       perl 5.012
       version 0.82
-  MooseX-Types-URI-0.09
-    pathname: E/ET/ETHER/MooseX-Types-URI-0.09.tar.gz
+  MooseX-Types-URI-0.10
+    pathname: E/ET/ETHER/MooseX-Types-URI-0.10.tar.gz
     provides:
-      MooseX::Types::URI 0.09
+      MooseX::Types::URI 0.10
     requirements:
-      ExtUtils::MakeMaker 0
       Module::Build::Tiny 0.034
       MooseX::Types 0.40
       MooseX::Types::Moose 0
@@ -5058,17 +5059,6 @@ DISTRIBUTIONS
       perl 5.008000
       strict 0
       warnings 0
-  Sub-Name-0.28
-    pathname: E/ET/ETHER/Sub-Name-0.28.tar.gz
-    provides:
-      Sub::Name 0.28
-    requirements:
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      XSLoader 0
-      perl 5.006
-      strict 0
-      warnings 0
   Sub-Quote-2.006008
     pathname: H/HA/HAARG/Sub-Quote-2.006008.tar.gz
     provides:
@@ -5236,6 +5226,19 @@ DISTRIBUTIONS
       Test::Builder 0
       Try::Tiny 0.07
       strict 0
+      warnings 0
+  Test-Number-Delta-1.06
+    pathname: D/DA/DAGOLDEN/Test-Number-Delta-1.06.tar.gz
+    provides:
+      Test::Number::Delta 1.06
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      Test::Builder 0
+      perl 5.006
+      strict 0
+      vars 0
       warnings 0
   Test-Requires-0.11
     pathname: T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
@@ -5590,6 +5593,22 @@ DISTRIBUTIONS
     requirements:
       Test::More 0
       perl 5.005
+  Time-Moment-0.44
+    pathname: C/CH/CHANSEN/Time-Moment-0.44.tar.gz
+    provides:
+      Time::Moment 0.44
+      Time::Moment::Adjusters 0.44
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.59
+      ExtUtils::ParseXS 3.18
+      Test::Fatal 0.006
+      Test::More 0.88
+      Test::Number::Delta 1.06
+      Test::Requires 0
+      Time::HiRes 0
+      XSLoader 0.02
+      perl 5.008001
   TimeDate-2.33
     pathname: A/AT/ATOOMIC/TimeDate-2.33.tar.gz
     provides:
@@ -6097,10 +6116,10 @@ DISTRIBUTIONS
       local::lib 2.000029
     requirements:
       perl 5.006
-  meta-0.012
-    pathname: P/PE/PEVANS/meta-0.012.tar.gz
+  meta-0.013
+    pathname: P/PE/PEVANS/meta-0.013.tar.gz
     provides:
-      meta 0.012
+      meta 0.013
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
