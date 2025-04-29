@@ -29,6 +29,8 @@ requires 'Hash::Ordered';
 requires 'Data::Printer';
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';
+requires 'Time::Moment';
+requires 'Time::HiRes';
 
 requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
@@ -75,7 +77,7 @@ on develop => sub {
   requires 'Dist::Milla', 'v1.0.21';
   requires 'Carmel', 'v0.1.56';
   requires 'Plack::Middleware::Debug';
-}; 
+};
 
 on test => sub {
   requires 'Test::More', '0.96'

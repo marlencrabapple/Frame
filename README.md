@@ -10,7 +10,7 @@ Frame - Bare-bones, real-time web framework (WIP)
     use v5.36;
 
     class FrameApp :does(Frame);
-    
+
     method startup {
       $self->routes->get('/', sub ($c) {
         $c->render('Frame works!')

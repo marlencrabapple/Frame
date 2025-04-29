@@ -1,9 +1,9 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-class Frame :abstract :does(Frame::Base);
+role Frame : does(Frame::Base);
 
-our $VERSION  = '0.01.4';
+our $VERSION = '0.01.4';
 
 use utf8;
 use v5.40;
@@ -23,124 +23,101 @@ use Frame::Routes;
 use Frame::Request;
 use Frame::Controller::Default;
 
-our $_config_default;
+const our $config_default => $Frame::Config::config_default;
 
-try {
-  my $error;
-  
-  ($_config_default, $error) = from_toml(
-    path($ENV{FRAME_DEFAULT_CONFIG_FILE}
-      // 'config-default.toml')
-    ->slurp_utf8);
-
-  if ($error) {
-    die $error
-  }
-}
-catch ($e) {
-  $_config_default = { charset => 'utf8' };
-  warn Dumper($e)
-}
-
-const our $config_default => { %$_config_default };
-
-field $loop :reader;
-field $ua :reader;
-field $routes :reader;
-field $config :reader :inheritable;
-field $charset :reader = 'utf-8';
-field $request_class :param = 'Frame::Request';
-field $controller_namespace :param :reader = undef;
-field $default_controller_class = 'Frame::Controller::Default';
+field $loop : reader;
+field $ua : reader;
+field $routes : reader;
+field $config : reader : inheritable;
+field $charset : reader                      = 'utf-8';
+field $request_class : param                 = 'Frame::Request';
+field $controller_namespace : param : reader = undef;
+field $default_controller_class              = 'Frame::Controller::Default';
 field $default_controller_meta;
 
-ADJUSTPARAMS ($params) {
-  unshift @INC, $INC[1];
-  $self->app($self);
+ADJUSTPARAMS($params) {
+    unshift @INC, $INC[1];
+    $self->app($self);
 
-  $loop = IO::Async::Loop->new; # This grabs the existing loop
-  $ua = Net::Async::HTTP->new;
-  $loop->add($ua);
+    $loop = IO::Async::Loop->new;    # This grabs the existing loop
+    $ua   = Net::Async::HTTP->new;
+    $loop->add($ua);
 
-  my ($_config, $error) = from_toml(path($ENV{FRAME_CONFIG_FILE}
-		// 'config.toml')->slurp_utf8);
+    Frame::Base::dmsg { config => $config, config_default => $config_default };
 
-  if($error) {
-    $_config = { charset => 'utf8' }
-  }
+    $charset       = $$config{charset}       if $$config{charset};
+    $request_class = $$config{request_class} if exists $$config{request_class};
 
-  const my $__config => { %$config_default, %$_config };
-  $config //= $__config;
+    $controller_namespace //=
+      exists $$config{controller_namespace}
+      ? $$config{controller_namespace}
+      : __CLASS__ . '::Controller';
 
-  dmsg $config, $_config, $error, $config_default;
+    try {
+        my $fn = __CLASS__ . '/Controller.pm';
+        require "$fn";
 
-  $charset = $$config{charset} if $$config{charset};
-  $request_class = $$config{request_class} if exists $$config{request_class};
-  
-  $controller_namespace //= exists $$config{controller_namespace}
-    ? $$config{controller_namespace} : __CLASS__ . '::Controller';
+        my $meta = Object::Pad::MOP::Class->create_class(
+            __CLASS__ . "::Controller::$self",
+            isa => $default_controller_class
+        );
 
-  try {
-    my $fn = __CLASS__ . '/Controller.pm';
-    require "$fn";
+        $meta->add_role( __CLASS__ . '::Controller' );
+        $meta->seal;
 
-    my $meta = Object::Pad::MOP::Class->create_class(__CLASS__ . "::Controller::$self"
-      , isa => $default_controller_class);
+        $default_controller_meta  = $meta;
+        $default_controller_class = $meta->name
+    }
+    catch ($e) {
+        Frame::Base::dmsg $e
+    }
 
-    $meta->add_role(__CLASS__ . '::Controller');
-    $meta->seal;
-
-    $default_controller_meta = $meta;
-    $default_controller_class = $meta->name
-  }
-  catch ($e) {
-    dmsg $e if $ENV{FRAME_DEBUG}
-  }
-  
-  $routes = Frame::Routes->new(app => $self);
-  $self->startup
+    $routes = Frame::Routes->new( app => $self );
+    $self->startup
 }
 
-method to_psgi { sub { $self->handler(shift) } }
+method to_psgi {
+    sub { $self->handler(shift) }
+}
 
 method handler ($env) {
-  my $req = $request_class->new(app => $self, env => $env);
-  my $res = $self->dispatch($req);
+    my $req = $request_class->new( app => $self, env => $env );
+    my $res = $self->dispatch($req);
 
-  utf8::encode($res->[2][0])
-    if $res->[2][0] =~ /[^\x00-\xff]/g;
+    utf8::encode( $res->[2][0] )
+      if $res->[2][0] =~ /[^\x00-\xff]/g;
 
-  $res
+    $res;
 }
 
 method dispatch ($req) {
-  my $res;
+    my $res;
 
-  if (my $match = $routes->match($req)) {
-    if ($match isa 'Plack::Response') {
-      $res = $match->finalize
+    if ( my $match = $routes->match($req) ) {
+        if ( $match isa 'Plack::Response' ) {
+            $res = $match->finalize;
+        }
+        elsif ( $match isa 'Frame::Routes::Route' ) {
+            $res = $self->route( $match, $req )->finalize;
+        }
     }
-    elsif ($match isa 'Frame::Routes::Route') {
-      $res = $self->route($match, $req)->finalize
+    else {
+        $res = $default_controller_class->new( app => $self, req => $req )
+          ->render_404->finalize;
     }
-  }
-  else {
-    $res = $default_controller_class
-      ->new(app => $self, req => $req)
-      ->render_404->finalize
-  }
 
-  $res
+    $res;
 }
 
-method route ($route, $req) {
-  my ($c, $sub) = $route->dest->@{qw(c sub)};
-  $c = ($c || $default_controller_class)->new(app => $self, req => $req, route => $route);
+method route ( $route, $req ) {
+    my ( $c, $sub ) = $route->dest->@{qw(c sub)};
+    $c = ( $c || $default_controller_class )
+      ->new( app => $self, req => $req, route => $route );
 
-  my $res = $c->$sub($req->placeholder_values_ord) // $c->res;
-  $res = $res->get if $res isa 'Future';
+    my $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
+    $res = $res->get if $res isa 'Future';
 
-  $res
+    $res;
 }
 
 method startup;
@@ -161,7 +138,7 @@ Frame - Bare-bones, real-time web framework (WIP)
   use v5.36;
 
   class FrameApp :does(Frame);
-  
+
   method startup {
     $self->routes->get('/', sub ($c) {
       $c->render('Frame works!')
