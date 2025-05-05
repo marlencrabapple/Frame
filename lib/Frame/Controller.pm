@@ -22,9 +22,13 @@ our $tx_default = Text::Xslate->new(
     path  => ['view']
 );
 
-$^H{ __PACKAGE__ . '/user' } = 1;
+method $import : common {
+    $^H{ __PACKAGE__ . '/user' } = 1;
+};
 
-APPLY {
+APPLY($mop) {
+    my $class = $mop->name;
+    $class->$import(@_);
     $^H{ __PACKAGE__ . '/user' } = 1;
 }
 
