@@ -12,34 +12,41 @@ use Text::Xslate;
 use JSON::MaybeXS;
 use Feature::Compat::Try;
 use Frame::Request;
+use Const::Fast;
 
-our @EXPORT_DOES = qw(template);
+const our @EXPORT_DOES => qw(template);
 
-our $template_vars = {};
-
-our $tx_default = Text::Xslate->new(
+const our $tx_default => Text::Xslate->new(
     cache => $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development' ? 0 : 1,
     path  => ['view']
 );
 
-$^H{ __PACKAGE__ . '/user' } = 1;
+method $import : common {
+    $^H{ __PACKAGE__ . '/user' } = 1;
+    $^H{"$class/user"} = 1;
+};
 
 APPLY {
-    $^H{ __PACKAGE__ . '/user' } = 1;
+    my $mop = shift;
+
+    do {
+        my $class = $mop->name;
+        $import->( $class, @_ );
+        $^H{ __PACKAGE__ . '/user' } = 1;
+        $^H{"$class/user"} = 1;
+    }
 }
 
 field $req : param : reader : weak;
 field $route : param : reader = undef;
 field $res : reader;    # :weak;
 
-# field $tx :reader;
-
 ADJUSTPARAMS($params) {
     $res = $req->new_response
 }
 
 method template : common ($name, $vars = {}, @args) {
-    $tx_default->render( $name, { %$template_vars, %$vars } );
+    $tx_default->render( $name, {%$vars} );
 }
 
 method stash { $req->stash }

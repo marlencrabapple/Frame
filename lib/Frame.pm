@@ -43,7 +43,8 @@ ADJUSTPARAMS($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    Frame::Base::dmsg { config => $config, config_default => $config_default };
+    Frame::Base->dmsg(
+        { config => $config, config_default => $config_default } );
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
