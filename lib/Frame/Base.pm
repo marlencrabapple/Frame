@@ -9,9 +9,10 @@ use v5.40;
 use parent 'Exporter';
 
 use Carp;
+use Const::Fast;
+use Const::Fast::Exporter;
 use Devel::StackTrace::WithLexicals;
 use PadWalker qw(peek_my peek_our);
-use Feature::Compat::Try;
 use List::AllUtils qw(singleton any);
 use JSON::MaybeXS;
 use Data::Dumper;
@@ -21,19 +22,23 @@ use Module::Metadata;
 use Syntax::Keyword::Dynamically;
 use Syntax::Keyword::Try;
 
-our @EXPORT_DOES = qw(dmsg json __pkgfn__ callstack);
-our $dev_mode    = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+our @EXPORT         = qw(dmsg json __pkgfn__ callstack);
+our @EXPORT_DOES    = @EXPORT;
 
-sub _json_default {
-    JSON::MaybeXS->new( utf8 => 1, $dev_mode ? ( pretty => 1 ) : () );
-}
+const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
 
-state $json_default = _json_default;
+#sub _json_default {
+#    JSON::MaybeXS->new( utf8 => 1, $dev_mode ? ( pretty => 1 ) : () );
+#}
 
-our $package    = __PACKAGE__;
-our %seen_users = (
+const our $json_default => JSON::MaybeXS->new( utf8 => 1, $DEV_MODE ? ( pretty => 1 ) : () );
+
+const our $package => __PACKAGE__;
+
+state %seen_users  = (
     $package => {
-        fn  => { __PACKAGE__->__pkgfn__ => 1 },
+        fn  => { $package->__pkgfn__    => 1 },
         pkg => { $package               => 1 }
     }
 );
@@ -44,13 +49,15 @@ $^H{ __PACKAGE__ . '/user' } = 1;
 
 field $app : weak : param : accessor = undef;
 field $json;
-field $debug_mode = $ENV{FRAME_DEBUG} ? 1 : 0;
+field $debug_mode :param :accessor = $DEBUG_MODE;
+field $dev_mode :param :accessor = $DEV_MODE;
 
-APPLY {
+
+APPLY ($mop) {
     my ( $package, $class, $callstack ) =
-      ( __PACKAGE__, __CLASS__, [ [caller], [ caller 1 ] ] );
+      ( __PACKAGE__, $mop->name, [ [caller], [ caller 1 ] ] );
 
-    #$^H{ $class . '/user' } = 1;
+    $^H{ $class . '/user' } = 1;
 
     __PACKAGE__->exports(
         __PACKAGE__,
@@ -60,7 +67,7 @@ APPLY {
     );
 };
 
-ADJUSTPARAMS($params) {
+ADJUSTPARAMS ($params) {
 
     # $^H{ __CLASS__ . '/user' } = 1;
 
@@ -208,7 +215,7 @@ method callstack : common {
 }
 
 method dmsg : common (@msgs) {
-    return '' unless $dev_mode;
+    return '' unless $DEV_MODE;
 
     my @caller = caller 0;
 
