@@ -1,15 +1,6 @@
-Revision history for Frame
+Revision history for Perl extension Frame
 
 {{$NEXT}}
 
-0.01.4  2025-04-22 03:17:06 PDT
-	- Sync/remove old pinned versioned dependencies
+    - original version
 
-0.01.2  2024-12-17 22:48:34 PST
-	- Sync/remove old pinned versioned dependencies
-
-0.1.2  2024-10-18 07:59:59 PDT
-        - Frame::Controller::render: Fix undef content_type header
-
-0.01.1  2024-10-05 16:40:13 PDT
-        - Initial release
