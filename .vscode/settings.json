@@ -1,0 +1,14 @@
+{
+  "perlnavigator.perlEnv": {
+    "PERL5LIB": "./local/lib/perl5"
+  },
+  "perlnavigator.perlimportsLintEnabled": false,
+  "perlnavigator.perlimportsTidyEnabled": false,
+  "perlnavigator.perlcriticSeverity": 1,
+  "perlnavigator.perlcriticTheme": "community",
+  "perlnavigator.perlEnvAdd": false,
+  "perlnavigator.perlPath": "/home/nameless/.plenv/shims/perl",
+  "perlnavigator.includePaths": [
+    "/home/nameless/perlnavigator-deps/local/lib/perl5"
+  ]
+}

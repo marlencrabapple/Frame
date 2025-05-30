@@ -3,7 +3,6 @@
 ._*
 .DS_Store
 .carmel/
-.vscode/
 local/
 *.sqlite3
 /Frame-*
