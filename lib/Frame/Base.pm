@@ -8,6 +8,7 @@ use v5.40;
 
 use parent 'Exporter';
 
+use meta;
 use Carp;
 use Const::Fast;
 use Const::Fast::Exporter;

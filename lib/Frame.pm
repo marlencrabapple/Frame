@@ -3,7 +3,7 @@ use Object::Pad qw/:experimental(:all)/;
 package Frame;
 role Frame : does(Frame::Base);
 
-our $VERSION = '0.01.4';
+our $VERSION = '0.01.5';
 
 use utf8;
 use v5.40;
