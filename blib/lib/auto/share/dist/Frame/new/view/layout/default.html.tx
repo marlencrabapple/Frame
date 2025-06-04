@@ -1,3 +1,0 @@
-: include "part/header.html.tx"
-: block content -> {}
-: include "part/footer.html.tx"
