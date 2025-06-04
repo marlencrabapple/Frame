@@ -1,6 +1,9 @@
 Revision history for Frame
 
 {{$NEXT}}
+        - 1/2: Clean up Frame::Base and remove most import/preprocesisng code
+                - Fix __CLASS__+recursive inheritance related segfaults
+        - Start moving small web based utilities into the Frame::App:: namespace
 
 0.01.4  2025-04-22 03:17:06 PDT
 	- Sync/remove old pinned versioned dependencies

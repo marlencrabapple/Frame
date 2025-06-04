@@ -15,7 +15,6 @@ use Const::Fast;
 use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
-use Feature::Compat::Try;
 use Syntax::Keyword::Try;
 
 use Frame::Config;
