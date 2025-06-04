@@ -94,7 +94,6 @@ our ( $srvpath, $mount ) = $ARGV[-1] =~ $MOUNTRE;
 
 our $builder = Plack::Builder->new;
 
-
 sub serve_directory ( $path, %args ) {
     ( DirIndex->new( { root => $path } )->to_app, $args{uri} // '/' );
 }
@@ -104,22 +103,24 @@ sub init ( $path = path( $srvpath // getcwd ), $uri = $mount // undef ) {
       unless any { $_ } @ENV{qw'NODEBUG PRODUCTION'};
     $builder->app_middleware('REPL') if $ENV{REPLWARNING};
 
-    my $envoptname = sub ($unqualified, $sep = qr/_[a-z0-9]+([a-z0-9]|_*)/, @prefix) {
-    };
+    my $envoptname =
+      sub ( $unqualified, $sep = qr/_[a-z0-9]+([a-z0-9]|_*)/, @prefix ) {
+      };
 
     $builder->add_middleware(
         'Auth::Basic',
         authenticator => sub (@args) {
             valid_user(@args);
         }
-    ) unless any { $_ } @ENV{map {} qw(FRAME)};
+    ) unless any { $_ } @ENV{ map { } qw(FRAME) };
 
-    my ( $app, $mount ) =
-        -f $path ? serve_file( $path, uri => $uri )
+    my ( $app, $mount ) = -f $path
+      ? die
+"Unimplemented: Virtual directory index for file or list of files is not yet implemented." #serve_file( $path, uri => $uri )
       : -d $path ? serve_directory( $path, uri => $uri )
       :   die "Path '$path' does not appear to be a file or directory.";
 
-    ...
+    ...;
 }
 
 method startup {

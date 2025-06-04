@@ -68,6 +68,7 @@
             "LWP::Protocol::https" : "6.10",
             "LWP::UserAgent" : "6.67",
             "List::AllUtils" : "0.19",
+            "MIME::Type" : "0",
             "Module::Refresh" : "0",
             "Mozilla::CA" : "20211001",
             "Net::Async::HTTP" : "0.50",
@@ -88,6 +89,7 @@
             "Text::Xslate" : "v3.5.9",
             "Time::HiRes" : "0",
             "Time::Moment" : "0",
+            "meta" : "0.013",
             "perl" : "v5.40.0"
          }
       },

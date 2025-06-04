@@ -17,6 +17,9 @@ requires 'Plack', '1.0053',
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';
+requires 'meta', '0.013';
+requires 'MIME::Types';
+requires 'File::XDG';
 
 requires 'IO::Async', '0.802';
 requires 'IO::Async::SSL', '0.23';

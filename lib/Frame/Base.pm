@@ -8,11 +8,12 @@ use v5.40;
 
 use parent 'Exporter';
 
+use meta;
 use Carp;
 use Const::Fast;
 use Const::Fast::Exporter;
 use Devel::StackTrace::WithLexicals;
-use PadWalker qw(peek_my peek_our);
+use PadWalker      qw(peek_my peek_our);
 use List::AllUtils qw(singleton any);
 use JSON::MaybeXS;
 use Data::Dumper;
@@ -22,8 +23,8 @@ use Module::Metadata;
 use Syntax::Keyword::Dynamically;
 use Syntax::Keyword::Try;
 
-our @EXPORT         = qw(dmsg json __pkgfn__ callstack);
-our @EXPORT_DOES    = @EXPORT;
+our @EXPORT      = qw(dmsg json __pkgfn__ callstack);
+our @EXPORT_DOES = @EXPORT;
 
 const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
@@ -32,14 +33,15 @@ const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
 #    JSON::MaybeXS->new( utf8 => 1, $dev_mode ? ( pretty => 1 ) : () );
 #}
 
-const our $json_default => JSON::MaybeXS->new( utf8 => 1, $DEV_MODE ? ( pretty => 1 ) : () );
+const our $json_default =>
+  JSON::MaybeXS->new( utf8 => 1, $DEV_MODE ? ( pretty => 1 ) : () );
 
 const our $package => __PACKAGE__;
 
-state %seen_users  = (
+state %seen_users = (
     $package => {
-        fn  => { $package->__pkgfn__    => 1 },
-        pkg => { $package               => 1 }
+        fn  => { $package->__pkgfn__ => 1 },
+        pkg => { $package            => 1 }
     }
 );
 
@@ -49,11 +51,10 @@ $^H{ __PACKAGE__ . '/user' } = 1;
 
 field $app : weak : param : accessor = undef;
 field $json;
-field $debug_mode :param :accessor = $DEBUG_MODE;
-field $dev_mode :param :accessor = $DEV_MODE;
+field $debug_mode : param : accessor = $DEBUG_MODE;
+field $dev_mode : param : accessor   = $DEV_MODE;
 
-
-APPLY ($mop) {
+APPLY($mop) {
     my ( $package, $class, $callstack ) =
       ( __PACKAGE__, $mop->name, [ [caller], [ caller 1 ] ] );
 
@@ -67,7 +68,7 @@ APPLY ($mop) {
     );
 };
 
-ADJUSTPARAMS ($params) {
+ADJUSTPARAMS($params) {
 
     # $^H{ __CLASS__ . '/user' } = 1;
 
@@ -215,7 +216,7 @@ method callstack : common {
 }
 
 method dmsg : common (@msgs) {
-    return '' unless $DEV_MODE;
+    $DEV_MODE || return '';
 
     my @caller = caller 0;
 
