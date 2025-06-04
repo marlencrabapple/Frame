@@ -1,27 +1,29 @@
-use Object::Pad;
+use Object::Pad ':experimental(:all)';
 
 package Frame::Routes::Common;
 role Frame::Routes::Common : does(Frame::Base);
 
 use utf8;
-use v5.36;
+use v5.40;
 
-use constant METHODS => qw/GET HEAD POST UPDATE DELETE PUT PATCH CONNECT TRACE/;
+use Const::Fast;
 
-field $eol : param : accessor              = undef;
-field $inline : param : accessor           = undef;
-field $prev_stop : param : accessor : weak = undef;
-field $has_stops : param : accessor        = undef;
-field $stops : reader : param              = undef;
-field $patterns : accessor;
-field $tree : accessor;
-field $routes : reader;
+const our @METHODS => qw/GET HEAD POST UPDATE DELETE PUT PATCH CONNECT TRACE/;
+
+field $eol       : param  : accessor = undef;
+field $inline    : param  : accessor = undef;
+field $prev_stop : param  : accessor : weak = undef;
+field $has_stops : param  : accessor = undef;
+field $stops     : reader : param    = undef;
+field $patterns  : accessor;
+field $tree      : accessor;
+field $routes    : reader;
 
 ADJUST {
     $routes   //= [];
     $stops    //= [];
     $patterns //= {};
-    $tree     //= { map { $_ => [] } METHODS }
+    $tree     //= { map { $_ => [] } @METHODS }
 }
 
 method add : required;
@@ -78,7 +80,18 @@ method websocket { $self->ws(@_) }
 
 method under ( $pattern, @args ) {
     my $opts = ref $args[$#args] eq 'HASH' ? pop @args : {};
-    $self->any( $pattern, @args, { has_stops => 1, inline => 1, %$opts } );
-}
 
-1
+    use subs 'dmsg';
+
+    dmsg { 'ref[-1]_args' => ref @args };
+
+    $self->any(
+        $pattern, @args,
+        {
+            has_stops => 1,
+            inline    => 1,
+            %$opts
+        }
+    );
+
+}

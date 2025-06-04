@@ -3,7 +3,7 @@ use Object::Pad qw/:experimental(:all)/;
 package Frame;
 role Frame : does(Frame::Base);
 
-our $VERSION = '0.01.5';
+our $VERSION = '0.01.4';
 
 use utf8;
 use v5.40;
@@ -15,6 +15,7 @@ use Const::Fast;
 use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
+use Feature::Compat::Try;
 use Syntax::Keyword::Try;
 
 use Frame::Config;
@@ -34,17 +35,20 @@ field $controller_namespace : param : reader = undef;
 field $default_controller_class              = 'Frame::Controller::Default';
 field $default_controller_meta;
 
-ADJUSTPARAMS ($params) {
+ADJUSTPARAMS($params) {
     unshift @INC, $INC[1];
     $self->app($self);
-
-    #my $class = __CLASS__;
 
     $loop = IO::Async::Loop->new;    # This grabs the existing loop
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
+<<<<<<< HEAD
+    Frame::Base->dmsg(
+        { config => $config, config_default => $config_default } );
+=======
     Frame::Base::dmsg { config => $config, config_default => $config_default };
+>>>>>>> 70add1a (Clean build artifacts in repo, refreshed LICENSE and Build.PL)
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -70,31 +74,15 @@ ADJUSTPARAMS ($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        Frame::Base->dmsg( e => $e )
+        Frame::Base::dmsg $e
     }
 
     $routes = Frame::Routes->new( app => $self );
-
-    my %startup_opts = ( params => $params,
-                         app    => $self
-                         routes => $routes );
-
-    my $ret = $self->startup(%startup_opts);
-
-    warn __CLASS__ . "$\::startup did not return a valid value: '$ret'."
-      . " Valid values"
-      . "are 1 or the instance of the class its called on."
-          unless $ret == 1 || ( ref $ret && $ret == $self )
-
-    $ret
+    $self->startup
 }
 
 method to_psgi {
     sub { $self->handler(shift) }
-}
-
-method to_app {
-    \to_psgi->&*
 }
 
 method handler ($env) {
@@ -119,8 +107,7 @@ method dispatch ($req) {
         }
     }
     else {
-        $res = $default_controller_class
-          ->new( app => $self, req => $req )
+        $res = $default_controller_class->new( app => $self, req => $req )
           ->render_404->finalize;
     }
 
@@ -129,28 +116,10 @@ method dispatch ($req) {
 
 method route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
+    $c = ( $c || $default_controller_class )
+      ->new( app => $self, req => $req, route => $route );
 
-    #if ( blessed $sub ) {
-    #  die ... if $c
-    #}
-
-    Frame::Base->dmsg({ c => $c, sub => $sub, route => $route, req => $self });
-
-    if(blessed $c) {
-      my $res = $c->$sub( route => $route, req => $req, c => $c, sub => $sub)
-    }
-    else {
-        $c = ( $c || $default_controller_class )
-              ->new( app   => $self
-                   , req   => $req
-                   , route => $route );
-
-        my $res = $c->$sub( $req->placeholder_values_ord )
-            // $c->res;
-    ]
-
-
-
+    my $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
     $res = $res->get if $res isa 'Future';
 
     $res;

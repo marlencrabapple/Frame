@@ -6,13 +6,12 @@ role Frame::Base;
 use utf8;
 use v5.40;
 
-use parent 'Exporter';
-
+use meta;
 use Carp;
 use Const::Fast;
 use Const::Fast::Exporter;
 use Devel::StackTrace::WithLexicals;
-use PadWalker qw(peek_my peek_our);
+use PadWalker      qw(peek_my peek_our);
 use List::AllUtils qw(singleton any);
 use JSON::MaybeXS;
 use Data::Dumper;
@@ -22,24 +21,21 @@ use Module::Metadata;
 use Syntax::Keyword::Dynamically;
 use Syntax::Keyword::Try;
 
-our @EXPORT         = qw(dmsg json __pkgfn__ callstack);
-our @EXPORT_DOES    = @EXPORT;
+our @EXPORT      = qw(dmsg json __pkgfn__ callstack);
+our @EXPORT_DOES = @EXPORT;
 
 const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
 
-#sub _json_default {
-#    JSON::MaybeXS->new( utf8 => 1, $dev_mode ? ( pretty => 1 ) : () );
-#}
-
-const our $json_default => JSON::MaybeXS->new( utf8 => 1, $DEV_MODE ? ( pretty => 1 ) : () );
+const our $json_default =>
+  JSON::MaybeXS->new( utf8 => 1, $DEV_MODE ? ( pretty => 1 ) : () );
 
 const our $package => __PACKAGE__;
 
-state %seen_users  = (
+state %seen_users = (
     $package => {
-        fn  => { $package->__pkgfn__    => 1 },
-        pkg => { $package               => 1 }
+        fn  => { $package->__pkgfn__ => 1 },
+        pkg => { $package            => 1 }
     }
 );
 
@@ -49,147 +45,35 @@ $^H{ __PACKAGE__ . '/user' } = 1;
 
 field $app : weak : param : accessor = undef;
 field $json;
-field $debug_mode :param :accessor = $DEBUG_MODE;
-field $dev_mode :param :accessor = $DEV_MODE;
+field $debug_mode : param : accessor = $DEBUG_MODE;
+field $dev_mode   : param : accessor = $DEV_MODE;
 
+APPLY($mop) {
 
-APPLY ($mop) {
-    my ( $package, $class, $callstack ) =
-      ( __PACKAGE__, $mop->name, [ [caller], [ caller 1 ] ] );
+    # my ( $package, $class, $callstack ) =
+    #   ( __PACKAGE__, $mop->name, [ [caller], [ caller 1 ] ] );
 
-    $^H{ $class . '/user' } = 1;
+    $^H{ __PACKAGE__ . '/user' } = 1;
 
-    __PACKAGE__->exports(
-        __PACKAGE__,
-        sub ( $export, $realsub, @vars ) {
-            $package->monkey_patch( $$callstack[0], $export );
-        }
-    );
+    # __PACKAGE__->exports(
+    #     __PACKAGE__,
+    #     sub ( $export, $realsub, @vars ) {
+    #         $package->monkey_patch( $$callstack[0], $export );
+    #     }
+    # );
 };
 
-ADJUSTPARAMS ($params) {
+ADJUSTPARAMS($params) {
 
-    # $^H{ __CLASS__ . '/user' } = 1;
+    $^H{ __PACKAGE__ . '/user' } = 1;
 
-    my ( $package, $callstack ) =
-      ( __PACKAGE__, [ [caller], [ caller 1 ] ] );
-
-    #  $^H{ $class . '/user' } = 1;
-
-    __PACKAGE__->exports(
-        __PACKAGE__,
-        sub ( $export, $realsub, @vars ) {
-            $package->monkey_patch( $$callstack[0], $export );
-        }
-    );
+    # __PACKAGE__->exports(
+    #     __PACKAGE__,
+    #     sub ( $export, $realsub, @vars ) {
+    #         $package->monkey_patch( $$callstack[0], $export );
+    #     }
+    # );
 };
-
-method patch_self : common ($src, $plain_subs) {
-    my $meta     = $src->META();
-    my $old_hook = ${^HOOK}{require__after};
-
-    $seen_users{$src}{pkg}{$src} = 1;
-    $seen_users{$src}{fn}{ __pkgfn__($src) } = 1;
-
-    ${^HOOK}{require__after} = sub ($name) {
-        $old_hook->($name) if $old_hook;
-
-        if ( any { $name eq $_ } keys $seen_users{$src}{fn}->%* ) {
-            use feature ':5.40';
-
-            $^H{"$src/user"} = 1;
-
-            my $caller = [ caller 1 ];
-            $caller->[10]{"$src/user"} = 1;
-
-            __PACKAGE__->compose( $src, $caller );
-        }
-    };
-
-    $class->exports(
-        $src,
-        sub ( $export, $realsub, @vars ) {
-            use strict 'refs';
-            my $og_sub = eval { no strict 'refs'; \&{"$src\::$export"} };
-            my $wrapper;
-
-            try {
-                my $method_meta = $meta->get_method($export);
-
-                if ( $method_meta->is_common ) {
-                    $wrapper = sub {
-                        unshift @_, $src;
-                        goto $og_sub;
-                    }
-                }
-                else {
-                    $wrapper = sub {
-                        my @caller      = caller 0;
-                        my $caller_vars = peek_my(1);
-                        my $_self       = $$caller_vars{'$self'}->$*;
-                        my $_class      = ref $_self;
-                        my $_meta       = $_self->META();
-
-                        $og_sub = eval {
-                            no strict 'refs';
-                            \&{"$caller[0]\::$export"};
-                        };
-
-                        unshift @_, $_self;
-                        goto $og_sub;
-                    }
-                }
-
-                $class->monkey_patch(
-                    $src, $wrapper,
-                    name       => $export,
-                    patch_self => 1
-                )
-            }
-            catch ($e) {
-                $$plain_subs{$export} = 1
-            }
-        }
-    );
-}
-
-method json : common {
-    $json_default;
-}
-
-method exports : common ($src, $cb, @vars) {
-    {
-        no strict 'refs';
-        foreach my $export ( @{"$src\::EXPORT_DOES"} ) {
-            use strict 'refs';
-            return 0 unless $cb->( $export, $export, @vars );
-        }
-    }
-
-    1;
-}
-
-method monkey_patch : common ($package, $sub, %args) {
-    {
-        no strict 'refs';
-        no warnings 'redefine';
-
-        if ( ref $sub eq 'CODE' ) {
-            return -1 unless $args{name};
-            return -1 if ${"$package\::"}{ $args{name} } && !$args{patch_self};
-            *{"$package\::$args{name}"} = $sub;
-        }
-        else {
-            return -1 if ${"$package\::"}{$sub} && !$args{patch_self};
-            *{"$package\::$sub"} = \&{ $class . "::$sub" };
-        }
-    }
-
-    $args{on_patch}( $args{on_patch_args} )
-      if ref $args{on_patch} eq 'CODE';
-
-    1;
-}
 
 method __pkgfn__ : common ($pkgname = undef) {
     $pkgname //= $class;
@@ -215,7 +99,7 @@ method callstack : common {
 }
 
 method dmsg : common (@msgs) {
-    return '' unless $DEV_MODE;
+    $DEV_MODE || return '';
 
     my @caller = caller 0;
 
@@ -246,4 +130,3 @@ method dmsg : common (@msgs) {
     $out;
 }
 
-1

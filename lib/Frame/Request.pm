@@ -22,7 +22,7 @@ field @placeholder_values_ord :reader;
 field $stash :reader = {};
 
 method BUILDARGS :common (%args) {
-  (delete $args{env}, 1, %args)
+  ( delete $args{env}, 1, %args )
 }
 
 ADJUSTPARAMS ($params) {
@@ -48,7 +48,7 @@ method set_placeholders (@placeholders) {
   foreach my $placeholder (@placeholders) {
     $self->placeholder(%$placeholder)
   }
-  
+
   # TODO: Benchmark this against Struct::Dumb solution (defined in
   # route, init'd here)
   # lock_hashref_recurse($placeholders)

@@ -10,7 +10,8 @@ use Carp;
 use Encode;
 use Text::Xslate;
 use JSON::MaybeXS;
-use Feature::Compat::Try;
+use Syntax::Keyword::Try;
+use Syntax::Keyword::Dynamically;
 use Frame::Request;
 use Const::Fast;
 
@@ -21,31 +22,46 @@ const our $tx_default => Text::Xslate->new(
     path  => ['view']
 );
 
-method $import : common {
-    $^H{ __PACKAGE__ . '/user' } = 1;
-    $^H{"$class/user"} = 1;
-};
+# method $import : common {
+#     $^H{ __PACKAGE__ . '/user' } = 1;
+#     $^H{"$class/user"} = 1;
+# };
 
 APPLY {
     my $mop = shift;
 
-    do {
-        my $class = $mop->name;
-        $import->( $class, @_ );
-        $^H{ __PACKAGE__ . '/user' } = 1;
-        $^H{"$class/user"} = 1;
-    }
+    # do {
+    #     my $class = $mop->name;
+    #     $import->( $class, @_ );
+    #     $^H{ __PACKAGE__ . '/user' } = 1;
+    #     $^H{"$class/user"} = 1;
+    # }
 }
 
-field $req : param : reader : weak;
+field $config ADJUST { $self->config };
+field $req   : param : reader : weak;
 field $route : param : reader = undef;
-field $res : reader;    # :weak;
+field $res   : reader;    # :weak;
 
 ADJUSTPARAMS($params) {
     $res = $req->new_response
 }
 
-method template : common ($name, $vars = {}, @args) {
+class Frame::Template::Response : isa(Plack::Response) {
+    field $tx : param = $tx_default;
+
+    method render ( $template, $status = 200, %opts ) {
+        my $content = $tx->render( $template, delete $opts{template} );
+
+        $self->app->render(
+            $content, $status,
+            delete $opts{content_type} // 'text/html',
+            map { $_ // {} } @opts{qw(headers cookies)}, %opts
+        );
+    }
+};
+
+method template : common ($name, $vars = {}, %opts) {
     $tx_default->render( $name, {%$vars} );
 }
 
@@ -59,7 +75,21 @@ method render (
     $cookies      = {}, %opts
   )
 {
-    my $res = $opts{noop} ? $req->new_response : $self->res;
+    #my $class = __CLASS__;
+    my $class = __PACKAGE__;
+    carp "An existing response was overwritten by a call to $class->render()."
+      . "To disable this warning or change response precedence configure"
+      . "'template.default_res' as needed."
+      if ( $res && $self->res )
+      && ( !$opts{noop} || $config->{'template'}{default_res} );
+
+    #my $res = $opts{noop} ? $req->new_response : $self->res;
+
+    dynamically $res =
+      ( $opts{noop} || $config->{template}{default_res} eq 'lifecycle' )
+      ? $self->res
+      : $res->new_response;
+
     $content_type = $res->content_type;
     $opts{charset} //= $self->app->charset;
 

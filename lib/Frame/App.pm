@@ -17,9 +17,10 @@ field $tx;
 field $psgi;
 
 ADJUST {
-    $app  = Frame::Example->new;
-    $tx   = $Frame::Controller::tx_default;
-    $psgi = $app->to_psgi;
+    $app = Frame::Example->new;
+    $tx  = $Frame::Controller::tx_default;
+
+    #$psgi = $app->to_psgi;
 }
 
 state %dispatch = (

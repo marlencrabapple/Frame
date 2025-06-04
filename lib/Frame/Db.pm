@@ -20,7 +20,7 @@ method $import {
 
 APPLY($mop) {
     try {
-        Frame::Base::dmsg { env => config => $ENV{config} };
+        Frame::Base::dmsg { env => \%ENV, config => $ENV{config} };
 
         if ( my $source = $ENV{config}->{db}{source} ) {
             my ($driver) = $source =~ /dbi:([^:]+):.+/;

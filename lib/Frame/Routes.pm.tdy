@@ -35,11 +35,18 @@ method add ( $methods, $pattern, @args ) {
     }
     elsif ($dest) {
         if ( my $c = blessed $dest ) {
-            if ( $dest isa 'Plack::App::Component'
-              || $dest->DOES('Frame::Base')) {
+            if ( $dest isa 'Plack::App::Component' ) {
                 my $controller_class = blessed $dest;
-                my $sub              = sub ( $self, %opts ) {
-                    $self->call( $self->req->env, %opts );
+                my $sub              = sub ( $controller, %opts ) {
+
+                    # if ($opts{foo}) {
+                    #     ...
+                    # }
+                    # else {
+
+                    # }
+
+                    $controller->call( $controller->req->env, %opts );
                 };
 
                 $route_args{dest} = {
@@ -72,9 +79,6 @@ method add ( $methods, $pattern, @args ) {
         eval "require $c; 1" or die $@;
 
         my $sub = $route_args{dest}{sub};
-
-        # This may not work because it isn't an instance
-        # TODO: look at docs
         $c->can( $route_args{dest}{sub} ) || $c->$sub;
 
         $route_args{dest}{c} = $c;
