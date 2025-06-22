@@ -5,18 +5,21 @@ package Frame::Routes;
 class Frame::Routes : does(Frame::Routes::Common);
 
 use utf8;
-use v5.36;
+use v5.40;
 
 use Frame::Routes::Route;
 use Frame::Routes::Pattern;
 use Frame::Request::Placeholder::Dummy;
 
+use Const::Fast;
 use List::Util 'uniq';
 use Scalar::Util qw/blessed refaddr/;
 
-my $ptn = join '|', Frame::Routes::Common::METHODS;
-use constant METHRE => qr/^ptn$/i;
-use constant RERE   => qr/^regexp$/i;
+my $ptn = join '|', @Frame::Routes::Common::METHODS;
+
+const our $METHRE  => qr/^ptn$/i;
+const our $RERE    => qr/^regexp$/i;
+const our $DASH_RE => qr/=/;
 
 method add ( $methods, $pattern, @args ) {
     my %route_args = ( factory => $self->app );
@@ -31,14 +34,15 @@ method add ( $methods, $pattern, @args ) {
         $route_args{dest}{sub} = $dest;
     }
     elsif ( $dest && !ref($dest) ) {
-        use constant DESTRE => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
-        my ( $c, $sub ) = $dest =~ DESTRE;
+        const our $DESTRE     => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
+        const our $DESTPKG_RE => s/$DASH_RE/::/g;
+        my ( $c, $sub ) = $dest =~ $DESTRE;
 
         if ($c) {
             $route_args{dest} = {
                 sub => $sub,
                 c   => join '::',
-                map { ucfirst $_ } split '-', $c
+                map { ucfirst $_ } split /-/, $c
               }
               if $sub;
         }
@@ -72,7 +76,7 @@ method add ( $methods, $pattern, @args ) {
             $has_args = 1;
         }
         elsif ( ref $arg eq 'ARRAY' && scalar @$methods == 0 ) {
-            next unless $$arg[0] =~ METHRE;
+            next unless $$arg[0] =~ $METHRE;
             $route_args{methods} = $arg;
             $has_args = 1;
         }
@@ -82,7 +86,7 @@ method add ( $methods, $pattern, @args ) {
       if !$has_args && !$route_args{eol} && scalar @args == 1;
 
     $route_args{pattern} //= Frame::Routes::Pattern->new( pattern => $pattern );
-    $methods = [Frame::Routes::Common::METHODS] unless scalar @$methods;
+    $methods = [@Frame::Routes::Common::METHODS] unless scalar @$methods;
 
     if ( $$opts{prev_stop} ) {
         my @stops;
@@ -149,7 +153,7 @@ method match ($req) {
                       ? $self->patterns->{$key}->( $self->app, $req, $part )
                           ? 1
                           : 0
-                      : ref( $self->patterns->{$key} ) =~ RERE
+                      : ref( $self->patterns->{$key} ) =~ $RERE
                       ? $part =~ $self->patterns->{$key}
                           ? 1
                           : 0

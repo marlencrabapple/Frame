@@ -51,25 +51,6 @@ DISTRIBUTIONS
       perl 5.020
       strict 0
       warnings 0
-<<<<<<< HEAD
-  App-FatPacker-0.010008
-    pathname: M/MS/MSTROUT/App-FatPacker-0.010008.tar.gz
-    provides:
-      App::FatPacker 0.010008
-      App::FatPacker::Trace undef
-    requirements:
-      B 1.01
-      Cwd 0
-      ExtUtils::MakeMaker 0
-      File::Copy 0
-      File::Find 0
-      File::Path 0
-      File::Spec::Functions 0
-      File::Spec::Unix 0
-      Getopt::Long 0
-      perl 5.008000
-=======
->>>>>>> 3e42ccd (...)
   B-Hooks-EndOfScope-0.28
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.28.tar.gz
     provides:
@@ -147,10 +128,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  CPAN-DistnameInfo-0.12
-    pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
+  CPAN-DistnameInfo-0.12_01
+    pathname: R/RJ/RJBS/CPAN-DistnameInfo-0.12_01.tar.gz
     provides:
-      CPAN::DistnameInfo 0.12
+      CPAN::DistnameInfo 0.12_01
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -394,10 +375,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Clone-0.47
-    pathname: A/AT/ATOOMIC/Clone-0.47.tar.gz
+  Clone-0.48_01
+    pathname: A/AT/ATOOMIC/Clone-0.48_01.tar.gz
     provides:
-      Clone 0.47
+      Clone 0.48_01
     requirements:
       ExtUtils::MakeMaker 0
   Clone-Choose-0.010
@@ -408,6 +389,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Storable 0
       perl 5.008001
+  Clone-PP-1.08
+    pathname: N/NE/NEILB/Clone-PP-1.08.tar.gz
+    provides:
+      Clone::PP 1.08
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      perl 5.006
+      strict 0
+      vars 0
+      warnings 0
   Config-INI-0.029
     pathname: R/RJ/RJBS/Config-INI-0.029.tar.gz
     provides:
@@ -795,7 +787,6 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-<<<<<<< HEAD
   DateTime-1.66
     pathname: D/DR/DROLSKY/DateTime-1.66.tar.gz
     provides:
@@ -809,21 +800,6 @@ DISTRIBUTIONS
       DateTime::PP 1.66
       DateTime::PPExtra 1.66
       DateTime::Types 1.66
-=======
-  DateTime-1.65
-    pathname: D/DR/DROLSKY/DateTime-1.65.tar.gz
-    provides:
-      DateTime 1.65
-      DateTime::Duration 1.65
-      DateTime::Helpers 1.65
-      DateTime::Infinite 1.65
-      DateTime::Infinite::Future 1.65
-      DateTime::Infinite::Past 1.65
-      DateTime::LeapSecond 1.65
-      DateTime::PP 1.65
-      DateTime::PPExtra 1.65
-      DateTime::Types 1.65
->>>>>>> 3e42ccd (...)
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -833,11 +809,7 @@ DISTRIBUTIONS
       POSIX 0
       Params::ValidationCompiler 0.26
       Scalar::Util 0
-<<<<<<< HEAD
       Specio 0.50
-=======
-      Specio 0.18
->>>>>>> 3e42ccd (...)
       Specio::Declare 0
       Specio::Exporter 0
       Specio::Library::Builtins 0
@@ -2265,10 +2237,10 @@ DISTRIBUTIONS
       File::Copy 0
       File::Glob 0
       File::Spec 0
-  File-Find-Rule-0.34
-    pathname: R/RC/RCLAMP/File-Find-Rule-0.34.tar.gz
+  File-Find-Rule-0.35
+    pathname: R/RC/RCLAMP/File-Find-Rule-0.35.tar.gz
     provides:
-      File::Find::Rule 0.34
+      File::Find::Rule 0.35
       File::Find::Rule::Test::ATeam undef
     requirements:
       ExtUtils::MakeMaker 0
@@ -2353,6 +2325,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       base 0
+      perl 5.006
+  File-XDG-1.03
+    pathname: P/PL/PLICEASE/File-XDG-1.03.tar.gz
+    provides:
+      File::XDG 1.03
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Path 2.07
+      Path::Tiny 0
+      Ref::Util 0
       perl 5.006
   File-chdir-0.1011
     pathname: D/DA/DAGOLDEN/File-chdir-0.1011.tar.gz
@@ -2752,18 +2734,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.089
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.089.tar.gz
+  IO-Socket-SSL-2.094
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.094.tar.gz
     provides:
-      IO::Socket::SSL 2.089
+      IO::Socket::SSL 2.094
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.089
-      IO::Socket::SSL::OCSP_Resolver 2.089
+      IO::Socket::SSL::OCSP_Cache 2.094
+      IO::Socket::SSL::OCSP_Resolver 2.094
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.089
-      IO::Socket::SSL::SSL_HANDLE 2.089
-      IO::Socket::SSL::Session_Cache 2.089
-      IO::Socket::SSL::Trace 2.089
+      IO::Socket::SSL::SSL_Context 2.094
+      IO::Socket::SSL::SSL_HANDLE 2.094
+      IO::Socket::SSL::Session_Cache 2.094
+      IO::Socket::SSL::Trace 2.094
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -3052,6 +3034,18 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       perl 5.008001
       utf8 0
+  MIME-Types-2.28
+    pathname: M/MA/MARKOV/MIME-Types-2.28.tar.gz
+    provides:
+      MIME::Type 2.28
+      MIME::Types 2.28
+      MojoX::MIME::Types 2.28
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Spec 0
+      List::Util 0
+      Test::More 0.47
   MRO-Compat-0.15
     pathname: H/HA/HAARG/MRO-Compat-0.15.tar.gz
     provides:
@@ -3130,8 +3124,6 @@ DISTRIBUTIONS
       perl 5.014
   Mixin-Linewise-0.111
     pathname: R/RJ/RJBS/Mixin-Linewise-0.111.tar.gz
-<<<<<<< HEAD
-=======
     provides:
       Mixin::Linewise 0.111
       Mixin::Linewise::Readers 0.111
@@ -3147,42 +3139,26 @@ DISTRIBUTIONS
       warnings 0
   Module-Build-0.42_35
     pathname: L/LE/LEONT/Module-Build-0.42_35.tar.gz
->>>>>>> 3e42ccd (...)
     provides:
-      Mixin::Linewise 0.111
-      Mixin::Linewise::Readers 0.111
-      Mixin::Linewise::Writers 0.111
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.78
-      IO::File 0
-      PerlIO::utf8_strict 0
-      Sub::Exporter 0
-      perl 5.012
-      strict 0
-      warnings 0
-  Module-Build-0.4234
-    pathname: L/LE/LEONT/Module-Build-0.4234.tar.gz
-    provides:
-      Module::Build 0.4234
-      Module::Build::Base 0.4234
-      Module::Build::Compat 0.4234
-      Module::Build::Config 0.4234
-      Module::Build::Cookbook 0.4234
-      Module::Build::Dumper 0.4234
-      Module::Build::Notes 0.4234
-      Module::Build::PPMMaker 0.4234
-      Module::Build::Platform::Default 0.4234
-      Module::Build::Platform::MacOS 0.4234
-      Module::Build::Platform::Unix 0.4234
-      Module::Build::Platform::VMS 0.4234
-      Module::Build::Platform::VOS 0.4234
-      Module::Build::Platform::Windows 0.4234
-      Module::Build::Platform::aix 0.4234
-      Module::Build::Platform::cygwin 0.4234
-      Module::Build::Platform::darwin 0.4234
-      Module::Build::Platform::os2 0.4234
-      Module::Build::PodParser 0.4234
+      Module::Build 0.42_35
+      Module::Build::Base 0.42_35
+      Module::Build::Compat 0.42_35
+      Module::Build::Config 0.42_35
+      Module::Build::Cookbook 0.42_35
+      Module::Build::Dumper 0.42_35
+      Module::Build::Notes 0.42_35
+      Module::Build::PPMMaker 0.42_35
+      Module::Build::Platform::Default 0.42_35
+      Module::Build::Platform::MacOS 0.42_35
+      Module::Build::Platform::Unix 0.42_35
+      Module::Build::Platform::VMS 0.42_35
+      Module::Build::Platform::VOS 0.42_35
+      Module::Build::Platform::Windows 0.42_35
+      Module::Build::Platform::aix 0.42_35
+      Module::Build::Platform::cygwin 0.42_35
+      Module::Build::Platform::darwin 0.42_35
+      Module::Build::Platform::os2 0.42_35
+      Module::Build::PodParser 0.42_35
     requirements:
       CPAN::Meta 2.142060
       Cwd 0
@@ -4052,10 +4028,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20250202
-    pathname: L/LW/LWP/Mozilla-CA-20250202.tar.gz
+  Mozilla-CA-20250602
+    pathname: L/LW/LWP/Mozilla-CA-20250602.tar.gz
     provides:
-      Mozilla::CA 20250202
+      Mozilla::CA 20250602
     requirements:
       ExtUtils::MakeMaker 0
   Net-Async-HTTP-0.50
@@ -4149,16 +4125,6 @@ DISTRIBUTIONS
       perl 5.008001
   Number-Compare-0.03
     pathname: R/RC/RCLAMP/Number-Compare-0.03.tar.gz
-<<<<<<< HEAD
-=======
-    provides:
-      Number::Compare 0.03
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
-  Object-Pad-0.819
-    pathname: P/PE/PEVANS/Object-Pad-0.819.tar.gz
->>>>>>> 3e42ccd (...)
     provides:
       Number::Compare 0.03
     requirements:
@@ -4496,8 +4462,6 @@ DISTRIBUTIONS
       warnings::register 0
   Perl-PrereqScanner-1.100
     pathname: R/RJ/RJBS/Perl-PrereqScanner-1.100.tar.gz
-<<<<<<< HEAD
-=======
     provides:
       Perl::PrereqScanner 1.100
       Perl::PrereqScanner::Scanner 1.100
@@ -4542,78 +4506,102 @@ DISTRIBUTIONS
       warnings 0
   Plack-1.0053
     pathname: C/CR/CRABAPP/Plack-1.0053-TRIAL.tar.gz
->>>>>>> 3e42ccd (...)
     provides:
-      Perl::PrereqScanner 1.100
-      Perl::PrereqScanner::Scanner 1.100
-      Perl::PrereqScanner::Scanner::Aliased 1.100
-      Perl::PrereqScanner::Scanner::Moose 1.100
-      Perl::PrereqScanner::Scanner::POE 1.100
-      Perl::PrereqScanner::Scanner::Perl5 1.100
-      Perl::PrereqScanner::Scanner::Superclass 1.100
-      Perl::PrereqScanner::Scanner::TestMore 1.100
+      HTTP::Message::PSGI undef
+      HTTP::Server::PSGI undef
+      Plack 1.0053
+      Plack::App::CGIBin undef
+      Plack::App::Cascade undef
+      Plack::App::Directory undef
+      Plack::App::File undef
+      Plack::App::PSGIBin undef
+      Plack::App::URLMap undef
+      Plack::App::WrapCGI undef
+      Plack::Builder undef
+      Plack::Component undef
+      Plack::HTTPParser undef
+      Plack::HTTPParser::PP undef
+      Plack::Handler undef
+      Plack::Handler::Apache1 undef
+      Plack::Handler::Apache2 undef
+      Plack::Handler::Apache2::Registry undef
+      Plack::Handler::CGI undef
+      Plack::Handler::CGI::Writer undef
+      Plack::Handler::FCGI undef
+      Plack::Handler::HTTP::Server::PSGI undef
+      Plack::Handler::Standalone undef
+      Plack::LWPish undef
+      Plack::Loader undef
+      Plack::Loader::Delayed undef
+      Plack::Loader::Restarter undef
+      Plack::Loader::Shotgun undef
+      Plack::MIME undef
+      Plack::Middleware undef
+      Plack::Middleware::AccessLog undef
+      Plack::Middleware::AccessLog::Timed undef
+      Plack::Middleware::Auth::Basic undef
+      Plack::Middleware::BufferedStreaming undef
+      Plack::Middleware::Chunked undef
+      Plack::Middleware::Conditional undef
+      Plack::Middleware::ConditionalGET undef
+      Plack::Middleware::ContentLength undef
+      Plack::Middleware::ContentMD5 undef
+      Plack::Middleware::ErrorDocument undef
+      Plack::Middleware::HTTPExceptions undef
+      Plack::Middleware::Head undef
+      Plack::Middleware::IIS6ScriptNameFix undef
+      Plack::Middleware::IIS7KeepAliveFix undef
+      Plack::Middleware::JSONP undef
+      Plack::Middleware::LighttpdScriptNameFix undef
+      Plack::Middleware::Lint undef
+      Plack::Middleware::Log4perl undef
+      Plack::Middleware::LogDispatch undef
+      Plack::Middleware::NullLogger undef
+      Plack::Middleware::RearrangeHeaders undef
+      Plack::Middleware::Recursive undef
+      Plack::Middleware::Refresh undef
+      Plack::Middleware::Runtime undef
+      Plack::Middleware::SimpleContentFilter undef
+      Plack::Middleware::SimpleLogger undef
+      Plack::Middleware::StackTrace undef
+      Plack::Middleware::Static undef
+      Plack::Middleware::XFramework undef
+      Plack::Middleware::XSendfile undef
+      Plack::Recursive::ForwardRequest undef
+      Plack::Request 1.0053
+      Plack::Request::Upload undef
+      Plack::Response 1.0053
+      Plack::Runner undef
+      Plack::TempBuffer undef
+      Plack::Test undef
+      Plack::Test::MockHTTP undef
+      Plack::Test::Server undef
+      Plack::Test::Suite undef
+      Plack::Util undef
+      Plack::Util::Accessor undef
+      Plack::Util::IOWithPath undef
+      Plack::Util::Prototype undef
     requirements:
-      CPAN::Meta::Requirements 2.124
-      Carp 0
-      ExtUtils::MakeMaker 6.78
-      File::Find 0
-      File::Spec::Functions 0
-      FindBin 0
-      Getopt::Long 0
-      Getopt::Long::Descriptive 0
-      List::Util 1.33
-      Module::Path 0
-      Moo 2.000000
-      Moo::Role 0
-      PPI 1.215
-      Params::Util 0
-      Scalar::Util 0
-      String::RewritePrefix 0.005
-      Types::Standard 0
-      lib 0
-      namespace::autoclean 0
-      perl 5.012
-      strict 0
-      warnings 0
-  PerlIO-utf8_strict-0.010
-    pathname: L/LE/LEONT/PerlIO-utf8_strict-0.010.tar.gz
-    provides:
-      PerlIO::utf8_strict 0.010
-    requirements:
+      Apache::LogFormat::Compiler 0.33
+      Cookie::Baker 0.07
+      Devel::StackTrace 1.23
+      Devel::StackTrace::AsHTML 0.11
       ExtUtils::MakeMaker 0
-      XSLoader 0
-      perl 5.008
-      strict 0
-      warnings 0
-  Plack-Middleware-Debug-0.18
-    pathname: M/MI/MIYAGAWA/Plack-Middleware-Debug-0.18.tar.gz
-    provides:
-      Plack::Middleware::Debug 0.18
-      Plack::Middleware::Debug::Base 0.18
-      Plack::Middleware::Debug::CatalystLog 0.18
-      Plack::Middleware::Debug::DBITrace 0.18
-      Plack::Middleware::Debug::Environment 0.18
-      Plack::Middleware::Debug::Memory 0.18
-      Plack::Middleware::Debug::ModuleVersions 0.18
-      Plack::Middleware::Debug::Panel undef
-      Plack::Middleware::Debug::Parameters undef
-      Plack::Middleware::Debug::PerlConfig 0.18
-      Plack::Middleware::Debug::Response 0.18
-      Plack::Middleware::Debug::Session undef
-      Plack::Middleware::Debug::Timer 0.18
-      Plack::Middleware::Debug::TrackObjects undef
-    requirements:
-      Class::Method::Modifiers 1.05
-      Data::Dump 0
-      Data::Dumper::Concise 0
-      Encode 2.23
       File::ShareDir 1.00
-      Module::Build::Tiny 0.034
-      Plack 0
-      Text::MicroTemplate 0.15
+      File::ShareDir::Install 0.06
+      Filesys::Notify::Simple 0
+      HTTP::Entity::Parser 0.25
+      HTTP::Headers::Fast 0.18
+      HTTP::Message 5.814
+      HTTP::Tiny 0.034
+      Hash::MultiValue 0.05
+      Pod::Usage 1.36
+      Stream::Buffered 0.02
+      Test::TCP 2.15
+      Try::Tiny 0
+      URI 1.59
+      WWW::Form::UrlEncoded 0.23
       parent 0
-<<<<<<< HEAD
-=======
       perl 5.012000
   Plack-Middleware-Debug-0.18
     pathname: M/MI/MIYAGAWA/Plack-Middleware-Debug-0.18.tar.gz
@@ -4642,7 +4630,6 @@ DISTRIBUTIONS
       Plack 0
       Text::MicroTemplate 0.15
       parent 0
->>>>>>> 3e42ccd (...)
       perl 5.008001
   Pod-Markdown-3.400
     pathname: R/RW/RWSTAUNER/Pod-Markdown-3.400.tar.gz
@@ -4735,6 +4722,26 @@ DISTRIBUTIONS
       Digest::SHA 0
       Module::Build::Tiny 0.035
       Scalar::Util 0
+  Ref-Util-0.204
+    pathname: A/AR/ARC/Ref-Util-0.204.tar.gz
+    provides:
+      Ref::Util 0.204
+      Ref::Util::PP 0.204
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      Ref::Util::XS 0
+      Text::ParseWords 0
+      perl 5.006
+  Ref-Util-XS-0.117
+    pathname: X/XS/XSAWYERX/Ref-Util-XS-0.117.tar.gz
+    provides:
+      Ref::Util::XS 0.117
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      XSLoader 0
+      perl 5.006
   Role-HasMessage-0.007
     pathname: R/RJ/RJBS/Role-HasMessage-0.007.tar.gz
     provides:
@@ -4906,99 +4913,57 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-<<<<<<< HEAD
-  Specio-0.50
-    pathname: D/DR/DROLSKY/Specio-0.50.tar.gz
+  Specio-0.51
+    pathname: D/DR/DROLSKY/Specio-0.51.tar.gz
     provides:
-      Specio 0.50
-      Specio::Coercion 0.50
-      Specio::Constraint::AnyCan 0.50
-      Specio::Constraint::AnyDoes 0.50
-      Specio::Constraint::AnyIsa 0.50
-      Specio::Constraint::Enum 0.50
-      Specio::Constraint::Intersection 0.50
-      Specio::Constraint::ObjectCan 0.50
-      Specio::Constraint::ObjectDoes 0.50
-      Specio::Constraint::ObjectIsa 0.50
-      Specio::Constraint::Parameterizable 0.50
-      Specio::Constraint::Parameterized 0.50
-      Specio::Constraint::Role::CanType 0.50
-      Specio::Constraint::Role::DoesType 0.50
-      Specio::Constraint::Role::Interface 0.50
-      Specio::Constraint::Role::IsaType 0.50
-      Specio::Constraint::Simple 0.50
-      Specio::Constraint::Structurable 0.50
-      Specio::Constraint::Structured 0.50
-      Specio::Constraint::Union 0.50
-      Specio::Declare 0.50
-      Specio::DeclaredAt 0.50
-      Specio::Exception 0.50
-      Specio::Exporter 0.50
-      Specio::Helpers 0.50
-      Specio::Library::Builtins 0.50
-      Specio::Library::Numeric 0.50
-      Specio::Library::Perl 0.50
-      Specio::Library::String 0.50
-      Specio::Library::Structured 0.50
-      Specio::Library::Structured::Dict 0.50
-      Specio::Library::Structured::Map 0.50
-      Specio::Library::Structured::Tuple 0.50
-      Specio::OO 0.50
-      Specio::PartialDump 0.50
-      Specio::Registry 0.50
-      Specio::Role::Inlinable 0.50
-      Specio::Subs 0.50
-      Specio::TypeChecks 0.50
-      Test::Specio 0.50
-=======
-  Specio-0.49
-    pathname: D/DR/DROLSKY/Specio-0.49.tar.gz
-    provides:
-      Specio 0.49
-      Specio::Coercion 0.49
-      Specio::Constraint::AnyCan 0.49
-      Specio::Constraint::AnyDoes 0.49
-      Specio::Constraint::AnyIsa 0.49
-      Specio::Constraint::Enum 0.49
-      Specio::Constraint::Intersection 0.49
-      Specio::Constraint::ObjectCan 0.49
-      Specio::Constraint::ObjectDoes 0.49
-      Specio::Constraint::ObjectIsa 0.49
-      Specio::Constraint::Parameterizable 0.49
-      Specio::Constraint::Parameterized 0.49
-      Specio::Constraint::Role::CanType 0.49
-      Specio::Constraint::Role::DoesType 0.49
-      Specio::Constraint::Role::Interface 0.49
-      Specio::Constraint::Role::IsaType 0.49
-      Specio::Constraint::Simple 0.49
-      Specio::Constraint::Structurable 0.49
-      Specio::Constraint::Structured 0.49
-      Specio::Constraint::Union 0.49
-      Specio::Declare 0.49
-      Specio::DeclaredAt 0.49
-      Specio::Exception 0.49
-      Specio::Exporter 0.49
-      Specio::Helpers 0.49
-      Specio::Library::Builtins 0.49
-      Specio::Library::Numeric 0.49
-      Specio::Library::Perl 0.49
-      Specio::Library::String 0.49
-      Specio::Library::Structured 0.49
-      Specio::Library::Structured::Dict 0.49
-      Specio::Library::Structured::Map 0.49
-      Specio::Library::Structured::Tuple 0.49
-      Specio::OO 0.49
-      Specio::PartialDump 0.49
-      Specio::Registry 0.49
-      Specio::Role::Inlinable 0.49
-      Specio::Subs 0.49
-      Specio::TypeChecks 0.49
-      Test::Specio 0.49
->>>>>>> 3e42ccd (...)
+      Specio 0.51
+      Specio::Coercion 0.51
+      Specio::Constraint::AnyCan 0.51
+      Specio::Constraint::AnyDoes 0.51
+      Specio::Constraint::AnyIsa 0.51
+      Specio::Constraint::Enum 0.51
+      Specio::Constraint::Intersection 0.51
+      Specio::Constraint::ObjectCan 0.51
+      Specio::Constraint::ObjectDoes 0.51
+      Specio::Constraint::ObjectIsa 0.51
+      Specio::Constraint::Parameterizable 0.51
+      Specio::Constraint::Parameterized 0.51
+      Specio::Constraint::Role::CanType 0.51
+      Specio::Constraint::Role::DoesType 0.51
+      Specio::Constraint::Role::Interface 0.51
+      Specio::Constraint::Role::IsaType 0.51
+      Specio::Constraint::Simple 0.51
+      Specio::Constraint::Structurable 0.51
+      Specio::Constraint::Structured 0.51
+      Specio::Constraint::Union 0.51
+      Specio::Declare 0.51
+      Specio::DeclaredAt 0.51
+      Specio::Exception 0.51
+      Specio::Exporter 0.51
+      Specio::Helpers 0.51
+      Specio::Library::Builtins 0.51
+      Specio::Library::Numeric 0.51
+      Specio::Library::Perl 0.51
+      Specio::Library::String 0.51
+      Specio::Library::Structured 0.51
+      Specio::Library::Structured::Dict 0.51
+      Specio::Library::Structured::Map 0.51
+      Specio::Library::Structured::Tuple 0.51
+      Specio::OO 0.51
+      Specio::PP 0.51
+      Specio::PartialDump 0.51
+      Specio::Registry 0.51
+      Specio::Role::Inlinable 0.51
+      Specio::Subs 0.51
+      Specio::TypeChecks 0.51
+      Specio::XS 0.51
+      Test::Specio 0.51
     requirements:
       B 0
       Carp 0
       Clone 0
+      Clone::Choose 0
+      Clone::PP 0
       Devel::StackTrace 0
       Eval::Closure 0
       Exporter 0
@@ -5006,6 +4971,7 @@ DISTRIBUTIONS
       IO::File 0
       List::Util 1.33
       MRO::Compat 0
+      Module::Implementation 0
       Module::Runtime 0
       Role::Tiny 1.003003
       Role::Tiny::With 0
@@ -5570,7 +5536,6 @@ DISTRIBUTIONS
       overload 0
       perl 5.006002
       utf8 0
->>>>>>> 3e42ccd (...)
   Test-TCP-2.22
     pathname: M/MI/MIYAGAWA/Test-TCP-2.22.tar.gz
     provides:
@@ -6018,7 +5983,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
-<<<<<<< HEAD
   YAML-PP-v0.39.0
     pathname: T/TI/TINITA/YAML-PP-v0.39.0.tar.gz
     provides:
@@ -6055,44 +6019,6 @@ DISTRIBUTIONS
       YAML::PP::Type::MergeKey v0.39.0
       YAML::PP::Writer v0.39.0
       YAML::PP::Writer::File v0.39.0
-=======
-  YAML-PP-v0.38.1
-    pathname: T/TI/TINITA/YAML-PP-v0.38.1.tar.gz
-    provides:
-      YAML::PP v0.38.1
-      YAML::PP::Common v0.38.1
-      YAML::PP::Constructor v0.38.1
-      YAML::PP::Dumper v0.38.1
-      YAML::PP::Emitter v0.38.1
-      YAML::PP::Exception v0.38.1
-      YAML::PP::Grammar v0.38.1
-      YAML::PP::Highlight v0.38.1
-      YAML::PP::Lexer v0.38.1
-      YAML::PP::Loader v0.38.1
-      YAML::PP::Parser v0.38.1
-      YAML::PP::Perl v0.38.1
-      YAML::PP::Preserve::Array v0.38.1
-      YAML::PP::Preserve::Hash v0.38.1
-      YAML::PP::Preserve::Scalar v0.38.1
-      YAML::PP::Reader v0.38.1
-      YAML::PP::Reader::File v0.38.1
-      YAML::PP::Render v0.38.1
-      YAML::PP::Representer v0.38.1
-      YAML::PP::Schema v0.38.1
-      YAML::PP::Schema::Binary v0.38.1
-      YAML::PP::Schema::Catchall v0.38.1
-      YAML::PP::Schema::Core v0.38.1
-      YAML::PP::Schema::Failsafe v0.38.1
-      YAML::PP::Schema::Include v0.38.1
-      YAML::PP::Schema::JSON v0.38.1
-      YAML::PP::Schema::Merge v0.38.1
-      YAML::PP::Schema::Perl v0.38.1
-      YAML::PP::Schema::Tie::IxHash v0.38.1
-      YAML::PP::Schema::YAML1_1 v0.38.1
-      YAML::PP::Type::MergeKey v0.38.1
-      YAML::PP::Writer v0.38.1
-      YAML::PP::Writer::File v0.38.1
->>>>>>> 3e42ccd (...)
     requirements:
       B 0
       B::Deparse 0
@@ -6130,64 +6056,6 @@ DISTRIBUTIONS
       warnings 0
   aliased-0.34
     pathname: E/ET/ETHER/aliased-0.34.tar.gz
-<<<<<<< HEAD
-=======
-    provides:
-      aliased 0.34
-    requirements:
-      Carp 0
-      Exporter 0
-      Module::Build::Tiny 0.039
-      perl 5.006
-      strict 0
-      warnings 0
-  autovivification-0.18
-    pathname: V/VP/VPIT/autovivification-0.18.tar.gz
-    provides:
-      autovivification 0.18
-    requirements:
-      Config 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      POSIX 0
-      Test::More 0
-      XSLoader 0
-      perl 5.008003
-  bareword-filehandles-0.007
-    pathname: I/IL/ILMARI/bareword-filehandles-0.007.tar.gz
-    provides:
-      bareword::filehandles 0.007
-    requirements:
-      B::Hooks::OP::Check 0
-      ExtUtils::Depends 0
-      ExtUtils::MakeMaker 0
-      Test::More 0.88
-      XSLoader 0
-      if 0
-      perl 5.008001
-      strict 0
-      warnings 0
-  indirect-0.39
-    pathname: V/VP/VPIT/indirect-0.39.tar.gz
-    provides:
-      indirect 0.39
-    requirements:
-      Carp 0
-      Config 0
-      ExtUtils::MakeMaker 0
-      File::Spec 0
-      IO::Handle 0
-      IO::Select 0
-      IPC::Open3 0
-      POSIX 0
-      Socket 0
-      Test::More 0
-      XSLoader 0
-      lib 0
-      perl 5.008001
-  libwww-perl-6.77
-    pathname: O/OA/OALDERS/libwww-perl-6.77.tar.gz
->>>>>>> 3e42ccd (...)
     provides:
       aliased 0.34
     requirements:

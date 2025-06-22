@@ -14,12 +14,12 @@ use Path::Tiny;
 field $config_file : param(config);
 field $config;
 
-#ADJUST {
-#    $config =
-#      from_toml( path( $ENV{FRAME_CONFIG_FILE} // 'config.toml' )->slurp_utf8 );
+ADJUST {
+    $config_file = $ENV{FRAME_CONFIG_FILE} // 'config.toml';
+    $config      = from_toml( path($config_file) );
 
-#    $self->init_db
-#}
+    $self->init_db
+}
 
 method startup {
     my $r = $self->routes;
