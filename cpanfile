@@ -11,9 +11,7 @@ use Const::Fast;
 
 const our $PWD => abs_path;
 
-requires 'Plack', '1.0053',
-  url => "file://$PWD/vendor/Plack-1.0053-TRIAL.tar.gz",
-  dist => 'CRABAPP/Plack-1.0053-TRIAL.tar.gz';
+requires 'Plack';
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';

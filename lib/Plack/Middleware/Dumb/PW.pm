@@ -1,7 +1,11 @@
-use Object::Pad qw(:experimental(:all));
+use Object::Pad ':experimental(:all)';
 
 package Plack::Middleware::Dumb::PW;
+class Plack::Middleware::Auth::Dumb :isa(Plack::Middleware);
 
-class Plack::Middleware::Dumb::PW;    # : does(Frame::PW::Config);
 use utf8;
-use v5.40;
+use v5.42;
+
+sub call {
+
+}
