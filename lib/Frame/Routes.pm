@@ -36,7 +36,8 @@ method add ( $methods, $pattern, @args ) {
     elsif ( $dest && !ref($dest) ) {
         const our $DESTRE     => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
         const our $DESTPKG_RE => s/$DASH_RE/::/g;
-        my ( $c, $sub ) = $dest =~ $DESTRE;
+
+        my ( $c, $sub ) = $dest =~ $DESTPKG_RE;
 
         if ($c) {
             $route_args{dest} = {
