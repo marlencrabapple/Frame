@@ -1,8 +1,8 @@
 use utf8;
-use v5.40;
+use v5.42;
 
+#use Frame;
 use Test::More;
-use Syntax::Keyword::Try;
 
 try {
     use Frame;

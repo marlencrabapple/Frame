@@ -4,7 +4,7 @@ package Frame::Base;
 role Frame::Base;
 
 use utf8;
-use v5.40;
+use v5.42;
 
 use parent 'Exporter';
 
@@ -54,7 +54,7 @@ field $json;
 field $debug_mode : param : accessor = $DEBUG_MODE;
 field $dev_mode : param : accessor   = $DEV_MODE;
 
-APPLY($mop) {
+APPLY ($mop) {
     my ( $package, $class, $callstack ) =
       ( __PACKAGE__, $mop->name, [ [caller], [ caller 1 ] ] );
 
@@ -68,14 +68,9 @@ APPLY($mop) {
     );
 };
 
-ADJUSTPARAMS($params) {
-
-    # $^H{ __CLASS__ . '/user' } = 1;
-
+ADJUSTPARAMS ($params) {
     my ( $package, $callstack ) =
       ( __PACKAGE__, [ [caller], [ caller 1 ] ] );
-
-    #  $^H{ $class . '/user' } = 1;
 
     __PACKAGE__->exports(
         __PACKAGE__,
@@ -96,7 +91,7 @@ method patch_self : common ($src, $plain_subs) {
         $old_hook->($name) if $old_hook;
 
         if ( any { $name eq $_ } keys $seen_users{$src}{fn}->%* ) {
-            use feature ':5.40';
+            use feature ':5.42';
 
             $^H{"$src/user"} = 1;
 
@@ -247,4 +242,3 @@ method dmsg : common (@msgs) {
     $out;
 }
 
-1

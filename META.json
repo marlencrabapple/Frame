@@ -91,12 +91,13 @@
             "Time::HiRes" : "0",
             "Time::Moment" : "0",
             "meta" : "0.013",
-            "perl" : "v5.40.0"
+            "perl" : "v5.42.0"
          }
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.96"
+            "Test::More" : "0.96",
+            "Test::Pod" : "0"
          }
       }
    },

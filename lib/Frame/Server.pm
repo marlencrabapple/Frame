@@ -10,12 +10,13 @@ use utf8;
 use v5.40;
 
 use Carp;
+use Const::Fast;
 use Hash::MultiValue;
 
 use Frame::Server::Request;
 use Frame::Server::Protocol;
 
-use constant CRLF => "\r\n";
+const our $CRLF => "\r\n";
 
 field $plack_handler : mutator;
 
@@ -53,7 +54,7 @@ sub _responder ( $req, $res ) {
             push @lines, "$key: " . join ',', $res_headers->get_all($key);
         }
 
-        $req->write( join CRLF, ( @lines, CRLF ) );
+        $req->write( join $CRLF, ( @lines, $CRLF ) );
     };
 
     my $has_content_length = 0;
@@ -120,13 +121,13 @@ sub _responder ( $req, $res ) {
 
                     # Form HTTP chunks out of it
                     defined $buffer
-                      and return
-                      sprintf( "%X${\CRLF}%s${\CRLF}", length $buffer,
+                        and return
+                        sprintf( "%X$CRLF%s$CRLF", length $buffer,
                         $buffer );
 
                     $body->close;
                     undef $body;
-                    return "0${\CRLF}${\CRLF}";
+                    return "0$CRLF$CRLF";
                 }
             );
         }
@@ -184,6 +185,8 @@ method on_accept ($conn) {
 
 method on_request ($req) {
     my $env = $$req{req};
+
+    Frame::Base->dmsg({ req => $req });
 
     my $res       = Plack::Util::run_app $$self{app}, $env;
     my $responder = sub { _responder( $req, $res ) };

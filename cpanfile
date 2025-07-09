@@ -1,4 +1,4 @@
-requires 'perl', 'v5.40';
+requires 'perl', 'v5.42';
 
 use utf8;
 use v5.40;
@@ -81,7 +81,8 @@ on develop => sub {
 };
 
 on test => sub {
-  requires 'Test::More', '0.96'
+  requires 'Test::More', '0.96';
+  requires 'Test::Pod'
 };
 
 requires 'HTTP::Parser::XS', '0.17';

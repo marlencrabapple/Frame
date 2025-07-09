@@ -33,48 +33,51 @@ method add ( $methods, $pattern, @args ) {
     if ( ref $dest eq 'CODE' ) {
         $route_args{dest}{sub} = $dest;
     }
-    elsif ($dest) {
-        if ( my $c = blessed $dest ) {
-            if ( $dest isa 'Plack::App::Component'
-              || $dest->DOES('Frame::Base')) {
+    elsif ( $dest ) {
+        if (my $c = blessed $dest) {
+            if ( $dest isa 'Plack::App::Component' ) {
                 my $controller_class = blessed $dest;
-                my $sub              = sub ( $self, %opts ) {
-                    $self->call( $self->req->env, %opts );
+                my $sub = sub ($controller, %opts) {
+                    # if ($opts{foo}) {
+                    #     ...
+                    # }
+                    # else {
+                        
+                    # }
+
+                    $controller->call($controller->req->env, %opts)
                 };
 
                 $route_args{dest} = {
-                    sub => $sub,
-                    c   => $dest,
-                };
+                    sub => $sub
+                  , c   => $dest
+                  , 
+                }
             }
         }
-        elsif ( !ref $dest ) {
-            const our $DESTRE     => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
-            const our $DESTPKG_RE => s/$DASH_RE/::/g;
+        elsif (!ref $dest) {
+          const our $DESTRE     => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
+          const our $DESTPKG_RE => s/$DASH_RE/::/g;
 
-            my ( $c, $sub ) = $dest =~ $DESTPKG_RE;
+          my ( $c, $sub ) = $dest =~ $DESTPKG_RE;
 
-            if ($c) {
-                $route_args{dest} = {
-                    sub => $sub,
-                    c   => join '::',
-                    map { ucfirst $_ } split /-/, $c
-                  }
-                  if $sub;
-            }
+          if ($c) {
+            $route_args{dest} = {
+                sub => $sub
+              , c   => join '::', map { ucfirst $_ } split /-/, $c
+            } if $sub;
+          }
         }
     }
 
     # TODO: Plack::{App,Middleware,Component} stuff
     if ( $route_args{dest}{c} && !ref $route_args{dest}{c} ) {
-        my $c = $self->app->controller_namespace . '::' . $route_args{dest}{c};
+        my $c = $self->app->controller_namespace
+          . '::' . $route_args{dest}{c};
 
         eval "require $c; 1" or die $@;
 
         my $sub = $route_args{dest}{sub};
-
-        # This may not work because it isn't an instance
-        # TODO: look at docs
         $c->can( $route_args{dest}{sub} ) || $c->$sub;
 
         $route_args{dest}{c} = $c;
@@ -130,7 +133,7 @@ method add ( $methods, $pattern, @args ) {
 
         $self->tree->{$method}[ scalar $route->pattern_arr - 1 ]
           ->@{ keys %$branch } = ( values %$branch );
-
+          
         push $self->routes->@*, $route;
     }
 
@@ -153,10 +156,10 @@ method match ($req) {
     my $barren = {};
     my @placeholder_matches;
 
-  BRANCH: while ( my $curr = $$prev{branch} // $branches ) {
+    BRANCH: while ( my $curr = $$prev{branch} // $branches ) {
         $prev = {};
 
-      PATH_PART: foreach my $part (@path) {
+        PATH_PART: foreach my $part (@path) {
             my ( $match, $wildcard_ne, $has_placeholder );
 
             if (   $part ne ''

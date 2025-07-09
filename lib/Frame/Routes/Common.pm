@@ -80,7 +80,14 @@ method websocket { $self->ws(@_) }
 
 method under ( $pattern, @args ) {
     my $opts = ref $args[$#args] eq 'HASH' ? pop @args : {};
+    
     use subs 'dmsg';
+    
     dmsg { 'ref[-1]_args' => ref @args };
-    $self->any( $pattern, @args, { has_stops => 1, inline => 1, %$opts } );
+
+    $self->any($pattern, @args, { has_stops => 1
+                                , inline    => 1
+                                , %$opts });
+
+    
 }

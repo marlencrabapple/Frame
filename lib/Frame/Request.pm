@@ -4,7 +4,7 @@ package Frame::Request;
 class Frame::Request :isa(Plack::Request) :does(Frame::Base);
 
 use utf8;
-use v5.40;
+use v5.42;
 
 use List::Util 'any';
 use Hash::Util 'lock_hashref_recurse';
@@ -22,7 +22,7 @@ field @placeholder_values_ord :reader;
 field $stash :reader = {};
 
 method BUILDARGS :common (%args) {
-  (delete $args{env}, 1, %args)
+  ( delete $args{env}, 1, %args )
 }
 
 ADJUSTPARAMS ($params) {
