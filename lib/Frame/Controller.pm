@@ -4,7 +4,7 @@ package Frame::Controller;
 role Frame::Controller : does(Frame::Base);
 
 use utf8;
-use v5.42;
+use v5.40;
 
 use Carp;
 use Encode;
@@ -49,7 +49,7 @@ ADJUSTPARAMS ($params) {
 
 class Frame::Template::Response :isa(Plack::Response) {
     field $tx :param = $tx_default;
-    
+
     method render ($template, $status = 200, %opts) {
         my $content = $tx->render( $template
                                  , delete $opts{template} );
@@ -80,12 +80,12 @@ method render (
     my $class = __PACKAGE__;
     carp "An existing response was overwritten by a call to $class->render()."
       . "To disable this warning or change response precedence configure"
-      . "'template.default_res' as needed." if ($res && $self->res) 
+      . "'template.default_res' as needed." if ($res && $self->res)
       && (!$opts{noop} || $config->{'template'}{default_res});
 
     #my $res = $opts{noop} ? $req->new_response : $self->res;
 
-    dynamically $res = ( $opts{noop} 
+    dynamically $res = ( $opts{noop}
       || $config->{template}{default_res} eq 'lifecycle' )
         ? $self->res
         : $res->new_response;

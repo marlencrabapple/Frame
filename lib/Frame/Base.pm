@@ -4,7 +4,7 @@ package Frame::Base;
 role Frame::Base;
 
 use utf8;
-use v5.42;
+use v5.40;
 
 use parent 'Exporter';
 
@@ -91,7 +91,7 @@ method patch_self : common ($src, $plain_subs) {
         $old_hook->($name) if $old_hook;
 
         if ( any { $name eq $_ } keys $seen_users{$src}{fn}->%* ) {
-            use feature ':5.42';
+            use feature ':5.40';
 
             $^H{"$src/user"} = 1;
 

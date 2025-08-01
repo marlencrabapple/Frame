@@ -6,7 +6,7 @@ role Frame : does(Frame::Base);
 our $VERSION = '0.01.5';
 
 use utf8;
-use v5.42;
+use v5.40;
 
 use Encode;
 use TOML::Tiny qw(from_toml to_toml);
@@ -79,7 +79,7 @@ ADJUSTPARAMS ($params) {
     my %startup_opts = ( params => $params,
                          app    => $self
                          routes => $routes );
-    
+
     my $ret = $self->startup(%startup_opts);
 
     warn __CLASS__ . "$\::startup did not return a valid value: '$ret'."
@@ -130,13 +130,13 @@ method dispatch ($req) {
 
 method route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
-    
+
     #if ( blessed $sub ) {
     #  die ... if $c
     #}
 
     Frame::Base->dmsg({ c => $c, sub => $sub, route => $route, req => $self });
-    
+
     if(blessed $c) {
       my $res = $c->$sub( route => $route, req => $req, c => $c, sub => $sub)
     }

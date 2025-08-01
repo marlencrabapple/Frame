@@ -51,6 +51,18 @@ DISTRIBUTIONS
       perl 5.020
       strict 0
       warnings 0
+  Archive-Tar-Wrapper-0.42
+    pathname: H/HA/HAARG/Archive-Tar-Wrapper-0.42.tar.gz
+    provides:
+      Archive::Tar::Wrapper 0.42
+    requirements:
+      Cwd 0
+      ExtUtils::MakeMaker 0
+      File::Temp 0
+      File::Which 0
+      IPC::Run 0
+      Log::Log4perl 0
+      perl 5.008001
   B-Hooks-EndOfScope-0.28
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.28.tar.gz
     provides:
@@ -128,10 +140,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  CPAN-DistnameInfo-0.12_01
-    pathname: R/RJ/RJBS/CPAN-DistnameInfo-0.12_01.tar.gz
+  CPAN-DistnameInfo-0.12
+    pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
     provides:
-      CPAN::DistnameInfo 0.12_01
+      CPAN::DistnameInfo 0.12
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -375,10 +387,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Clone-0.48_01
-    pathname: A/AT/ATOOMIC/Clone-0.48_01.tar.gz
+  Clone-0.47
+    pathname: A/AT/ATOOMIC/Clone-0.47.tar.gz
     provides:
-      Clone 0.48_01
+      Clone 0.47
     requirements:
       ExtUtils::MakeMaker 0
   Clone-Choose-0.010
@@ -2769,6 +2781,20 @@ DISTRIBUTIONS
       Symbol 0
       strict 0
       warnings 0
+  IPC-Run-20231003.0
+    pathname: T/TO/TODDR/IPC-Run-20231003.0.tar.gz
+    provides:
+      IPC::Run 20231003.0
+      IPC::Run::Debug 20231003.0
+      IPC::Run::IO 20231003.0
+      IPC::Run::Timer 20231003.0
+      IPC::Run::Win32Helper 20231003.0
+      IPC::Run::Win32IO 20231003.0
+      IPC::Run::Win32Process 20231003.0
+      IPC::Run::Win32Pump 20231003.0
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0.47
   IPC-Run3-0.049
     pathname: R/RJ/RJBS/IPC-Run3-0.049.tar.gz
     provides:
@@ -2971,13 +2997,13 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Log-Dispatchouli-3.009
-    pathname: R/RJ/RJBS/Log-Dispatchouli-3.009.tar.gz
+  Log-Dispatchouli-3.010
+    pathname: R/RJ/RJBS/Log-Dispatchouli-3.010.tar.gz
     provides:
-      Log::Dispatchouli 3.009
-      Log::Dispatchouli::Global 3.009
-      Log::Dispatchouli::Proxy 3.009
-      Log::Fmt 3.009
+      Log::Dispatchouli 3.010
+      Log::Dispatchouli::Global 3.010
+      Log::Dispatchouli::Proxy 3.010
+      Log::Fmt 3.010
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -2999,6 +3025,65 @@ DISTRIBUTIONS
       perl 5.020000
       strict 0
       warnings 0
+  Log-Log4perl-1.57
+    pathname: E/ET/ETJ/Log-Log4perl-1.57.tar.gz
+    provides:
+      L4pResurrectable 0.01
+      Log::Log4perl 1.57
+      Log::Log4perl::Appender undef
+      Log::Log4perl::Appender::Buffer 1.53
+      Log::Log4perl::Appender::DBI undef
+      Log::Log4perl::Appender::File undef
+      Log::Log4perl::Appender::Limit 1.53
+      Log::Log4perl::Appender::RRDs undef
+      Log::Log4perl::Appender::Screen undef
+      Log::Log4perl::Appender::ScreenColoredLevels undef
+      Log::Log4perl::Appender::Socket undef
+      Log::Log4perl::Appender::String undef
+      Log::Log4perl::Appender::Synchronized 1.53
+      Log::Log4perl::Appender::TestArrayBuffer undef
+      Log::Log4perl::Appender::TestBuffer undef
+      Log::Log4perl::Appender::TestFileCreeper undef
+      Log::Log4perl::Catalyst 1.53
+      Log::Log4perl::Config undef
+      Log::Log4perl::Config::BaseConfigurator undef
+      Log::Log4perl::Config::DOMConfigurator 0.03
+      Log::Log4perl::Config::PropertyConfigurator undef
+      Log::Log4perl::Config::Watch undef
+      Log::Log4perl::DateFormat undef
+      Log::Log4perl::Filter undef
+      Log::Log4perl::Filter::Boolean undef
+      Log::Log4perl::Filter::LevelMatch undef
+      Log::Log4perl::Filter::LevelRange undef
+      Log::Log4perl::Filter::MDC undef
+      Log::Log4perl::Filter::StringMatch undef
+      Log::Log4perl::InternalDebug undef
+      Log::Log4perl::JavaMap undef
+      Log::Log4perl::JavaMap::ConsoleAppender undef
+      Log::Log4perl::JavaMap::FileAppender undef
+      Log::Log4perl::JavaMap::JDBCAppender undef
+      Log::Log4perl::JavaMap::NTEventLogAppender undef
+      Log::Log4perl::JavaMap::RollingFileAppender undef
+      Log::Log4perl::JavaMap::SyslogAppender undef
+      Log::Log4perl::JavaMap::TestBuffer undef
+      Log::Log4perl::Layout undef
+      Log::Log4perl::Layout::NoopLayout undef
+      Log::Log4perl::Layout::PatternLayout undef
+      Log::Log4perl::Layout::PatternLayout::Multiline undef
+      Log::Log4perl::Layout::SimpleLayout undef
+      Log::Log4perl::Level undef
+      Log::Log4perl::Logger undef
+      Log::Log4perl::MDC undef
+      Log::Log4perl::NDC undef
+      Log::Log4perl::Resurrector undef
+      Log::Log4perl::Util undef
+      Log::Log4perl::Util::Semaphore undef
+      Log::Log4perl::Util::TimeTracker undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Path 2.07
+      File::Spec 0.82
+      perl 5.006
   Log-Message-0.08
     pathname: B/BI/BINGOS/Log-Message-0.08.tar.gz
     provides:
@@ -3137,35 +3222,34 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Module-Build-0.42_35
-    pathname: L/LE/LEONT/Module-Build-0.42_35.tar.gz
+  Module-Build-0.4234
+    pathname: L/LE/LEONT/Module-Build-0.4234.tar.gz
     provides:
-      Module::Build 0.42_35
-      Module::Build::Base 0.42_35
-      Module::Build::Compat 0.42_35
-      Module::Build::Config 0.42_35
-      Module::Build::Cookbook 0.42_35
-      Module::Build::Dumper 0.42_35
-      Module::Build::Notes 0.42_35
-      Module::Build::PPMMaker 0.42_35
-      Module::Build::Platform::Default 0.42_35
-      Module::Build::Platform::MacOS 0.42_35
-      Module::Build::Platform::Unix 0.42_35
-      Module::Build::Platform::VMS 0.42_35
-      Module::Build::Platform::VOS 0.42_35
-      Module::Build::Platform::Windows 0.42_35
-      Module::Build::Platform::aix 0.42_35
-      Module::Build::Platform::cygwin 0.42_35
-      Module::Build::Platform::darwin 0.42_35
-      Module::Build::Platform::os2 0.42_35
-      Module::Build::PodParser 0.42_35
+      Module::Build 0.4234
+      Module::Build::Base 0.4234
+      Module::Build::Compat 0.4234
+      Module::Build::Config 0.4234
+      Module::Build::Cookbook 0.4234
+      Module::Build::Dumper 0.4234
+      Module::Build::Notes 0.4234
+      Module::Build::PPMMaker 0.4234
+      Module::Build::Platform::Default 0.4234
+      Module::Build::Platform::MacOS 0.4234
+      Module::Build::Platform::Unix 0.4234
+      Module::Build::Platform::VMS 0.4234
+      Module::Build::Platform::VOS 0.4234
+      Module::Build::Platform::Windows 0.4234
+      Module::Build::Platform::aix 0.4234
+      Module::Build::Platform::cygwin 0.4234
+      Module::Build::Platform::darwin 0.4234
+      Module::Build::Platform::os2 0.4234
+      Module::Build::PodParser 0.4234
     requirements:
       CPAN::Meta 2.142060
       Cwd 0
       Data::Dumper 0
       ExtUtils::CBuilder 0.27
       ExtUtils::Install 0
-      ExtUtils::InstallPaths 0.003
       ExtUtils::Manifest 0
       ExtUtils::Mkbootstrap 0
       ExtUtils::ParseXS 2.21
@@ -4433,11 +4517,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.148
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.148.tar.gz
+  Path-Tiny-0.150
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.150.tar.gz
     provides:
-      Path::Tiny 0.148
-      Path::Tiny::Error 0.148
+      Path::Tiny 0.150
+      Path::Tiny::Error 0.150
     requirements:
       Carp 0
       Cwd 0
@@ -4504,12 +4588,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0053
-    pathname: C/CR/CRABAPP/Plack-1.0053-TRIAL.tar.gz
+  Plack-1.0051
+    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0053
+      Plack 1.0051
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -4568,9 +4652,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0053
+      Plack::Request 1.0051
       Plack::Request::Upload undef
-      Plack::Response 1.0053
+      Plack::Response 1.0051
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef

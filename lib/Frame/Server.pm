@@ -1,4 +1,4 @@
-use Object::Pad;
+use Object::Pad ':experimental(:all)';
 
 package Frame::Server;
 

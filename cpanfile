@@ -1,15 +1,10 @@
-requires 'perl', 'v5.42';
+requires 'perl', 'v5.40';
 
 use utf8;
 use v5.40;
 
 requires 'Cwd';
 requires 'Const::Fast';
-
-use Cwd 'abs_path';
-use Const::Fast;
-
-const our $PWD => abs_path;
 
 requires 'Plack';
 
@@ -78,6 +73,7 @@ on develop => sub {
   requires 'Dist::Milla', 'v1.0.21';
   requires 'Carmel', 'v0.1.56';
   requires 'Plack::Middleware::Debug';
+  requires 'Archive::Tar::Wrapper'
 };
 
 on test => sub {

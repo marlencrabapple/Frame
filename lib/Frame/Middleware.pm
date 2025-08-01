@@ -4,7 +4,7 @@ package Frame::Middleware;
 role Frame::Middleware :does(Frame::Base);
 
 use utf8;
-use v5.42;
+use v5.40;
 
 use Carp;
 

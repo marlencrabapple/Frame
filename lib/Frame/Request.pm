@@ -4,7 +4,7 @@ package Frame::Request;
 class Frame::Request :isa(Plack::Request) :does(Frame::Base);
 
 use utf8;
-use v5.42;
+use v5.40;
 
 use List::Util 'any';
 use Hash::Util 'lock_hashref_recurse';
@@ -48,7 +48,7 @@ method set_placeholders (@placeholders) {
   foreach my $placeholder (@placeholders) {
     $self->placeholder(%$placeholder)
   }
-  
+
   # TODO: Benchmark this against Struct::Dumb solution (defined in
   # route, init'd here)
   # lock_hashref_recurse($placeholders)
