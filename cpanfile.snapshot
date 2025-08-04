@@ -2997,13 +2997,13 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Log-Dispatchouli-3.010
-    pathname: R/RJ/RJBS/Log-Dispatchouli-3.010.tar.gz
+  Log-Dispatchouli-3.011
+    pathname: R/RJ/RJBS/Log-Dispatchouli-3.011.tar.gz
     provides:
-      Log::Dispatchouli 3.010
-      Log::Dispatchouli::Global 3.010
-      Log::Dispatchouli::Proxy 3.010
-      Log::Fmt 3.010
+      Log::Dispatchouli 3.011
+      Log::Dispatchouli::Global 3.011
+      Log::Dispatchouli::Proxy 3.011
+      Log::Fmt 3.011
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
