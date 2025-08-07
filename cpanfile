@@ -1,8 +1,5 @@
 requires 'perl', 'v5.40';
 
-use utf8;
-use v5.40;
-
 requires 'Cwd';
 requires 'Const::Fast';
 
@@ -19,10 +16,7 @@ requires 'IO::Async::SSL', '0.23';
 requires 'IO::Socket::SSL', '2.074';
 requires 'Net::SSLeay', '1.92';
 requires 'Mozilla::CA', '20211001';
-requires 'LWP::UserAgent', '6.67';
-requires 'LWP::Protocol::https', '6.10';
 requires 'Hash::Ordered';
-requires 'Data::Printer';
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';
 requires 'Time::Moment';
@@ -65,21 +59,19 @@ requires 'Net::Async::HTTP', '0.50';
 
 requires 'Module::Refresh';
 
-on develop => sub {
-  recommends 'App::perlimports', '0.000049';
+#on develop => sub {
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
   recommends 'Perl::Critic::Community', 'v1.0.3';
   requires 'Dist::Milla', 'v1.0.21';
-  requires 'Carmel', 'v0.1.56';
   requires 'Plack::Middleware::Debug';
-  requires 'Archive::Tar::Wrapper'
-};
+  recommends 'Archive::Tar::Wrapper';
+#};
 
-on test => sub {
+#on test => sub {
   requires 'Test::More', '0.96';
-  requires 'Test::Pod'
-};
+  requires 'Test::Pod';
+#};
 
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';

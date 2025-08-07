@@ -30,21 +30,18 @@
          }
       },
       "develop" : {
-         "recommends" : {
-            "App::perlimports" : "0.000049",
-            "Perl::Critic" : "1.144",
-            "Perl::Critic::Community" : "v1.0.3",
-            "Perl::Tidy" : "20221112"
-         },
          "requires" : {
-            "Archive::Tar::Wrapper" : "0",
-            "Carmel" : "v0.1.56",
             "Dist::Milla" : "v1.0.22",
-            "Plack::Middleware::Debug" : "0",
             "Test::Pod" : "1.41"
          }
       },
       "runtime" : {
+         "recommends" : {
+            "Archive::Tar::Wrapper" : "0",
+            "Perl::Critic" : "1.144",
+            "Perl::Critic::Community" : "v1.0.3",
+            "Perl::Tidy" : "20221112"
+         },
          "requires" : {
             "Const::Fast" : "0",
             "Const::Fast::Exporter" : "0",
@@ -53,8 +50,8 @@
             "Cwd" : "0",
             "DBD::SQLite" : "1.72",
             "DBI" : "1.643",
-            "Data::Printer" : "0",
             "Devel::StackTrace::WithLexicals" : "2.01",
+            "Dist::Milla" : "v1.0.21",
             "Feature::Compat::Try" : "0.05",
             "File::XDG" : "0",
             "Future" : "0.50",
@@ -67,8 +64,6 @@
             "IO::Async::SSL" : "0.23",
             "IO::Socket::SSL" : "2.075",
             "JSON::MaybeXS" : "1.004004",
-            "LWP::Protocol::https" : "6.10",
-            "LWP::UserAgent" : "6.67",
             "List::AllUtils" : "0.19",
             "MIME::Types" : "0",
             "Module::Refresh" : "0",
@@ -82,23 +77,20 @@
             "Parallel::Prefork" : "0.18",
             "Path::Tiny" : "0.144",
             "Plack" : "1.0051",
+            "Plack::Middleware::Debug" : "0",
             "SQL::Abstract" : "2.000001",
             "Server::Starter" : "0.35",
             "Syntax::Keyword::Dynamically" : "0.11",
             "Syntax::Keyword::MultiSub" : "0",
             "Syntax::Keyword::Try" : "0",
             "TOML::Tiny" : "0",
+            "Test::More" : "0.96",
+            "Test::Pod" : "0",
             "Text::Xslate" : "v3.5.9",
             "Time::HiRes" : "0",
             "Time::Moment" : "0",
             "meta" : "0.013",
             "perl" : "v5.40.0"
-         }
-      },
-      "test" : {
-         "requires" : {
-            "Test::More" : "0.96",
-            "Test::Pod" : "0"
          }
       }
    },

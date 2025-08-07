@@ -51,18 +51,6 @@ DISTRIBUTIONS
       perl 5.020
       strict 0
       warnings 0
-  Archive-Tar-Wrapper-0.42
-    pathname: H/HA/HAARG/Archive-Tar-Wrapper-0.42.tar.gz
-    provides:
-      Archive::Tar::Wrapper 0.42
-    requirements:
-      Cwd 0
-      ExtUtils::MakeMaker 0
-      File::Temp 0
-      File::Which 0
-      IPC::Run 0
-      Log::Log4perl 0
-      perl 5.008001
   B-Hooks-EndOfScope-0.28
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.28.tar.gz
     provides:
@@ -111,56 +99,6 @@ DISTRIBUTIONS
       Sub::Quote 1.005000
       Test::Builder 0
       Types::Standard 0
-  CPAN-Common-Index-0.010
-    pathname: D/DA/DAGOLDEN/CPAN-Common-Index-0.010.tar.gz
-    provides:
-      CPAN::Common::Index 0.010
-      CPAN::Common::Index::LocalPackage 0.010
-      CPAN::Common::Index::MetaDB 0.010
-      CPAN::Common::Index::Mirror 0.010
-      CPAN::Common::Index::Mux::Ordered 0.010
-    requirements:
-      CPAN::DistnameInfo 0
-      CPAN::Meta::YAML 0
-      Carp 0
-      Class::Tiny 0
-      ExtUtils::MakeMaker 6.17
-      File::Basename 0
-      File::Copy 0
-      File::Fetch 0
-      File::Spec 0
-      File::Temp 0.19
-      File::stat 0
-      HTTP::Tiny 0
-      Module::Load 0
-      Search::Dict 1.07
-      Tie::Handle::SkipHeader 0
-      URI 0
-      parent 0
-      perl 5.008001
-      strict 0
-      warnings 0
-  CPAN-DistnameInfo-0.12
-    pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
-    provides:
-      CPAN::DistnameInfo 0.12
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
-  CPAN-Meta-Check-0.018
-    pathname: L/LE/LEONT/CPAN-Meta-Check-0.018.tar.gz
-    provides:
-      CPAN::Meta::Check 0.018
-    requirements:
-      CPAN::Meta::Prereqs 2.132830
-      CPAN::Meta::Requirements 2.121
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      Module::Metadata 1.000023
-      base 0
-      perl 5.006
-      strict 0
-      warnings 0
   CPAN-Requirements-Dynamic-0.002
     pathname: L/LE/LEONT/CPAN-Requirements-Dynamic-0.002.tar.gz
     provides:
@@ -213,45 +151,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Carmel-v0.1.56
-    pathname: M/MI/MIYAGAWA/Carmel-v0.1.56.tar.gz
-    provides:
-      Carmel 0.001056
-      Carmel::App undef
-      Carmel::Artifact undef
-      Carmel::Builder undef
-      Carmel::CPANfile undef
-      Carmel::Difftool undef
-      Carmel::Preload undef
-      Carmel::ProgressBar undef
-      Carmel::Repository undef
-      Carmel::Resolver undef
-      Carmel::Runner undef
-      Carmel::Runtime undef
-      Carmel::Runtime::FastINC undef
-      Carmel::Runtime::SiteINC undef
-      Carmel::Setup undef
-    requirements:
-      CPAN::Common::Index 0.006
-      CPAN::DistnameInfo 0
-      CPAN::Meta::Prereqs 2.132830
-      CPAN::Meta::Requirements 2.129
-      Carton v1.0.35
-      Class::Tiny 1.001
-      ExtUtils::Install 1.47
-      ExtUtils::InstallPaths 0
-      ExtUtils::MakeMaker 0
-      File::Copy::Recursive 0
-      File::pushd 1.009
-      JSON 0
-      Menlo::CLI::Compat 1.9018
-      Module::CPANfile 1.1000
-      Module::CoreList 0
-      Module::Metadata 1.000003
-      Module::Runtime 0.014
-      Path::Tiny 0.068
-      Try::Tiny 0.20
-      perl 5.014000
   Carp-Clan-6.08
     pathname: E/ET/ETHER/Carp-Clan-6.08.tar.gz
     provides:
@@ -261,47 +160,6 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
-  Carton-v1.0.35
-    pathname: M/MI/MIYAGAWA/Carton-v1.0.35.tar.gz
-    provides:
-      Carton 1.000035
-      Carton::Builder undef
-      Carton::CLI undef
-      Carton::CPANfile undef
-      Carton::Dependency undef
-      Carton::Dist undef
-      Carton::Dist::Core undef
-      Carton::Environment undef
-      Carton::Error undef
-      Carton::Error::CPANfileNotFound undef
-      Carton::Error::CommandExit undef
-      Carton::Error::CommandNotFound undef
-      Carton::Error::SnapshotNotFound undef
-      Carton::Error::SnapshotParseError undef
-      Carton::Index undef
-      Carton::Mirror undef
-      Carton::Package undef
-      Carton::Packer undef
-      Carton::Snapshot undef
-      Carton::Snapshot::Emitter undef
-      Carton::Snapshot::Parser undef
-      Carton::Tree undef
-      Carton::Util undef
-    requirements:
-      CPAN::Meta 2.120921
-      CPAN::Meta::Requirements 2.121
-      Class::Tiny 1.001
-      ExtUtils::MakeMaker 0
-      Getopt::Long 2.39
-      JSON::PP 2.27300
-      Menlo::CLI::Compat 1.9018
-      Module::CPANfile 0.9031
-      Module::CoreList 0
-      Path::Tiny 0.033
-      Try::Tiny 0.09
-      parent 0.223
-      perl 5.008005
-      version 0.77
   Class-Accessor-Lite-0.08
     pathname: K/KA/KAZUHO/Class-Accessor-Lite-0.08.tar.gz
     provides:
@@ -374,17 +232,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.64
       perl 5.008001
-      strict 0
-      warnings 0
-  Class-Tiny-1.008
-    pathname: D/DA/DAGOLDEN/Class-Tiny-1.008.tar.gz
-    provides:
-      Class::Tiny 1.008
-      Class::Tiny::Object 1.008
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      perl 5.006
       strict 0
       warnings 0
   Clone-0.47
@@ -746,47 +593,6 @@ DISTRIBUTIONS
       Scalar::Util 0
       parent 0
       strictures 0
-  Data-Printer-1.002001
-    pathname: G/GA/GARU/Data-Printer-1.002001.tar.gz
-    provides:
-      DDP 1.002001
-      Data::Printer 1.002001
-      Data::Printer::Common undef
-      Data::Printer::Config undef
-      Data::Printer::Filter undef
-      Data::Printer::Filter::ARRAY undef
-      Data::Printer::Filter::CODE undef
-      Data::Printer::Filter::ContentType undef
-      Data::Printer::Filter::DB undef
-      Data::Printer::Filter::DateTime undef
-      Data::Printer::Filter::Digest undef
-      Data::Printer::Filter::FORMAT undef
-      Data::Printer::Filter::GLOB undef
-      Data::Printer::Filter::GenericClass undef
-      Data::Printer::Filter::HASH undef
-      Data::Printer::Filter::OBJECT undef
-      Data::Printer::Filter::REF undef
-      Data::Printer::Filter::Regexp undef
-      Data::Printer::Filter::SCALAR undef
-      Data::Printer::Filter::VSTRING undef
-      Data::Printer::Filter::Web undef
-      Data::Printer::Object undef
-      Data::Printer::Profile undef
-      Data::Printer::Profile::Dumper undef
-      Data::Printer::Profile::JSON undef
-      Data::Printer::Theme undef
-      Data::Printer::Theme::Classic undef
-      Data::Printer::Theme::Material undef
-      Data::Printer::Theme::Monokai undef
-      Data::Printer::Theme::Solarized undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      Fcntl 0
-      File::Spec 0
-      File::Temp 0
-      Scalar::Util 0
-      Test::More 0
-      version 0.77
   Data-Section-0.200008
     pathname: R/RJ/RJBS/Data-Section-0.200008.tar.gz
     provides:
@@ -2220,18 +2026,6 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  ExtUtils-MakeMaker-CPANfile-0.09
-    pathname: I/IS/ISHIGAKI/ExtUtils-MakeMaker-CPANfile-0.09.tar.gz
-    provides:
-      ExtUtils::MakeMaker::CPANfile 0.09
-    requirements:
-      CPAN::Meta::Converter 2.141170
-      Cwd 0
-      ExtUtils::MakeMaker 6.17
-      File::Path 0
-      Module::CPANfile 0
-      Test::More 0.88
-      version 0.76
   Feature-Compat-Try-0.05
     pathname: P/PE/PEVANS/Feature-Compat-Try-0.05.tar.gz
     provides:
@@ -2781,20 +2575,6 @@ DISTRIBUTIONS
       Symbol 0
       strict 0
       warnings 0
-  IPC-Run-20231003.0
-    pathname: T/TO/TODDR/IPC-Run-20231003.0.tar.gz
-    provides:
-      IPC::Run 20231003.0
-      IPC::Run::Debug 20231003.0
-      IPC::Run::IO 20231003.0
-      IPC::Run::Timer 20231003.0
-      IPC::Run::Win32Helper 20231003.0
-      IPC::Run::Win32IO 20231003.0
-      IPC::Run::Win32Process 20231003.0
-      IPC::Run::Win32Pump 20231003.0
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0.47
   IPC-Run3-0.049
     pathname: R/RJ/RJBS/IPC-Run3-0.049.tar.gz
     provides:
@@ -2825,14 +2605,6 @@ DISTRIBUTIONS
       re 0
       strict 0
       warnings 0
-  JSON-4.10
-    pathname: I/IS/ISHIGAKI/JSON-4.10.tar.gz
-    provides:
-      JSON 4.10
-      JSON::Backend::PP 4.10
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   JSON-MaybeXS-1.004008
     pathname: E/ET/ETHER/JSON-MaybeXS-1.004008.tar.gz
     provides:
@@ -3025,65 +2797,6 @@ DISTRIBUTIONS
       perl 5.020000
       strict 0
       warnings 0
-  Log-Log4perl-1.57
-    pathname: E/ET/ETJ/Log-Log4perl-1.57.tar.gz
-    provides:
-      L4pResurrectable 0.01
-      Log::Log4perl 1.57
-      Log::Log4perl::Appender undef
-      Log::Log4perl::Appender::Buffer 1.53
-      Log::Log4perl::Appender::DBI undef
-      Log::Log4perl::Appender::File undef
-      Log::Log4perl::Appender::Limit 1.53
-      Log::Log4perl::Appender::RRDs undef
-      Log::Log4perl::Appender::Screen undef
-      Log::Log4perl::Appender::ScreenColoredLevels undef
-      Log::Log4perl::Appender::Socket undef
-      Log::Log4perl::Appender::String undef
-      Log::Log4perl::Appender::Synchronized 1.53
-      Log::Log4perl::Appender::TestArrayBuffer undef
-      Log::Log4perl::Appender::TestBuffer undef
-      Log::Log4perl::Appender::TestFileCreeper undef
-      Log::Log4perl::Catalyst 1.53
-      Log::Log4perl::Config undef
-      Log::Log4perl::Config::BaseConfigurator undef
-      Log::Log4perl::Config::DOMConfigurator 0.03
-      Log::Log4perl::Config::PropertyConfigurator undef
-      Log::Log4perl::Config::Watch undef
-      Log::Log4perl::DateFormat undef
-      Log::Log4perl::Filter undef
-      Log::Log4perl::Filter::Boolean undef
-      Log::Log4perl::Filter::LevelMatch undef
-      Log::Log4perl::Filter::LevelRange undef
-      Log::Log4perl::Filter::MDC undef
-      Log::Log4perl::Filter::StringMatch undef
-      Log::Log4perl::InternalDebug undef
-      Log::Log4perl::JavaMap undef
-      Log::Log4perl::JavaMap::ConsoleAppender undef
-      Log::Log4perl::JavaMap::FileAppender undef
-      Log::Log4perl::JavaMap::JDBCAppender undef
-      Log::Log4perl::JavaMap::NTEventLogAppender undef
-      Log::Log4perl::JavaMap::RollingFileAppender undef
-      Log::Log4perl::JavaMap::SyslogAppender undef
-      Log::Log4perl::JavaMap::TestBuffer undef
-      Log::Log4perl::Layout undef
-      Log::Log4perl::Layout::NoopLayout undef
-      Log::Log4perl::Layout::PatternLayout undef
-      Log::Log4perl::Layout::PatternLayout::Multiline undef
-      Log::Log4perl::Layout::SimpleLayout undef
-      Log::Log4perl::Level undef
-      Log::Log4perl::Logger undef
-      Log::Log4perl::MDC undef
-      Log::Log4perl::NDC undef
-      Log::Log4perl::Resurrector undef
-      Log::Log4perl::Util undef
-      Log::Log4perl::Util::Semaphore undef
-      Log::Log4perl::Util::TimeTracker undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Path 2.07
-      File::Spec 0.82
-      perl 5.006
   Log-Message-0.08
     pathname: B/BI/BINGOS/Log-Message-0.08.tar.gz
     provides:
@@ -3138,59 +2851,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Menlo-1.9019
-    pathname: M/MI/MIYAGAWA/Menlo-1.9019.tar.gz
-    provides:
-      Menlo 1.9019
-      Menlo::Builder::Static undef
-      Menlo::Dependency undef
-      Menlo::Index::MetaCPAN undef
-      Menlo::Index::MetaDB 1.9019
-      Menlo::Index::Mirror undef
-      Menlo::Util undef
-    requirements:
-      CPAN::Common::Index 0.006
-      CPAN::DistnameInfo 0
-      CPAN::Meta 2.132830
-      CPAN::Meta::Check 0
-      CPAN::Meta::Requirements 0
-      CPAN::Meta::YAML 0
-      Capture::Tiny 0
-      Class::Tiny 1.001
-      Exporter 0
-      ExtUtils::Config 0.003
-      ExtUtils::Helpers 0.020
-      ExtUtils::InstallPaths 0.002
-      ExtUtils::MakeMaker 0
-      File::Temp 0
-      File::Which 0
-      File::pushd 0
-      Getopt::Long 2.36
-      HTTP::Tiny 0.054
-      HTTP::Tinyish 0.04
-      JSON::PP 2
-      Module::CPANfile 0
-      Module::CoreList 0
-      Module::Metadata 0
-      Parse::CPAN::Meta 0
-      Parse::PMFile 0.26
-      String::ShellQuote 0
-      URI 0
-      Win32::ShellQuote 0
-      local::lib 0
-      parent 0
-      perl 5.008001
-      version 0
-  Menlo-Legacy-1.9022
-    pathname: M/MI/MIYAGAWA/Menlo-Legacy-1.9022.tar.gz
-    provides:
-      Menlo::CLI::Compat 1.9022
-      Menlo::Legacy 1.9022
-    requirements:
-      ExtUtils::MakeMaker 0
-      Menlo 1.9018
-      perl 5.008001
-      version 0.9905
   Metrics-Any-0.10
     pathname: P/PE/PEVANS/Metrics-Any-0.10.tar.gz
     provides:
@@ -4480,18 +4140,6 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Parse-PMFile-0.47
-    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.47.tar.gz
-    provides:
-      Parse::PMFile 0.47
-    requirements:
-      Dumpvalue 0
-      ExtUtils::MakeMaker 0
-      ExtUtils::MakeMaker::CPANfile 0.09
-      File::Spec 0
-      JSON::PP 2.00
-      Safe 0
-      version 0.83
   Path-Class-0.37
     pathname: K/KW/KWILLIAMS/Path-Class-0.37.tar.gz
     provides:
@@ -5135,12 +4783,6 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  String-ShellQuote-1.04
-    pathname: R/RO/ROSCH/String-ShellQuote-1.04.tar.gz
-    provides:
-      String::ShellQuote 1.04
-    requirements:
-      ExtUtils::MakeMaker 0
   Struct-Dumb-0.14
     pathname: P/PE/PEVANS/Struct-Dumb-0.14.tar.gz
     provides:
@@ -5730,16 +5372,6 @@ DISTRIBUTIONS
       Scalar::Util 0
       Sub::Quote 0
       overload 0
-  Tie-Handle-Offset-0.004
-    pathname: D/DA/DAGOLDEN/Tie-Handle-Offset-0.004.tar.gz
-    provides:
-      Tie::Handle::Offset 0.004
-      Tie::Handle::SkipHeader 0.004
-    requirements:
-      ExtUtils::MakeMaker 6.17
-      Tie::Handle 0
-      perl 5.006
-      strict 0
   Tie-IxHash-1.23
     pathname: C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
     provides:
@@ -6040,12 +5672,6 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  Win32-ShellQuote-0.003001
-    pathname: H/HA/HAARG/Win32-ShellQuote-0.003001.tar.gz
-    provides:
-      Win32::ShellQuote 0.003001
-    requirements:
-      perl 5.006
   XS-Parse-Keyword-0.48
     pathname: P/PE/PEVANS/XS-Parse-Keyword-0.48.tar.gz
     provides:
@@ -6264,13 +5890,6 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  local-lib-2.000029
-    pathname: H/HA/HAARG/local-lib-2.000029.tar.gz
-    provides:
-      lib::core::only undef
-      local::lib 2.000029
-    requirements:
-      perl 5.006
   meta-0.013
     pathname: P/PE/PEVANS/meta-0.013.tar.gz
     provides:
