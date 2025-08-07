@@ -16,13 +16,13 @@ const our $NAME_RE        => qr/[\W]/;
 # field $method :param :reader;
 field $methods : param : reader;
 field $pattern : param : reader;
-field $filter : param : reader = undef;
-field $dest : param : reader   = undef;
-field $name : param : accessor = undef;
-field $root : param : reader : weak;
+field $filter  : param : reader   = undef;
+field $dest    : param : reader   = undef;
+field $name    : param : accessor = undef;
+field $root    : param : reader : weak;
 
 # field $limb :reader;
-field @pattern_arr : reader;
+field @pattern_arr  : reader;
 field @placeholders : reader;
 
 ADJUSTPARAMS($params) {
