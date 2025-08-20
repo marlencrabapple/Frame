@@ -95,7 +95,7 @@ method to_psgi {
 }
 
 method to_app {
-    &to_psgi
+    \to_psgi->&*
 }
 
 method handler ($env) {

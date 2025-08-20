@@ -3,8 +3,7 @@ use Object::Pad ':experimental(:all)';
 package Frame::Server;
 
 class Frame::Server
-  : isa(Net::Async::HTTP::Server::PSGI)
-  : does(Frame::Base);
+  : isa(Net::Async::HTTP::Server::PSGI);
 
 use utf8;
 use v5.40;
@@ -121,9 +120,8 @@ sub _responder ( $req, $res ) {
 
                     # Form HTTP chunks out of it
                     defined $buffer
-                        and return
-                        sprintf( "%X$CRLF%s$CRLF", length $buffer,
-                        $buffer );
+                      and return
+                      sprintf( "%X$CRLF%s$CRLF", length $buffer, $buffer );
 
                     $body->close;
                     undef $body;
@@ -155,7 +153,6 @@ method on_accept ($conn) {
     my %timer_args_base = (
         remove_on_expire => 1,
         on_expire        => sub ($self) {
-            dmsg "$conn", "$self", $self if $ENV{FRAME_DEBUG};
             $conn->_flush_requests
               ; # TODO: See if this makes pipeline reqs work correctly or breaks things
             $conn->close;
@@ -177,7 +174,6 @@ method on_accept ($conn) {
         $conn->$field->start unless $key eq 'keep_alive';
 
         my $asdf = $conn->$field;
-        dmsg "$conn", "$asdf", $asdf->notifier_name if $ENV{FRAME_DEBUG};
     }
 
     $conn;
@@ -186,7 +182,7 @@ method on_accept ($conn) {
 method on_request ($req) {
     my $env = $$req{req};
 
-    Frame::Base->dmsg({ req => $req });
+    Frame::Base->dmsg( { req => $req } );
 
     my $res       = Plack::Util::run_app $$self{app}, $env;
     my $responder = sub { _responder( $req, $res ) };

@@ -1,7 +1,7 @@
 requires 'perl', 'v5.40';
 
 requires 'Cwd';
-requires 'Const::Fast';
+requires 'Const::Fast';qqqq
 
 requires 'Plack', '1.0051';
 
@@ -12,7 +12,7 @@ requires 'MIME::Types';
 requires 'File::XDG';
 
 requires 'IO::Async', '0.802';
-requires 'IO::Async::SSL', '0.23';
+requires 'IO::Async::SSL', '0.23'; 
 requires 'IO::Socket::SSL', '2.074';
 requires 'Net::SSLeay', '1.92';
 requires 'Mozilla::CA', '20211001';
@@ -75,4 +75,8 @@ requires 'Module::Refresh';
 
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
-requires 'PadWalker'
+requires 'Podwalker'
+
+
+
+
