@@ -1,7 +1,7 @@
 use Object::Pad qw(:experimental(:all));
 
-package Frame::PW::Config;
-role Frame::PW::Config : does(Frame::PW);
+package Frame::Auth::Config;
+role Frame::Auth::Config : does(Frame::Auth);
 
 use utf8;
 use v5.40;
@@ -9,7 +9,11 @@ use v5.40;
 use Path::Tiny;
 use Const::Fast;
 
+<<<<<<< HEAD
+const our $DEBUG => 1;    #$ENV{FRAME_DEBUG} // $ENV{DEBUG};
+=======
 const our $DEBUG = 1;#$ENV{FRAME_DEBUG} // $ENV{DEBUG};
+>>>>>>> ea49c5a (...)
 
 #field %users : inheritable = ();
 

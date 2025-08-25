@@ -1,7 +1,7 @@
 use Object::Pad qw(:experimental(:all));
 
-package Frame::PW;
-role Frame::PW : does(Frame::Base);
+package Frame::Auth;
+role Frame::Auth : does(Frame::Base);
 
 use utf8;
 use v5.40;

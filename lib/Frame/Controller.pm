@@ -12,10 +12,18 @@ use Text::Xslate;
 use JSON::MaybeXS;
 use Syntax::Keyword::Try;
 use Syntax::Keyword::Dynamically;
-use Frame::Request;
 use Const::Fast;
 
-const our @EXPORT_DOES => qw(template);
+use Frame::Request;
+
+our @EXPORT_DOES = qw(template);
+our @EXPORT      = @EXPORT_DOES;
+
+BEGIN {
+    require Exporter;
+    our @ISA    = qw(Exporter);
+    our @EXPORT = qw(dmsg epoch err);
+}
 
 const our $tx_default => Text::Xslate->new(
     cache => $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development' ? 0 : 1,
@@ -30,12 +38,11 @@ const our $tx_default => Text::Xslate->new(
 APPLY {
     my $mop = shift;
 
-    # do {
-    #     my $class = $mop->name;
-    #     $import->( $class, @_ );
-    #     $^H{ __PACKAGE__ . '/user' } = 1;
-    #     $^H{"$class/user"} = 1;
-    # }
+    use utf8;
+    use v5.40;
+
+    use Exporter 'import';
+    our @EXPORT = @{__PACKAGE__::EXPORT}
 }
 
 field $config ADJUST { $self->config };

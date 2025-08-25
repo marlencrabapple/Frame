@@ -1,8 +1,8 @@
-use Object::Pad ':experimentall(:all)';
+use Object::Pad ':experimental(:all)';
 
 package Frame::App::Media::Stream;
 
-class Frame::App::Media::Stream : does(Frame::App);
+class Frame::App::Media::Stream : isa(Frame::App);
 
 use utf8;
 use v5.40;
@@ -24,7 +24,7 @@ method view_video_playback ($vid_id) {
 
 }
 
-our $video_page => <<'...'
+const our $video_page => <<'...'
 <!DOCTYPE html>
 <html lang="en">
 <head>

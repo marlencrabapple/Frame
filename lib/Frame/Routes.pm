@@ -35,8 +35,9 @@ method add ( $methods, $pattern, @args ) {
     }
     elsif ($dest) {
         if ( my $c = blessed $dest ) {
-            if ( $dest isa 'Plack::App::Component'
-              || $dest->DOES('Frame::Base')) {
+            if (   $dest isa 'Plack::App::Component'
+                || $dest->DOES('Frame::Base') )
+            {
                 my $controller_class = blessed $dest;
                 my $sub              = sub ( $self, %opts ) {
                     $self->call( $self->req->env, %opts );

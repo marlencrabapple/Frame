@@ -1,9 +1,9 @@
 requires 'perl', 'v5.40';
 
 requires 'Cwd';
-requires 'Const::Fast';qqqq
+requires 'Const::Fast';
 
-requires 'Plack', '1.0051';
+requires 'Plack';
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';
@@ -26,10 +26,6 @@ requires 'Object::Pad', '0.808';
 requires 'Future', '0.50';
 requires 'Future::AsyncAwait', '0.62';
 requires 'Syntax::Keyword::Dynamically', '0.11';
-requires 'Syntax::Keyword::MultiSub';
-
-# Which one do we stick with?
-requires 'Feature::Compat::Try', '0.05';
 requires 'Syntax::Keyword::Try';
 
 requires 'Devel::StackTrace::WithLexicals', '2.01';
@@ -59,24 +55,20 @@ requires 'Net::Async::HTTP', '0.50';
 
 requires 'Module::Refresh';
 
-#on develop => sub {
+on develop => sub {
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
   recommends 'Perl::Critic::Community', 'v1.0.3';
   requires 'Dist::Milla', 'v1.0.21';
   requires 'Plack::Middleware::Debug';
   recommends 'Archive::Tar::Wrapper';
-#};
+};
 
-#on test => sub {
+on test => sub {
   requires 'Test::More', '0.96';
   requires 'Test::Pod';
-#};
+};
 
 requires 'HTTP::Parser::XS', '0.17';
 requires 'Server::Starter', '0.35';
-requires 'Podwalker'
-
-
-
-
+requires 'PadWalker'

@@ -23,7 +23,7 @@ ADJUST {
     $routes   //= [];
     $stops    //= [];
     $patterns //= {};
-    $tree     //= { map { $_ => [] } @METHODS }
+    $tree     //= { map { $_ => [] } @Frame::Routes::Common::METHODS }
 }
 
 method add : required;

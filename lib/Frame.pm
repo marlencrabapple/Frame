@@ -1,7 +1,7 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame : does(Frame::Base);
+role Frame : does(Frame::Base) : does(Frame::Config);
 
 our $VERSION = '0.01.5';
 
@@ -12,7 +12,6 @@ use Encode;
 use TOML::Tiny qw(from_toml to_toml);
 use Path::Tiny;
 use Const::Fast;
-use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Syntax::Keyword::Try;
@@ -20,21 +19,22 @@ use Syntax::Keyword::Try;
 use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
-use Frame::Controller::Default;
+
+#use Frame::Controller::Default;
 
 const our $config_default => $Frame::Config::config_default;
 
-field $loop : reader;
-field $ua : reader;
-field $routes : reader;
-field $config : reader : inheritable;
-field $charset : reader                      = 'utf-8';
-field $request_class : param                 = 'Frame::Request';
+field $loop          : reader;
+field $ua            : reader;
+field $routes        : reader;
+field $config        : reader : inheritable;
+field $charset       : reader = 'utf-8';
+field $request_class : param  = 'Frame::Request';
 field $controller_namespace : param : reader = undef;
-field $default_controller_class              = 'Frame::Controller::Default';
+field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
-ADJUSTPARAMS ($params) {
+ADJUSTPARAMS($params) {
     unshift @INC, $INC[1];
     $self->app($self);
 
@@ -44,7 +44,7 @@ ADJUSTPARAMS ($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    Frame::Base::dmsg { config => $config, config_default => $config_default };
+    dmsg( { config => $config, config_default => $config_default } );
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -70,21 +70,24 @@ ADJUSTPARAMS ($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        Frame::Base->dmsg( e => $e )
+        dmsg( { e => $e } )
     }
 
     $routes = Frame::Routes->new( app => $self );
 
-    my %startup_opts = ( params => $params,
-                         app    => $self
-                         routes => $routes );
+    my %startup_opts = (
+        params => $params,
+        app    => $self,
+        routes => $routes
+    );
 
     my $ret = $self->startup(%startup_opts);
 
-    warn __CLASS__ . "$\::startup did not return a valid value: '$ret'."
+    warn __CLASS__
+      . "$\::startup did not return a valid value: '$ret'."
       . " Valid values"
       . "are 1 or the instance of the class its called on."
-          unless $ret == 1 || ( ref $ret && $ret == $self )
+      unless $ret == 1 || ( ref $ret && $ret == $self );
 
     $ret
 }
@@ -94,7 +97,7 @@ method to_psgi {
 }
 
 method to_app {
-    \to_psgi->&*
+    \to_psgi->&*;
 }
 
 method handler ($env) {
@@ -119,8 +122,7 @@ method dispatch ($req) {
         }
     }
     else {
-        $res = $default_controller_class
-          ->new( app => $self, req => $req )
+        $res = $default_controller_class->new( app => $self, req => $req )
           ->render_404->finalize;
     }
 
@@ -129,27 +131,27 @@ method dispatch ($req) {
 
 method route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
+    my $res;
 
     #if ( blessed $sub ) {
     #  die ... if $c
     #}
 
-    Frame::Base->dmsg({ c => $c, sub => $sub, route => $route, req => $self });
+    dmsg( { c => $c, sub => $sub, route => $route, req => $self } );
 
-    if(blessed $c) {
-      my $res = $c->$sub( route => $route, req => $req, c => $c, sub => $sub)
+    if ( blessed $c ) {
+        my $res =
+          $c->$sub( route => $route, req => $req, c => $c, sub => $sub );
     }
     else {
-        $c = ( $c || $default_controller_class )
-              ->new( app   => $self
-                   , req   => $req
-                   , route => $route );
+        $c = ( $c || $default_controller_class )->new(
+            app   => $self,
+            req   => $req,
+            route => $route
+        );
 
-        my $res = $c->$sub( $req->placeholder_values_ord )
-            // $c->res;
-    ]
-
-
+        my $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
+    }
 
     $res = $res->get if $res isa 'Future';
 

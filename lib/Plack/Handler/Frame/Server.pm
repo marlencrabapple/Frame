@@ -1,19 +1,19 @@
-use Object::Pad;
+use Object::Pad ':experimental(:all)';
 
 package Plack::Handler::Frame::Server;
 
 class Plack::Handler::Frame::Server;
 
 use utf8;
-use v5.36;
+use v5.40;
 
-use List::Util;
 use Data::Dumper;
+use List::Util;
 use Frame::Server;
 use IO::Async::Loop;
 use Parallel::Prefork;
-use Server::Starter ();
-use List::AllUtils  qw(any first notall);
+use Server::Starter;
+use List::AllUtils qw'uniq any first all';
 
 use constant SIGRERE => qr/^(TERM|USR1)$/;
 
@@ -64,7 +64,7 @@ ADJUSTPARAMS($params) {
     $pm_args{err_respawn_interval} = $$params{err_respawn_interval}
       if $$params{err_respawn_interval};
 
-    if ( $ssl || any { /^ssl(_)?/ } keys %$params ) {
+    if ( $ssl || any { /^(ssl[_\-].+)?/ } keys %$params ) {
         require IO::Async::SSL;
 
         %ssl_args = (
@@ -80,7 +80,8 @@ ADJUSTPARAMS($params) {
         );
     }
 
-    $loop = IO::Async::Loop->new
+    warn Dumper( { params => $params } );
+    $loop = IO::Async::Loop->new;
 }
 
 method BUILDARGS : common (@args) {
@@ -186,5 +187,3 @@ method register_service ($app) {
         }
     }
 }
-
-1
