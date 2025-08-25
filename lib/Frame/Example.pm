@@ -11,12 +11,12 @@ use TOML::Tiny;
 use Data::Dumper;
 use Path::Tiny;
 
-field $config_file : param(config);
-field $config;
+#field $config_file : param(config);
+#field $config;
 
 ADJUST {
-    $config_file = $ENV{FRAME_CONFIG_FILE} // 'config.toml';
-    $config      = from_toml( path($config_file) );
+    #$config_file = $ENV{FRAME_CONFIG_FILE} // 'config.toml';
+    #$config      = from_toml( path($config_file) );
 
     $self->init_db
 }

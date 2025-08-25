@@ -16,6 +16,7 @@ use List::AllUtils qw(singleton any);
 use JSON::MaybeXS;
 use Data::Dumper;
 use Time::Piece;
+use Time::HiRes;
 use Plack::Util;
 use Module::Metadata;
 use Syntax::Keyword::Dynamically;
@@ -23,6 +24,18 @@ use Syntax::Keyword::Try;
 
 our @EXPORT      = qw(dmsg json __pkgfn__ callstack);
 our @EXPORT_DOES = @EXPORT;
+
+use subs @EXPORT;
+
+BEGIN {
+    require Exporter;
+    our @ISA = qw(Exporter);
+    our @EXPORT = qw(dmsg json __pkgfn__ callstack);
+    $^H{ __PACKAGE__ . '/user' } = 1;
+}
+
+$^H{ __PACKAGE__ . '/user' } = 1;
+
 
 const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
@@ -32,55 +45,41 @@ const our $json_default =>
 
 const our $package => __PACKAGE__;
 
-state %seen_users = (
-    $package => {
-        fn  => { $package->__pkgfn__ => 1 },
-        pkg => { $package            => 1 }
-    }
-);
-
-use subs @EXPORT_DOES;
-
-$^H{ __PACKAGE__ . '/user' } = 1;
-
 field $app : weak : param : accessor = undef;
 field $json;
 field $debug_mode : param : accessor = $DEBUG_MODE;
 field $dev_mode   : param : accessor = $DEV_MODE;
 
+
 APPLY($mop) {
+    use utf8;
+    use v5.40;
 
-    # my ( $package, $class, $callstack ) =
-    #   ( __PACKAGE__, $mop->name, [ [caller], [ caller 1 ] ] );
-
+    use Exporter 'import';
+    our @EXPORT = @{__PACKAGE__::EXPORT};
     $^H{ __PACKAGE__ . '/user' } = 1;
 
-    # __PACKAGE__->exports(
-    #     __PACKAGE__,
-    #     sub ( $export, $realsub, @vars ) {
-    #         $package->monkey_patch( $$callstack[0], $export );
-    #     }
-    # );
 };
 
 ADJUSTPARAMS($params) {
+    use utf8;
+    use v5.40;
 
+    use Exporter 'import';
+    our @EXPORT = @{__PACKAGE__::EXPORT};
     $^H{ __PACKAGE__ . '/user' } = 1;
-
-    # __PACKAGE__->exports(
-    #     __PACKAGE__,
-    #     sub ( $export, $realsub, @vars ) {
-    #         $package->monkey_patch( $$callstack[0], $export );
-    #     }
-    # );
 };
 
-method __pkgfn__ : common ($pkgname = undef) {
+sub epoch( $join = '', %opts) {
+    join $join, Time::HiRes::gettimeofday;
+}
+
+sub __pkgfn__ ($class, $pkgname = undef) {
     $pkgname //= $class;
     "$pkgname.pm" =~ s/::/\//rg;
 }
 
-method callstack : common {
+sub callstack ($class = undef) {
     my @callstack;
     my $i = 0;
 
@@ -98,7 +97,7 @@ method callstack : common {
     @callstack;
 }
 
-method dmsg : common (@msgs) {
+sub dmsg :prototype(@) (@msgs) {
     $DEV_MODE || return '';
 
     my @caller = caller 0;
@@ -130,3 +129,20 @@ method dmsg : common (@msgs) {
     $out;
 }
 
+const our $S_UNKNOWNERR => 'Internal Server Error';
+
+sub err : prototype($;$%) (
+    $msg = ( $! // $S_UNKNOWNERR ),
+    $exit     = ( $? ? $? >> 8 : 255 ), %opts
+  )
+{
+    dmsg( { exit => $exit, msg => $msg, opts => \%opts } );
+
+    my $errstr = $msg isa 'ARRAY' ? join "\n", map {
+        my $str = $_ isa 'HASH' ? $$_{msg} : $_;
+        $str = $S_UNKNOWNERR if $str =~ /^[0-9]+$/ && $str == 0;
+        $str
+    } @$msg : $msg;
+
+    die "ERROR: $errstr ($exit)";
+}

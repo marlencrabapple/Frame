@@ -27,7 +27,7 @@ BEGIN {
     }
     catch ($e) {
         our $_config_default = { charset => 'utf8' };
-        Frame::Base->dmsg($e)
+        warn $e
     }
 }
 

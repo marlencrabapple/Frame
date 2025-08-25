@@ -8,10 +8,8 @@ use v5.40;
 
 use DBI;
 use DBD::SQLite;
-use Data::Printer;
 use Hash::Ordered;
-
-#use Exporter;
+use Exporter;
 
 use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
 
@@ -44,7 +42,7 @@ APPLY($mop) {
 
     $^H{"$class/dbmodel"} = 1;
 
-    p %^H
+    dmsg(\%^H) 
 }
 
 ADJUST {

@@ -6,7 +6,6 @@ role Frame::Db : does(Frame::Base);
 use utf8;
 use v5.40;
 
-use Data::Printer;
 use SQL::Abstract;
 use Syntax::Keyword::Try;
 
@@ -20,7 +19,7 @@ method $import {
 
 APPLY($mop) {
     try {
-        Frame::Base::dmsg { env => \%ENV, config => $ENV{config} };
+        dmsg({ env => \%ENV, config => $ENV{config} });
 
         if ( my $source = $ENV{config}->{db}{source} ) {
             my ($driver) = $source =~ /dbi:([^:]+):.+/;

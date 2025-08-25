@@ -1,7 +1,7 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame : does(Frame::Base);
+role Frame : does(Frame::Base) :does(Frame::Config);
 
 our $VERSION = '0.01.5';
 
@@ -12,15 +12,9 @@ use Encode;
 use TOML::Tiny qw(from_toml to_toml);
 use Path::Tiny;
 use Const::Fast;
-use Data::Dumper;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use Syntax::Keyword::Try;
-
-use Frame::Config;
-use Frame::Routes;
-use Frame::Request;
-use Frame::Controller::Default;
 
 const our $config_default => $Frame::Config::config_default;
 
@@ -44,8 +38,7 @@ ADJUSTPARAMS ($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    Frame::Base->dmsg(
-        { config => $config, config_default => $config_default } );
+    dmsg({ config => $config, config_default => $config_default });
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -71,13 +64,13 @@ ADJUSTPARAMS ($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        Frame::Base->dmsg( e => $e )
+        dmsg( {e => $e })
     }
 
     $routes = Frame::Routes->new( app => $self );
 
     my %startup_opts = ( params => $params,
-                         app    => $self
+                         app    => $self,
                          routes => $routes );
 
     my $ret = $self->startup(%startup_opts);
@@ -85,7 +78,7 @@ ADJUSTPARAMS ($params) {
     warn __CLASS__ . "$\::startup did not return a valid value: '$ret'."
       . " Valid values"
       . "are 1 or the instance of the class its called on."
-          unless $ret == 1 || ( ref $ret && $ret == $self )
+          unless $ret == 1 || ( ref $ret && $ret == $self );
 
     $ret
 }
@@ -130,12 +123,12 @@ method dispatch ($req) {
 
 method route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
-
+my $res;
     #if ( blessed $sub ) {
     #  die ... if $c
     #}
 
-    Frame::Base->dmsg({ c => $c, sub => $sub, route => $route, req => $self });
+    dmsg({ c => $c, sub => $sub, route => $route, req => $self });
 
     if(blessed $c) {
       my $res = $c->$sub( route => $route, req => $req, c => $c, sub => $sub)
@@ -148,7 +141,7 @@ method route ( $route, $req ) {
 
         my $res = $c->$sub( $req->placeholder_values_ord )
             // $c->res;
-    ]
+    }
 
 
 
