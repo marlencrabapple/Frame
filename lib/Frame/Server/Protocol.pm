@@ -1,7 +1,6 @@
-use Object::Pad;
+use Object::Pad ':experimental(:all)';
 
 package Frame::Server::Protocol;
-
 class Frame::Server::Protocol : isa(Net::Async::HTTP::Server::Protocol) :
   does(Frame::Base);
 
@@ -157,5 +156,3 @@ method restart_timeout (@names) {
         $self->$field->is_running ? $self->$field->reset : $self->$field->start;
     }
 }
-
-1

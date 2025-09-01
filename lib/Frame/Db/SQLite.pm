@@ -1,11 +1,10 @@
-use Object::Pad;
+use Object::Pad ':experimental(:all)';
 
 package Frame::Db::SQLite;
 role Frame::Db::SQLite :does(Frame::Db);
 
 use utf8;
-use v5.36;
-# use autodie;
+use v5.40;
 
 use DBI;
 use DBD::SQLite::Constants ':dbd_sqlite_string_mode';

@@ -1,0 +1,113 @@
+{
+   "abstract" : "Bare-bones, real-time web framework (WIP)",
+   "author" : [
+      "Ian P Bradley <ian.bradley@studiocrabapple.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Minilla/v3.1.25, CPAN::Meta::Converter version 2.150010",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : 2
+   },
+   "name" : "Frame",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author",
+         "builder"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build::Tiny" : "0.035"
+         }
+      },
+      "develop" : {
+         "recommends" : {
+            "App::perlimports" : "0.000049",
+            "Carmel" : "v0.1.56",
+            "Dist::Milla" : "v1.0.21",
+            "Perl::Critic" : "1.144",
+            "Perl::Critic::Community" : "v1.0.3",
+            "Perl::Tidy" : "20221112"
+         },
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion::Fast" : "0.04",
+            "Test::PAUSE::Permissions" : "0.07",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.2.7"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Cpanel::JSON::XS" : "4.32",
+            "Crypt::Argon2" : "0.029",
+            "DBD::SQLite" : "1.72",
+            "DBI" : "1.643",
+            "Data::Printer" : "0",
+            "Devel::StackTrace::WithLexicals" : "2.01",
+            "Feature::Compat::Try" : "0.05",
+            "Future" : "0.50",
+            "Future::AsyncAwait" : "0.62",
+            "HTML::Escape" : "1.11",
+            "HTTP::Parser::XS" : "0.17",
+            "HTTP::Tinyish" : "0.18",
+            "Hash::Ordered" : "0",
+            "IO::Async" : "0.802",
+            "IO::Async::SSL" : "0.23",
+            "IO::Socket::SSL" : "2.075",
+            "JSON::MaybeXS" : "1.004004",
+            "LWP::Protocol::https" : "6.10",
+            "LWP::UserAgent" : "6.67",
+            "List::AllUtils" : "0.19",
+            "Mozilla::CA" : "20211001",
+            "Net::Async::HTTP" : "0.50",
+            "Net::Async::HTTP::Server" : "0.14",
+            "Net::Async::WebSocket" : "0.13",
+            "Net::SSLeay" : "1.92",
+            "Object::Pad" : "0.808",
+            "Parallel::Prefork" : "0.18",
+            "Path::Tiny" : "0.144",
+            "Plack" : "1.0053",
+            "SQL::Abstract" : "2.000001",
+            "Server::Starter" : "0.35",
+            "Syntax::Keyword::Dynamically" : "0.11",
+            "Syntax::Keyword::MultiSub" : "0",
+            "Syntax::Keyword::Try" : "0",
+            "Text::Xslate" : "v3.5.9",
+            "YAML::Tiny" : "1.73",
+            "perl" : "v5.40.0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0.96"
+         }
+      }
+   },
+   "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/marlencrabapple/Frame/issues"
+      },
+      "homepage" : "https://github.com/marlencrabapple/Frame",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/marlencrabapple/Frame.git",
+         "web" : "https://github.com/marlencrabapple/Frame"
+      }
+   },
+   "version" : "0.01.2",
+   "x_serialization_backend" : "JSON::PP version 4.16",
+   "x_static_install" : 1
+}

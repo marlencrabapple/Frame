@@ -1,7 +1,8 @@
-use Object::Pad ':experiment(:all)';
+use Object::Pad ':experimental(:all)';
 
 package Frame::App::Media::Stream;
-class Frame::App::Media::Stream :does(Frame::App);
+
+class Frame::App::Media::Stream : isa(Frame::App);
 
 use utf8;
 use v5.40;
@@ -9,10 +10,10 @@ use v5.40;
 use Const::Fast;
 
 method startup {
-  my $r = $self->routes;
+    my $r = $self->routes;
 
-  $r->get('/stream/:id');
-  $r->get('/stream/:id.m3u8');
+    $r->get('/stream/:id');
+    $r->get('/stream/:id.m3u8');
 }
 
 method view_m3u8 ($vid_id) {
@@ -23,7 +24,7 @@ method view_video_playback ($vid_id) {
 
 }
 
-our $video_page => <<'...'
+const our $video_page => <<'...'
 <!DOCTYPE html>
 <html lang="en">
 <head>

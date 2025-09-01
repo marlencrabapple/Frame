@@ -17,6 +17,7 @@ BEGIN {
     try {
         my $error;
 
+<<<<<<< HEAD
         ( $_config_default, $error ) = from_toml(
             path( $ENV{FRAME_DEFAULT_CONFIG_FILE} // 'config-default.toml' )
               ->slurp_utf8 );
@@ -27,7 +28,7 @@ BEGIN {
     }
     catch ($e) {
         our $_config_default = { charset => 'utf8' };
-        warn $e
+        Frame::Base->dmsg($e)
     }
 }
 
@@ -48,6 +49,39 @@ ADJUST {
           && $config_in != $Frame::Config::config_default_path;
 
         $_config = { %$_config, %$_config_curr };
+=======
+try {
+    my $error;
+
+    ( $_config_default, $error ) = from_toml(
+        path( $ENV{FRAME_DEFAULT_CONFIG_FILE} // 'config-default.toml' )
+          ->slurp_utf8 );
+
+    if ($error) {
+        die $error;
+    }
+}
+catch ($e) {
+    $_config_default = { charset => 'utf8' };
+    Frame::Base::dmsg($e)
+}
+
+const our $config_default => {%$_config_default};
+
+field $config_in : param(config) = [ 'config-default.toml', 'config.toml' ];
+field $config = {%$config_default};
+
+APPLY {
+
+  }
+
+  ADJUST {
+    my $_config = {};
+
+    foreach my $in (@$config_in) {
+        my $_config_in = from_toml( path($in)->slurp_utf8 );
+        $_config = { %$_config, %$_config_in };
+>>>>>>> 70add1a (Clean build artifacts in repo, refreshed LICENSE and Build.PL)
     }
 
     const our $run_config = {%$_config};

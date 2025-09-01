@@ -4,12 +4,11 @@
   },
   "perlnavigator.perlimportsLintEnabled": false,
   "perlnavigator.perlimportsTidyEnabled": false,
-  "perlnavigator.perlcriticSeverity": 1,
+  // "perlnavigator.perlcriticSeverity": 1,
   "perlnavigator.perlcriticTheme": "community",
-  "perlnavigator.perlEnvAdd": false,
   "perlnavigator.perlPath": "/home/nameless/.plenv/shims/carmel",
-  "perlnavigator.perlParams": ["exec", "perl"],
-  "perlnavigator.includePaths": [
-    "/home/nameless/perlnavigator-deps/local/lib/perl5"
-  ]
+  "perlnavigator.perlParams": [
+    "exec",
+    "perl"
+  ],
 }
