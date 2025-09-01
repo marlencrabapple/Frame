@@ -8,8 +8,8 @@ use Syntax::Keyword::Try;
 
 try {
     use Data::Dumper;
-    #warn Dumper({ caller => [[caller 0], [caller]] });
-    #use Frame;
+    warn Dumper({ caller => [[caller 0], [caller]] });
+    use Frame;
 }
 catch ($e) {
     use Data::Dumper;

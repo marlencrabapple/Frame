@@ -30,18 +30,19 @@
          }
       },
       "develop" : {
-         "requires" : {
-            "Dist::Milla" : "v1.0.22",
-            "Test::Pod" : "1.41"
-         }
-      },
-      "runtime" : {
          "recommends" : {
             "Archive::Tar::Wrapper" : "0",
             "Perl::Critic" : "1.144",
             "Perl::Critic::Community" : "v1.0.3",
             "Perl::Tidy" : "20221112"
          },
+         "requires" : {
+            "Dist::Milla" : "v1.0.22",
+            "Plack::Middleware::Debug" : "0",
+            "Test::Pod" : "1.41"
+         }
+      },
+      "runtime" : {
          "requires" : {
             "Const::Fast" : "0",
             "Const::Fast::Exporter" : "0",
@@ -51,8 +52,6 @@
             "DBD::SQLite" : "1.72",
             "DBI" : "1.643",
             "Devel::StackTrace::WithLexicals" : "2.01",
-            "Dist::Milla" : "v1.0.21",
-            "Feature::Compat::Try" : "0.05",
             "File::XDG" : "0",
             "Future" : "0.50",
             "Future::AsyncAwait" : "0.62",
@@ -76,21 +75,23 @@
             "PadWalker" : "0",
             "Parallel::Prefork" : "0.18",
             "Path::Tiny" : "0.144",
-            "Plack" : "1.0051",
-            "Plack::Middleware::Debug" : "0",
+            "Plack" : "0",
             "SQL::Abstract" : "2.000001",
             "Server::Starter" : "0.35",
             "Syntax::Keyword::Dynamically" : "0.11",
-            "Syntax::Keyword::MultiSub" : "0",
             "Syntax::Keyword::Try" : "0",
             "TOML::Tiny" : "0",
-            "Test::More" : "0.96",
-            "Test::Pod" : "0",
             "Text::Xslate" : "v3.5.9",
             "Time::HiRes" : "0",
             "Time::Moment" : "0",
             "meta" : "0.013",
             "perl" : "v5.40.0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0.96",
+            "Test::Pod" : "0"
          }
       }
    },
@@ -107,7 +108,7 @@
       }
    },
    "version" : "0.01.5",
-   "x_generated_by_perl" : "v5.42.0",
+   "x_generated_by_perl" : "v5.40.3",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.39",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
    "x_static_install" : 0

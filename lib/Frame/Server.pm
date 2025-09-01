@@ -3,8 +3,7 @@ use Object::Pad ':experimental(:all)';
 package Frame::Server;
 
 class Frame::Server
-  : isa(Net::Async::HTTP::Server::PSGI)
-  : does(Frame::Base);
+  : isa(Net::Async::HTTP::Server::PSGI);
 
 use utf8;
 use v5.40;
@@ -20,50 +19,43 @@ const our $CRLF => "\r\n";
 
 field $plack_handler : mutator;
 
-# method BUILDARGS :common (%args) {
-#   (app => delete $args{app})
-# }
-
 method _init : override ($params) {
     $$params{handle_class}  = "Frame::Server::Protocol";
     $$params{request_class} = "Frame::Server::Request";
     $self->IO::Async::Listener::_init($params);
 }
 
+sub _write_headers ( $req, $lines, $c = 'close', %opts ) {
+
+    if ( $req->keep_alive ) {
+        $c = 'keep-alive';
+        $req->{conn}->restart_timeout('keep_alive');
+    }
+
+    push @$lines, sprintf "Connection: $c"
+      unless $req->protocol eq 'HTTP/1.1' && $c eq 'keep-alive';
+
+    foreach my $key ( $opts{res_headers}->keys ) {
+        push @$lines, "$key: " . join ',', $opts{res_headers}->get_all($key);
+    }
+
+    $req->write( join $CRLF, ( @$lines, $CRLF ) );
+}
+
 # Mostly copied from an anon sub in $self->SUPER::on_request
 sub _responder ( $req, $res ) {
     my ( $status, $headers, $body ) = @$res;
 
-    my @lines = (
-"@{[ $req->protocol ]} $status @{[ HTTP::Status::status_message($status) ]}"
-    );
+    my @lines =
+      ( $req->protocol . " $status " . HTTP::Status::status_message($status) );
+
     my $res_headers = Hash::MultiValue->new;
-
-    my $write_headers = sub {
-        my $c = 'close';
-
-        if ( $req->keep_alive ) {
-            $c = 'keep-alive';
-            $req->{conn}->restart_timeout('keep_alive');
-        }
-
-        push @lines, sprintf "Connection: $c"
-          unless $req->protocol eq 'HTTP/1.1' && $c eq 'keep-alive';
-
-        foreach my $key ( $res_headers->keys ) {
-            push @lines, "$key: " . join ',', $res_headers->get_all($key);
-        }
-
-        $req->write( join $CRLF, ( @lines, $CRLF ) );
-    };
 
     my $has_content_length = 0;
     my $use_chunked_transfer;
 
     while ( my ( $key, $val ) = splice @$headers, 0, 2 ) {
         $res_headers->set( $key => $val );
-
-        # push @lines, "$key: $val";
 
         $has_content_length = 1 if $key eq "Content-Length";
         $use_chunked_transfer++
@@ -79,7 +71,7 @@ sub _responder ( $req, $res ) {
             $use_chunked_transfer++;
         }
 
-        $write_headers->();
+        _write_headers( $req, \@lines, 'close', res_headers => $res_headers );
 
         return $use_chunked_transfer
           ? Net::Async::HTTP::Server::PSGI::ChunkWriterStream->new($req)
@@ -95,7 +87,7 @@ sub _responder ( $req, $res ) {
             push @lines, "Content-Length: $len";
         }
 
-        $write_headers->();
+        _write_headers( $req, \@lines, 'close', res_headers => $res_headers );
 
         $req->write($_) for @$body;
         $req->done;
@@ -105,8 +97,7 @@ sub _responder ( $req, $res ) {
             push @lines, 'Transfer-Encoding: chunked';
             $use_chunked_transfer++;
         }
-
-        $write_headers->();
+        _write_headers( $req, \@lines, 'close', res_headers => $res_headers );
 
         if ($use_chunked_transfer) {
             $req->write(
@@ -121,9 +112,8 @@ sub _responder ( $req, $res ) {
 
                     # Form HTTP chunks out of it
                     defined $buffer
-                        and return
-                        sprintf( "%X$CRLF%s$CRLF", length $buffer,
-                        $buffer );
+                      and return
+                      sprintf( "%X$CRLF%s$CRLF", length $buffer, $buffer );
 
                     $body->close;
                     undef $body;
@@ -155,7 +145,6 @@ method on_accept ($conn) {
     my %timer_args_base = (
         remove_on_expire => 1,
         on_expire        => sub ($self) {
-            dmsg "$conn", "$self", $self if $ENV{FRAME_DEBUG};
             $conn->_flush_requests
               ; # TODO: See if this makes pipeline reqs work correctly or breaks things
             $conn->close;
@@ -177,7 +166,6 @@ method on_accept ($conn) {
         $conn->$field->start unless $key eq 'keep_alive';
 
         my $asdf = $conn->$field;
-        dmsg "$conn", "$asdf", $asdf->notifier_name if $ENV{FRAME_DEBUG};
     }
 
     $conn;
@@ -186,7 +174,7 @@ method on_accept ($conn) {
 method on_request ($req) {
     my $env = $$req{req};
 
-    Frame::Base->dmsg({ req => $req });
+    #Frame::Base->dmsg( { req => $req } );
 
     my $res       = Plack::Util::run_app $$self{app}, $env;
     my $responder = sub { _responder( $req, $res ) };

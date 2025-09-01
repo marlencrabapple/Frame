@@ -12,53 +12,59 @@ use Text::Xslate;
 use JSON::MaybeXS;
 use Syntax::Keyword::Try;
 use Syntax::Keyword::Dynamically;
-use Frame::Request;
 use Const::Fast;
 
-const our @EXPORT_DOES => qw(template);
+use Frame::Request;
+
+our @EXPORT_DOES = qw(template);
+our @EXPORT      = @EXPORT_DOES;
+
+BEGIN {
+    require Exporter;
+    our @ISA    = qw(Exporter);
+    our @EXPORT = qw(dmsg epoch err);
+}
 
 const our $tx_default => Text::Xslate->new(
     cache => $ENV{'PLACK_ENV'} && $ENV{'PLACK_ENV'} eq 'development' ? 0 : 1,
     path  => ['view']
 );
 
-method $import : common {
-    $^H{ __PACKAGE__ . '/user' } = 1;
-    $^H{"$class/user"} = 1;
-};
+# method $import : common {
+#     $^H{ __PACKAGE__ . '/user' } = 1;
+#     $^H{"$class/user"} = 1;
+# };
 
 APPLY {
     my $mop = shift;
 
-    do {
-        my $class = $mop->name;
-        $import->( $class, @_ );
-        $^H{ __PACKAGE__ . '/user' } = 1;
-        $^H{"$class/user"} = 1;
-    }
+    use utf8;
+    use v5.40;
+
+    use Exporter 'import';
+    our @EXPORT = @{__PACKAGE__::EXPORT}
 }
 
 field $config ADJUST { $self->config };
-field $req : param : reader : weak;
+field $req   : param : reader : weak;
 field $route : param : reader = undef;
-field $res : reader;    # :weak;
+field $res   : reader;    # :weak;
 
-ADJUSTPARAMS ($params) {
+ADJUSTPARAMS($params) {
     $res = $req->new_response
 }
 
-class Frame::Template::Response :isa(Plack::Response) {
-    field $tx :param = $tx_default;
+class Frame::Template::Response : isa(Plack::Response) {
+    field $tx : param = $tx_default;
 
-    method render ($template, $status = 200, %opts) {
-        my $content = $tx->render( $template
-                                 , delete $opts{template} );
+    method render ( $template, $status = 200, %opts ) {
+        my $content = $tx->render( $template, delete $opts{template} );
 
-        $self->app->render( $content
-          , $status
-          , delete $opts{content_type} // 'text/html'
-          , map { $_ // {} } @opts{qw(headers cookies)}
-          , %opts )
+        $self->app->render(
+            $content, $status,
+            delete $opts{content_type} // 'text/html',
+            map { $_ // {} } @opts{qw(headers cookies)}, %opts
+        );
     }
 };
 
@@ -80,15 +86,16 @@ method render (
     my $class = __PACKAGE__;
     carp "An existing response was overwritten by a call to $class->render()."
       . "To disable this warning or change response precedence configure"
-      . "'template.default_res' as needed." if ($res && $self->res)
-      && (!$opts{noop} || $config->{'template'}{default_res});
+      . "'template.default_res' as needed."
+      if ( $res && $self->res )
+      && ( !$opts{noop} || $config->{'template'}{default_res} );
 
     #my $res = $opts{noop} ? $req->new_response : $self->res;
 
-    dynamically $res = ( $opts{noop}
-      || $config->{template}{default_res} eq 'lifecycle' )
-        ? $self->res
-        : $res->new_response;
+    dynamically $res =
+      ( $opts{noop} || $config->{template}{default_res} eq 'lifecycle' )
+      ? $self->res
+      : $res->new_response;
 
     $content_type = $res->content_type;
     $opts{charset} //= $self->app->charset;

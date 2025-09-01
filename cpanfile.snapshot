@@ -99,6 +99,56 @@ DISTRIBUTIONS
       Sub::Quote 1.005000
       Test::Builder 0
       Types::Standard 0
+  CPAN-Common-Index-0.010
+    pathname: D/DA/DAGOLDEN/CPAN-Common-Index-0.010.tar.gz
+    provides:
+      CPAN::Common::Index 0.010
+      CPAN::Common::Index::LocalPackage 0.010
+      CPAN::Common::Index::MetaDB 0.010
+      CPAN::Common::Index::Mirror 0.010
+      CPAN::Common::Index::Mux::Ordered 0.010
+    requirements:
+      CPAN::DistnameInfo 0
+      CPAN::Meta::YAML 0
+      Carp 0
+      Class::Tiny 0
+      ExtUtils::MakeMaker 6.17
+      File::Basename 0
+      File::Copy 0
+      File::Fetch 0
+      File::Spec 0
+      File::Temp 0.19
+      File::stat 0
+      HTTP::Tiny 0
+      Module::Load 0
+      Search::Dict 1.07
+      Tie::Handle::SkipHeader 0
+      URI 0
+      parent 0
+      perl 5.008001
+      strict 0
+      warnings 0
+  CPAN-DistnameInfo-0.12
+    pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
+    provides:
+      CPAN::DistnameInfo 0.12
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
+  CPAN-Meta-Check-0.018
+    pathname: L/LE/LEONT/CPAN-Meta-Check-0.018.tar.gz
+    provides:
+      CPAN::Meta::Check 0.018
+    requirements:
+      CPAN::Meta::Prereqs 2.132830
+      CPAN::Meta::Requirements 2.121
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Module::Metadata 1.000023
+      base 0
+      perl 5.006
+      strict 0
+      warnings 0
   CPAN-Requirements-Dynamic-0.002
     pathname: L/LE/LEONT/CPAN-Requirements-Dynamic-0.002.tar.gz
     provides:
@@ -151,6 +201,45 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Carmel-v0.1.56
+    pathname: M/MI/MIYAGAWA/Carmel-v0.1.56.tar.gz
+    provides:
+      Carmel 0.001056
+      Carmel::App undef
+      Carmel::Artifact undef
+      Carmel::Builder undef
+      Carmel::CPANfile undef
+      Carmel::Difftool undef
+      Carmel::Preload undef
+      Carmel::ProgressBar undef
+      Carmel::Repository undef
+      Carmel::Resolver undef
+      Carmel::Runner undef
+      Carmel::Runtime undef
+      Carmel::Runtime::FastINC undef
+      Carmel::Runtime::SiteINC undef
+      Carmel::Setup undef
+    requirements:
+      CPAN::Common::Index 0.006
+      CPAN::DistnameInfo 0
+      CPAN::Meta::Prereqs 2.132830
+      CPAN::Meta::Requirements 2.129
+      Carton v1.0.35
+      Class::Tiny 1.001
+      ExtUtils::Install 1.47
+      ExtUtils::InstallPaths 0
+      ExtUtils::MakeMaker 0
+      File::Copy::Recursive 0
+      File::pushd 1.009
+      JSON 0
+      Menlo::CLI::Compat 1.9018
+      Module::CPANfile 1.1000
+      Module::CoreList 0
+      Module::Metadata 1.000003
+      Module::Runtime 0.014
+      Path::Tiny 0.068
+      Try::Tiny 0.20
+      perl 5.014000
   Carp-Clan-6.08
     pathname: E/ET/ETHER/Carp-Clan-6.08.tar.gz
     provides:
@@ -160,6 +249,47 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
+  Carton-v1.0.35
+    pathname: M/MI/MIYAGAWA/Carton-v1.0.35.tar.gz
+    provides:
+      Carton 1.000035
+      Carton::Builder undef
+      Carton::CLI undef
+      Carton::CPANfile undef
+      Carton::Dependency undef
+      Carton::Dist undef
+      Carton::Dist::Core undef
+      Carton::Environment undef
+      Carton::Error undef
+      Carton::Error::CPANfileNotFound undef
+      Carton::Error::CommandExit undef
+      Carton::Error::CommandNotFound undef
+      Carton::Error::SnapshotNotFound undef
+      Carton::Error::SnapshotParseError undef
+      Carton::Index undef
+      Carton::Mirror undef
+      Carton::Package undef
+      Carton::Packer undef
+      Carton::Snapshot undef
+      Carton::Snapshot::Emitter undef
+      Carton::Snapshot::Parser undef
+      Carton::Tree undef
+      Carton::Util undef
+    requirements:
+      CPAN::Meta 2.120921
+      CPAN::Meta::Requirements 2.121
+      Class::Tiny 1.001
+      ExtUtils::MakeMaker 0
+      Getopt::Long 2.39
+      JSON::PP 2.27300
+      Menlo::CLI::Compat 1.9018
+      Module::CPANfile 0.9031
+      Module::CoreList 0
+      Path::Tiny 0.033
+      Try::Tiny 0.09
+      parent 0.223
+      perl 5.008005
+      version 0.77
   Class-Accessor-Lite-0.08
     pathname: K/KA/KAZUHO/Class-Accessor-Lite-0.08.tar.gz
     provides:
@@ -234,6 +364,17 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  Class-Tiny-1.008
+    pathname: D/DA/DAGOLDEN/Class-Tiny-1.008.tar.gz
+    provides:
+      Class::Tiny 1.008
+      Class::Tiny::Object 1.008
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      perl 5.006
+      strict 0
+      warnings 0
   Clone-0.47
     pathname: A/AT/ATOOMIC/Clone-0.47.tar.gz
     provides:
@@ -248,17 +389,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Storable 0
       perl 5.008001
-  Clone-PP-1.08
-    pathname: N/NE/NEILB/Clone-PP-1.08.tar.gz
-    provides:
-      Clone::PP 1.08
-    requirements:
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      perl 5.006
-      strict 0
-      vars 0
-      warnings 0
   Config-INI-0.029
     pathname: R/RJ/RJBS/Config-INI-0.029.tar.gz
     provides:
@@ -380,15 +510,12 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Crypt-Argon2-0.030
-    pathname: L/LE/LEONT/Crypt-Argon2-0.030.tar.gz
+  Crypt-Argon2-0.029
+    pathname: L/LE/LEONT/Crypt-Argon2-0.029.tar.gz
     provides:
-      Crypt::Argon2 0.030
+      Crypt::Argon2 0.029
     requirements:
-      Dist::Build 0.020
-      Dist::Build::Core 0
-      Dist::Build::XS 0
-      Dist::Build::XS::Conf 0
+      Dist::Build 0.010
       Exporter 5.57
       Time::HiRes 0
       XSLoader 0
@@ -593,6 +720,47 @@ DISTRIBUTIONS
       Scalar::Util 0
       parent 0
       strictures 0
+  Data-Printer-1.002001
+    pathname: G/GA/GARU/Data-Printer-1.002001.tar.gz
+    provides:
+      DDP 1.002001
+      Data::Printer 1.002001
+      Data::Printer::Common undef
+      Data::Printer::Config undef
+      Data::Printer::Filter undef
+      Data::Printer::Filter::ARRAY undef
+      Data::Printer::Filter::CODE undef
+      Data::Printer::Filter::ContentType undef
+      Data::Printer::Filter::DB undef
+      Data::Printer::Filter::DateTime undef
+      Data::Printer::Filter::Digest undef
+      Data::Printer::Filter::FORMAT undef
+      Data::Printer::Filter::GLOB undef
+      Data::Printer::Filter::GenericClass undef
+      Data::Printer::Filter::HASH undef
+      Data::Printer::Filter::OBJECT undef
+      Data::Printer::Filter::REF undef
+      Data::Printer::Filter::Regexp undef
+      Data::Printer::Filter::SCALAR undef
+      Data::Printer::Filter::VSTRING undef
+      Data::Printer::Filter::Web undef
+      Data::Printer::Object undef
+      Data::Printer::Profile undef
+      Data::Printer::Profile::Dumper undef
+      Data::Printer::Profile::JSON undef
+      Data::Printer::Theme undef
+      Data::Printer::Theme::Classic undef
+      Data::Printer::Theme::Material undef
+      Data::Printer::Theme::Monokai undef
+      Data::Printer::Theme::Solarized undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::Spec 0
+      File::Temp 0
+      Scalar::Util 0
+      Test::More 0
+      version 0.77
   Data-Section-0.200008
     pathname: R/RJ/RJBS/Data-Section-0.200008.tar.gz
     provides:
@@ -1096,20 +1264,20 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       PadWalker 1.98
       perl 5.008001
-  Dist-Build-0.020
-    pathname: L/LE/LEONT/Dist-Build-0.020.tar.gz
+  Dist-Build-0.019
+    pathname: L/LE/LEONT/Dist-Build-0.019.tar.gz
     provides:
-      Dist::Build 0.020
-      Dist::Build::Core 0.020
-      Dist::Build::DynamicPrereqs 0.020
-      Dist::Build::Serializer 0.020
-      Dist::Build::ShareDir 0.020
-      Dist::Build::XS 0.020
-      Dist::Build::XS::Alien 0.020
-      Dist::Build::XS::Conf 0.020
-      Dist::Build::XS::Export 0.020
-      Dist::Build::XS::Import 0.020
-      Dist::Build::XS::WriteConstants 0.020
+      Dist::Build 0.019
+      Dist::Build::Core 0.019
+      Dist::Build::DynamicPrereqs 0.019
+      Dist::Build::Serializer 0.019
+      Dist::Build::ShareDir 0.019
+      Dist::Build::XS 0.019
+      Dist::Build::XS::Alien 0.019
+      Dist::Build::XS::Conf 0.019
+      Dist::Build::XS::Export 0.019
+      Dist::Build::XS::Import 0.019
+      Dist::Build::XS::WriteConstants 0.019
     requirements:
       CPAN::Meta 0
       CPAN::Meta::Merge 0
@@ -1208,152 +1376,152 @@ DISTRIBUTIONS
       Module::Build 0.3601
       Module::CPANfile 0.9025
       perl 5.012
-  Dist-Zilla-6.033
-    pathname: R/RJ/RJBS/Dist-Zilla-6.033.tar.gz
+  Dist-Zilla-6.032
+    pathname: R/RJ/RJBS/Dist-Zilla-6.032.tar.gz
     provides:
-      Dist::Zilla 6.033
-      Dist::Zilla::App 6.033
-      Dist::Zilla::App::Command 6.033
-      Dist::Zilla::App::Command::add 6.033
-      Dist::Zilla::App::Command::authordeps 6.033
-      Dist::Zilla::App::Command::build 6.033
-      Dist::Zilla::App::Command::clean 6.033
-      Dist::Zilla::App::Command::install 6.033
-      Dist::Zilla::App::Command::listdeps 6.033
-      Dist::Zilla::App::Command::new 6.033
-      Dist::Zilla::App::Command::nop 6.033
-      Dist::Zilla::App::Command::release 6.033
-      Dist::Zilla::App::Command::run 6.033
-      Dist::Zilla::App::Command::setup 6.033
-      Dist::Zilla::App::Command::smoke 6.033
-      Dist::Zilla::App::Command::test 6.033
-      Dist::Zilla::App::Command::version 6.033
-      Dist::Zilla::App::Tester 6.033
-      Dist::Zilla::App::Tester::Result 6.033
-      Dist::Zilla::Chrome::Term 6.033
-      Dist::Zilla::Chrome::Test 6.033
-      Dist::Zilla::Dist::Builder 6.033
-      Dist::Zilla::Dist::Minter 6.033
-      Dist::Zilla::File::FromCode 6.033
-      Dist::Zilla::File::InMemory 6.033
-      Dist::Zilla::File::OnDisk 6.033
-      Dist::Zilla::MVP::Assembler 6.033
-      Dist::Zilla::MVP::Assembler::GlobalConfig 6.033
-      Dist::Zilla::MVP::Assembler::Zilla 6.033
-      Dist::Zilla::MVP::Reader::Finder 6.033
-      Dist::Zilla::MVP::Reader::Perl 6.033
-      Dist::Zilla::MVP::RootSection 6.033
-      Dist::Zilla::MVP::Section 6.033
-      Dist::Zilla::MintingProfile::Default 6.033
-      Dist::Zilla::Path 6.033
-      Dist::Zilla::Plugin::AutoPrereqs 6.033
-      Dist::Zilla::Plugin::AutoVersion 6.033
-      Dist::Zilla::Plugin::CPANFile 6.033
-      Dist::Zilla::Plugin::ConfirmRelease 6.033
-      Dist::Zilla::Plugin::DistINI 6.033
-      Dist::Zilla::Plugin::Encoding 6.033
-      Dist::Zilla::Plugin::ExecDir 6.033
-      Dist::Zilla::Plugin::ExtraTests 6.033
-      Dist::Zilla::Plugin::FakeRelease 6.033
-      Dist::Zilla::Plugin::FileFinder::ByName 6.033
-      Dist::Zilla::Plugin::FileFinder::Filter 6.033
-      Dist::Zilla::Plugin::FinderCode 6.033
-      Dist::Zilla::Plugin::GatherDir 6.033
-      Dist::Zilla::Plugin::GatherDir::Template 6.033
-      Dist::Zilla::Plugin::GatherFile 6.033
-      Dist::Zilla::Plugin::GenerateFile 6.033
-      Dist::Zilla::Plugin::InlineFiles 6.033
-      Dist::Zilla::Plugin::License 6.033
-      Dist::Zilla::Plugin::MakeMaker 6.033
-      Dist::Zilla::Plugin::MakeMaker::Runner 6.033
-      Dist::Zilla::Plugin::Manifest 6.033
-      Dist::Zilla::Plugin::ManifestSkip 6.033
-      Dist::Zilla::Plugin::MetaConfig 6.033
-      Dist::Zilla::Plugin::MetaJSON 6.033
-      Dist::Zilla::Plugin::MetaNoIndex 6.033
-      Dist::Zilla::Plugin::MetaResources 6.033
-      Dist::Zilla::Plugin::MetaTests 6.033
-      Dist::Zilla::Plugin::MetaYAML 6.033
-      Dist::Zilla::Plugin::ModuleBuild 6.033
-      Dist::Zilla::Plugin::ModuleShareDirs 6.033
-      Dist::Zilla::Plugin::NextRelease 6.033
-      Dist::Zilla::Plugin::PkgDist 6.033
-      Dist::Zilla::Plugin::PkgVersion 6.033
-      Dist::Zilla::Plugin::PodCoverageTests 6.033
-      Dist::Zilla::Plugin::PodSyntaxTests 6.033
-      Dist::Zilla::Plugin::PodVersion 6.033
-      Dist::Zilla::Plugin::Prereqs 6.033
-      Dist::Zilla::Plugin::PruneCruft 6.033
-      Dist::Zilla::Plugin::PruneFiles 6.033
-      Dist::Zilla::Plugin::Readme 6.033
-      Dist::Zilla::Plugin::RemovePrereqs 6.033
-      Dist::Zilla::Plugin::ShareDir 6.033
-      Dist::Zilla::Plugin::TemplateModule 6.033
-      Dist::Zilla::Plugin::TestRelease 6.033
-      Dist::Zilla::Plugin::UploadToCPAN 6.033
-      Dist::Zilla::PluginBundle::Basic 6.033
-      Dist::Zilla::PluginBundle::Classic 6.033
-      Dist::Zilla::PluginBundle::FakeClassic 6.033
-      Dist::Zilla::PluginBundle::Filter 6.033
-      Dist::Zilla::Pragmas 6.033
-      Dist::Zilla::Prereqs 6.033
-      Dist::Zilla::Role::AfterBuild 6.033
-      Dist::Zilla::Role::AfterMint 6.033
-      Dist::Zilla::Role::AfterRelease 6.033
-      Dist::Zilla::Role::ArchiveBuilder 6.033
-      Dist::Zilla::Role::BeforeArchive 6.033
-      Dist::Zilla::Role::BeforeBuild 6.033
-      Dist::Zilla::Role::BeforeMint 6.033
-      Dist::Zilla::Role::BeforeRelease 6.033
-      Dist::Zilla::Role::BuildPL 6.033
-      Dist::Zilla::Role::BuildRunner 6.033
-      Dist::Zilla::Role::Chrome 6.033
-      Dist::Zilla::Role::ConfigDumper 6.033
-      Dist::Zilla::Role::EncodingProvider 6.033
-      Dist::Zilla::Role::ExecFiles 6.033
-      Dist::Zilla::Role::File 6.033
-      Dist::Zilla::Role::FileFinder 6.033
-      Dist::Zilla::Role::FileFinderUser 6.033
-      Dist::Zilla::Role::FileGatherer 6.033
-      Dist::Zilla::Role::FileInjector 6.033
-      Dist::Zilla::Role::FileMunger 6.033
-      Dist::Zilla::Role::FilePruner 6.033
-      Dist::Zilla::Role::InstallTool 6.033
-      Dist::Zilla::Role::LicenseProvider 6.033
-      Dist::Zilla::Role::MetaProvider 6.033
-      Dist::Zilla::Role::MintingProfile 6.033
-      Dist::Zilla::Role::MintingProfile::ShareDir 6.033
-      Dist::Zilla::Role::ModuleMaker 6.033
-      Dist::Zilla::Role::MutableFile 6.033
-      Dist::Zilla::Role::NameProvider 6.033
-      Dist::Zilla::Role::PPI 6.033
-      Dist::Zilla::Role::Plugin 6.033
-      Dist::Zilla::Role::PluginBundle 6.033
-      Dist::Zilla::Role::PluginBundle::Easy 6.033
-      Dist::Zilla::Role::PrereqScanner 6.033
-      Dist::Zilla::Role::PrereqSource 6.033
-      Dist::Zilla::Role::ReleaseStatusProvider 6.033
-      Dist::Zilla::Role::Releaser 6.033
-      Dist::Zilla::Role::ShareDir 6.033
-      Dist::Zilla::Role::Stash 6.033
-      Dist::Zilla::Role::Stash::Authors 6.033
-      Dist::Zilla::Role::Stash::Login 6.033
-      Dist::Zilla::Role::StubBuild 6.033
-      Dist::Zilla::Role::TestRunner 6.033
-      Dist::Zilla::Role::TextTemplate 6.033
-      Dist::Zilla::Role::VersionProvider 6.033
-      Dist::Zilla::Stash::Mint 6.033
-      Dist::Zilla::Stash::PAUSE 6.033
-      Dist::Zilla::Stash::Rights 6.033
-      Dist::Zilla::Stash::User 6.033
-      Dist::Zilla::Tester 6.033
-      Dist::Zilla::Tester::_Builder 6.033
-      Dist::Zilla::Tester::_Minter 6.033
-      Dist::Zilla::Tutorial 6.033
-      Dist::Zilla::Types 6.033
-      Dist::Zilla::Util 6.033
-      Dist::Zilla::Util::AuthorDeps 6.033
-      Test::DZil 6.033
+      Dist::Zilla 6.032
+      Dist::Zilla::App 6.032
+      Dist::Zilla::App::Command 6.032
+      Dist::Zilla::App::Command::add 6.032
+      Dist::Zilla::App::Command::authordeps 6.032
+      Dist::Zilla::App::Command::build 6.032
+      Dist::Zilla::App::Command::clean 6.032
+      Dist::Zilla::App::Command::install 6.032
+      Dist::Zilla::App::Command::listdeps 6.032
+      Dist::Zilla::App::Command::new 6.032
+      Dist::Zilla::App::Command::nop 6.032
+      Dist::Zilla::App::Command::release 6.032
+      Dist::Zilla::App::Command::run 6.032
+      Dist::Zilla::App::Command::setup 6.032
+      Dist::Zilla::App::Command::smoke 6.032
+      Dist::Zilla::App::Command::test 6.032
+      Dist::Zilla::App::Command::version 6.032
+      Dist::Zilla::App::Tester 6.032
+      Dist::Zilla::App::Tester::Result 6.032
+      Dist::Zilla::Chrome::Term 6.032
+      Dist::Zilla::Chrome::Test 6.032
+      Dist::Zilla::Dist::Builder 6.032
+      Dist::Zilla::Dist::Minter 6.032
+      Dist::Zilla::File::FromCode 6.032
+      Dist::Zilla::File::InMemory 6.032
+      Dist::Zilla::File::OnDisk 6.032
+      Dist::Zilla::MVP::Assembler 6.032
+      Dist::Zilla::MVP::Assembler::GlobalConfig 6.032
+      Dist::Zilla::MVP::Assembler::Zilla 6.032
+      Dist::Zilla::MVP::Reader::Finder 6.032
+      Dist::Zilla::MVP::Reader::Perl 6.032
+      Dist::Zilla::MVP::RootSection 6.032
+      Dist::Zilla::MVP::Section 6.032
+      Dist::Zilla::MintingProfile::Default 6.032
+      Dist::Zilla::Path 6.032
+      Dist::Zilla::Plugin::AutoPrereqs 6.032
+      Dist::Zilla::Plugin::AutoVersion 6.032
+      Dist::Zilla::Plugin::CPANFile 6.032
+      Dist::Zilla::Plugin::ConfirmRelease 6.032
+      Dist::Zilla::Plugin::DistINI 6.032
+      Dist::Zilla::Plugin::Encoding 6.032
+      Dist::Zilla::Plugin::ExecDir 6.032
+      Dist::Zilla::Plugin::ExtraTests 6.032
+      Dist::Zilla::Plugin::FakeRelease 6.032
+      Dist::Zilla::Plugin::FileFinder::ByName 6.032
+      Dist::Zilla::Plugin::FileFinder::Filter 6.032
+      Dist::Zilla::Plugin::FinderCode 6.032
+      Dist::Zilla::Plugin::GatherDir 6.032
+      Dist::Zilla::Plugin::GatherDir::Template 6.032
+      Dist::Zilla::Plugin::GatherFile 6.032
+      Dist::Zilla::Plugin::GenerateFile 6.032
+      Dist::Zilla::Plugin::InlineFiles 6.032
+      Dist::Zilla::Plugin::License 6.032
+      Dist::Zilla::Plugin::MakeMaker 6.032
+      Dist::Zilla::Plugin::MakeMaker::Runner 6.032
+      Dist::Zilla::Plugin::Manifest 6.032
+      Dist::Zilla::Plugin::ManifestSkip 6.032
+      Dist::Zilla::Plugin::MetaConfig 6.032
+      Dist::Zilla::Plugin::MetaJSON 6.032
+      Dist::Zilla::Plugin::MetaNoIndex 6.032
+      Dist::Zilla::Plugin::MetaResources 6.032
+      Dist::Zilla::Plugin::MetaTests 6.032
+      Dist::Zilla::Plugin::MetaYAML 6.032
+      Dist::Zilla::Plugin::ModuleBuild 6.032
+      Dist::Zilla::Plugin::ModuleShareDirs 6.032
+      Dist::Zilla::Plugin::NextRelease 6.032
+      Dist::Zilla::Plugin::PkgDist 6.032
+      Dist::Zilla::Plugin::PkgVersion 6.032
+      Dist::Zilla::Plugin::PodCoverageTests 6.032
+      Dist::Zilla::Plugin::PodSyntaxTests 6.032
+      Dist::Zilla::Plugin::PodVersion 6.032
+      Dist::Zilla::Plugin::Prereqs 6.032
+      Dist::Zilla::Plugin::PruneCruft 6.032
+      Dist::Zilla::Plugin::PruneFiles 6.032
+      Dist::Zilla::Plugin::Readme 6.032
+      Dist::Zilla::Plugin::RemovePrereqs 6.032
+      Dist::Zilla::Plugin::ShareDir 6.032
+      Dist::Zilla::Plugin::TemplateModule 6.032
+      Dist::Zilla::Plugin::TestRelease 6.032
+      Dist::Zilla::Plugin::UploadToCPAN 6.032
+      Dist::Zilla::PluginBundle::Basic 6.032
+      Dist::Zilla::PluginBundle::Classic 6.032
+      Dist::Zilla::PluginBundle::FakeClassic 6.032
+      Dist::Zilla::PluginBundle::Filter 6.032
+      Dist::Zilla::Pragmas 6.032
+      Dist::Zilla::Prereqs 6.032
+      Dist::Zilla::Role::AfterBuild 6.032
+      Dist::Zilla::Role::AfterMint 6.032
+      Dist::Zilla::Role::AfterRelease 6.032
+      Dist::Zilla::Role::ArchiveBuilder 6.032
+      Dist::Zilla::Role::BeforeArchive 6.032
+      Dist::Zilla::Role::BeforeBuild 6.032
+      Dist::Zilla::Role::BeforeMint 6.032
+      Dist::Zilla::Role::BeforeRelease 6.032
+      Dist::Zilla::Role::BuildPL 6.032
+      Dist::Zilla::Role::BuildRunner 6.032
+      Dist::Zilla::Role::Chrome 6.032
+      Dist::Zilla::Role::ConfigDumper 6.032
+      Dist::Zilla::Role::EncodingProvider 6.032
+      Dist::Zilla::Role::ExecFiles 6.032
+      Dist::Zilla::Role::File 6.032
+      Dist::Zilla::Role::FileFinder 6.032
+      Dist::Zilla::Role::FileFinderUser 6.032
+      Dist::Zilla::Role::FileGatherer 6.032
+      Dist::Zilla::Role::FileInjector 6.032
+      Dist::Zilla::Role::FileMunger 6.032
+      Dist::Zilla::Role::FilePruner 6.032
+      Dist::Zilla::Role::InstallTool 6.032
+      Dist::Zilla::Role::LicenseProvider 6.032
+      Dist::Zilla::Role::MetaProvider 6.032
+      Dist::Zilla::Role::MintingProfile 6.032
+      Dist::Zilla::Role::MintingProfile::ShareDir 6.032
+      Dist::Zilla::Role::ModuleMaker 6.032
+      Dist::Zilla::Role::MutableFile 6.032
+      Dist::Zilla::Role::NameProvider 6.032
+      Dist::Zilla::Role::PPI 6.032
+      Dist::Zilla::Role::Plugin 6.032
+      Dist::Zilla::Role::PluginBundle 6.032
+      Dist::Zilla::Role::PluginBundle::Easy 6.032
+      Dist::Zilla::Role::PrereqScanner 6.032
+      Dist::Zilla::Role::PrereqSource 6.032
+      Dist::Zilla::Role::ReleaseStatusProvider 6.032
+      Dist::Zilla::Role::Releaser 6.032
+      Dist::Zilla::Role::ShareDir 6.032
+      Dist::Zilla::Role::Stash 6.032
+      Dist::Zilla::Role::Stash::Authors 6.032
+      Dist::Zilla::Role::Stash::Login 6.032
+      Dist::Zilla::Role::StubBuild 6.032
+      Dist::Zilla::Role::TestRunner 6.032
+      Dist::Zilla::Role::TextTemplate 6.032
+      Dist::Zilla::Role::VersionProvider 6.032
+      Dist::Zilla::Stash::Mint 6.032
+      Dist::Zilla::Stash::PAUSE 6.032
+      Dist::Zilla::Stash::Rights 6.032
+      Dist::Zilla::Stash::User 6.032
+      Dist::Zilla::Tester 6.032
+      Dist::Zilla::Tester::_Builder 6.032
+      Dist::Zilla::Tester::_Minter 6.032
+      Dist::Zilla::Tutorial 6.032
+      Dist::Zilla::Types 6.032
+      Dist::Zilla::Util 6.032
+      Dist::Zilla::Util::AuthorDeps 6.032
+      Test::DZil 6.032
     requirements:
       App::Cmd::Command::version 0
       App::Cmd::Setup 0.330
@@ -1623,10 +1791,10 @@ DISTRIBUTIONS
       Module::Load 0.32
       Software::License 0
       perl 5.008005
-  Dist-Zilla-Plugin-ModuleBuildTiny-0.020
-    pathname: L/LE/LEONT/Dist-Zilla-Plugin-ModuleBuildTiny-0.020.tar.gz
+  Dist-Zilla-Plugin-ModuleBuildTiny-0.019
+    pathname: L/LE/LEONT/Dist-Zilla-Plugin-ModuleBuildTiny-0.019.tar.gz
     provides:
-      Dist::Zilla::Plugin::ModuleBuildTiny 0.020
+      Dist::Zilla::Plugin::ModuleBuildTiny 0.019
     requirements:
       Dist::Zilla 4.300039
       Dist::Zilla::File::InMemory 0
@@ -1692,10 +1860,10 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Dist-Zilla-Plugin-ReadmeFromPod-0.40
-    pathname: F/FA/FAYLAND/Dist-Zilla-Plugin-ReadmeFromPod-0.40.tar.gz
+  Dist-Zilla-Plugin-ReadmeFromPod-0.38
+    pathname: F/FA/FAYLAND/Dist-Zilla-Plugin-ReadmeFromPod-0.38.tar.gz
     provides:
-      Dist::Zilla::Plugin::ReadmeFromPod 0.40
+      Dist::Zilla::Plugin::ReadmeFromPod 0.38
     requirements:
       Dist::Zilla 6.000
       Dist::Zilla::File::InMemory 0
@@ -1904,31 +2072,31 @@ DISTRIBUTIONS
       strict 0
       version 0
       warnings 0
-  ExtUtils-Builder-Compiler-0.032
-    pathname: L/LE/LEONT/ExtUtils-Builder-Compiler-0.032.tar.gz
+  ExtUtils-Builder-Compiler-0.028
+    pathname: L/LE/LEONT/ExtUtils-Builder-Compiler-0.028.tar.gz
     provides:
-      ExtUtils::Builder::ArgumentCollector 0.032
-      ExtUtils::Builder::AutoDetect::C 0.032
-      ExtUtils::Builder::AutoDetect::Cpp 0.032
-      ExtUtils::Builder::Binary 0.032
-      ExtUtils::Builder::Compiler 0.032
-      ExtUtils::Builder::Compiler::MSVC 0.032
-      ExtUtils::Builder::Compiler::Unixy 0.032
-      ExtUtils::Builder::Compiler::VMS 0.032
-      ExtUtils::Builder::Conf 0.032
-      ExtUtils::Builder::Linker 0.032
-      ExtUtils::Builder::Linker::Ar 0.032
-      ExtUtils::Builder::Linker::COFF 0.032
-      ExtUtils::Builder::Linker::ELF::Any 0.032
-      ExtUtils::Builder::Linker::ELF::GCC 0.032
-      ExtUtils::Builder::Linker::Mach::GCC 0.032
-      ExtUtils::Builder::Linker::PE::GCC 0.032
-      ExtUtils::Builder::Linker::PE::MSVC 0.032
-      ExtUtils::Builder::Linker::Unixy 0.032
-      ExtUtils::Builder::Linker::XCOFF 0.032
-      ExtUtils::Builder::MultiLingual 0.032
-      ExtUtils::Builder::ParseXS 0.032
-      ExtUtils::Builder::Profile::Perl 0.032
+      ExtUtils::Builder::ArgumentCollector 0.028
+      ExtUtils::Builder::AutoDetect::C 0.028
+      ExtUtils::Builder::AutoDetect::Cpp 0.028
+      ExtUtils::Builder::Binary 0.028
+      ExtUtils::Builder::Compiler 0.028
+      ExtUtils::Builder::Compiler::MSVC 0.028
+      ExtUtils::Builder::Compiler::Unixy 0.028
+      ExtUtils::Builder::Compiler::VMS 0.028
+      ExtUtils::Builder::Conf 0.028
+      ExtUtils::Builder::Linker 0.028
+      ExtUtils::Builder::Linker::Ar 0.028
+      ExtUtils::Builder::Linker::COFF 0.028
+      ExtUtils::Builder::Linker::ELF::Any 0.028
+      ExtUtils::Builder::Linker::ELF::GCC 0.028
+      ExtUtils::Builder::Linker::Mach::GCC 0.028
+      ExtUtils::Builder::Linker::PE::GCC 0.028
+      ExtUtils::Builder::Linker::PE::MSVC 0.028
+      ExtUtils::Builder::Linker::Unixy 0.028
+      ExtUtils::Builder::Linker::XCOFF 0.028
+      ExtUtils::Builder::MultiLingual 0.028
+      ExtUtils::Builder::ParseXS 0.028
+      ExtUtils::Builder::Profile::Perl 0.028
     requirements:
       Carp 0
       DynaLoader 0
@@ -2026,6 +2194,18 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
+  ExtUtils-MakeMaker-CPANfile-0.09
+    pathname: I/IS/ISHIGAKI/ExtUtils-MakeMaker-CPANfile-0.09.tar.gz
+    provides:
+      ExtUtils::MakeMaker::CPANfile 0.09
+    requirements:
+      CPAN::Meta::Converter 2.141170
+      Cwd 0
+      ExtUtils::MakeMaker 6.17
+      File::Path 0
+      Module::CPANfile 0
+      Test::More 0.88
+      version 0.76
   Feature-Compat-Try-0.05
     pathname: P/PE/PEVANS/Feature-Compat-Try-0.05.tar.gz
     provides:
@@ -2043,10 +2223,10 @@ DISTRIBUTIONS
       File::Copy 0
       File::Glob 0
       File::Spec 0
-  File-Find-Rule-0.35
-    pathname: R/RC/RCLAMP/File-Find-Rule-0.35.tar.gz
+  File-Find-Rule-0.34
+    pathname: R/RC/RCLAMP/File-Find-Rule-0.34.tar.gz
     provides:
-      File::Find::Rule 0.35
+      File::Find::Rule 0.34
       File::Find::Rule::Test::ATeam undef
     requirements:
       ExtUtils::MakeMaker 0
@@ -2132,16 +2312,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       base 0
       perl 5.006
-  File-XDG-1.03
-    pathname: P/PL/PLICEASE/File-XDG-1.03.tar.gz
-    provides:
-      File::XDG 1.03
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Path 2.07
-      Path::Tiny 0
-      Ref::Util 0
-      perl 5.006
   File-chdir-0.1011
     pathname: D/DA/DAGOLDEN/File-chdir-0.1011.tar.gz
     provides:
@@ -2180,16 +2350,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  Future-0.52
-    pathname: P/PE/PEVANS/Future-0.52.tar.gz
+  Future-0.51
+    pathname: P/PE/PEVANS/Future-0.51.tar.gz
     provides:
-      Future 0.52
-      Future::Exception 0.52
-      Future::Mutex 0.52
-      Future::PP 0.52
-      Future::Utils 0.52
-      Test::Future 0.52
-      Test::Future::Deferred 0.52
+      Future 0.51
+      Future::Exception 0.51
+      Future::Mutex 0.51
+      Future::PP 0.51
+      Future::Utils 0.51
+      Test::Future 0.51
+      Test::Future::Deferred 0.51
     requirements:
       Carp 1.25
       List::Util 1.29
@@ -2463,46 +2633,46 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  IO-Async-0.804
-    pathname: P/PE/PEVANS/IO-Async-0.804.tar.gz
+  IO-Async-0.803
+    pathname: P/PE/PEVANS/IO-Async-0.803.tar.gz
     provides:
-      Future::IO::Impl::IOAsync 0.804
-      IO::Async 0.804
-      IO::Async::Channel 0.804
-      IO::Async::Debug 0.804
-      IO::Async::File 0.804
-      IO::Async::FileStream 0.804
-      IO::Async::Function 0.804
-      IO::Async::Future 0.804
-      IO::Async::Handle 0.804
-      IO::Async::Internals::ChildManager 0.804
-      IO::Async::Internals::FunctionWorker 0.804
-      IO::Async::Listener 0.804
-      IO::Async::Loop 0.804
-      IO::Async::Loop::Poll 0.804
-      IO::Async::Loop::Select 0.804
-      IO::Async::LoopTests 0.804
-      IO::Async::Metrics 0.804
-      IO::Async::Notifier 0.804
-      IO::Async::OS 0.804
-      IO::Async::OS::MSWin32 0.804
-      IO::Async::OS::cygwin 0.804
-      IO::Async::OS::linux 0.804
-      IO::Async::PID 0.804
-      IO::Async::Process 0.804
-      IO::Async::Protocol 0.804
-      IO::Async::Protocol::LineStream 0.804
-      IO::Async::Protocol::Stream 0.804
-      IO::Async::Resolver 0.804
-      IO::Async::Routine 0.804
-      IO::Async::Signal 0.804
-      IO::Async::Socket 0.804
-      IO::Async::Stream 0.804
-      IO::Async::Test 0.804
-      IO::Async::Timer 0.804
-      IO::Async::Timer::Absolute 0.804
-      IO::Async::Timer::Countdown 0.804
-      IO::Async::Timer::Periodic 0.804
+      Future::IO::Impl::IOAsync 0.803
+      IO::Async 0.803
+      IO::Async::Channel 0.803
+      IO::Async::Debug 0.803
+      IO::Async::File 0.803
+      IO::Async::FileStream 0.803
+      IO::Async::Function 0.803
+      IO::Async::Future 0.803
+      IO::Async::Handle 0.803
+      IO::Async::Internals::ChildManager 0.803
+      IO::Async::Internals::FunctionWorker 0.803
+      IO::Async::Listener 0.803
+      IO::Async::Loop 0.803
+      IO::Async::Loop::Poll 0.803
+      IO::Async::Loop::Select 0.803
+      IO::Async::LoopTests 0.803
+      IO::Async::Metrics 0.803
+      IO::Async::Notifier 0.803
+      IO::Async::OS 0.803
+      IO::Async::OS::MSWin32 0.803
+      IO::Async::OS::cygwin 0.803
+      IO::Async::OS::linux 0.803
+      IO::Async::PID 0.803
+      IO::Async::Process 0.803
+      IO::Async::Protocol 0.803
+      IO::Async::Protocol::LineStream 0.803
+      IO::Async::Protocol::Stream 0.803
+      IO::Async::Resolver 0.803
+      IO::Async::Routine 0.803
+      IO::Async::Signal 0.803
+      IO::Async::Socket 0.803
+      IO::Async::Stream 0.803
+      IO::Async::Test 0.803
+      IO::Async::Timer 0.803
+      IO::Async::Timer::Absolute 0.803
+      IO::Async::Timer::Countdown 0.803
+      IO::Async::Timer::Periodic 0.803
     requirements:
       Exporter 5.57
       File::stat 0
@@ -2540,18 +2710,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.095
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.095.tar.gz
+  IO-Socket-SSL-2.089
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.089.tar.gz
     provides:
-      IO::Socket::SSL 2.095
+      IO::Socket::SSL 2.089
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.095
-      IO::Socket::SSL::OCSP_Resolver 2.095
+      IO::Socket::SSL::OCSP_Cache 2.089
+      IO::Socket::SSL::OCSP_Resolver 2.089
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.095
-      IO::Socket::SSL::SSL_HANDLE 2.095
-      IO::Socket::SSL::Session_Cache 2.095
-      IO::Socket::SSL::Trace 2.095
+      IO::Socket::SSL::SSL_Context 2.089
+      IO::Socket::SSL::SSL_HANDLE 2.089
+      IO::Socket::SSL::Session_Cache 2.089
+      IO::Socket::SSL::Trace 2.089
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2605,6 +2775,14 @@ DISTRIBUTIONS
       re 0
       strict 0
       warnings 0
+  JSON-4.10
+    pathname: I/IS/ISHIGAKI/JSON-4.10.tar.gz
+    provides:
+      JSON 4.10
+      JSON::Backend::PP 4.10
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   JSON-MaybeXS-1.004008
     pathname: E/ET/ETHER/JSON-MaybeXS-1.004008.tar.gz
     provides:
@@ -2769,13 +2947,13 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Log-Dispatchouli-3.011
-    pathname: R/RJ/RJBS/Log-Dispatchouli-3.011.tar.gz
+  Log-Dispatchouli-3.009
+    pathname: R/RJ/RJBS/Log-Dispatchouli-3.009.tar.gz
     provides:
-      Log::Dispatchouli 3.011
-      Log::Dispatchouli::Global 3.011
-      Log::Dispatchouli::Proxy 3.011
-      Log::Fmt 3.011
+      Log::Dispatchouli 3.009
+      Log::Dispatchouli::Global 3.009
+      Log::Dispatchouli::Proxy 3.009
+      Log::Fmt 3.009
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -2832,18 +3010,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       perl 5.008001
       utf8 0
-  MIME-Types-2.28
-    pathname: M/MA/MARKOV/MIME-Types-2.28.tar.gz
-    provides:
-      MIME::Type 2.28
-      MIME::Types 2.28
-      MojoX::MIME::Types 2.28
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Basename 0
-      File::Spec 0
-      List::Util 0
-      Test::More 0.47
   MRO-Compat-0.15
     pathname: H/HA/HAARG/MRO-Compat-0.15.tar.gz
     provides:
@@ -2851,6 +3017,59 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
+  Menlo-1.9019
+    pathname: M/MI/MIYAGAWA/Menlo-1.9019.tar.gz
+    provides:
+      Menlo 1.9019
+      Menlo::Builder::Static undef
+      Menlo::Dependency undef
+      Menlo::Index::MetaCPAN undef
+      Menlo::Index::MetaDB 1.9019
+      Menlo::Index::Mirror undef
+      Menlo::Util undef
+    requirements:
+      CPAN::Common::Index 0.006
+      CPAN::DistnameInfo 0
+      CPAN::Meta 2.132830
+      CPAN::Meta::Check 0
+      CPAN::Meta::Requirements 0
+      CPAN::Meta::YAML 0
+      Capture::Tiny 0
+      Class::Tiny 1.001
+      Exporter 0
+      ExtUtils::Config 0.003
+      ExtUtils::Helpers 0.020
+      ExtUtils::InstallPaths 0.002
+      ExtUtils::MakeMaker 0
+      File::Temp 0
+      File::Which 0
+      File::pushd 0
+      Getopt::Long 2.36
+      HTTP::Tiny 0.054
+      HTTP::Tinyish 0.04
+      JSON::PP 2
+      Module::CPANfile 0
+      Module::CoreList 0
+      Module::Metadata 0
+      Parse::CPAN::Meta 0
+      Parse::PMFile 0.26
+      String::ShellQuote 0
+      URI 0
+      Win32::ShellQuote 0
+      local::lib 0
+      parent 0
+      perl 5.008001
+      version 0
+  Menlo-Legacy-1.9022
+    pathname: M/MI/MIYAGAWA/Menlo-Legacy-1.9022.tar.gz
+    provides:
+      Menlo::CLI::Compat 1.9022
+      Menlo::Legacy 1.9022
+    requirements:
+      ExtUtils::MakeMaker 0
+      Menlo 1.9018
+      perl 5.008001
+      version 0.9905
   Metrics-Any-0.10
     pathname: P/PE/PEVANS/Metrics-Any-0.10.tar.gz
     provides:
@@ -2882,34 +3101,35 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Module-Build-0.4234
-    pathname: L/LE/LEONT/Module-Build-0.4234.tar.gz
+  Module-Build-0.42_35
+    pathname: L/LE/LEONT/Module-Build-0.42_35.tar.gz
     provides:
-      Module::Build 0.4234
-      Module::Build::Base 0.4234
-      Module::Build::Compat 0.4234
-      Module::Build::Config 0.4234
-      Module::Build::Cookbook 0.4234
-      Module::Build::Dumper 0.4234
-      Module::Build::Notes 0.4234
-      Module::Build::PPMMaker 0.4234
-      Module::Build::Platform::Default 0.4234
-      Module::Build::Platform::MacOS 0.4234
-      Module::Build::Platform::Unix 0.4234
-      Module::Build::Platform::VMS 0.4234
-      Module::Build::Platform::VOS 0.4234
-      Module::Build::Platform::Windows 0.4234
-      Module::Build::Platform::aix 0.4234
-      Module::Build::Platform::cygwin 0.4234
-      Module::Build::Platform::darwin 0.4234
-      Module::Build::Platform::os2 0.4234
-      Module::Build::PodParser 0.4234
+      Module::Build 0.42_35
+      Module::Build::Base 0.42_35
+      Module::Build::Compat 0.42_35
+      Module::Build::Config 0.42_35
+      Module::Build::Cookbook 0.42_35
+      Module::Build::Dumper 0.42_35
+      Module::Build::Notes 0.42_35
+      Module::Build::PPMMaker 0.42_35
+      Module::Build::Platform::Default 0.42_35
+      Module::Build::Platform::MacOS 0.42_35
+      Module::Build::Platform::Unix 0.42_35
+      Module::Build::Platform::VMS 0.42_35
+      Module::Build::Platform::VOS 0.42_35
+      Module::Build::Platform::Windows 0.42_35
+      Module::Build::Platform::aix 0.42_35
+      Module::Build::Platform::cygwin 0.42_35
+      Module::Build::Platform::darwin 0.42_35
+      Module::Build::Platform::os2 0.42_35
+      Module::Build::PodParser 0.42_35
     requirements:
       CPAN::Meta 2.142060
       Cwd 0
       Data::Dumper 0
       ExtUtils::CBuilder 0.27
       ExtUtils::Install 0
+      ExtUtils::InstallPaths 0.003
       ExtUtils::Manifest 0
       ExtUtils::Mkbootstrap 0
       ExtUtils::ParseXS 2.21
@@ -2963,10 +3183,10 @@ DISTRIBUTIONS
       Test::Requires 0
       parent 0
       perl 5.008001
-  Module-Build-Tiny-0.052
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.052.tar.gz
+  Module-Build-Tiny-0.051
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.051.tar.gz
     provides:
-      Module::Build::Tiny 0.052
+      Module::Build::Tiny 0.051
     requirements:
       CPAN::Meta 0
       DynaLoader 0
@@ -3128,446 +3348,446 @@ DISTRIBUTIONS
       Module::Runtime 0
       Moo 1.003000
       Role::Tiny 0
-  Moose-2.4000
-    pathname: E/ET/ETHER/Moose-2.4000.tar.gz
+  Moose-2.2207
+    pathname: E/ET/ETHER/Moose-2.2207.tar.gz
     provides:
-      Class::MOP 2.4000
-      Class::MOP::Attribute 2.4000
-      Class::MOP::Class 2.4000
-      Class::MOP::Class::Immutable::Trait 2.4000
-      Class::MOP::Deprecated 2.4000
-      Class::MOP::Instance 2.4000
-      Class::MOP::Method 2.4000
-      Class::MOP::Method::Accessor 2.4000
-      Class::MOP::Method::Constructor 2.4000
-      Class::MOP::Method::Generated 2.4000
-      Class::MOP::Method::Inlined 2.4000
-      Class::MOP::Method::Meta 2.4000
-      Class::MOP::Method::Wrapped 2.4000
-      Class::MOP::MiniTrait 2.4000
-      Class::MOP::Mixin 2.4000
-      Class::MOP::Mixin::AttributeCore 2.4000
-      Class::MOP::Mixin::HasAttributes 2.4000
-      Class::MOP::Mixin::HasMethods 2.4000
-      Class::MOP::Mixin::HasOverloads 2.4000
-      Class::MOP::Module 2.4000
-      Class::MOP::Object 2.4000
-      Class::MOP::Overload 2.4000
-      Class::MOP::Package 2.4000
-      Moose 2.4000
-      Moose::Cookbook 2.4000
-      Moose::Cookbook::Basics::BankAccount_MethodModifiersAndSubclassing 2.4000
-      Moose::Cookbook::Basics::BinaryTree_AttributeFeatures 2.4000
-      Moose::Cookbook::Basics::BinaryTree_BuilderAndLazyBuild 2.4000
-      Moose::Cookbook::Basics::Company_Subtypes 2.4000
-      Moose::Cookbook::Basics::DateTime_ExtendingNonMooseParent 2.4000
-      Moose::Cookbook::Basics::Document_AugmentAndInner 2.4000
-      Moose::Cookbook::Basics::Genome_OverloadingSubtypesAndCoercion 2.4000
-      Moose::Cookbook::Basics::HTTP_SubtypesAndCoercion 2.4000
-      Moose::Cookbook::Basics::Immutable 2.4000
-      Moose::Cookbook::Basics::Person_BUILDARGSAndBUILD 2.4000
-      Moose::Cookbook::Basics::Point_AttributesAndSubclassing 2.4000
-      Moose::Cookbook::Extending::Debugging_BaseClassRole 2.4000
-      Moose::Cookbook::Extending::ExtensionOverview 2.4000
-      Moose::Cookbook::Extending::Mooseish_MooseSugar 2.4000
-      Moose::Cookbook::Legacy::Debugging_BaseClassReplacement 2.4000
-      Moose::Cookbook::Legacy::Labeled_AttributeMetaclass 2.4000
-      Moose::Cookbook::Legacy::Table_ClassMetaclass 2.4000
-      Moose::Cookbook::Meta::GlobRef_InstanceMetaclass 2.4000
-      Moose::Cookbook::Meta::Labeled_AttributeTrait 2.4000
-      Moose::Cookbook::Meta::PrivateOrPublic_MethodMetaclass 2.4000
-      Moose::Cookbook::Meta::Table_MetaclassTrait 2.4000
-      Moose::Cookbook::Meta::WhyMeta 2.4000
-      Moose::Cookbook::Roles::ApplicationToInstance 2.4000
-      Moose::Cookbook::Roles::Comparable_CodeReuse 2.4000
-      Moose::Cookbook::Roles::Restartable_AdvancedComposition 2.4000
-      Moose::Cookbook::Snack::Keywords 2.4000
-      Moose::Cookbook::Snack::Types 2.4000
-      Moose::Cookbook::Style 2.4000
-      Moose::Deprecated 2.4000
-      Moose::Exception 2.4000
-      Moose::Exception::AccessorMustReadWrite 2.4000
-      Moose::Exception::AddParameterizableTypeTakesParameterizableType 2.4000
-      Moose::Exception::AddRoleTakesAMooseMetaRoleInstance 2.4000
-      Moose::Exception::AddRoleToARoleTakesAMooseMetaRole 2.4000
-      Moose::Exception::ApplyTakesABlessedInstance 2.4000
-      Moose::Exception::AttachToClassNeedsAClassMOPClassInstanceOrASubclass 2.4000
-      Moose::Exception::AttributeConflictInRoles 2.4000
-      Moose::Exception::AttributeConflictInSummation 2.4000
-      Moose::Exception::AttributeExtensionIsNotSupportedInRoles 2.4000
-      Moose::Exception::AttributeIsRequired 2.4000
-      Moose::Exception::AttributeMustBeAnClassMOPMixinAttributeCoreOrSubclass 2.4000
-      Moose::Exception::AttributeNamesDoNotMatch 2.4000
-      Moose::Exception::AttributeValueIsNotAnObject 2.4000
-      Moose::Exception::AttributeValueIsNotDefined 2.4000
-      Moose::Exception::AutoDeRefNeedsArrayRefOrHashRef 2.4000
-      Moose::Exception::BadOptionFormat 2.4000
-      Moose::Exception::BothBuilderAndDefaultAreNotAllowed 2.4000
-      Moose::Exception::BuilderDoesNotExist 2.4000
-      Moose::Exception::BuilderMethodNotSupportedForAttribute 2.4000
-      Moose::Exception::BuilderMethodNotSupportedForInlineAttribute 2.4000
-      Moose::Exception::BuilderMustBeAMethodName 2.4000
-      Moose::Exception::CallingMethodOnAnImmutableInstance 2.4000
-      Moose::Exception::CallingReadOnlyMethodOnAnImmutableInstance 2.4000
-      Moose::Exception::CanExtendOnlyClasses 2.4000
-      Moose::Exception::CanOnlyConsumeRole 2.4000
-      Moose::Exception::CanOnlyWrapBlessedCode 2.4000
-      Moose::Exception::CanReblessOnlyIntoASubclass 2.4000
-      Moose::Exception::CanReblessOnlyIntoASuperclass 2.4000
-      Moose::Exception::CannotAddAdditionalTypeCoercionsToUnion 2.4000
-      Moose::Exception::CannotAddAsAnAttributeToARole 2.4000
-      Moose::Exception::CannotApplyBaseClassRolesToRole 2.4000
-      Moose::Exception::CannotAssignValueToReadOnlyAccessor 2.4000
-      Moose::Exception::CannotAugmentIfLocalMethodPresent 2.4000
-      Moose::Exception::CannotAugmentNoSuperMethod 2.4000
-      Moose::Exception::CannotAutoDerefWithoutIsa 2.4000
-      Moose::Exception::CannotAutoDereferenceTypeConstraint 2.4000
-      Moose::Exception::CannotCalculateNativeType 2.4000
-      Moose::Exception::CannotCallAnAbstractBaseMethod 2.4000
-      Moose::Exception::CannotCallAnAbstractMethod 2.4000
-      Moose::Exception::CannotCoerceAWeakRef 2.4000
-      Moose::Exception::CannotCoerceAttributeWhichHasNoCoercion 2.4000
-      Moose::Exception::CannotCreateHigherOrderTypeWithoutATypeParameter 2.4000
-      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresent 2.4000
-      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresentInClass 2.4000
-      Moose::Exception::CannotDelegateLocalMethodIsPresent 2.4000
-      Moose::Exception::CannotDelegateWithoutIsa 2.4000
-      Moose::Exception::CannotFindDelegateMetaclass 2.4000
-      Moose::Exception::CannotFindType 2.4000
-      Moose::Exception::CannotFindTypeGivenToMatchOnType 2.4000
-      Moose::Exception::CannotFixMetaclassCompatibility 2.4000
-      Moose::Exception::CannotGenerateInlineConstraint 2.4000
-      Moose::Exception::CannotInitializeMooseMetaRoleComposite 2.4000
-      Moose::Exception::CannotInlineTypeConstraintCheck 2.4000
-      Moose::Exception::CannotLocatePackageInINC 2.4000
-      Moose::Exception::CannotMakeMetaclassCompatible 2.4000
-      Moose::Exception::CannotOverrideALocalMethod 2.4000
-      Moose::Exception::CannotOverrideBodyOfMetaMethods 2.4000
-      Moose::Exception::CannotOverrideLocalMethodIsPresent 2.4000
-      Moose::Exception::CannotOverrideNoSuperMethod 2.4000
-      Moose::Exception::CannotRegisterUnnamedTypeConstraint 2.4000
-      Moose::Exception::CannotUseLazyBuildAndDefaultSimultaneously 2.4000
-      Moose::Exception::CircularReferenceInAlso 2.4000
-      Moose::Exception::ClassDoesNotHaveInitMeta 2.4000
-      Moose::Exception::ClassDoesTheExcludedRole 2.4000
-      Moose::Exception::ClassNamesDoNotMatch 2.4000
-      Moose::Exception::CloneObjectExpectsAnInstanceOfMetaclass 2.4000
-      Moose::Exception::CodeBlockMustBeACodeRef 2.4000
-      Moose::Exception::CoercingWithoutCoercions 2.4000
-      Moose::Exception::CoercionAlreadyExists 2.4000
-      Moose::Exception::CoercionNeedsTypeConstraint 2.4000
-      Moose::Exception::ConflictDetectedInCheckRoleExclusions 2.4000
-      Moose::Exception::ConflictDetectedInCheckRoleExclusionsInToClass 2.4000
-      Moose::Exception::ConstructClassInstanceTakesPackageName 2.4000
-      Moose::Exception::CouldNotCreateMethod 2.4000
-      Moose::Exception::CouldNotCreateWriter 2.4000
-      Moose::Exception::CouldNotEvalConstructor 2.4000
-      Moose::Exception::CouldNotEvalDestructor 2.4000
-      Moose::Exception::CouldNotFindTypeConstraintToCoerceFrom 2.4000
-      Moose::Exception::CouldNotGenerateInlineAttributeMethod 2.4000
-      Moose::Exception::CouldNotLocateTypeConstraintForUnion 2.4000
-      Moose::Exception::CouldNotParseType 2.4000
-      Moose::Exception::CreateMOPClassTakesArrayRefOfAttributes 2.4000
-      Moose::Exception::CreateMOPClassTakesArrayRefOfSuperclasses 2.4000
-      Moose::Exception::CreateMOPClassTakesHashRefOfMethods 2.4000
-      Moose::Exception::CreateTakesArrayRefOfRoles 2.4000
-      Moose::Exception::CreateTakesHashRefOfAttributes 2.4000
-      Moose::Exception::CreateTakesHashRefOfMethods 2.4000
-      Moose::Exception::DefaultToMatchOnTypeMustBeCodeRef 2.4000
-      Moose::Exception::DelegationToAClassWhichIsNotLoaded 2.4000
-      Moose::Exception::DelegationToARoleWhichIsNotLoaded 2.4000
-      Moose::Exception::DelegationToATypeWhichIsNotAClass 2.4000
-      Moose::Exception::DoesRequiresRoleName 2.4000
-      Moose::Exception::EnumCalledWithAnArrayRefAndAdditionalArgs 2.4000
-      Moose::Exception::EnumValuesMustBeString 2.4000
-      Moose::Exception::ExtendsMissingArgs 2.4000
-      Moose::Exception::HandlesMustBeAHashRef 2.4000
-      Moose::Exception::IllegalInheritedOptions 2.4000
-      Moose::Exception::IllegalMethodTypeToAddMethodModifier 2.4000
-      Moose::Exception::IncompatibleMetaclassOfSuperclass 2.4000
-      Moose::Exception::InitMetaRequiresClass 2.4000
-      Moose::Exception::InitializeTakesUnBlessedPackageName 2.4000
-      Moose::Exception::InstanceBlessedIntoWrongClass 2.4000
-      Moose::Exception::InstanceMustBeABlessedReference 2.4000
-      Moose::Exception::InvalidArgPassedToMooseUtilMetaRole 2.4000
-      Moose::Exception::InvalidArgumentToMethod 2.4000
-      Moose::Exception::InvalidArgumentsToTraitAliases 2.4000
-      Moose::Exception::InvalidBaseTypeGivenToCreateParameterizedTypeConstraint 2.4000
-      Moose::Exception::InvalidHandleValue 2.4000
-      Moose::Exception::InvalidHasProvidedInARole 2.4000
-      Moose::Exception::InvalidNameForType 2.4000
-      Moose::Exception::InvalidOverloadOperator 2.4000
-      Moose::Exception::InvalidRoleApplication 2.4000
-      Moose::Exception::InvalidTypeConstraint 2.4000
-      Moose::Exception::InvalidTypeGivenToCreateParameterizedTypeConstraint 2.4000
-      Moose::Exception::InvalidValueForIs 2.4000
-      Moose::Exception::IsaDoesNotDoTheRole 2.4000
-      Moose::Exception::IsaLacksDoesMethod 2.4000
-      Moose::Exception::LazyAttributeNeedsADefault 2.4000
-      Moose::Exception::Legacy 2.4000
-      Moose::Exception::MOPAttributeNewNeedsAttributeName 2.4000
-      Moose::Exception::MatchActionMustBeACodeRef 2.4000
-      Moose::Exception::MessageParameterMustBeCodeRef 2.4000
-      Moose::Exception::MetaclassIsAClassNotASubclassOfGivenMetaclass 2.4000
-      Moose::Exception::MetaclassIsARoleNotASubclassOfGivenMetaclass 2.4000
-      Moose::Exception::MetaclassIsNotASubclassOfGivenMetaclass 2.4000
-      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaClass 2.4000
-      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaRole 2.4000
-      Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass 2.4000
-      Moose::Exception::MetaclassNotLoaded 2.4000
-      Moose::Exception::MetaclassTypeIncompatible 2.4000
-      Moose::Exception::MethodExpectedAMetaclassObject 2.4000
-      Moose::Exception::MethodExpectsFewerArgs 2.4000
-      Moose::Exception::MethodExpectsMoreArgs 2.4000
-      Moose::Exception::MethodModifierNeedsMethodName 2.4000
-      Moose::Exception::MethodNameConflictInRoles 2.4000
-      Moose::Exception::MethodNameNotFoundInInheritanceHierarchy 2.4000
-      Moose::Exception::MethodNameNotGiven 2.4000
-      Moose::Exception::MustDefineAMethodName 2.4000
-      Moose::Exception::MustDefineAnAttributeName 2.4000
-      Moose::Exception::MustDefineAnOverloadOperator 2.4000
-      Moose::Exception::MustHaveAtLeastOneValueToEnumerate 2.4000
-      Moose::Exception::MustPassAHashOfOptions 2.4000
-      Moose::Exception::MustPassAMooseMetaRoleInstanceOrSubclass 2.4000
-      Moose::Exception::MustPassAPackageNameOrAnExistingClassMOPPackageInstance 2.4000
-      Moose::Exception::MustPassEvenNumberOfArguments 2.4000
-      Moose::Exception::MustPassEvenNumberOfAttributeOptions 2.4000
-      Moose::Exception::MustProvideANameForTheAttribute 2.4000
-      Moose::Exception::MustSpecifyAtleastOneMethod 2.4000
-      Moose::Exception::MustSpecifyAtleastOneRole 2.4000
-      Moose::Exception::MustSpecifyAtleastOneRoleToApplicant 2.4000
-      Moose::Exception::MustSupplyAClassMOPAttributeInstance 2.4000
-      Moose::Exception::MustSupplyADelegateToMethod 2.4000
-      Moose::Exception::MustSupplyAMetaclass 2.4000
-      Moose::Exception::MustSupplyAMooseMetaAttributeInstance 2.4000
-      Moose::Exception::MustSupplyAnAccessorTypeToConstructWith 2.4000
-      Moose::Exception::MustSupplyAnAttributeToConstructWith 2.4000
-      Moose::Exception::MustSupplyArrayRefAsCurriedArguments 2.4000
-      Moose::Exception::MustSupplyPackageNameAndName 2.4000
-      Moose::Exception::NeedsTypeConstraintUnionForTypeCoercionUnion 2.4000
-      Moose::Exception::NeitherAttributeNorAttributeNameIsGiven 2.4000
-      Moose::Exception::NeitherClassNorClassNameIsGiven 2.4000
-      Moose::Exception::NeitherRoleNorRoleNameIsGiven 2.4000
-      Moose::Exception::NeitherTypeNorTypeNameIsGiven 2.4000
-      Moose::Exception::NoAttributeFoundInSuperClass 2.4000
-      Moose::Exception::NoBodyToInitializeInAnAbstractBaseClass 2.4000
-      Moose::Exception::NoCasesMatched 2.4000
-      Moose::Exception::NoConstraintCheckForTypeConstraint 2.4000
-      Moose::Exception::NoDestructorClassSpecified 2.4000
-      Moose::Exception::NoImmutableTraitSpecifiedForClass 2.4000
-      Moose::Exception::NoParentGivenToSubtype 2.4000
-      Moose::Exception::OnlyInstancesCanBeCloned 2.4000
-      Moose::Exception::OperatorIsRequired 2.4000
-      Moose::Exception::OverloadConflictInSummation 2.4000
-      Moose::Exception::OverloadRequiresAMetaClass 2.4000
-      Moose::Exception::OverloadRequiresAMetaMethod 2.4000
-      Moose::Exception::OverloadRequiresAMetaOverload 2.4000
-      Moose::Exception::OverloadRequiresAMethodNameOrCoderef 2.4000
-      Moose::Exception::OverloadRequiresAnOperator 2.4000
-      Moose::Exception::OverloadRequiresNamesForCoderef 2.4000
-      Moose::Exception::OverrideConflictInComposition 2.4000
-      Moose::Exception::OverrideConflictInSummation 2.4000
-      Moose::Exception::PackageDoesNotUseMooseExporter 2.4000
-      Moose::Exception::PackageNameAndNameParamsNotGivenToWrap 2.4000
-      Moose::Exception::PackagesAndModulesAreNotCachable 2.4000
-      Moose::Exception::ParameterIsNotSubtypeOfParent 2.4000
-      Moose::Exception::ReferencesAreNotAllowedAsDefault 2.4000
-      Moose::Exception::RequiredAttributeLacksInitialization 2.4000
-      Moose::Exception::RequiredAttributeNeedsADefault 2.4000
-      Moose::Exception::RequiredMethodsImportedByClass 2.4000
-      Moose::Exception::RequiredMethodsNotImplementedByClass 2.4000
-      Moose::Exception::Role::Attribute 2.4000
-      Moose::Exception::Role::AttributeName 2.4000
-      Moose::Exception::Role::Class 2.4000
-      Moose::Exception::Role::EitherAttributeOrAttributeName 2.4000
-      Moose::Exception::Role::Instance 2.4000
-      Moose::Exception::Role::InstanceClass 2.4000
-      Moose::Exception::Role::InvalidAttributeOptions 2.4000
-      Moose::Exception::Role::Method 2.4000
-      Moose::Exception::Role::ParamsHash 2.4000
-      Moose::Exception::Role::Role 2.4000
-      Moose::Exception::Role::RoleForCreate 2.4000
-      Moose::Exception::Role::RoleForCreateMOPClass 2.4000
-      Moose::Exception::Role::TypeConstraint 2.4000
-      Moose::Exception::RoleDoesTheExcludedRole 2.4000
-      Moose::Exception::RoleExclusionConflict 2.4000
-      Moose::Exception::RoleNameRequired 2.4000
-      Moose::Exception::RoleNameRequiredForMooseMetaRole 2.4000
-      Moose::Exception::RolesDoNotSupportAugment 2.4000
-      Moose::Exception::RolesDoNotSupportExtends 2.4000
-      Moose::Exception::RolesDoNotSupportInner 2.4000
-      Moose::Exception::RolesDoNotSupportRegexReferencesForMethodModifiers 2.4000
-      Moose::Exception::RolesInCreateTakesAnArrayRef 2.4000
-      Moose::Exception::RolesListMustBeInstancesOfMooseMetaRole 2.4000
-      Moose::Exception::SingleParamsToNewMustBeHashRef 2.4000
-      Moose::Exception::TriggerMustBeACodeRef 2.4000
-      Moose::Exception::TypeConstraintCannotBeUsedForAParameterizableType 2.4000
-      Moose::Exception::TypeConstraintIsAlreadyCreated 2.4000
-      Moose::Exception::TypeParameterMustBeMooseMetaType 2.4000
-      Moose::Exception::UnableToCanonicalizeHandles 2.4000
-      Moose::Exception::UnableToCanonicalizeNonRolePackage 2.4000
-      Moose::Exception::UnableToRecognizeDelegateMetaclass 2.4000
-      Moose::Exception::UndefinedHashKeysPassedToMethod 2.4000
-      Moose::Exception::UnionCalledWithAnArrayRefAndAdditionalArgs 2.4000
-      Moose::Exception::UnionTakesAtleastTwoTypeNames 2.4000
-      Moose::Exception::ValidationFailedForInlineTypeConstraint 2.4000
-      Moose::Exception::ValidationFailedForTypeConstraint 2.4000
-      Moose::Exception::WrapTakesACodeRefToBless 2.4000
-      Moose::Exception::WrongTypeConstraintGiven 2.4000
-      Moose::Exporter 2.4000
-      Moose::Intro 2.4000
-      Moose::Manual 2.4000
-      Moose::Manual::Attributes 2.4000
-      Moose::Manual::BestPractices 2.4000
-      Moose::Manual::Classes 2.4000
-      Moose::Manual::Concepts 2.4000
-      Moose::Manual::Construction 2.4000
-      Moose::Manual::Contributing 2.4000
-      Moose::Manual::Delegation 2.4000
-      Moose::Manual::Delta 2.4000
-      Moose::Manual::Exceptions 2.4000
-      Moose::Manual::Exceptions::Manifest 2.4000
-      Moose::Manual::FAQ 2.4000
-      Moose::Manual::MOP 2.4000
-      Moose::Manual::MethodModifiers 2.4000
-      Moose::Manual::MooseX 2.4000
-      Moose::Manual::Resources 2.4000
-      Moose::Manual::Roles 2.4000
-      Moose::Manual::Support 2.4000
-      Moose::Manual::Types 2.4000
-      Moose::Manual::Unsweetened 2.4000
-      Moose::Meta::Attribute 2.4000
-      Moose::Meta::Attribute::Native 2.4000
-      Moose::Meta::Attribute::Native::Trait 2.4000
-      Moose::Meta::Attribute::Native::Trait::Array 2.4000
-      Moose::Meta::Attribute::Native::Trait::Bool 2.4000
-      Moose::Meta::Attribute::Native::Trait::Code 2.4000
-      Moose::Meta::Attribute::Native::Trait::Counter 2.4000
-      Moose::Meta::Attribute::Native::Trait::Hash 2.4000
-      Moose::Meta::Attribute::Native::Trait::Number 2.4000
-      Moose::Meta::Attribute::Native::Trait::String 2.4000
-      Moose::Meta::Class 2.4000
-      Moose::Meta::Class::Immutable::Trait 2.4000
-      Moose::Meta::Instance 2.4000
-      Moose::Meta::Method 2.4000
-      Moose::Meta::Method::Accessor 2.4000
-      Moose::Meta::Method::Accessor::Native 2.4000
-      Moose::Meta::Method::Accessor::Native::Array 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::Writer 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::accessor 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::clear 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::count 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::delete 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::elements 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::first 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::first_index 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::get 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::grep 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::insert 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::is_empty 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::join 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::map 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::natatime 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::pop 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::push 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::reduce 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::set 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::shallow_clone 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::shift 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::shuffle 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::sort 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::sort_in_place 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::splice 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::uniq 2.4000
-      Moose::Meta::Method::Accessor::Native::Array::unshift 2.4000
-      Moose::Meta::Method::Accessor::Native::Bool::not 2.4000
-      Moose::Meta::Method::Accessor::Native::Bool::set 2.4000
-      Moose::Meta::Method::Accessor::Native::Bool::toggle 2.4000
-      Moose::Meta::Method::Accessor::Native::Bool::unset 2.4000
-      Moose::Meta::Method::Accessor::Native::Code::execute 2.4000
-      Moose::Meta::Method::Accessor::Native::Code::execute_method 2.4000
-      Moose::Meta::Method::Accessor::Native::Collection 2.4000
-      Moose::Meta::Method::Accessor::Native::Counter::Writer 2.4000
-      Moose::Meta::Method::Accessor::Native::Counter::dec 2.4000
-      Moose::Meta::Method::Accessor::Native::Counter::inc 2.4000
-      Moose::Meta::Method::Accessor::Native::Counter::reset 2.4000
-      Moose::Meta::Method::Accessor::Native::Counter::set 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::Writer 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::accessor 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::clear 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::count 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::defined 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::delete 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::elements 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::exists 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::get 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::is_empty 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::keys 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::kv 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::set 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::shallow_clone 2.4000
-      Moose::Meta::Method::Accessor::Native::Hash::values 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::abs 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::add 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::div 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::mod 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::mul 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::set 2.4000
-      Moose::Meta::Method::Accessor::Native::Number::sub 2.4000
-      Moose::Meta::Method::Accessor::Native::Reader 2.4000
-      Moose::Meta::Method::Accessor::Native::String::append 2.4000
-      Moose::Meta::Method::Accessor::Native::String::chomp 2.4000
-      Moose::Meta::Method::Accessor::Native::String::chop 2.4000
-      Moose::Meta::Method::Accessor::Native::String::clear 2.4000
-      Moose::Meta::Method::Accessor::Native::String::inc 2.4000
-      Moose::Meta::Method::Accessor::Native::String::length 2.4000
-      Moose::Meta::Method::Accessor::Native::String::match 2.4000
-      Moose::Meta::Method::Accessor::Native::String::prepend 2.4000
-      Moose::Meta::Method::Accessor::Native::String::replace 2.4000
-      Moose::Meta::Method::Accessor::Native::String::substr 2.4000
-      Moose::Meta::Method::Accessor::Native::Writer 2.4000
-      Moose::Meta::Method::Augmented 2.4000
-      Moose::Meta::Method::Constructor 2.4000
-      Moose::Meta::Method::Delegation 2.4000
-      Moose::Meta::Method::Destructor 2.4000
-      Moose::Meta::Method::Meta 2.4000
-      Moose::Meta::Method::Overridden 2.4000
-      Moose::Meta::Mixin::AttributeCore 2.4000
-      Moose::Meta::Object::Trait 2.4000
-      Moose::Meta::Role 2.4000
-      Moose::Meta::Role::Application 2.4000
-      Moose::Meta::Role::Application::RoleSummation 2.4000
-      Moose::Meta::Role::Application::ToClass 2.4000
-      Moose::Meta::Role::Application::ToInstance 2.4000
-      Moose::Meta::Role::Application::ToRole 2.4000
-      Moose::Meta::Role::Attribute 2.4000
-      Moose::Meta::Role::Composite 2.4000
-      Moose::Meta::Role::Method 2.4000
-      Moose::Meta::Role::Method::Conflicting 2.4000
-      Moose::Meta::Role::Method::Required 2.4000
-      Moose::Meta::TypeCoercion 2.4000
-      Moose::Meta::TypeCoercion::Union 2.4000
-      Moose::Meta::TypeConstraint 2.4000
-      Moose::Meta::TypeConstraint::Class 2.4000
-      Moose::Meta::TypeConstraint::DuckType 2.4000
-      Moose::Meta::TypeConstraint::Enum 2.4000
-      Moose::Meta::TypeConstraint::Parameterizable 2.4000
-      Moose::Meta::TypeConstraint::Parameterized 2.4000
-      Moose::Meta::TypeConstraint::Registry 2.4000
-      Moose::Meta::TypeConstraint::Role 2.4000
-      Moose::Meta::TypeConstraint::Union 2.4000
-      Moose::Object 2.4000
-      Moose::Role 2.4000
-      Moose::Spec::Role 2.4000
-      Moose::Unsweetened 2.4000
-      Moose::Util 2.4000
-      Moose::Util::MetaRole 2.4000
-      Moose::Util::TypeConstraints 2.4000
-      Moose::Util::TypeConstraints::Builtins 2.4000
-      Test::Moose 2.4000
-      metaclass 2.4000
-      oose 2.4000
+      Class::MOP 2.2207
+      Class::MOP::Attribute 2.2207
+      Class::MOP::Class 2.2207
+      Class::MOP::Class::Immutable::Trait 2.2207
+      Class::MOP::Deprecated 2.2207
+      Class::MOP::Instance 2.2207
+      Class::MOP::Method 2.2207
+      Class::MOP::Method::Accessor 2.2207
+      Class::MOP::Method::Constructor 2.2207
+      Class::MOP::Method::Generated 2.2207
+      Class::MOP::Method::Inlined 2.2207
+      Class::MOP::Method::Meta 2.2207
+      Class::MOP::Method::Wrapped 2.2207
+      Class::MOP::MiniTrait 2.2207
+      Class::MOP::Mixin 2.2207
+      Class::MOP::Mixin::AttributeCore 2.2207
+      Class::MOP::Mixin::HasAttributes 2.2207
+      Class::MOP::Mixin::HasMethods 2.2207
+      Class::MOP::Mixin::HasOverloads 2.2207
+      Class::MOP::Module 2.2207
+      Class::MOP::Object 2.2207
+      Class::MOP::Overload 2.2207
+      Class::MOP::Package 2.2207
+      Moose 2.2207
+      Moose::Cookbook 2.2207
+      Moose::Cookbook::Basics::BankAccount_MethodModifiersAndSubclassing 2.2207
+      Moose::Cookbook::Basics::BinaryTree_AttributeFeatures 2.2207
+      Moose::Cookbook::Basics::BinaryTree_BuilderAndLazyBuild 2.2207
+      Moose::Cookbook::Basics::Company_Subtypes 2.2207
+      Moose::Cookbook::Basics::DateTime_ExtendingNonMooseParent 2.2207
+      Moose::Cookbook::Basics::Document_AugmentAndInner 2.2207
+      Moose::Cookbook::Basics::Genome_OverloadingSubtypesAndCoercion 2.2207
+      Moose::Cookbook::Basics::HTTP_SubtypesAndCoercion 2.2207
+      Moose::Cookbook::Basics::Immutable 2.2207
+      Moose::Cookbook::Basics::Person_BUILDARGSAndBUILD 2.2207
+      Moose::Cookbook::Basics::Point_AttributesAndSubclassing 2.2207
+      Moose::Cookbook::Extending::Debugging_BaseClassRole 2.2207
+      Moose::Cookbook::Extending::ExtensionOverview 2.2207
+      Moose::Cookbook::Extending::Mooseish_MooseSugar 2.2207
+      Moose::Cookbook::Legacy::Debugging_BaseClassReplacement 2.2207
+      Moose::Cookbook::Legacy::Labeled_AttributeMetaclass 2.2207
+      Moose::Cookbook::Legacy::Table_ClassMetaclass 2.2207
+      Moose::Cookbook::Meta::GlobRef_InstanceMetaclass 2.2207
+      Moose::Cookbook::Meta::Labeled_AttributeTrait 2.2207
+      Moose::Cookbook::Meta::PrivateOrPublic_MethodMetaclass 2.2207
+      Moose::Cookbook::Meta::Table_MetaclassTrait 2.2207
+      Moose::Cookbook::Meta::WhyMeta 2.2207
+      Moose::Cookbook::Roles::ApplicationToInstance 2.2207
+      Moose::Cookbook::Roles::Comparable_CodeReuse 2.2207
+      Moose::Cookbook::Roles::Restartable_AdvancedComposition 2.2207
+      Moose::Cookbook::Snack::Keywords 2.2207
+      Moose::Cookbook::Snack::Types 2.2207
+      Moose::Cookbook::Style 2.2207
+      Moose::Deprecated 2.2207
+      Moose::Exception 2.2207
+      Moose::Exception::AccessorMustReadWrite 2.2207
+      Moose::Exception::AddParameterizableTypeTakesParameterizableType 2.2207
+      Moose::Exception::AddRoleTakesAMooseMetaRoleInstance 2.2207
+      Moose::Exception::AddRoleToARoleTakesAMooseMetaRole 2.2207
+      Moose::Exception::ApplyTakesABlessedInstance 2.2207
+      Moose::Exception::AttachToClassNeedsAClassMOPClassInstanceOrASubclass 2.2207
+      Moose::Exception::AttributeConflictInRoles 2.2207
+      Moose::Exception::AttributeConflictInSummation 2.2207
+      Moose::Exception::AttributeExtensionIsNotSupportedInRoles 2.2207
+      Moose::Exception::AttributeIsRequired 2.2207
+      Moose::Exception::AttributeMustBeAnClassMOPMixinAttributeCoreOrSubclass 2.2207
+      Moose::Exception::AttributeNamesDoNotMatch 2.2207
+      Moose::Exception::AttributeValueIsNotAnObject 2.2207
+      Moose::Exception::AttributeValueIsNotDefined 2.2207
+      Moose::Exception::AutoDeRefNeedsArrayRefOrHashRef 2.2207
+      Moose::Exception::BadOptionFormat 2.2207
+      Moose::Exception::BothBuilderAndDefaultAreNotAllowed 2.2207
+      Moose::Exception::BuilderDoesNotExist 2.2207
+      Moose::Exception::BuilderMethodNotSupportedForAttribute 2.2207
+      Moose::Exception::BuilderMethodNotSupportedForInlineAttribute 2.2207
+      Moose::Exception::BuilderMustBeAMethodName 2.2207
+      Moose::Exception::CallingMethodOnAnImmutableInstance 2.2207
+      Moose::Exception::CallingReadOnlyMethodOnAnImmutableInstance 2.2207
+      Moose::Exception::CanExtendOnlyClasses 2.2207
+      Moose::Exception::CanOnlyConsumeRole 2.2207
+      Moose::Exception::CanOnlyWrapBlessedCode 2.2207
+      Moose::Exception::CanReblessOnlyIntoASubclass 2.2207
+      Moose::Exception::CanReblessOnlyIntoASuperclass 2.2207
+      Moose::Exception::CannotAddAdditionalTypeCoercionsToUnion 2.2207
+      Moose::Exception::CannotAddAsAnAttributeToARole 2.2207
+      Moose::Exception::CannotApplyBaseClassRolesToRole 2.2207
+      Moose::Exception::CannotAssignValueToReadOnlyAccessor 2.2207
+      Moose::Exception::CannotAugmentIfLocalMethodPresent 2.2207
+      Moose::Exception::CannotAugmentNoSuperMethod 2.2207
+      Moose::Exception::CannotAutoDerefWithoutIsa 2.2207
+      Moose::Exception::CannotAutoDereferenceTypeConstraint 2.2207
+      Moose::Exception::CannotCalculateNativeType 2.2207
+      Moose::Exception::CannotCallAnAbstractBaseMethod 2.2207
+      Moose::Exception::CannotCallAnAbstractMethod 2.2207
+      Moose::Exception::CannotCoerceAWeakRef 2.2207
+      Moose::Exception::CannotCoerceAttributeWhichHasNoCoercion 2.2207
+      Moose::Exception::CannotCreateHigherOrderTypeWithoutATypeParameter 2.2207
+      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresent 2.2207
+      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresentInClass 2.2207
+      Moose::Exception::CannotDelegateLocalMethodIsPresent 2.2207
+      Moose::Exception::CannotDelegateWithoutIsa 2.2207
+      Moose::Exception::CannotFindDelegateMetaclass 2.2207
+      Moose::Exception::CannotFindType 2.2207
+      Moose::Exception::CannotFindTypeGivenToMatchOnType 2.2207
+      Moose::Exception::CannotFixMetaclassCompatibility 2.2207
+      Moose::Exception::CannotGenerateInlineConstraint 2.2207
+      Moose::Exception::CannotInitializeMooseMetaRoleComposite 2.2207
+      Moose::Exception::CannotInlineTypeConstraintCheck 2.2207
+      Moose::Exception::CannotLocatePackageInINC 2.2207
+      Moose::Exception::CannotMakeMetaclassCompatible 2.2207
+      Moose::Exception::CannotOverrideALocalMethod 2.2207
+      Moose::Exception::CannotOverrideBodyOfMetaMethods 2.2207
+      Moose::Exception::CannotOverrideLocalMethodIsPresent 2.2207
+      Moose::Exception::CannotOverrideNoSuperMethod 2.2207
+      Moose::Exception::CannotRegisterUnnamedTypeConstraint 2.2207
+      Moose::Exception::CannotUseLazyBuildAndDefaultSimultaneously 2.2207
+      Moose::Exception::CircularReferenceInAlso 2.2207
+      Moose::Exception::ClassDoesNotHaveInitMeta 2.2207
+      Moose::Exception::ClassDoesTheExcludedRole 2.2207
+      Moose::Exception::ClassNamesDoNotMatch 2.2207
+      Moose::Exception::CloneObjectExpectsAnInstanceOfMetaclass 2.2207
+      Moose::Exception::CodeBlockMustBeACodeRef 2.2207
+      Moose::Exception::CoercingWithoutCoercions 2.2207
+      Moose::Exception::CoercionAlreadyExists 2.2207
+      Moose::Exception::CoercionNeedsTypeConstraint 2.2207
+      Moose::Exception::ConflictDetectedInCheckRoleExclusions 2.2207
+      Moose::Exception::ConflictDetectedInCheckRoleExclusionsInToClass 2.2207
+      Moose::Exception::ConstructClassInstanceTakesPackageName 2.2207
+      Moose::Exception::CouldNotCreateMethod 2.2207
+      Moose::Exception::CouldNotCreateWriter 2.2207
+      Moose::Exception::CouldNotEvalConstructor 2.2207
+      Moose::Exception::CouldNotEvalDestructor 2.2207
+      Moose::Exception::CouldNotFindTypeConstraintToCoerceFrom 2.2207
+      Moose::Exception::CouldNotGenerateInlineAttributeMethod 2.2207
+      Moose::Exception::CouldNotLocateTypeConstraintForUnion 2.2207
+      Moose::Exception::CouldNotParseType 2.2207
+      Moose::Exception::CreateMOPClassTakesArrayRefOfAttributes 2.2207
+      Moose::Exception::CreateMOPClassTakesArrayRefOfSuperclasses 2.2207
+      Moose::Exception::CreateMOPClassTakesHashRefOfMethods 2.2207
+      Moose::Exception::CreateTakesArrayRefOfRoles 2.2207
+      Moose::Exception::CreateTakesHashRefOfAttributes 2.2207
+      Moose::Exception::CreateTakesHashRefOfMethods 2.2207
+      Moose::Exception::DefaultToMatchOnTypeMustBeCodeRef 2.2207
+      Moose::Exception::DelegationToAClassWhichIsNotLoaded 2.2207
+      Moose::Exception::DelegationToARoleWhichIsNotLoaded 2.2207
+      Moose::Exception::DelegationToATypeWhichIsNotAClass 2.2207
+      Moose::Exception::DoesRequiresRoleName 2.2207
+      Moose::Exception::EnumCalledWithAnArrayRefAndAdditionalArgs 2.2207
+      Moose::Exception::EnumValuesMustBeString 2.2207
+      Moose::Exception::ExtendsMissingArgs 2.2207
+      Moose::Exception::HandlesMustBeAHashRef 2.2207
+      Moose::Exception::IllegalInheritedOptions 2.2207
+      Moose::Exception::IllegalMethodTypeToAddMethodModifier 2.2207
+      Moose::Exception::IncompatibleMetaclassOfSuperclass 2.2207
+      Moose::Exception::InitMetaRequiresClass 2.2207
+      Moose::Exception::InitializeTakesUnBlessedPackageName 2.2207
+      Moose::Exception::InstanceBlessedIntoWrongClass 2.2207
+      Moose::Exception::InstanceMustBeABlessedReference 2.2207
+      Moose::Exception::InvalidArgPassedToMooseUtilMetaRole 2.2207
+      Moose::Exception::InvalidArgumentToMethod 2.2207
+      Moose::Exception::InvalidArgumentsToTraitAliases 2.2207
+      Moose::Exception::InvalidBaseTypeGivenToCreateParameterizedTypeConstraint 2.2207
+      Moose::Exception::InvalidHandleValue 2.2207
+      Moose::Exception::InvalidHasProvidedInARole 2.2207
+      Moose::Exception::InvalidNameForType 2.2207
+      Moose::Exception::InvalidOverloadOperator 2.2207
+      Moose::Exception::InvalidRoleApplication 2.2207
+      Moose::Exception::InvalidTypeConstraint 2.2207
+      Moose::Exception::InvalidTypeGivenToCreateParameterizedTypeConstraint 2.2207
+      Moose::Exception::InvalidValueForIs 2.2207
+      Moose::Exception::IsaDoesNotDoTheRole 2.2207
+      Moose::Exception::IsaLacksDoesMethod 2.2207
+      Moose::Exception::LazyAttributeNeedsADefault 2.2207
+      Moose::Exception::Legacy 2.2207
+      Moose::Exception::MOPAttributeNewNeedsAttributeName 2.2207
+      Moose::Exception::MatchActionMustBeACodeRef 2.2207
+      Moose::Exception::MessageParameterMustBeCodeRef 2.2207
+      Moose::Exception::MetaclassIsAClassNotASubclassOfGivenMetaclass 2.2207
+      Moose::Exception::MetaclassIsARoleNotASubclassOfGivenMetaclass 2.2207
+      Moose::Exception::MetaclassIsNotASubclassOfGivenMetaclass 2.2207
+      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaClass 2.2207
+      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaRole 2.2207
+      Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass 2.2207
+      Moose::Exception::MetaclassNotLoaded 2.2207
+      Moose::Exception::MetaclassTypeIncompatible 2.2207
+      Moose::Exception::MethodExpectedAMetaclassObject 2.2207
+      Moose::Exception::MethodExpectsFewerArgs 2.2207
+      Moose::Exception::MethodExpectsMoreArgs 2.2207
+      Moose::Exception::MethodModifierNeedsMethodName 2.2207
+      Moose::Exception::MethodNameConflictInRoles 2.2207
+      Moose::Exception::MethodNameNotFoundInInheritanceHierarchy 2.2207
+      Moose::Exception::MethodNameNotGiven 2.2207
+      Moose::Exception::MustDefineAMethodName 2.2207
+      Moose::Exception::MustDefineAnAttributeName 2.2207
+      Moose::Exception::MustDefineAnOverloadOperator 2.2207
+      Moose::Exception::MustHaveAtLeastOneValueToEnumerate 2.2207
+      Moose::Exception::MustPassAHashOfOptions 2.2207
+      Moose::Exception::MustPassAMooseMetaRoleInstanceOrSubclass 2.2207
+      Moose::Exception::MustPassAPackageNameOrAnExistingClassMOPPackageInstance 2.2207
+      Moose::Exception::MustPassEvenNumberOfArguments 2.2207
+      Moose::Exception::MustPassEvenNumberOfAttributeOptions 2.2207
+      Moose::Exception::MustProvideANameForTheAttribute 2.2207
+      Moose::Exception::MustSpecifyAtleastOneMethod 2.2207
+      Moose::Exception::MustSpecifyAtleastOneRole 2.2207
+      Moose::Exception::MustSpecifyAtleastOneRoleToApplicant 2.2207
+      Moose::Exception::MustSupplyAClassMOPAttributeInstance 2.2207
+      Moose::Exception::MustSupplyADelegateToMethod 2.2207
+      Moose::Exception::MustSupplyAMetaclass 2.2207
+      Moose::Exception::MustSupplyAMooseMetaAttributeInstance 2.2207
+      Moose::Exception::MustSupplyAnAccessorTypeToConstructWith 2.2207
+      Moose::Exception::MustSupplyAnAttributeToConstructWith 2.2207
+      Moose::Exception::MustSupplyArrayRefAsCurriedArguments 2.2207
+      Moose::Exception::MustSupplyPackageNameAndName 2.2207
+      Moose::Exception::NeedsTypeConstraintUnionForTypeCoercionUnion 2.2207
+      Moose::Exception::NeitherAttributeNorAttributeNameIsGiven 2.2207
+      Moose::Exception::NeitherClassNorClassNameIsGiven 2.2207
+      Moose::Exception::NeitherRoleNorRoleNameIsGiven 2.2207
+      Moose::Exception::NeitherTypeNorTypeNameIsGiven 2.2207
+      Moose::Exception::NoAttributeFoundInSuperClass 2.2207
+      Moose::Exception::NoBodyToInitializeInAnAbstractBaseClass 2.2207
+      Moose::Exception::NoCasesMatched 2.2207
+      Moose::Exception::NoConstraintCheckForTypeConstraint 2.2207
+      Moose::Exception::NoDestructorClassSpecified 2.2207
+      Moose::Exception::NoImmutableTraitSpecifiedForClass 2.2207
+      Moose::Exception::NoParentGivenToSubtype 2.2207
+      Moose::Exception::OnlyInstancesCanBeCloned 2.2207
+      Moose::Exception::OperatorIsRequired 2.2207
+      Moose::Exception::OverloadConflictInSummation 2.2207
+      Moose::Exception::OverloadRequiresAMetaClass 2.2207
+      Moose::Exception::OverloadRequiresAMetaMethod 2.2207
+      Moose::Exception::OverloadRequiresAMetaOverload 2.2207
+      Moose::Exception::OverloadRequiresAMethodNameOrCoderef 2.2207
+      Moose::Exception::OverloadRequiresAnOperator 2.2207
+      Moose::Exception::OverloadRequiresNamesForCoderef 2.2207
+      Moose::Exception::OverrideConflictInComposition 2.2207
+      Moose::Exception::OverrideConflictInSummation 2.2207
+      Moose::Exception::PackageDoesNotUseMooseExporter 2.2207
+      Moose::Exception::PackageNameAndNameParamsNotGivenToWrap 2.2207
+      Moose::Exception::PackagesAndModulesAreNotCachable 2.2207
+      Moose::Exception::ParameterIsNotSubtypeOfParent 2.2207
+      Moose::Exception::ReferencesAreNotAllowedAsDefault 2.2207
+      Moose::Exception::RequiredAttributeLacksInitialization 2.2207
+      Moose::Exception::RequiredAttributeNeedsADefault 2.2207
+      Moose::Exception::RequiredMethodsImportedByClass 2.2207
+      Moose::Exception::RequiredMethodsNotImplementedByClass 2.2207
+      Moose::Exception::Role::Attribute 2.2207
+      Moose::Exception::Role::AttributeName 2.2207
+      Moose::Exception::Role::Class 2.2207
+      Moose::Exception::Role::EitherAttributeOrAttributeName 2.2207
+      Moose::Exception::Role::Instance 2.2207
+      Moose::Exception::Role::InstanceClass 2.2207
+      Moose::Exception::Role::InvalidAttributeOptions 2.2207
+      Moose::Exception::Role::Method 2.2207
+      Moose::Exception::Role::ParamsHash 2.2207
+      Moose::Exception::Role::Role 2.2207
+      Moose::Exception::Role::RoleForCreate 2.2207
+      Moose::Exception::Role::RoleForCreateMOPClass 2.2207
+      Moose::Exception::Role::TypeConstraint 2.2207
+      Moose::Exception::RoleDoesTheExcludedRole 2.2207
+      Moose::Exception::RoleExclusionConflict 2.2207
+      Moose::Exception::RoleNameRequired 2.2207
+      Moose::Exception::RoleNameRequiredForMooseMetaRole 2.2207
+      Moose::Exception::RolesDoNotSupportAugment 2.2207
+      Moose::Exception::RolesDoNotSupportExtends 2.2207
+      Moose::Exception::RolesDoNotSupportInner 2.2207
+      Moose::Exception::RolesDoNotSupportRegexReferencesForMethodModifiers 2.2207
+      Moose::Exception::RolesInCreateTakesAnArrayRef 2.2207
+      Moose::Exception::RolesListMustBeInstancesOfMooseMetaRole 2.2207
+      Moose::Exception::SingleParamsToNewMustBeHashRef 2.2207
+      Moose::Exception::TriggerMustBeACodeRef 2.2207
+      Moose::Exception::TypeConstraintCannotBeUsedForAParameterizableType 2.2207
+      Moose::Exception::TypeConstraintIsAlreadyCreated 2.2207
+      Moose::Exception::TypeParameterMustBeMooseMetaType 2.2207
+      Moose::Exception::UnableToCanonicalizeHandles 2.2207
+      Moose::Exception::UnableToCanonicalizeNonRolePackage 2.2207
+      Moose::Exception::UnableToRecognizeDelegateMetaclass 2.2207
+      Moose::Exception::UndefinedHashKeysPassedToMethod 2.2207
+      Moose::Exception::UnionCalledWithAnArrayRefAndAdditionalArgs 2.2207
+      Moose::Exception::UnionTakesAtleastTwoTypeNames 2.2207
+      Moose::Exception::ValidationFailedForInlineTypeConstraint 2.2207
+      Moose::Exception::ValidationFailedForTypeConstraint 2.2207
+      Moose::Exception::WrapTakesACodeRefToBless 2.2207
+      Moose::Exception::WrongTypeConstraintGiven 2.2207
+      Moose::Exporter 2.2207
+      Moose::Intro 2.2207
+      Moose::Manual 2.2207
+      Moose::Manual::Attributes 2.2207
+      Moose::Manual::BestPractices 2.2207
+      Moose::Manual::Classes 2.2207
+      Moose::Manual::Concepts 2.2207
+      Moose::Manual::Construction 2.2207
+      Moose::Manual::Contributing 2.2207
+      Moose::Manual::Delegation 2.2207
+      Moose::Manual::Delta 2.2207
+      Moose::Manual::Exceptions 2.2207
+      Moose::Manual::Exceptions::Manifest 2.2207
+      Moose::Manual::FAQ 2.2207
+      Moose::Manual::MOP 2.2207
+      Moose::Manual::MethodModifiers 2.2207
+      Moose::Manual::MooseX 2.2207
+      Moose::Manual::Resources 2.2207
+      Moose::Manual::Roles 2.2207
+      Moose::Manual::Support 2.2207
+      Moose::Manual::Types 2.2207
+      Moose::Manual::Unsweetened 2.2207
+      Moose::Meta::Attribute 2.2207
+      Moose::Meta::Attribute::Native 2.2207
+      Moose::Meta::Attribute::Native::Trait 2.2207
+      Moose::Meta::Attribute::Native::Trait::Array 2.2207
+      Moose::Meta::Attribute::Native::Trait::Bool 2.2207
+      Moose::Meta::Attribute::Native::Trait::Code 2.2207
+      Moose::Meta::Attribute::Native::Trait::Counter 2.2207
+      Moose::Meta::Attribute::Native::Trait::Hash 2.2207
+      Moose::Meta::Attribute::Native::Trait::Number 2.2207
+      Moose::Meta::Attribute::Native::Trait::String 2.2207
+      Moose::Meta::Class 2.2207
+      Moose::Meta::Class::Immutable::Trait 2.2207
+      Moose::Meta::Instance 2.2207
+      Moose::Meta::Method 2.2207
+      Moose::Meta::Method::Accessor 2.2207
+      Moose::Meta::Method::Accessor::Native 2.2207
+      Moose::Meta::Method::Accessor::Native::Array 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::Writer 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::accessor 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::clear 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::count 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::delete 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::elements 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::first 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::first_index 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::get 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::grep 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::insert 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::is_empty 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::join 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::map 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::natatime 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::pop 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::push 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::reduce 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::set 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::shallow_clone 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::shift 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::shuffle 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::sort 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::sort_in_place 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::splice 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::uniq 2.2207
+      Moose::Meta::Method::Accessor::Native::Array::unshift 2.2207
+      Moose::Meta::Method::Accessor::Native::Bool::not 2.2207
+      Moose::Meta::Method::Accessor::Native::Bool::set 2.2207
+      Moose::Meta::Method::Accessor::Native::Bool::toggle 2.2207
+      Moose::Meta::Method::Accessor::Native::Bool::unset 2.2207
+      Moose::Meta::Method::Accessor::Native::Code::execute 2.2207
+      Moose::Meta::Method::Accessor::Native::Code::execute_method 2.2207
+      Moose::Meta::Method::Accessor::Native::Collection 2.2207
+      Moose::Meta::Method::Accessor::Native::Counter::Writer 2.2207
+      Moose::Meta::Method::Accessor::Native::Counter::dec 2.2207
+      Moose::Meta::Method::Accessor::Native::Counter::inc 2.2207
+      Moose::Meta::Method::Accessor::Native::Counter::reset 2.2207
+      Moose::Meta::Method::Accessor::Native::Counter::set 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::Writer 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::accessor 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::clear 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::count 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::defined 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::delete 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::elements 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::exists 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::get 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::is_empty 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::keys 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::kv 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::set 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::shallow_clone 2.2207
+      Moose::Meta::Method::Accessor::Native::Hash::values 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::abs 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::add 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::div 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::mod 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::mul 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::set 2.2207
+      Moose::Meta::Method::Accessor::Native::Number::sub 2.2207
+      Moose::Meta::Method::Accessor::Native::Reader 2.2207
+      Moose::Meta::Method::Accessor::Native::String::append 2.2207
+      Moose::Meta::Method::Accessor::Native::String::chomp 2.2207
+      Moose::Meta::Method::Accessor::Native::String::chop 2.2207
+      Moose::Meta::Method::Accessor::Native::String::clear 2.2207
+      Moose::Meta::Method::Accessor::Native::String::inc 2.2207
+      Moose::Meta::Method::Accessor::Native::String::length 2.2207
+      Moose::Meta::Method::Accessor::Native::String::match 2.2207
+      Moose::Meta::Method::Accessor::Native::String::prepend 2.2207
+      Moose::Meta::Method::Accessor::Native::String::replace 2.2207
+      Moose::Meta::Method::Accessor::Native::String::substr 2.2207
+      Moose::Meta::Method::Accessor::Native::Writer 2.2207
+      Moose::Meta::Method::Augmented 2.2207
+      Moose::Meta::Method::Constructor 2.2207
+      Moose::Meta::Method::Delegation 2.2207
+      Moose::Meta::Method::Destructor 2.2207
+      Moose::Meta::Method::Meta 2.2207
+      Moose::Meta::Method::Overridden 2.2207
+      Moose::Meta::Mixin::AttributeCore 2.2207
+      Moose::Meta::Object::Trait 2.2207
+      Moose::Meta::Role 2.2207
+      Moose::Meta::Role::Application 2.2207
+      Moose::Meta::Role::Application::RoleSummation 2.2207
+      Moose::Meta::Role::Application::ToClass 2.2207
+      Moose::Meta::Role::Application::ToInstance 2.2207
+      Moose::Meta::Role::Application::ToRole 2.2207
+      Moose::Meta::Role::Attribute 2.2207
+      Moose::Meta::Role::Composite 2.2207
+      Moose::Meta::Role::Method 2.2207
+      Moose::Meta::Role::Method::Conflicting 2.2207
+      Moose::Meta::Role::Method::Required 2.2207
+      Moose::Meta::TypeCoercion 2.2207
+      Moose::Meta::TypeCoercion::Union 2.2207
+      Moose::Meta::TypeConstraint 2.2207
+      Moose::Meta::TypeConstraint::Class 2.2207
+      Moose::Meta::TypeConstraint::DuckType 2.2207
+      Moose::Meta::TypeConstraint::Enum 2.2207
+      Moose::Meta::TypeConstraint::Parameterizable 2.2207
+      Moose::Meta::TypeConstraint::Parameterized 2.2207
+      Moose::Meta::TypeConstraint::Registry 2.2207
+      Moose::Meta::TypeConstraint::Role 2.2207
+      Moose::Meta::TypeConstraint::Union 2.2207
+      Moose::Object 2.2207
+      Moose::Role 2.2207
+      Moose::Spec::Role 2.2207
+      Moose::Unsweetened 2.2207
+      Moose::Util 2.2207
+      Moose::Util::MetaRole 2.2207
+      Moose::Util::TypeConstraints 2.2207
+      Moose::Util::TypeConstraints::Builtins 2.2207
+      Test::Moose 2.2207
+      metaclass 2.2207
+      oose 2.2207
     requirements:
       Carp 1.22
       Class::Load 0.09
@@ -3714,11 +3934,12 @@ DISTRIBUTIONS
       Params::Util 0
       perl 5.012
       version 0.82
-  MooseX-Types-URI-0.10
-    pathname: E/ET/ETHER/MooseX-Types-URI-0.10.tar.gz
+  MooseX-Types-URI-0.09
+    pathname: E/ET/ETHER/MooseX-Types-URI-0.09.tar.gz
     provides:
-      MooseX::Types::URI 0.10
+      MooseX::Types::URI 0.09
     requirements:
+      ExtUtils::MakeMaker 0
       Module::Build::Tiny 0.034
       MooseX::Types 0.40
       MooseX::Types::Moose 0
@@ -3772,10 +3993,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20250602
-    pathname: L/LW/LWP/Mozilla-CA-20250602.tar.gz
+  Mozilla-CA-20250202
+    pathname: L/LW/LWP/Mozilla-CA-20250202.tar.gz
     provides:
-      Mozilla::CA 20250602
+      Mozilla::CA 20250202
     requirements:
       ExtUtils::MakeMaker 0
   Net-Async-HTTP-0.50
@@ -3801,14 +4022,14 @@ DISTRIBUTIONS
       Time::HiRes 0
       URI 0
       perl 5.014
-  Net-Async-HTTP-Server-0.15
-    pathname: P/PE/PEVANS/Net-Async-HTTP-Server-0.15.tar.gz
+  Net-Async-HTTP-Server-0.14
+    pathname: P/PE/PEVANS/Net-Async-HTTP-Server-0.14.tar.gz
     provides:
-      Net::Async::HTTP::Server 0.15
-      Net::Async::HTTP::Server::PSGI 0.15
-      Net::Async::HTTP::Server::Protocol 0.15
-      Net::Async::HTTP::Server::Request 0.15
-      Plack::Handler::Net::Async::HTTP::Server 0.15
+      Net::Async::HTTP::Server 0.14
+      Net::Async::HTTP::Server::PSGI 0.14
+      Net::Async::HTTP::Server::Protocol 0.14
+      Net::Async::HTTP::Server::Request 0.14
+      Plack::Handler::Net::Async::HTTP::Server 0.14
     requirements:
       HTTP::Request 0
       IO::Async 0.54
@@ -3874,16 +4095,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Object-Pad-0.821
-    pathname: P/PE/PEVANS/Object-Pad-0.821.tar.gz
+  Object-Pad-0.820
+    pathname: P/PE/PEVANS/Object-Pad-0.820.tar.gz
     provides:
-      Object::Pad 0.821
-      Object::Pad::ExtensionBuilder 0.821
-      Object::Pad::MOP::Class 0.821
-      Object::Pad::MOP::Field 0.821
-      Object::Pad::MOP::FieldAttr 0.821
-      Object::Pad::MOP::Method 0.821
-      Object::Pad::MetaFunctions 0.821
+      Object::Pad 0.820
+      Object::Pad::ExtensionBuilder 0.820
+      Object::Pad::MOP::Class 0.820
+      Object::Pad::MOP::Field 0.820
+      Object::Pad::MOP::FieldAttr 0.820
+      Object::Pad::MOP::Method 0.820
+      Object::Pad::MetaFunctions 0.820
     requirements:
       ExtUtils::CBuilder 0
       File::ShareDir 1.00
@@ -3904,101 +4125,101 @@ DISTRIBUTIONS
       POSIX 0
       Time::Local 0
       perl 5.008001
-  PPI-1.283
-    pathname: M/MI/MITHALDU/PPI-1.283.tar.gz
+  PPI-1.281
+    pathname: M/MI/MITHALDU/PPI-1.281.tar.gz
     provides:
-      PPI 1.283
-      PPI::Cache 1.283
-      PPI::Document 1.283
-      PPI::Document::File 1.283
-      PPI::Document::Fragment 1.283
-      PPI::Document::Normalized 1.283
-      PPI::Dumper 1.283
-      PPI::Element 1.283
-      PPI::Exception 1.283
-      PPI::Exception::ParserRejection 1.283
-      PPI::Find 1.283
-      PPI::Lexer 1.283
-      PPI::Node 1.283
-      PPI::Normal 1.283
-      PPI::Normal::Standard 1.283
-      PPI::Singletons 1.283
-      PPI::Statement 1.283
-      PPI::Statement::Break 1.283
-      PPI::Statement::Compound 1.283
-      PPI::Statement::Data 1.283
-      PPI::Statement::End 1.283
-      PPI::Statement::Expression 1.283
-      PPI::Statement::Given 1.283
-      PPI::Statement::Include 1.283
-      PPI::Statement::Include::Perl6 1.283
-      PPI::Statement::Null 1.283
-      PPI::Statement::Package 1.283
-      PPI::Statement::Scheduled 1.283
-      PPI::Statement::Sub 1.283
-      PPI::Statement::Unknown 1.283
-      PPI::Statement::UnmatchedBrace 1.283
-      PPI::Statement::Variable 1.283
-      PPI::Statement::When 1.283
-      PPI::Structure 1.283
-      PPI::Structure::Block 1.283
-      PPI::Structure::Condition 1.283
-      PPI::Structure::Constructor 1.283
-      PPI::Structure::For 1.283
-      PPI::Structure::Given 1.283
-      PPI::Structure::List 1.283
-      PPI::Structure::Signature 1.283
-      PPI::Structure::Subscript 1.283
-      PPI::Structure::Unknown 1.283
-      PPI::Structure::When 1.283
-      PPI::Token 1.283
-      PPI::Token::ArrayIndex 1.283
-      PPI::Token::Attribute 1.283
-      PPI::Token::BOM 1.283
-      PPI::Token::Cast 1.283
-      PPI::Token::Comment 1.283
-      PPI::Token::DashedWord 1.283
-      PPI::Token::Data 1.283
-      PPI::Token::End 1.283
-      PPI::Token::HereDoc 1.283
-      PPI::Token::Label 1.283
-      PPI::Token::Magic 1.283
-      PPI::Token::Number 1.283
-      PPI::Token::Number::Binary 1.283
-      PPI::Token::Number::Exp 1.283
-      PPI::Token::Number::Float 1.283
-      PPI::Token::Number::Hex 1.283
-      PPI::Token::Number::Octal 1.283
-      PPI::Token::Number::Version 1.283
-      PPI::Token::Operator 1.283
-      PPI::Token::Pod 1.283
-      PPI::Token::Prototype 1.283
-      PPI::Token::Quote 1.283
-      PPI::Token::Quote::Double 1.283
-      PPI::Token::Quote::Interpolate 1.283
-      PPI::Token::Quote::Literal 1.283
-      PPI::Token::Quote::Single 1.283
-      PPI::Token::QuoteLike 1.283
-      PPI::Token::QuoteLike::Backtick 1.283
-      PPI::Token::QuoteLike::Command 1.283
-      PPI::Token::QuoteLike::Readline 1.283
-      PPI::Token::QuoteLike::Regexp 1.283
-      PPI::Token::QuoteLike::Words 1.283
-      PPI::Token::Regexp 1.283
-      PPI::Token::Regexp::Match 1.283
-      PPI::Token::Regexp::Substitute 1.283
-      PPI::Token::Regexp::Transliterate 1.283
-      PPI::Token::Separator 1.283
-      PPI::Token::Structure 1.283
-      PPI::Token::Symbol 1.283
-      PPI::Token::Unknown 1.283
-      PPI::Token::Whitespace 1.283
-      PPI::Token::Word 1.283
-      PPI::Tokenizer 1.283
-      PPI::Transform 1.283
-      PPI::Transform::UpdateCopyright 1.283
-      PPI::Util 1.283
-      PPI::XSAccessor 1.283
+      PPI 1.281
+      PPI::Cache 1.281
+      PPI::Document 1.281
+      PPI::Document::File 1.281
+      PPI::Document::Fragment 1.281
+      PPI::Document::Normalized 1.281
+      PPI::Dumper 1.281
+      PPI::Element 1.281
+      PPI::Exception 1.281
+      PPI::Exception::ParserRejection 1.281
+      PPI::Find 1.281
+      PPI::Lexer 1.281
+      PPI::Node 1.281
+      PPI::Normal 1.281
+      PPI::Normal::Standard 1.281
+      PPI::Singletons 1.281
+      PPI::Statement 1.281
+      PPI::Statement::Break 1.281
+      PPI::Statement::Compound 1.281
+      PPI::Statement::Data 1.281
+      PPI::Statement::End 1.281
+      PPI::Statement::Expression 1.281
+      PPI::Statement::Given 1.281
+      PPI::Statement::Include 1.281
+      PPI::Statement::Include::Perl6 1.281
+      PPI::Statement::Null 1.281
+      PPI::Statement::Package 1.281
+      PPI::Statement::Scheduled 1.281
+      PPI::Statement::Sub 1.281
+      PPI::Statement::Unknown 1.281
+      PPI::Statement::UnmatchedBrace 1.281
+      PPI::Statement::Variable 1.281
+      PPI::Statement::When 1.281
+      PPI::Structure 1.281
+      PPI::Structure::Block 1.281
+      PPI::Structure::Condition 1.281
+      PPI::Structure::Constructor 1.281
+      PPI::Structure::For 1.281
+      PPI::Structure::Given 1.281
+      PPI::Structure::List 1.281
+      PPI::Structure::Signature 1.281
+      PPI::Structure::Subscript 1.281
+      PPI::Structure::Unknown 1.281
+      PPI::Structure::When 1.281
+      PPI::Token 1.281
+      PPI::Token::ArrayIndex 1.281
+      PPI::Token::Attribute 1.281
+      PPI::Token::BOM 1.281
+      PPI::Token::Cast 1.281
+      PPI::Token::Comment 1.281
+      PPI::Token::DashedWord 1.281
+      PPI::Token::Data 1.281
+      PPI::Token::End 1.281
+      PPI::Token::HereDoc 1.281
+      PPI::Token::Label 1.281
+      PPI::Token::Magic 1.281
+      PPI::Token::Number 1.281
+      PPI::Token::Number::Binary 1.281
+      PPI::Token::Number::Exp 1.281
+      PPI::Token::Number::Float 1.281
+      PPI::Token::Number::Hex 1.281
+      PPI::Token::Number::Octal 1.281
+      PPI::Token::Number::Version 1.281
+      PPI::Token::Operator 1.281
+      PPI::Token::Pod 1.281
+      PPI::Token::Prototype 1.281
+      PPI::Token::Quote 1.281
+      PPI::Token::Quote::Double 1.281
+      PPI::Token::Quote::Interpolate 1.281
+      PPI::Token::Quote::Literal 1.281
+      PPI::Token::Quote::Single 1.281
+      PPI::Token::QuoteLike 1.281
+      PPI::Token::QuoteLike::Backtick 1.281
+      PPI::Token::QuoteLike::Command 1.281
+      PPI::Token::QuoteLike::Readline 1.281
+      PPI::Token::QuoteLike::Regexp 1.281
+      PPI::Token::QuoteLike::Words 1.281
+      PPI::Token::Regexp 1.281
+      PPI::Token::Regexp::Match 1.281
+      PPI::Token::Regexp::Substitute 1.281
+      PPI::Token::Regexp::Transliterate 1.281
+      PPI::Token::Separator 1.281
+      PPI::Token::Structure 1.281
+      PPI::Token::Symbol 1.281
+      PPI::Token::Unknown 1.281
+      PPI::Token::Whitespace 1.281
+      PPI::Token::Word 1.281
+      PPI::Tokenizer 1.281
+      PPI::Transform 1.281
+      PPI::Transform::UpdateCopyright 1.281
+      PPI::Util 1.281
+      PPI::XSAccessor 1.281
     requirements:
       Carp 0
       Clone 0.30
@@ -4140,6 +4361,18 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  Parse-PMFile-0.47
+    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.47.tar.gz
+    provides:
+      Parse::PMFile 0.47
+    requirements:
+      Dumpvalue 0
+      ExtUtils::MakeMaker 0
+      ExtUtils::MakeMaker::CPANfile 0.09
+      File::Spec 0
+      JSON::PP 2.00
+      Safe 0
+      version 0.83
   Path-Class-0.37
     pathname: K/KW/KWILLIAMS/Path-Class-0.37.tar.gz
     provides:
@@ -4165,11 +4398,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.150
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.150.tar.gz
+  Path-Tiny-0.148
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.148.tar.gz
     provides:
-      Path::Tiny 0.150
-      Path::Tiny::Error 0.150
+      Path::Tiny 0.148
+      Path::Tiny::Error 0.148
     requirements:
       Carp 0
       Cwd 0
@@ -4236,12 +4469,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0051
-    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
+  Plack-1.0053
+    pathname: C/CR/CRABAPP/Plack-1.0053-TRIAL.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0051
+      Plack 1.0053
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -4300,9 +4533,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0051
+      Plack::Request 1.0053
       Plack::Request::Upload undef
-      Plack::Response 1.0051
+      Plack::Response 1.0053
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
@@ -4454,26 +4687,6 @@ DISTRIBUTIONS
       Digest::SHA 0
       Module::Build::Tiny 0.035
       Scalar::Util 0
-  Ref-Util-0.204
-    pathname: A/AR/ARC/Ref-Util-0.204.tar.gz
-    provides:
-      Ref::Util 0.204
-      Ref::Util::PP 0.204
-    requirements:
-      Exporter 5.57
-      ExtUtils::MakeMaker 0
-      Ref::Util::XS 0
-      Text::ParseWords 0
-      perl 5.006
-  Ref-Util-XS-0.117
-    pathname: X/XS/XSAWYERX/Ref-Util-XS-0.117.tar.gz
-    provides:
-      Ref::Util::XS 0.117
-    requirements:
-      Exporter 5.57
-      ExtUtils::MakeMaker 0
-      XSLoader 0
-      perl 5.006
   Role-HasMessage-0.007
     pathname: R/RJ/RJBS/Role-HasMessage-0.007.tar.gz
     provides:
@@ -4585,43 +4798,43 @@ DISTRIBUTIONS
       POSIX 0
       strict 0
       warnings 0
-  Software-License-0.104007
-    pathname: L/LE/LEONT/Software-License-0.104007.tar.gz
+  Software-License-0.104006
+    pathname: L/LE/LEONT/Software-License-0.104006.tar.gz
     provides:
-      Software::License 0.104007
-      Software::License::AGPL_3 0.104007
-      Software::License::Apache_1_1 0.104007
-      Software::License::Apache_2_0 0.104007
-      Software::License::Artistic_1_0 0.104007
-      Software::License::Artistic_1_0_Perl 0.104007
-      Software::License::Artistic_2_0 0.104007
-      Software::License::BSD 0.104007
-      Software::License::CC0_1_0 0.104007
-      Software::License::Custom 0.104007
-      Software::License::EUPL_1_1 0.104007
-      Software::License::EUPL_1_2 0.104007
-      Software::License::FreeBSD 0.104007
-      Software::License::GFDL_1_2 0.104007
-      Software::License::GFDL_1_3 0.104007
-      Software::License::GPL_1 0.104007
-      Software::License::GPL_2 0.104007
-      Software::License::GPL_3 0.104007
-      Software::License::ISC 0.104007
-      Software::License::LGPL_2_1 0.104007
-      Software::License::LGPL_3_0 0.104007
-      Software::License::MIT 0.104007
-      Software::License::Mozilla_1_0 0.104007
-      Software::License::Mozilla_1_1 0.104007
-      Software::License::Mozilla_2_0 0.104007
-      Software::License::None 0.104007
-      Software::License::OpenSSL 0.104007
-      Software::License::Perl_5 0.104007
-      Software::License::PostgreSQL 0.104007
-      Software::License::QPL_1_0 0.104007
-      Software::License::SSLeay 0.104007
-      Software::License::Sun 0.104007
-      Software::License::Zlib 0.104007
-      Software::LicenseUtils 0.104007
+      Software::License 0.104006
+      Software::License::AGPL_3 0.104006
+      Software::License::Apache_1_1 0.104006
+      Software::License::Apache_2_0 0.104006
+      Software::License::Artistic_1_0 0.104006
+      Software::License::Artistic_1_0_Perl 0.104006
+      Software::License::Artistic_2_0 0.104006
+      Software::License::BSD 0.104006
+      Software::License::CC0_1_0 0.104006
+      Software::License::Custom 0.104006
+      Software::License::EUPL_1_1 0.104006
+      Software::License::EUPL_1_2 0.104006
+      Software::License::FreeBSD 0.104006
+      Software::License::GFDL_1_2 0.104006
+      Software::License::GFDL_1_3 0.104006
+      Software::License::GPL_1 0.104006
+      Software::License::GPL_2 0.104006
+      Software::License::GPL_3 0.104006
+      Software::License::ISC 0.104006
+      Software::License::LGPL_2_1 0.104006
+      Software::License::LGPL_3_0 0.104006
+      Software::License::MIT 0.104006
+      Software::License::Mozilla_1_0 0.104006
+      Software::License::Mozilla_1_1 0.104006
+      Software::License::Mozilla_2_0 0.104006
+      Software::License::None 0.104006
+      Software::License::OpenSSL 0.104006
+      Software::License::Perl_5 0.104006
+      Software::License::PostgreSQL 0.104006
+      Software::License::QPL_1_0 0.104006
+      Software::License::SSLeay 0.104006
+      Software::License::Sun 0.104006
+      Software::License::Zlib 0.104006
+      Software::LicenseUtils 0.104006
     requirements:
       Carp 0
       Data::Section 0
@@ -4645,57 +4858,53 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Specio-0.51
-    pathname: D/DR/DROLSKY/Specio-0.51.tar.gz
+  Specio-0.50
+    pathname: D/DR/DROLSKY/Specio-0.50.tar.gz
     provides:
-      Specio 0.51
-      Specio::Coercion 0.51
-      Specio::Constraint::AnyCan 0.51
-      Specio::Constraint::AnyDoes 0.51
-      Specio::Constraint::AnyIsa 0.51
-      Specio::Constraint::Enum 0.51
-      Specio::Constraint::Intersection 0.51
-      Specio::Constraint::ObjectCan 0.51
-      Specio::Constraint::ObjectDoes 0.51
-      Specio::Constraint::ObjectIsa 0.51
-      Specio::Constraint::Parameterizable 0.51
-      Specio::Constraint::Parameterized 0.51
-      Specio::Constraint::Role::CanType 0.51
-      Specio::Constraint::Role::DoesType 0.51
-      Specio::Constraint::Role::Interface 0.51
-      Specio::Constraint::Role::IsaType 0.51
-      Specio::Constraint::Simple 0.51
-      Specio::Constraint::Structurable 0.51
-      Specio::Constraint::Structured 0.51
-      Specio::Constraint::Union 0.51
-      Specio::Declare 0.51
-      Specio::DeclaredAt 0.51
-      Specio::Exception 0.51
-      Specio::Exporter 0.51
-      Specio::Helpers 0.51
-      Specio::Library::Builtins 0.51
-      Specio::Library::Numeric 0.51
-      Specio::Library::Perl 0.51
-      Specio::Library::String 0.51
-      Specio::Library::Structured 0.51
-      Specio::Library::Structured::Dict 0.51
-      Specio::Library::Structured::Map 0.51
-      Specio::Library::Structured::Tuple 0.51
-      Specio::OO 0.51
-      Specio::PP 0.51
-      Specio::PartialDump 0.51
-      Specio::Registry 0.51
-      Specio::Role::Inlinable 0.51
-      Specio::Subs 0.51
-      Specio::TypeChecks 0.51
-      Specio::XS 0.51
-      Test::Specio 0.51
+      Specio 0.50
+      Specio::Coercion 0.50
+      Specio::Constraint::AnyCan 0.50
+      Specio::Constraint::AnyDoes 0.50
+      Specio::Constraint::AnyIsa 0.50
+      Specio::Constraint::Enum 0.50
+      Specio::Constraint::Intersection 0.50
+      Specio::Constraint::ObjectCan 0.50
+      Specio::Constraint::ObjectDoes 0.50
+      Specio::Constraint::ObjectIsa 0.50
+      Specio::Constraint::Parameterizable 0.50
+      Specio::Constraint::Parameterized 0.50
+      Specio::Constraint::Role::CanType 0.50
+      Specio::Constraint::Role::DoesType 0.50
+      Specio::Constraint::Role::Interface 0.50
+      Specio::Constraint::Role::IsaType 0.50
+      Specio::Constraint::Simple 0.50
+      Specio::Constraint::Structurable 0.50
+      Specio::Constraint::Structured 0.50
+      Specio::Constraint::Union 0.50
+      Specio::Declare 0.50
+      Specio::DeclaredAt 0.50
+      Specio::Exception 0.50
+      Specio::Exporter 0.50
+      Specio::Helpers 0.50
+      Specio::Library::Builtins 0.50
+      Specio::Library::Numeric 0.50
+      Specio::Library::Perl 0.50
+      Specio::Library::String 0.50
+      Specio::Library::Structured 0.50
+      Specio::Library::Structured::Dict 0.50
+      Specio::Library::Structured::Map 0.50
+      Specio::Library::Structured::Tuple 0.50
+      Specio::OO 0.50
+      Specio::PartialDump 0.50
+      Specio::Registry 0.50
+      Specio::Role::Inlinable 0.50
+      Specio::Subs 0.50
+      Specio::TypeChecks 0.50
+      Test::Specio 0.50
     requirements:
       B 0
       Carp 0
       Clone 0
-      Clone::Choose 0
-      Clone::PP 0
       Devel::StackTrace 0
       Eval::Closure 0
       Exporter 0
@@ -4703,7 +4912,6 @@ DISTRIBUTIONS
       IO::File 0
       List::Util 1.33
       MRO::Compat 0
-      Module::Implementation 0
       Module::Runtime 0
       Role::Tiny 1.003003
       Role::Tiny::With 0
@@ -4783,6 +4991,12 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
+  String-ShellQuote-1.04
+    pathname: R/RO/ROSCH/String-ShellQuote-1.04.tar.gz
+    provides:
+      String::ShellQuote 1.04
+    requirements:
+      ExtUtils::MakeMaker 0
   Struct-Dumb-0.14
     pathname: P/PE/PEVANS/Struct-Dumb-0.14.tar.gz
     provides:
@@ -4842,6 +5056,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.78
       Scalar::Util 0
       perl 5.008000
+      strict 0
+      warnings 0
+  Sub-Name-0.28
+    pathname: E/ET/ETHER/Sub-Name-0.28.tar.gz
+    provides:
+      Sub::Name 0.28
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      XSLoader 0
+      perl 5.006
       strict 0
       warnings 0
   Sub-Quote-2.006008
@@ -5012,30 +5237,6 @@ DISTRIBUTIONS
       Try::Tiny 0.07
       strict 0
       warnings 0
-  Test-Number-Delta-1.06
-    pathname: D/DA/DAGOLDEN/Test-Number-Delta-1.06.tar.gz
-    provides:
-      Test::Number::Delta 1.06
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.17
-      Test::Builder 0
-      perl 5.006
-      strict 0
-      vars 0
-      warnings 0
-  Test-Pod-1.52
-    pathname: E/ET/ETHER/Test-Pod-1.52.tar.gz
-    provides:
-      Test::Pod 1.52
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Find 0
-      Pod::Simple 3.05
-      Test::Builder::Tester 1.02
-      Test::More 0.62
-      perl 5.008
   Test-Requires-0.11
     pathname: T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
     provides:
@@ -5059,206 +5260,206 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-Simple-1.302214
-    pathname: E/EX/EXODIST/Test-Simple-1.302214.tar.gz
+  Test-Simple-1.302210
+    pathname: E/EX/EXODIST/Test-Simple-1.302210.tar.gz
     provides:
-      Test2 1.302214
-      Test2::API 1.302214
-      Test2::API::Breakage 1.302214
-      Test2::API::Context 1.302214
-      Test2::API::Instance 1.302214
-      Test2::API::InterceptResult 1.302214
-      Test2::API::InterceptResult::Event 1.302214
-      Test2::API::InterceptResult::Facet 1.302214
-      Test2::API::InterceptResult::Hub 1.302214
-      Test2::API::InterceptResult::Squasher 1.302214
-      Test2::API::Stack 1.302214
-      Test2::AsyncSubtest 1.302214
-      Test2::AsyncSubtest::Event::Attach 1.302214
-      Test2::AsyncSubtest::Event::Detach 1.302214
-      Test2::AsyncSubtest::Formatter 1.302214
-      Test2::AsyncSubtest::Hub 1.302214
-      Test2::Bundle 1.302214
-      Test2::Bundle::Extended 1.302214
-      Test2::Bundle::More 1.302214
-      Test2::Bundle::Simple 1.302214
-      Test2::Compare 1.302214
-      Test2::Compare::Array 1.302214
-      Test2::Compare::Bag 1.302214
-      Test2::Compare::Base 1.302214
-      Test2::Compare::Bool 1.302214
-      Test2::Compare::Custom 1.302214
-      Test2::Compare::DeepRef 1.302214
-      Test2::Compare::Delta 1.302214
-      Test2::Compare::Event 1.302214
-      Test2::Compare::EventMeta 1.302214
-      Test2::Compare::Float 1.302214
-      Test2::Compare::Hash 1.302214
-      Test2::Compare::Isa 1.302214
-      Test2::Compare::Meta 1.302214
-      Test2::Compare::Negatable 1.302214
-      Test2::Compare::Number 1.302214
-      Test2::Compare::Object 1.302214
-      Test2::Compare::OrderedSubset 1.302214
-      Test2::Compare::Pattern 1.302214
-      Test2::Compare::Ref 1.302214
-      Test2::Compare::Regex 1.302214
-      Test2::Compare::Scalar 1.302214
-      Test2::Compare::Set 1.302214
-      Test2::Compare::String 1.302214
-      Test2::Compare::Undef 1.302214
-      Test2::Compare::Wildcard 1.302214
-      Test2::Env 1.302214
-      Test2::Event 1.302214
-      Test2::Event::Bail 1.302214
-      Test2::Event::Diag 1.302214
-      Test2::Event::Encoding 1.302214
-      Test2::Event::Exception 1.302214
-      Test2::Event::Fail 1.302214
-      Test2::Event::Generic 1.302214
-      Test2::Event::Note 1.302214
-      Test2::Event::Ok 1.302214
-      Test2::Event::Pass 1.302214
-      Test2::Event::Plan 1.302214
-      Test2::Event::Skip 1.302214
-      Test2::Event::Subtest 1.302214
-      Test2::Event::TAP::Version 1.302214
-      Test2::Event::V2 1.302214
-      Test2::Event::Waiting 1.302214
-      Test2::EventFacet 1.302214
-      Test2::EventFacet::About 1.302214
-      Test2::EventFacet::Amnesty 1.302214
-      Test2::EventFacet::Assert 1.302214
-      Test2::EventFacet::Control 1.302214
-      Test2::EventFacet::Error 1.302214
-      Test2::EventFacet::Hub 1.302214
-      Test2::EventFacet::Info 1.302214
-      Test2::EventFacet::Info::Table 1.302214
-      Test2::EventFacet::Meta 1.302214
-      Test2::EventFacet::Parent 1.302214
-      Test2::EventFacet::Plan 1.302214
-      Test2::EventFacet::Render 1.302214
-      Test2::EventFacet::Trace 1.302214
-      Test2::Formatter 1.302214
-      Test2::Formatter::TAP 1.302214
-      Test2::Hub 1.302214
-      Test2::Hub::Interceptor 1.302214
-      Test2::Hub::Interceptor::Terminator 1.302214
-      Test2::Hub::Subtest 1.302214
-      Test2::IPC 1.302214
-      Test2::IPC::Driver 1.302214
-      Test2::IPC::Driver::Files 1.302214
-      Test2::Manual 1.302214
-      Test2::Manual::Anatomy 1.302214
-      Test2::Manual::Anatomy::API 1.302214
-      Test2::Manual::Anatomy::Context 1.302214
-      Test2::Manual::Anatomy::EndToEnd 1.302214
-      Test2::Manual::Anatomy::Event 1.302214
-      Test2::Manual::Anatomy::Hubs 1.302214
-      Test2::Manual::Anatomy::IPC 1.302214
-      Test2::Manual::Anatomy::Utilities 1.302214
-      Test2::Manual::Concurrency 1.302214
-      Test2::Manual::Contributing 1.302214
-      Test2::Manual::Testing 1.302214
-      Test2::Manual::Testing::Introduction 1.302214
-      Test2::Manual::Testing::Migrating 1.302214
-      Test2::Manual::Testing::Planning 1.302214
-      Test2::Manual::Testing::Todo 1.302214
-      Test2::Manual::Tooling 1.302214
-      Test2::Manual::Tooling::FirstTool 1.302214
-      Test2::Manual::Tooling::Formatter 1.302214
-      Test2::Manual::Tooling::Nesting 1.302214
-      Test2::Manual::Tooling::Plugin::TestExit 1.302214
-      Test2::Manual::Tooling::Plugin::TestingDone 1.302214
-      Test2::Manual::Tooling::Plugin::ToolCompletes 1.302214
-      Test2::Manual::Tooling::Plugin::ToolStarts 1.302214
-      Test2::Manual::Tooling::Subtest 1.302214
-      Test2::Manual::Tooling::TestBuilder 1.302214
-      Test2::Manual::Tooling::Testing 1.302214
-      Test2::Mock 1.302214
-      Test2::Plugin 1.302214
-      Test2::Plugin::BailOnFail 1.302214
-      Test2::Plugin::DieOnFail 1.302214
-      Test2::Plugin::ExitSummary 1.302214
-      Test2::Plugin::SRand 1.302214
-      Test2::Plugin::Times 1.302214
-      Test2::Plugin::UTF8 1.302214
-      Test2::Require 1.302214
-      Test2::Require::AuthorTesting 1.302214
-      Test2::Require::AutomatedTesting 1.302214
-      Test2::Require::EnvVar 1.302214
-      Test2::Require::ExtendedTesting 1.302214
-      Test2::Require::Fork 1.302214
-      Test2::Require::Module 1.302214
-      Test2::Require::NonInteractiveTesting 1.302214
-      Test2::Require::Perl 1.302214
-      Test2::Require::RealFork 1.302214
-      Test2::Require::ReleaseTesting 1.302214
-      Test2::Require::Threads 1.302214
-      Test2::Suite 1.302214
-      Test2::Todo 1.302214
-      Test2::Tools 1.302214
-      Test2::Tools::AsyncSubtest 1.302214
-      Test2::Tools::Basic 1.302214
-      Test2::Tools::Class 1.302214
-      Test2::Tools::ClassicCompare 1.302214
-      Test2::Tools::Compare 1.302214
-      Test2::Tools::Defer 1.302214
-      Test2::Tools::Encoding 1.302214
-      Test2::Tools::Event 1.302214
-      Test2::Tools::Exception 1.302214
-      Test2::Tools::Exports 1.302214
-      Test2::Tools::GenTemp 1.302214
-      Test2::Tools::Grab 1.302214
-      Test2::Tools::Mock 1.302214
-      Test2::Tools::Ref 1.302214
-      Test2::Tools::Refcount 1.302214
-      Test2::Tools::Spec 1.302214
-      Test2::Tools::Subtest 1.302214
-      Test2::Tools::Target 1.302214
-      Test2::Tools::Tester 1.302214
-      Test2::Tools::Tiny 1.302214
-      Test2::Tools::Warnings 1.302214
-      Test2::Util 1.302214
-      Test2::Util::ExternalMeta 1.302214
-      Test2::Util::Facets2Legacy 1.302214
-      Test2::Util::Grabber 1.302214
-      Test2::Util::Guard 1.302214
-      Test2::Util::HashBase 1.302214
-      Test2::Util::Importer 1.302214
-      Test2::Util::Ref 1.302214
-      Test2::Util::Sig 1.302214
-      Test2::Util::Stash 1.302214
-      Test2::Util::Sub 1.302214
-      Test2::Util::Table 1.302214
-      Test2::Util::Table::Cell 1.302214
-      Test2::Util::Table::LineBreak 1.302214
-      Test2::Util::Term 1.302214
-      Test2::Util::Times 1.302214
-      Test2::Util::Trace 1.302214
-      Test2::V0 1.302214
-      Test2::Workflow 1.302214
-      Test2::Workflow::BlockBase 1.302214
-      Test2::Workflow::Build 1.302214
-      Test2::Workflow::Runner 1.302214
-      Test2::Workflow::Task 1.302214
-      Test2::Workflow::Task::Action 1.302214
-      Test2::Workflow::Task::Group 1.302214
-      Test::Builder 1.302214
-      Test::Builder::Formatter 1.302214
-      Test::Builder::Module 1.302214
-      Test::Builder::Tester 1.302214
-      Test::Builder::Tester::Color 1.302214
-      Test::Builder::Tester::Tie 1.302214
-      Test::Builder::TodoDiag 1.302214
-      Test::More 1.302214
-      Test::Simple 1.302214
-      Test::Tester 1.302214
-      Test::Tester::Capture 1.302214
-      Test::Tester::CaptureRunner 1.302214
-      Test::Tester::Delegate 1.302214
-      Test::use::ok 1.302214
-      ok 1.302214
+      Test2 1.302210
+      Test2::API 1.302210
+      Test2::API::Breakage 1.302210
+      Test2::API::Context 1.302210
+      Test2::API::Instance 1.302210
+      Test2::API::InterceptResult 1.302210
+      Test2::API::InterceptResult::Event 1.302210
+      Test2::API::InterceptResult::Facet 1.302210
+      Test2::API::InterceptResult::Hub 1.302210
+      Test2::API::InterceptResult::Squasher 1.302210
+      Test2::API::Stack 1.302210
+      Test2::AsyncSubtest 1.302210
+      Test2::AsyncSubtest::Event::Attach 1.302210
+      Test2::AsyncSubtest::Event::Detach 1.302210
+      Test2::AsyncSubtest::Formatter 1.302210
+      Test2::AsyncSubtest::Hub 1.302210
+      Test2::Bundle 1.302210
+      Test2::Bundle::Extended 1.302210
+      Test2::Bundle::More 1.302210
+      Test2::Bundle::Simple 1.302210
+      Test2::Compare 1.302210
+      Test2::Compare::Array 1.302210
+      Test2::Compare::Bag 1.302210
+      Test2::Compare::Base 1.302210
+      Test2::Compare::Bool 1.302210
+      Test2::Compare::Custom 1.302210
+      Test2::Compare::DeepRef 1.302210
+      Test2::Compare::Delta 1.302210
+      Test2::Compare::Event 1.302210
+      Test2::Compare::EventMeta 1.302210
+      Test2::Compare::Float 1.302210
+      Test2::Compare::Hash 1.302210
+      Test2::Compare::Isa 1.302210
+      Test2::Compare::Meta 1.302210
+      Test2::Compare::Negatable 1.302210
+      Test2::Compare::Number 1.302210
+      Test2::Compare::Object 1.302210
+      Test2::Compare::OrderedSubset 1.302210
+      Test2::Compare::Pattern 1.302210
+      Test2::Compare::Ref 1.302210
+      Test2::Compare::Regex 1.302210
+      Test2::Compare::Scalar 1.302210
+      Test2::Compare::Set 1.302210
+      Test2::Compare::String 1.302210
+      Test2::Compare::Undef 1.302210
+      Test2::Compare::Wildcard 1.302210
+      Test2::Env 1.302210
+      Test2::Event 1.302210
+      Test2::Event::Bail 1.302210
+      Test2::Event::Diag 1.302210
+      Test2::Event::Encoding 1.302210
+      Test2::Event::Exception 1.302210
+      Test2::Event::Fail 1.302210
+      Test2::Event::Generic 1.302210
+      Test2::Event::Note 1.302210
+      Test2::Event::Ok 1.302210
+      Test2::Event::Pass 1.302210
+      Test2::Event::Plan 1.302210
+      Test2::Event::Skip 1.302210
+      Test2::Event::Subtest 1.302210
+      Test2::Event::TAP::Version 1.302210
+      Test2::Event::V2 1.302210
+      Test2::Event::Waiting 1.302210
+      Test2::EventFacet 1.302210
+      Test2::EventFacet::About 1.302210
+      Test2::EventFacet::Amnesty 1.302210
+      Test2::EventFacet::Assert 1.302210
+      Test2::EventFacet::Control 1.302210
+      Test2::EventFacet::Error 1.302210
+      Test2::EventFacet::Hub 1.302210
+      Test2::EventFacet::Info 1.302210
+      Test2::EventFacet::Info::Table 1.302210
+      Test2::EventFacet::Meta 1.302210
+      Test2::EventFacet::Parent 1.302210
+      Test2::EventFacet::Plan 1.302210
+      Test2::EventFacet::Render 1.302210
+      Test2::EventFacet::Trace 1.302210
+      Test2::Formatter 1.302210
+      Test2::Formatter::TAP 1.302210
+      Test2::Hub 1.302210
+      Test2::Hub::Interceptor 1.302210
+      Test2::Hub::Interceptor::Terminator 1.302210
+      Test2::Hub::Subtest 1.302210
+      Test2::IPC 1.302210
+      Test2::IPC::Driver 1.302210
+      Test2::IPC::Driver::Files 1.302210
+      Test2::Manual 1.302210
+      Test2::Manual::Anatomy 1.302210
+      Test2::Manual::Anatomy::API 1.302210
+      Test2::Manual::Anatomy::Context 1.302210
+      Test2::Manual::Anatomy::EndToEnd 1.302210
+      Test2::Manual::Anatomy::Event 1.302210
+      Test2::Manual::Anatomy::Hubs 1.302210
+      Test2::Manual::Anatomy::IPC 1.302210
+      Test2::Manual::Anatomy::Utilities 1.302210
+      Test2::Manual::Concurrency 1.302210
+      Test2::Manual::Contributing 1.302210
+      Test2::Manual::Testing 1.302210
+      Test2::Manual::Testing::Introduction 1.302210
+      Test2::Manual::Testing::Migrating 1.302210
+      Test2::Manual::Testing::Planning 1.302210
+      Test2::Manual::Testing::Todo 1.302210
+      Test2::Manual::Tooling 1.302210
+      Test2::Manual::Tooling::FirstTool 1.302210
+      Test2::Manual::Tooling::Formatter 1.302210
+      Test2::Manual::Tooling::Nesting 1.302210
+      Test2::Manual::Tooling::Plugin::TestExit 1.302210
+      Test2::Manual::Tooling::Plugin::TestingDone 1.302210
+      Test2::Manual::Tooling::Plugin::ToolCompletes 1.302210
+      Test2::Manual::Tooling::Plugin::ToolStarts 1.302210
+      Test2::Manual::Tooling::Subtest 1.302210
+      Test2::Manual::Tooling::TestBuilder 1.302210
+      Test2::Manual::Tooling::Testing 1.302210
+      Test2::Mock 1.302210
+      Test2::Plugin 1.302210
+      Test2::Plugin::BailOnFail 1.302210
+      Test2::Plugin::DieOnFail 1.302210
+      Test2::Plugin::ExitSummary 1.302210
+      Test2::Plugin::SRand 1.302210
+      Test2::Plugin::Times 1.302210
+      Test2::Plugin::UTF8 1.302210
+      Test2::Require 1.302210
+      Test2::Require::AuthorTesting 1.302210
+      Test2::Require::AutomatedTesting 1.302210
+      Test2::Require::EnvVar 1.302210
+      Test2::Require::ExtendedTesting 1.302210
+      Test2::Require::Fork 1.302210
+      Test2::Require::Module 1.302210
+      Test2::Require::NonInteractiveTesting 1.302210
+      Test2::Require::Perl 1.302210
+      Test2::Require::RealFork 1.302210
+      Test2::Require::ReleaseTesting 1.302210
+      Test2::Require::Threads 1.302210
+      Test2::Suite 1.302210
+      Test2::Todo 1.302210
+      Test2::Tools 1.302210
+      Test2::Tools::AsyncSubtest 1.302210
+      Test2::Tools::Basic 1.302210
+      Test2::Tools::Class 1.302210
+      Test2::Tools::ClassicCompare 1.302210
+      Test2::Tools::Compare 1.302210
+      Test2::Tools::Defer 1.302210
+      Test2::Tools::Encoding 1.302210
+      Test2::Tools::Event 1.302210
+      Test2::Tools::Exception 1.302210
+      Test2::Tools::Exports 1.302210
+      Test2::Tools::GenTemp 1.302210
+      Test2::Tools::Grab 1.302210
+      Test2::Tools::Mock 1.302210
+      Test2::Tools::Ref 1.302210
+      Test2::Tools::Refcount 1.302210
+      Test2::Tools::Spec 1.302210
+      Test2::Tools::Subtest 1.302210
+      Test2::Tools::Target 1.302210
+      Test2::Tools::Tester 1.302210
+      Test2::Tools::Tiny 1.302210
+      Test2::Tools::Warnings 1.302210
+      Test2::Util 1.302210
+      Test2::Util::ExternalMeta 1.302210
+      Test2::Util::Facets2Legacy 1.302210
+      Test2::Util::Grabber 1.302210
+      Test2::Util::Guard 1.302210
+      Test2::Util::HashBase 1.302210
+      Test2::Util::Importer 1.302210
+      Test2::Util::Ref 1.302210
+      Test2::Util::Sig 1.302210
+      Test2::Util::Stash 1.302210
+      Test2::Util::Sub 1.302210
+      Test2::Util::Table 1.302210
+      Test2::Util::Table::Cell 1.302210
+      Test2::Util::Table::LineBreak 1.302210
+      Test2::Util::Term 1.302210
+      Test2::Util::Times 1.302210
+      Test2::Util::Trace 1.302210
+      Test2::V0 1.302210
+      Test2::Workflow 1.302210
+      Test2::Workflow::BlockBase 1.302210
+      Test2::Workflow::Build 1.302210
+      Test2::Workflow::Runner 1.302210
+      Test2::Workflow::Task 1.302210
+      Test2::Workflow::Task::Action 1.302210
+      Test2::Workflow::Task::Group 1.302210
+      Test::Builder 1.302210
+      Test::Builder::Formatter 1.302210
+      Test::Builder::Module 1.302210
+      Test::Builder::Tester 1.302210
+      Test::Builder::Tester::Color 1.302210
+      Test::Builder::Tester::Tie 1.302210
+      Test::Builder::TodoDiag 1.302210
+      Test::More 1.302210
+      Test::Simple 1.302210
+      Test::Tester 1.302210
+      Test::Tester::Capture 1.302210
+      Test::Tester::CaptureRunner 1.302210
+      Test::Tester::Delegate 1.302210
+      Test::use::ok 1.302210
+      ok 1.302210
     requirements:
       B 0
       Data::Dumper 0
@@ -5372,6 +5573,16 @@ DISTRIBUTIONS
       Scalar::Util 0
       Sub::Quote 0
       overload 0
+  Tie-Handle-Offset-0.004
+    pathname: D/DA/DAGOLDEN/Tie-Handle-Offset-0.004.tar.gz
+    provides:
+      Tie::Handle::Offset 0.004
+      Tie::Handle::SkipHeader 0.004
+    requirements:
+      ExtUtils::MakeMaker 6.17
+      Tie::Handle 0
+      perl 5.006
+      strict 0
   Tie-IxHash-1.23
     pathname: C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
     provides:
@@ -5379,22 +5590,6 @@ DISTRIBUTIONS
     requirements:
       Test::More 0
       perl 5.005
-  Time-Moment-0.44
-    pathname: C/CH/CHANSEN/Time-Moment-0.44.tar.gz
-    provides:
-      Time::Moment 0.44
-      Time::Moment::Adjusters 0.44
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.59
-      ExtUtils::ParseXS 3.18
-      Test::Fatal 0.006
-      Test::More 0.88
-      Test::Number::Delta 1.06
-      Test::Requires 0
-      Time::HiRes 0
-      XSLoader 0.02
-      perl 5.008001
   TimeDate-2.33
     pathname: A/AT/ATOOMIC/TimeDate-2.33.tar.gz
     provides:
@@ -5452,60 +5647,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.008002
-    pathname: T/TO/TOBYINK/Type-Tiny-2.008002.tar.gz
+  Type-Tiny-2.008001
+    pathname: T/TO/TOBYINK/Type-Tiny-2.008001.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.008002
-      Error::TypeTiny 2.008002
-      Error::TypeTiny::Assertion 2.008002
-      Error::TypeTiny::Compilation 2.008002
-      Error::TypeTiny::WrongNumberOfParameters 2.008002
-      Eval::TypeTiny 2.008002
-      Eval::TypeTiny::CodeAccumulator 2.008002
-      Reply::Plugin::TypeTiny 2.008002
-      Test::TypeTiny 2.008002
-      Type::Coercion 2.008002
-      Type::Coercion::FromMoose 2.008002
-      Type::Coercion::Union 2.008002
-      Type::Library 2.008002
-      Type::Params 2.008002
-      Type::Params::Alternatives 2.008002
-      Type::Params::Parameter 2.008002
-      Type::Params::Signature 2.008002
-      Type::Parser 2.008002
-      Type::Parser::AstBuilder 2.008002
-      Type::Parser::Token 2.008002
-      Type::Parser::TokenStream 2.008002
-      Type::Registry 2.008002
-      Type::Tie 2.008002
-      Type::Tie::ARRAY 2.008002
-      Type::Tie::BASE 2.008002
-      Type::Tie::HASH 2.008002
-      Type::Tie::SCALAR 2.008002
-      Type::Tiny 2.008002
-      Type::Tiny::Bitfield 2.008002
-      Type::Tiny::Class 2.008002
-      Type::Tiny::ConstrainedObject 2.008002
-      Type::Tiny::Duck 2.008002
-      Type::Tiny::Enum 2.008002
-      Type::Tiny::Intersection 2.008002
-      Type::Tiny::Role 2.008002
-      Type::Tiny::Union 2.008002
-      Type::Utils 2.008002
-      Types::Common 2.008002
-      Types::Common::Numeric 2.008002
-      Types::Common::String 2.008002
-      Types::Standard 2.008002
-      Types::Standard::ArrayRef 2.008002
-      Types::Standard::CycleTuple 2.008002
-      Types::Standard::Dict 2.008002
-      Types::Standard::HashRef 2.008002
-      Types::Standard::Map 2.008002
-      Types::Standard::ScalarRef 2.008002
-      Types::Standard::StrMatch 2.008002
-      Types::Standard::Tied 2.008002
-      Types::Standard::Tuple 2.008002
-      Types::TypeTiny 2.008002
+      Devel::TypeTiny::Perl58Compat 2.008001
+      Error::TypeTiny 2.008001
+      Error::TypeTiny::Assertion 2.008001
+      Error::TypeTiny::Compilation 2.008001
+      Error::TypeTiny::WrongNumberOfParameters 2.008001
+      Eval::TypeTiny 2.008001
+      Eval::TypeTiny::CodeAccumulator 2.008001
+      Reply::Plugin::TypeTiny 2.008001
+      Test::TypeTiny 2.008001
+      Type::Coercion 2.008001
+      Type::Coercion::FromMoose 2.008001
+      Type::Coercion::Union 2.008001
+      Type::Library 2.008001
+      Type::Params 2.008001
+      Type::Params::Alternatives 2.008001
+      Type::Params::Parameter 2.008001
+      Type::Params::Signature 2.008001
+      Type::Parser 2.008001
+      Type::Parser::AstBuilder 2.008001
+      Type::Parser::Token 2.008001
+      Type::Parser::TokenStream 2.008001
+      Type::Registry 2.008001
+      Type::Tie 2.008001
+      Type::Tie::ARRAY 2.008001
+      Type::Tie::BASE 2.008001
+      Type::Tie::HASH 2.008001
+      Type::Tie::SCALAR 2.008001
+      Type::Tiny 2.008001
+      Type::Tiny::Bitfield 2.008001
+      Type::Tiny::Class 2.008001
+      Type::Tiny::ConstrainedObject 2.008001
+      Type::Tiny::Duck 2.008001
+      Type::Tiny::Enum 2.008001
+      Type::Tiny::Intersection 2.008001
+      Type::Tiny::Role 2.008001
+      Type::Tiny::Union 2.008001
+      Type::Utils 2.008001
+      Types::Common 2.008001
+      Types::Common::Numeric 2.008001
+      Types::Common::String 2.008001
+      Types::Standard 2.008001
+      Types::Standard::ArrayRef 2.008001
+      Types::Standard::CycleTuple 2.008001
+      Types::Standard::Dict 2.008001
+      Types::Standard::HashRef 2.008001
+      Types::Standard::Map 2.008001
+      Types::Standard::ScalarRef 2.008001
+      Types::Standard::StrMatch 2.008001
+      Types::Standard::Tied 2.008001
+      Types::Standard::Tuple 2.008001
+      Types::TypeTiny 2.008001
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
@@ -5524,63 +5719,62 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  URI-5.32
-    pathname: O/OA/OALDERS/URI-5.32.tar.gz
+  URI-5.31
+    pathname: O/OA/OALDERS/URI-5.31.tar.gz
     provides:
-      URI 5.32
-      URI::Escape 5.32
-      URI::Heuristic 5.32
-      URI::IRI 5.32
-      URI::QueryParam 5.32
-      URI::Split 5.32
-      URI::URL 5.32
-      URI::WithBase 5.32
-      URI::data 5.32
-      URI::file 5.32
-      URI::file::Base 5.32
-      URI::file::FAT 5.32
-      URI::file::Mac 5.32
-      URI::file::OS2 5.32
-      URI::file::QNX 5.32
-      URI::file::Unix 5.32
-      URI::file::Win32 5.32
-      URI::ftp 5.32
-      URI::ftpes 5.32
-      URI::ftps 5.32
-      URI::geo 5.32
-      URI::gopher 5.32
-      URI::http 5.32
-      URI::https 5.32
-      URI::icap 5.32
-      URI::icaps 5.32
-      URI::irc 5.32
-      URI::ircs 5.32
-      URI::ldap 5.32
-      URI::ldapi 5.32
-      URI::ldaps 5.32
-      URI::mailto 5.32
-      URI::mms 5.32
-      URI::news 5.32
-      URI::nntp 5.32
-      URI::nntps 5.32
-      URI::otpauth 5.32
-      URI::pop 5.32
-      URI::rlogin 5.32
-      URI::rsync 5.32
-      URI::rtsp 5.32
-      URI::rtspu 5.32
-      URI::scp 5.32
-      URI::sftp 5.32
-      URI::sip 5.32
-      URI::sips 5.32
-      URI::smb 5.32
-      URI::snews 5.32
-      URI::ssh 5.32
-      URI::telnet 5.32
-      URI::tn3270 5.32
-      URI::urn 5.32
-      URI::urn::isbn 5.32
-      URI::urn::oid 5.32
+      URI 5.31
+      URI::Escape 5.31
+      URI::Heuristic 5.31
+      URI::IRI 5.31
+      URI::QueryParam 5.31
+      URI::Split 5.31
+      URI::URL 5.31
+      URI::WithBase 5.31
+      URI::data 5.31
+      URI::file 5.31
+      URI::file::Base 5.31
+      URI::file::FAT 5.31
+      URI::file::Mac 5.31
+      URI::file::OS2 5.31
+      URI::file::QNX 5.31
+      URI::file::Unix 5.31
+      URI::file::Win32 5.31
+      URI::ftp 5.31
+      URI::ftpes 5.31
+      URI::ftps 5.31
+      URI::geo 5.31
+      URI::gopher 5.31
+      URI::http 5.31
+      URI::https 5.31
+      URI::icap 5.31
+      URI::icaps 5.31
+      URI::irc 5.31
+      URI::ircs 5.31
+      URI::ldap 5.31
+      URI::ldapi 5.31
+      URI::ldaps 5.31
+      URI::mailto 5.31
+      URI::mms 5.31
+      URI::news 5.31
+      URI::nntp 5.31
+      URI::nntps 5.31
+      URI::otpauth 5.31
+      URI::pop 5.31
+      URI::rlogin 5.31
+      URI::rsync 5.31
+      URI::rtsp 5.31
+      URI::rtspu 5.31
+      URI::scp 5.31
+      URI::sftp 5.31
+      URI::sip 5.31
+      URI::sips 5.31
+      URI::snews 5.31
+      URI::ssh 5.31
+      URI::telnet 5.31
+      URI::tn3270 5.31
+      URI::urn 5.31
+      URI::urn::isbn 5.31
+      URI::urn::oid 5.31
     requirements:
       Carp 0
       Cwd 0
@@ -5672,6 +5866,12 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
+  Win32-ShellQuote-0.003001
+    pathname: H/HA/HAARG/Win32-ShellQuote-0.003001.tar.gz
+    provides:
+      Win32::ShellQuote 0.003001
+    requirements:
+      perl 5.006
   XS-Parse-Keyword-0.48
     pathname: P/PE/PEVANS/XS-Parse-Keyword-0.48.tar.gz
     provides:
@@ -5830,32 +6030,32 @@ DISTRIBUTIONS
       XSLoader 0
       lib 0
       perl 5.008001
-  libwww-perl-6.79
-    pathname: O/OA/OALDERS/libwww-perl-6.79.tar.gz
+  libwww-perl-6.78
+    pathname: O/OA/OALDERS/libwww-perl-6.78.tar.gz
     provides:
-      LWP 6.79
-      LWP::Authen::Basic 6.79
-      LWP::Authen::Digest 6.79
-      LWP::Authen::Ntlm 6.79
-      LWP::ConnCache 6.79
-      LWP::Debug 6.79
-      LWP::Debug::TraceHTTP 6.79
-      LWP::DebugFile 6.79
-      LWP::MemberMixin 6.79
-      LWP::Protocol 6.79
-      LWP::Protocol::cpan 6.79
-      LWP::Protocol::data 6.79
-      LWP::Protocol::file 6.79
-      LWP::Protocol::ftp 6.79
-      LWP::Protocol::gopher 6.79
-      LWP::Protocol::http 6.79
-      LWP::Protocol::loopback 6.79
-      LWP::Protocol::mailto 6.79
-      LWP::Protocol::nntp 6.79
-      LWP::Protocol::nogo 6.79
-      LWP::RobotUA 6.79
-      LWP::Simple 6.79
-      LWP::UserAgent 6.79
+      LWP 6.78
+      LWP::Authen::Basic 6.78
+      LWP::Authen::Digest 6.78
+      LWP::Authen::Ntlm 6.78
+      LWP::ConnCache 6.78
+      LWP::Debug 6.78
+      LWP::Debug::TraceHTTP 6.78
+      LWP::DebugFile 6.78
+      LWP::MemberMixin 6.78
+      LWP::Protocol 6.78
+      LWP::Protocol::cpan 6.78
+      LWP::Protocol::data 6.78
+      LWP::Protocol::file 6.78
+      LWP::Protocol::ftp 6.78
+      LWP::Protocol::gopher 6.78
+      LWP::Protocol::http 6.78
+      LWP::Protocol::loopback 6.78
+      LWP::Protocol::mailto 6.78
+      LWP::Protocol::nntp 6.78
+      LWP::Protocol::nogo 6.78
+      LWP::RobotUA 6.78
+      LWP::Simple 6.78
+      LWP::UserAgent 6.78
     requirements:
       Digest::MD5 0
       Encode 2.12
@@ -5890,10 +6090,17 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  meta-0.013
-    pathname: P/PE/PEVANS/meta-0.013.tar.gz
+  local-lib-2.000029
+    pathname: H/HA/HAARG/local-lib-2.000029.tar.gz
     provides:
-      meta 0.013
+      lib::core::only undef
+      local::lib 2.000029
+    requirements:
+      perl 5.006
+  meta-0.012
+    pathname: P/PE/PEVANS/meta-0.012.tar.gz
+    provides:
+      meta 0.012
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
