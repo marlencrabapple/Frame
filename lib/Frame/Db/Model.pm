@@ -11,6 +11,8 @@ use DBD::SQLite;
 use Hash::Ordered;
 use Exporter;
 
+use Frame::Base;
+
 use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
 
 field $table : param;
@@ -42,7 +44,7 @@ APPLY($mop) {
 
     $^H{"$class/dbmodel"} = 1;
 
-    dmsg(\%^H) 
+    dmsg({\%^H}) 
 }
 
 ADJUST {

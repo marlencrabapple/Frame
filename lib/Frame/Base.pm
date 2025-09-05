@@ -25,17 +25,15 @@ use Syntax::Keyword::Try;
 our @EXPORT      = qw(dmsg json __pkgfn__ callstack);
 our @EXPORT_DOES = @EXPORT;
 
-use subs @EXPORT;
-
 BEGIN {
     require Exporter;
-    our @ISA = qw(Exporter);
+    our @ISA    = qw(Exporter);
     our @EXPORT = qw(dmsg json __pkgfn__ callstack);
+    use subs @EXPORT;
     $^H{ __PACKAGE__ . '/user' } = 1;
 }
 
 $^H{ __PACKAGE__ . '/user' } = 1;
-
 
 const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
@@ -49,7 +47,6 @@ field $app : weak : param : accessor = undef;
 field $json;
 field $debug_mode : param : accessor = $DEBUG_MODE;
 field $dev_mode   : param : accessor = $DEV_MODE;
-
 
 APPLY($mop) {
     use utf8;
@@ -70,16 +67,16 @@ ADJUSTPARAMS($params) {
     $^H{ __PACKAGE__ . '/user' } = 1;
 };
 
-sub epoch( $join = '', %opts) {
+sub epoch( $join = '', %opts ) {
     join $join, Time::HiRes::gettimeofday;
 }
 
-sub __pkgfn__ ($class, $pkgname = undef) {
+sub __pkgfn__ ( $class, $pkgname = undef ) {
     $pkgname //= $class;
     "$pkgname.pm" =~ s/::/\//rg;
 }
 
-sub callstack ($class = undef) {
+sub callstack ( $class = undef ) {
     my @callstack;
     my $i = 0;
 
@@ -97,7 +94,7 @@ sub callstack ($class = undef) {
     @callstack;
 }
 
-sub dmsg :prototype(@) (@msgs) {
+sub dmsg : prototype(@) (@msgs) {
     $DEV_MODE || return '';
 
     my @caller = caller 0;
@@ -132,17 +129,19 @@ sub dmsg :prototype(@) (@msgs) {
 const our $S_UNKNOWNERR => 'Internal Server Error';
 
 sub err : prototype($;$%) (
-    $msg = ( $! // $S_UNKNOWNERR ),
-    $exit     = ( $? ? $? >> 8 : 255 ), %opts
+    $msg  = ( $! // $S_UNKNOWNERR ),
+    $exit = ( $? ? $? >> 8 : 255 ), %opts
   )
 {
     dmsg( { exit => $exit, msg => $msg, opts => \%opts } );
 
-    my $errstr = $msg isa 'ARRAY' ? join "\n", map {
+    my $errstr = $msg isa 'ARRAY'
+      ? join "\n", map {
         my $str = $_ isa 'HASH' ? $$_{msg} : $_;
         $str = $S_UNKNOWNERR if $str =~ /^[0-9]+$/ && $str == 0;
         $str
-    } @$msg : $msg;
+      } @$msg
+      : $msg;
 
     die "ERROR: $errstr ($exit)";
 }
