@@ -10,6 +10,7 @@ use v5.40;
 method startup {
 
 }
+
 #!/usr/bin/env perl
 use Object::Pad ':experimental(:all)';
 
@@ -112,7 +113,7 @@ sub init ( $path = path( $srvpath // getcwd ), $uri = $mount // undef ) {
         authenticator => sub (@args) {
             valid_user(@args);
         }
-    ) unless any { $_ } @ENV{ map { } qw(FRAME) };
+    ) unless any { $_ } @ENV{ map { ... } qw(FRAME) };
 
     my ( $app, $mount ) = -f $path
       ? die
