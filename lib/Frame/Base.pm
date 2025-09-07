@@ -17,13 +17,10 @@ use JSON::MaybeXS;
 use Data::Dumper;
 use Time::Piece;
 use Time::HiRes;
-use Plack::Util;
+use Plack::Util; 
 use Module::Metadata;
 use Syntax::Keyword::Dynamically;
 use Syntax::Keyword::Try;
-
-our @EXPORT      = qw(dmsg json __pkgfn__ callstack);
-our @EXPORT_DOES = @EXPORT;
 
 BEGIN {
     require Exporter;
@@ -32,8 +29,6 @@ BEGIN {
     use subs @EXPORT;
     $^H{ __PACKAGE__ . '/user' } = 1;
 }
-
-$^H{ __PACKAGE__ . '/user' } = 1;
 
 const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
@@ -48,7 +43,7 @@ field $json;
 field $debug_mode : param : accessor = $DEBUG_MODE;
 field $dev_mode   : param : accessor = $DEV_MODE;
 
-APPLY($mop) {
+APPLY ($mop) {
     use utf8;
     use v5.40;
 
@@ -126,6 +121,14 @@ sub dmsg : prototype(@) (@msgs) {
     $out;
 }
 
+# BEGIN {
+# my $msg = Dumper(\%Frame::Base::);# dmsg({ asdf => fsda });
+# $msg =~ s/[\n\s\r]+/ /g;
+# #printf STDERR $msg;
+# printf $msg;
+# say $msg
+# }
+
 const our $S_UNKNOWNERR => 'Internal Server Error';
 
 sub err : prototype($;$%) (
@@ -145,3 +148,7 @@ sub err : prototype($;$%) (
 
     die "ERROR: $errstr ($exit)";
 }
+
+const our $defaultconfig_inline => <<'...';
+charset = utf8
+...

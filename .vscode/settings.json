@@ -5,11 +5,11 @@
   "perlnavigator.perlimportsLintEnabled": false,
   "perlnavigator.perlimportsTidyEnabled": false,
   // "perlnavigator.perlcriticSeverity": 1,
-  //"perlnavigator.perlcriticTheme": "community",
+  "perlnavigator.perlcriticTheme": "community",
   // "perlnavigator.perlEnvAdd": false,
-  "perlnavigator.perlPath": "/home/nameless/.plenv/shims/carmel",
+  "perlnavigator.perlPath": "carmel",
   "perlnavigator.perlParams": [
     "exec",
     "perl"
-  ],
+  ]
 }
