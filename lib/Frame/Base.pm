@@ -22,6 +22,8 @@ use Module::Metadata;
 use Syntax::Keyword::Dynamically;
 use Syntax::Keyword::Try;
 
+use parent 'Exporter';
+
 our @EXPORT      = qw(dmsg json __pkgfn__ callstack);
 our @EXPORT_DOES = @EXPORT;
 
