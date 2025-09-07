@@ -364,10 +364,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.39
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.39.tar.gz
+  Cpanel-JSON-XS-4.40
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.40.tar.gz
     provides:
-      Cpanel::JSON::XS 4.39
+      Cpanel::JSON::XS 4.40
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -1519,22 +1519,22 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Dist-Zilla-Plugin-Git-2.051
-    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Git-2.051.tar.gz
+  Dist-Zilla-Plugin-Git-2.052
+    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Git-2.052.tar.gz
     provides:
-      Dist::Zilla::Plugin::Git 2.051
-      Dist::Zilla::Plugin::Git::Check 2.051
-      Dist::Zilla::Plugin::Git::Commit 2.051
-      Dist::Zilla::Plugin::Git::CommitBuild 2.051
-      Dist::Zilla::Plugin::Git::GatherDir 2.051
-      Dist::Zilla::Plugin::Git::Init 2.051
-      Dist::Zilla::Plugin::Git::NextVersion 2.051
-      Dist::Zilla::Plugin::Git::Push 2.051
-      Dist::Zilla::Plugin::Git::Tag 2.051
-      Dist::Zilla::PluginBundle::Git 2.051
-      Dist::Zilla::Role::Git::DirtyFiles 2.051
-      Dist::Zilla::Role::Git::Repo 2.051
-      Dist::Zilla::Role::Git::StringFormatter 2.051
+      Dist::Zilla::Plugin::Git 2.052
+      Dist::Zilla::Plugin::Git::Check 2.052
+      Dist::Zilla::Plugin::Git::Commit 2.052
+      Dist::Zilla::Plugin::Git::CommitBuild 2.052
+      Dist::Zilla::Plugin::Git::GatherDir 2.052
+      Dist::Zilla::Plugin::Git::Init 2.052
+      Dist::Zilla::Plugin::Git::NextVersion 2.052
+      Dist::Zilla::Plugin::Git::Push 2.052
+      Dist::Zilla::Plugin::Git::Tag 2.052
+      Dist::Zilla::PluginBundle::Git 2.052
+      Dist::Zilla::Role::Git::DirtyFiles 2.052
+      Dist::Zilla::Role::Git::Repo 2.052
+      Dist::Zilla::Role::Git::StringFormatter 2.052
     requirements:
       Cwd 0
       DateTime 0
@@ -1559,7 +1559,6 @@ DISTRIBUTIONS
       Module::Runtime 0
       Moose 0
       Moose::Role 0
-      MooseX::Has::Sugar 0
       Path::Tiny 0.048
       String::Formatter 0
       Text::ParseWords 0
@@ -2190,13 +2189,13 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Time::HiRes 0
       perl 5.014
-  Future-AsyncAwait-0.70
-    pathname: P/PE/PEVANS/Future-AsyncAwait-0.70.tar.gz
+  Future-AsyncAwait-0.71
+    pathname: P/PE/PEVANS/Future-AsyncAwait-0.71.tar.gz
     provides:
-      Future::AsyncAwait 0.70
-      Future::AsyncAwait::Awaitable 0.70
-      Future::AsyncAwait::ExtensionBuilder 0.70
-      Test::Future::AsyncAwait::Awaitable 0.70
+      Future::AsyncAwait 0.71
+      Future::AsyncAwait::Awaitable 0.71
+      Future::AsyncAwait::ExtensionBuilder 0.71
+      Test::Future::AsyncAwait::Awaitable 0.71
     requirements:
       ExtUtils::CBuilder 0
       File::ShareDir 1.00
@@ -2825,12 +2824,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       perl 5.008001
       utf8 0
-  MIME-Types-2.28
-    pathname: M/MA/MARKOV/MIME-Types-2.28.tar.gz
+  MIME-Types-2.29
+    pathname: M/MA/MARKOV/MIME-Types-2.29.tar.gz
     provides:
-      MIME::Type 2.28
-      MIME::Types 2.28
-      MojoX::MIME::Types 2.28
+      MIME::Type 2.29
+      MIME::Types 2.29
+      MojoX::MIME::Types 2.29
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -4857,11 +4856,11 @@ DISTRIBUTIONS
       XS::Parse::Keyword 0.13
       XS::Parse::Keyword::Builder 0.13
       perl 5.014
-  Syntax-Keyword-Try-0.30
-    pathname: P/PE/PEVANS/Syntax-Keyword-Try-0.30.tar.gz
+  Syntax-Keyword-Try-0.31
+    pathname: P/PE/PEVANS/Syntax-Keyword-Try-0.31.tar.gz
     provides:
-      Syntax::Keyword::Try 0.30
-      Syntax::Keyword::Try::Deparse 0.30
+      Syntax::Keyword::Try 0.31
+      Syntax::Keyword::Try::Deparse 0.31
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
@@ -5435,60 +5434,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.008002
-    pathname: T/TO/TOBYINK/Type-Tiny-2.008002.tar.gz
+  Type-Tiny-2.008003
+    pathname: T/TO/TOBYINK/Type-Tiny-2.008003.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.008002
-      Error::TypeTiny 2.008002
-      Error::TypeTiny::Assertion 2.008002
-      Error::TypeTiny::Compilation 2.008002
-      Error::TypeTiny::WrongNumberOfParameters 2.008002
-      Eval::TypeTiny 2.008002
-      Eval::TypeTiny::CodeAccumulator 2.008002
-      Reply::Plugin::TypeTiny 2.008002
-      Test::TypeTiny 2.008002
-      Type::Coercion 2.008002
-      Type::Coercion::FromMoose 2.008002
-      Type::Coercion::Union 2.008002
-      Type::Library 2.008002
-      Type::Params 2.008002
-      Type::Params::Alternatives 2.008002
-      Type::Params::Parameter 2.008002
-      Type::Params::Signature 2.008002
-      Type::Parser 2.008002
-      Type::Parser::AstBuilder 2.008002
-      Type::Parser::Token 2.008002
-      Type::Parser::TokenStream 2.008002
-      Type::Registry 2.008002
-      Type::Tie 2.008002
-      Type::Tie::ARRAY 2.008002
-      Type::Tie::BASE 2.008002
-      Type::Tie::HASH 2.008002
-      Type::Tie::SCALAR 2.008002
-      Type::Tiny 2.008002
-      Type::Tiny::Bitfield 2.008002
-      Type::Tiny::Class 2.008002
-      Type::Tiny::ConstrainedObject 2.008002
-      Type::Tiny::Duck 2.008002
-      Type::Tiny::Enum 2.008002
-      Type::Tiny::Intersection 2.008002
-      Type::Tiny::Role 2.008002
-      Type::Tiny::Union 2.008002
-      Type::Utils 2.008002
-      Types::Common 2.008002
-      Types::Common::Numeric 2.008002
-      Types::Common::String 2.008002
-      Types::Standard 2.008002
-      Types::Standard::ArrayRef 2.008002
-      Types::Standard::CycleTuple 2.008002
-      Types::Standard::Dict 2.008002
-      Types::Standard::HashRef 2.008002
-      Types::Standard::Map 2.008002
-      Types::Standard::ScalarRef 2.008002
-      Types::Standard::StrMatch 2.008002
-      Types::Standard::Tied 2.008002
-      Types::Standard::Tuple 2.008002
-      Types::TypeTiny 2.008002
+      Devel::TypeTiny::Perl58Compat 2.008003
+      Error::TypeTiny 2.008003
+      Error::TypeTiny::Assertion 2.008003
+      Error::TypeTiny::Compilation 2.008003
+      Error::TypeTiny::WrongNumberOfParameters 2.008003
+      Eval::TypeTiny 2.008003
+      Eval::TypeTiny::CodeAccumulator 2.008003
+      Reply::Plugin::TypeTiny 2.008003
+      Test::TypeTiny 2.008003
+      Type::Coercion 2.008003
+      Type::Coercion::FromMoose 2.008003
+      Type::Coercion::Union 2.008003
+      Type::Library 2.008003
+      Type::Params 2.008003
+      Type::Params::Alternatives 2.008003
+      Type::Params::Parameter 2.008003
+      Type::Params::Signature 2.008003
+      Type::Parser 2.008003
+      Type::Parser::AstBuilder 2.008003
+      Type::Parser::Token 2.008003
+      Type::Parser::TokenStream 2.008003
+      Type::Registry 2.008003
+      Type::Tie 2.008003
+      Type::Tie::ARRAY 2.008003
+      Type::Tie::BASE 2.008003
+      Type::Tie::HASH 2.008003
+      Type::Tie::SCALAR 2.008003
+      Type::Tiny 2.008003
+      Type::Tiny::Bitfield 2.008003
+      Type::Tiny::Class 2.008003
+      Type::Tiny::ConstrainedObject 2.008003
+      Type::Tiny::Duck 2.008003
+      Type::Tiny::Enum 2.008003
+      Type::Tiny::Intersection 2.008003
+      Type::Tiny::Role 2.008003
+      Type::Tiny::Union 2.008003
+      Type::Utils 2.008003
+      Types::Common 2.008003
+      Types::Common::Numeric 2.008003
+      Types::Common::String 2.008003
+      Types::Standard 2.008003
+      Types::Standard::ArrayRef 2.008003
+      Types::Standard::CycleTuple 2.008003
+      Types::Standard::Dict 2.008003
+      Types::Standard::HashRef 2.008003
+      Types::Standard::Map 2.008003
+      Types::Standard::ScalarRef 2.008003
+      Types::Standard::StrMatch 2.008003
+      Types::Standard::Tied 2.008003
+      Types::Standard::Tuple 2.008003
+      Types::TypeTiny 2.008003
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
@@ -5813,32 +5812,32 @@ DISTRIBUTIONS
       XSLoader 0
       lib 0
       perl 5.008001
-  libwww-perl-6.79
-    pathname: O/OA/OALDERS/libwww-perl-6.79.tar.gz
+  libwww-perl-6.80
+    pathname: O/OA/OALDERS/libwww-perl-6.80.tar.gz
     provides:
-      LWP 6.79
-      LWP::Authen::Basic 6.79
-      LWP::Authen::Digest 6.79
-      LWP::Authen::Ntlm 6.79
-      LWP::ConnCache 6.79
-      LWP::Debug 6.79
-      LWP::Debug::TraceHTTP 6.79
-      LWP::DebugFile 6.79
-      LWP::MemberMixin 6.79
-      LWP::Protocol 6.79
-      LWP::Protocol::cpan 6.79
-      LWP::Protocol::data 6.79
-      LWP::Protocol::file 6.79
-      LWP::Protocol::ftp 6.79
-      LWP::Protocol::gopher 6.79
-      LWP::Protocol::http 6.79
-      LWP::Protocol::loopback 6.79
-      LWP::Protocol::mailto 6.79
-      LWP::Protocol::nntp 6.79
-      LWP::Protocol::nogo 6.79
-      LWP::RobotUA 6.79
-      LWP::Simple 6.79
-      LWP::UserAgent 6.79
+      LWP 6.80
+      LWP::Authen::Basic 6.80
+      LWP::Authen::Digest 6.80
+      LWP::Authen::Ntlm 6.80
+      LWP::ConnCache 6.80
+      LWP::Debug 6.80
+      LWP::Debug::TraceHTTP 6.80
+      LWP::DebugFile 6.80
+      LWP::MemberMixin 6.80
+      LWP::Protocol 6.80
+      LWP::Protocol::cpan 6.80
+      LWP::Protocol::data 6.80
+      LWP::Protocol::file 6.80
+      LWP::Protocol::ftp 6.80
+      LWP::Protocol::gopher 6.80
+      LWP::Protocol::http 6.80
+      LWP::Protocol::loopback 6.80
+      LWP::Protocol::mailto 6.80
+      LWP::Protocol::nntp 6.80
+      LWP::Protocol::nogo 6.80
+      LWP::RobotUA 6.80
+      LWP::Simple 6.80
+      LWP::UserAgent 6.80
     requirements:
       Digest::MD5 0
       Encode 2.12
@@ -5873,10 +5872,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  meta-0.013
-    pathname: P/PE/PEVANS/meta-0.013.tar.gz
+  meta-0.014
+    pathname: P/PE/PEVANS/meta-0.014.tar.gz
     provides:
-      meta 0.013
+      meta 0.014
     requirements:
       ExtUtils::CBuilder 0
       Module::Build 0.4004
