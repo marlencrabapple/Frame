@@ -53,3 +53,24 @@ ADJUST {
     const our $run_config = {%$_config};
     $config = $run_config
 }
+
+const our $defaultconfig_inline => q{
+charset="utf8"
+environment="devlopment"
+
+middleware={ "Plack::Middleware::Debug" => { 
+  enable_if = $ENV{PLACKENV} 
+  },
+  "Plack::Middleware::Static" => {
+    path => www,
+    root => 'static'
+  },
+  "Plack::Middleware::REPL" => {
+    enable_if = $ENV{PLACKENV}
+  },
+
+  "Plack::Middleware::ReverseProxy" => {
+    enable_if => !ENV{REMOTE_ADDR}
+  }
+}
+}
