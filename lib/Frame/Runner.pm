@@ -1,9 +1,12 @@
 use Object::Pad ':experimental(:all)';
 
-package Frame::Runner::PSGI;
-class Frame::Runner::PSGI :does(Frame::Base);
+package Frame::Runner;
+class Frame::Runner :does(Frame::Base);
 
-field $app;
+use utf8;
+use v5.40;
+
+# field $app;
 
 my class Example = {
   apply 'Frame';
@@ -15,4 +18,7 @@ my class Example = {
     my $r = $self->routes
   }
 }
- 
+
+# method sdfsadf {
+#   Example->new;
+# }
