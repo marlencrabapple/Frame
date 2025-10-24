@@ -108,7 +108,7 @@
       }
    },
    "version" : "0.01.5",
-   "x_generated_by_perl" : "v5.42.0",
+   "x_generated_by_perl" : "v5.40.3",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.40",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
    "x_static_install" : 0

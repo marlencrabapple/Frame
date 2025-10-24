@@ -5597,14 +5597,6 @@ DISTRIBUTIONS
       URI 1.68
       strict 0
       warnings 0
-  URI-ws-0.03
-    pathname: P/PL/PLICEASE/URI-ws-0.03.tar.gz
-    provides:
-      URI::ws 0.03
-      URI::wss 0.03
-    requirements:
-      ExtUtils::MakeMaker 6.30
-      URI 0
   Variable-Magic-0.64
     pathname: V/VP/VPIT/Variable-Magic-0.64.tar.gz
     provides:
