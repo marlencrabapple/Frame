@@ -1,10 +1,8 @@
 requires 'perl', 'v5.40';
 
 requires 'Cwd';
-requires 'Const::Fast';
 
-requires 'Plack', '1.0051',
-  dist => 'MIYAGAWA/Plack-1.0051.tar.gz';
+requires 'Plack', '1.0051';
 
 requires 'Path::Tiny', '0.144';
 requires 'List::AllUtils', '0.19';

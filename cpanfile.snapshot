@@ -1208,152 +1208,152 @@ DISTRIBUTIONS
       Module::Build 0.3601
       Module::CPANfile 0.9025
       perl 5.012
-  Dist-Zilla-6.033
-    pathname: R/RJ/RJBS/Dist-Zilla-6.033.tar.gz
+  Dist-Zilla-6.036
+    pathname: R/RJ/RJBS/Dist-Zilla-6.036.tar.gz
     provides:
-      Dist::Zilla 6.033
-      Dist::Zilla::App 6.033
-      Dist::Zilla::App::Command 6.033
-      Dist::Zilla::App::Command::add 6.033
-      Dist::Zilla::App::Command::authordeps 6.033
-      Dist::Zilla::App::Command::build 6.033
-      Dist::Zilla::App::Command::clean 6.033
-      Dist::Zilla::App::Command::install 6.033
-      Dist::Zilla::App::Command::listdeps 6.033
-      Dist::Zilla::App::Command::new 6.033
-      Dist::Zilla::App::Command::nop 6.033
-      Dist::Zilla::App::Command::release 6.033
-      Dist::Zilla::App::Command::run 6.033
-      Dist::Zilla::App::Command::setup 6.033
-      Dist::Zilla::App::Command::smoke 6.033
-      Dist::Zilla::App::Command::test 6.033
-      Dist::Zilla::App::Command::version 6.033
-      Dist::Zilla::App::Tester 6.033
-      Dist::Zilla::App::Tester::Result 6.033
-      Dist::Zilla::Chrome::Term 6.033
-      Dist::Zilla::Chrome::Test 6.033
-      Dist::Zilla::Dist::Builder 6.033
-      Dist::Zilla::Dist::Minter 6.033
-      Dist::Zilla::File::FromCode 6.033
-      Dist::Zilla::File::InMemory 6.033
-      Dist::Zilla::File::OnDisk 6.033
-      Dist::Zilla::MVP::Assembler 6.033
-      Dist::Zilla::MVP::Assembler::GlobalConfig 6.033
-      Dist::Zilla::MVP::Assembler::Zilla 6.033
-      Dist::Zilla::MVP::Reader::Finder 6.033
-      Dist::Zilla::MVP::Reader::Perl 6.033
-      Dist::Zilla::MVP::RootSection 6.033
-      Dist::Zilla::MVP::Section 6.033
-      Dist::Zilla::MintingProfile::Default 6.033
-      Dist::Zilla::Path 6.033
-      Dist::Zilla::Plugin::AutoPrereqs 6.033
-      Dist::Zilla::Plugin::AutoVersion 6.033
-      Dist::Zilla::Plugin::CPANFile 6.033
-      Dist::Zilla::Plugin::ConfirmRelease 6.033
-      Dist::Zilla::Plugin::DistINI 6.033
-      Dist::Zilla::Plugin::Encoding 6.033
-      Dist::Zilla::Plugin::ExecDir 6.033
-      Dist::Zilla::Plugin::ExtraTests 6.033
-      Dist::Zilla::Plugin::FakeRelease 6.033
-      Dist::Zilla::Plugin::FileFinder::ByName 6.033
-      Dist::Zilla::Plugin::FileFinder::Filter 6.033
-      Dist::Zilla::Plugin::FinderCode 6.033
-      Dist::Zilla::Plugin::GatherDir 6.033
-      Dist::Zilla::Plugin::GatherDir::Template 6.033
-      Dist::Zilla::Plugin::GatherFile 6.033
-      Dist::Zilla::Plugin::GenerateFile 6.033
-      Dist::Zilla::Plugin::InlineFiles 6.033
-      Dist::Zilla::Plugin::License 6.033
-      Dist::Zilla::Plugin::MakeMaker 6.033
-      Dist::Zilla::Plugin::MakeMaker::Runner 6.033
-      Dist::Zilla::Plugin::Manifest 6.033
-      Dist::Zilla::Plugin::ManifestSkip 6.033
-      Dist::Zilla::Plugin::MetaConfig 6.033
-      Dist::Zilla::Plugin::MetaJSON 6.033
-      Dist::Zilla::Plugin::MetaNoIndex 6.033
-      Dist::Zilla::Plugin::MetaResources 6.033
-      Dist::Zilla::Plugin::MetaTests 6.033
-      Dist::Zilla::Plugin::MetaYAML 6.033
-      Dist::Zilla::Plugin::ModuleBuild 6.033
-      Dist::Zilla::Plugin::ModuleShareDirs 6.033
-      Dist::Zilla::Plugin::NextRelease 6.033
-      Dist::Zilla::Plugin::PkgDist 6.033
-      Dist::Zilla::Plugin::PkgVersion 6.033
-      Dist::Zilla::Plugin::PodCoverageTests 6.033
-      Dist::Zilla::Plugin::PodSyntaxTests 6.033
-      Dist::Zilla::Plugin::PodVersion 6.033
-      Dist::Zilla::Plugin::Prereqs 6.033
-      Dist::Zilla::Plugin::PruneCruft 6.033
-      Dist::Zilla::Plugin::PruneFiles 6.033
-      Dist::Zilla::Plugin::Readme 6.033
-      Dist::Zilla::Plugin::RemovePrereqs 6.033
-      Dist::Zilla::Plugin::ShareDir 6.033
-      Dist::Zilla::Plugin::TemplateModule 6.033
-      Dist::Zilla::Plugin::TestRelease 6.033
-      Dist::Zilla::Plugin::UploadToCPAN 6.033
-      Dist::Zilla::PluginBundle::Basic 6.033
-      Dist::Zilla::PluginBundle::Classic 6.033
-      Dist::Zilla::PluginBundle::FakeClassic 6.033
-      Dist::Zilla::PluginBundle::Filter 6.033
-      Dist::Zilla::Pragmas 6.033
-      Dist::Zilla::Prereqs 6.033
-      Dist::Zilla::Role::AfterBuild 6.033
-      Dist::Zilla::Role::AfterMint 6.033
-      Dist::Zilla::Role::AfterRelease 6.033
-      Dist::Zilla::Role::ArchiveBuilder 6.033
-      Dist::Zilla::Role::BeforeArchive 6.033
-      Dist::Zilla::Role::BeforeBuild 6.033
-      Dist::Zilla::Role::BeforeMint 6.033
-      Dist::Zilla::Role::BeforeRelease 6.033
-      Dist::Zilla::Role::BuildPL 6.033
-      Dist::Zilla::Role::BuildRunner 6.033
-      Dist::Zilla::Role::Chrome 6.033
-      Dist::Zilla::Role::ConfigDumper 6.033
-      Dist::Zilla::Role::EncodingProvider 6.033
-      Dist::Zilla::Role::ExecFiles 6.033
-      Dist::Zilla::Role::File 6.033
-      Dist::Zilla::Role::FileFinder 6.033
-      Dist::Zilla::Role::FileFinderUser 6.033
-      Dist::Zilla::Role::FileGatherer 6.033
-      Dist::Zilla::Role::FileInjector 6.033
-      Dist::Zilla::Role::FileMunger 6.033
-      Dist::Zilla::Role::FilePruner 6.033
-      Dist::Zilla::Role::InstallTool 6.033
-      Dist::Zilla::Role::LicenseProvider 6.033
-      Dist::Zilla::Role::MetaProvider 6.033
-      Dist::Zilla::Role::MintingProfile 6.033
-      Dist::Zilla::Role::MintingProfile::ShareDir 6.033
-      Dist::Zilla::Role::ModuleMaker 6.033
-      Dist::Zilla::Role::MutableFile 6.033
-      Dist::Zilla::Role::NameProvider 6.033
-      Dist::Zilla::Role::PPI 6.033
-      Dist::Zilla::Role::Plugin 6.033
-      Dist::Zilla::Role::PluginBundle 6.033
-      Dist::Zilla::Role::PluginBundle::Easy 6.033
-      Dist::Zilla::Role::PrereqScanner 6.033
-      Dist::Zilla::Role::PrereqSource 6.033
-      Dist::Zilla::Role::ReleaseStatusProvider 6.033
-      Dist::Zilla::Role::Releaser 6.033
-      Dist::Zilla::Role::ShareDir 6.033
-      Dist::Zilla::Role::Stash 6.033
-      Dist::Zilla::Role::Stash::Authors 6.033
-      Dist::Zilla::Role::Stash::Login 6.033
-      Dist::Zilla::Role::StubBuild 6.033
-      Dist::Zilla::Role::TestRunner 6.033
-      Dist::Zilla::Role::TextTemplate 6.033
-      Dist::Zilla::Role::VersionProvider 6.033
-      Dist::Zilla::Stash::Mint 6.033
-      Dist::Zilla::Stash::PAUSE 6.033
-      Dist::Zilla::Stash::Rights 6.033
-      Dist::Zilla::Stash::User 6.033
-      Dist::Zilla::Tester 6.033
-      Dist::Zilla::Tester::_Builder 6.033
-      Dist::Zilla::Tester::_Minter 6.033
-      Dist::Zilla::Tutorial 6.033
-      Dist::Zilla::Types 6.033
-      Dist::Zilla::Util 6.033
-      Dist::Zilla::Util::AuthorDeps 6.033
-      Test::DZil 6.033
+      Dist::Zilla 6.036
+      Dist::Zilla::App 6.036
+      Dist::Zilla::App::Command 6.036
+      Dist::Zilla::App::Command::add 6.036
+      Dist::Zilla::App::Command::authordeps 6.036
+      Dist::Zilla::App::Command::build 6.036
+      Dist::Zilla::App::Command::clean 6.036
+      Dist::Zilla::App::Command::install 6.036
+      Dist::Zilla::App::Command::listdeps 6.036
+      Dist::Zilla::App::Command::new 6.036
+      Dist::Zilla::App::Command::nop 6.036
+      Dist::Zilla::App::Command::release 6.036
+      Dist::Zilla::App::Command::run 6.036
+      Dist::Zilla::App::Command::setup 6.036
+      Dist::Zilla::App::Command::smoke 6.036
+      Dist::Zilla::App::Command::test 6.036
+      Dist::Zilla::App::Command::version 6.036
+      Dist::Zilla::App::Tester 6.036
+      Dist::Zilla::App::Tester::Result 6.036
+      Dist::Zilla::Chrome::Term 6.036
+      Dist::Zilla::Chrome::Test 6.036
+      Dist::Zilla::Dist::Builder 6.036
+      Dist::Zilla::Dist::Minter 6.036
+      Dist::Zilla::File::FromCode 6.036
+      Dist::Zilla::File::InMemory 6.036
+      Dist::Zilla::File::OnDisk 6.036
+      Dist::Zilla::MVP::Assembler 6.036
+      Dist::Zilla::MVP::Assembler::GlobalConfig 6.036
+      Dist::Zilla::MVP::Assembler::Zilla 6.036
+      Dist::Zilla::MVP::Reader::Finder 6.036
+      Dist::Zilla::MVP::Reader::Perl 6.036
+      Dist::Zilla::MVP::RootSection 6.036
+      Dist::Zilla::MVP::Section 6.036
+      Dist::Zilla::MintingProfile::Default 6.036
+      Dist::Zilla::Path 6.036
+      Dist::Zilla::Plugin::AutoPrereqs 6.036
+      Dist::Zilla::Plugin::AutoVersion 6.036
+      Dist::Zilla::Plugin::CPANFile 6.036
+      Dist::Zilla::Plugin::ConfirmRelease 6.036
+      Dist::Zilla::Plugin::DistINI 6.036
+      Dist::Zilla::Plugin::Encoding 6.036
+      Dist::Zilla::Plugin::ExecDir 6.036
+      Dist::Zilla::Plugin::ExtraTests 6.036
+      Dist::Zilla::Plugin::FakeRelease 6.036
+      Dist::Zilla::Plugin::FileFinder::ByName 6.036
+      Dist::Zilla::Plugin::FileFinder::Filter 6.036
+      Dist::Zilla::Plugin::FinderCode 6.036
+      Dist::Zilla::Plugin::GatherDir 6.036
+      Dist::Zilla::Plugin::GatherDir::Template 6.036
+      Dist::Zilla::Plugin::GatherFile 6.036
+      Dist::Zilla::Plugin::GenerateFile 6.036
+      Dist::Zilla::Plugin::InlineFiles 6.036
+      Dist::Zilla::Plugin::License 6.036
+      Dist::Zilla::Plugin::MakeMaker 6.036
+      Dist::Zilla::Plugin::MakeMaker::Runner 6.036
+      Dist::Zilla::Plugin::Manifest 6.036
+      Dist::Zilla::Plugin::ManifestSkip 6.036
+      Dist::Zilla::Plugin::MetaConfig 6.036
+      Dist::Zilla::Plugin::MetaJSON 6.036
+      Dist::Zilla::Plugin::MetaNoIndex 6.036
+      Dist::Zilla::Plugin::MetaResources 6.036
+      Dist::Zilla::Plugin::MetaTests 6.036
+      Dist::Zilla::Plugin::MetaYAML 6.036
+      Dist::Zilla::Plugin::ModuleBuild 6.036
+      Dist::Zilla::Plugin::ModuleShareDirs 6.036
+      Dist::Zilla::Plugin::NextRelease 6.036
+      Dist::Zilla::Plugin::PkgDist 6.036
+      Dist::Zilla::Plugin::PkgVersion 6.036
+      Dist::Zilla::Plugin::PodCoverageTests 6.036
+      Dist::Zilla::Plugin::PodSyntaxTests 6.036
+      Dist::Zilla::Plugin::PodVersion 6.036
+      Dist::Zilla::Plugin::Prereqs 6.036
+      Dist::Zilla::Plugin::PruneCruft 6.036
+      Dist::Zilla::Plugin::PruneFiles 6.036
+      Dist::Zilla::Plugin::Readme 6.036
+      Dist::Zilla::Plugin::RemovePrereqs 6.036
+      Dist::Zilla::Plugin::ShareDir 6.036
+      Dist::Zilla::Plugin::TemplateModule 6.036
+      Dist::Zilla::Plugin::TestRelease 6.036
+      Dist::Zilla::Plugin::UploadToCPAN 6.036
+      Dist::Zilla::PluginBundle::Basic 6.036
+      Dist::Zilla::PluginBundle::Classic 6.036
+      Dist::Zilla::PluginBundle::FakeClassic 6.036
+      Dist::Zilla::PluginBundle::Filter 6.036
+      Dist::Zilla::Pragmas 6.036
+      Dist::Zilla::Prereqs 6.036
+      Dist::Zilla::Role::AfterBuild 6.036
+      Dist::Zilla::Role::AfterMint 6.036
+      Dist::Zilla::Role::AfterRelease 6.036
+      Dist::Zilla::Role::ArchiveBuilder 6.036
+      Dist::Zilla::Role::BeforeArchive 6.036
+      Dist::Zilla::Role::BeforeBuild 6.036
+      Dist::Zilla::Role::BeforeMint 6.036
+      Dist::Zilla::Role::BeforeRelease 6.036
+      Dist::Zilla::Role::BuildPL 6.036
+      Dist::Zilla::Role::BuildRunner 6.036
+      Dist::Zilla::Role::Chrome 6.036
+      Dist::Zilla::Role::ConfigDumper 6.036
+      Dist::Zilla::Role::EncodingProvider 6.036
+      Dist::Zilla::Role::ExecFiles 6.036
+      Dist::Zilla::Role::File 6.036
+      Dist::Zilla::Role::FileFinder 6.036
+      Dist::Zilla::Role::FileFinderUser 6.036
+      Dist::Zilla::Role::FileGatherer 6.036
+      Dist::Zilla::Role::FileInjector 6.036
+      Dist::Zilla::Role::FileMunger 6.036
+      Dist::Zilla::Role::FilePruner 6.036
+      Dist::Zilla::Role::InstallTool 6.036
+      Dist::Zilla::Role::LicenseProvider 6.036
+      Dist::Zilla::Role::MetaProvider 6.036
+      Dist::Zilla::Role::MintingProfile 6.036
+      Dist::Zilla::Role::MintingProfile::ShareDir 6.036
+      Dist::Zilla::Role::ModuleMaker 6.036
+      Dist::Zilla::Role::MutableFile 6.036
+      Dist::Zilla::Role::NameProvider 6.036
+      Dist::Zilla::Role::PPI 6.036
+      Dist::Zilla::Role::Plugin 6.036
+      Dist::Zilla::Role::PluginBundle 6.036
+      Dist::Zilla::Role::PluginBundle::Easy 6.036
+      Dist::Zilla::Role::PrereqScanner 6.036
+      Dist::Zilla::Role::PrereqSource 6.036
+      Dist::Zilla::Role::ReleaseStatusProvider 6.036
+      Dist::Zilla::Role::Releaser 6.036
+      Dist::Zilla::Role::ShareDir 6.036
+      Dist::Zilla::Role::Stash 6.036
+      Dist::Zilla::Role::Stash::Authors 6.036
+      Dist::Zilla::Role::Stash::Login 6.036
+      Dist::Zilla::Role::StubBuild 6.036
+      Dist::Zilla::Role::TestRunner 6.036
+      Dist::Zilla::Role::TextTemplate 6.036
+      Dist::Zilla::Role::VersionProvider 6.036
+      Dist::Zilla::Stash::Mint 6.036
+      Dist::Zilla::Stash::PAUSE 6.036
+      Dist::Zilla::Stash::Rights 6.036
+      Dist::Zilla::Stash::User 6.036
+      Dist::Zilla::Tester 6.036
+      Dist::Zilla::Tester::_Builder 6.036
+      Dist::Zilla::Tester::_Minter 6.036
+      Dist::Zilla::Tutorial 6.036
+      Dist::Zilla::Types 6.036
+      Dist::Zilla::Util 6.036
+      Dist::Zilla::Util::AuthorDeps 6.036
+      Test::DZil 6.036
     requirements:
       App::Cmd::Command::version 0
       App::Cmd::Setup 0.330
@@ -1434,6 +1434,7 @@ DISTRIBUTIONS
       namespace::autoclean 0
       parent 0
       perl 5.020000
+      strict 0
       utf8 0
       version 0
       warnings 0
@@ -4984,17 +4985,17 @@ DISTRIBUTIONS
       Test::Builder 0
       Test::More 0.96
       perl 5.012
-  Test-Fatal-0.017
-    pathname: R/RJ/RJBS/Test-Fatal-0.017.tar.gz
+  Test-Fatal-0.018
+    pathname: R/RJ/RJBS/Test-Fatal-0.018.tar.gz
     provides:
-      Test::Fatal 0.017
+      Test::Fatal 0.018
     requirements:
       Carp 0
       Exporter 5.57
       ExtUtils::MakeMaker 6.78
       Test::Builder 0
       Try::Tiny 0.07
-      strict 0
+      perl 5.012
       warnings 0
   Test-Number-Delta-1.06
     pathname: D/DA/DAGOLDEN/Test-Number-Delta-1.06.tar.gz
