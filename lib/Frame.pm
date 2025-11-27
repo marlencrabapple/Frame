@@ -2,7 +2,7 @@ use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
 role Frame : does(Frame::Base) : does(Frame::Config);
-
+use vars qw/@EXPORT @ISA $VERSION/;
 our $VERSION = '0.01.5';
 
 use utf8;
@@ -34,11 +34,16 @@ field $controller_namespace : param : reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
+APPLY {
+  use utf8;
+  use v5.40;
+  use vars qw/@EXPORT @ISA/;
+  use subs 'dmsg'
+}
+
 ADJUSTPARAMS($params) {
     unshift @INC, $INC[1];
     $self->app($self);
-
-    #my $class = __CLASS__;
 
     $loop = IO::Async::Loop->new;    # This grabs the existing loop
     $ua   = Net::Async::HTTP->new;
