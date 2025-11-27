@@ -1,58 +1,48 @@
-requires 'perl', 'v5.40';
-
-requires 'Cwd';
-
-requires 'Plack', '1.0051';
-
-requires 'Path::Tiny', '0.144';
-requires 'List::AllUtils', '0.19';
-requires 'meta', '0.013';
-requires 'MIME::Types';
-requires 'File::XDG';
-
-requires 'IO::Async', '0.802';
-requires 'IO::Async::SSL', '0.23'; 
-requires 'IO::Socket::SSL', '2.074';
-requires 'Net::SSLeay', '1.92';
-requires 'Mozilla::CA', '20211001';
-requires 'Hash::Ordered';
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';
-requires 'Time::Moment';
-requires 'Time::HiRes';
-
-requires 'Object::Pad', '0.808';
-requires 'Future', '0.50';
-requires 'Future::AsyncAwait', '0.62';
-requires 'Syntax::Keyword::Dynamically', '0.11';
-requires 'Syntax::Keyword::Try';
-
-requires 'Devel::StackTrace::WithLexicals', '2.01';
-
-requires 'Net::Async::HTTP::Server', '0.14';
-requires 'Net::Async::WebSocket', '0.13';
-requires 'HTTP::Parser::XS', '0.17';
-requires 'Server::Starter', '0.35';
-requires 'Parallel::Prefork', '0.18';
-
-requires 'Crypt::Argon2', '0.029';
-
-requires 'DBI', '1.643';
-requires 'DBD::SQLite', '1.72';
-requires 'SQL::Abstract', '2.000001';
-
-requires 'HTML::Escape', '1.11';
-requires 'JSON::MaybeXS', '1.004004';
-requires 'Cpanel::JSON::XS', '4.32';
-requires 'TOML::Tiny';
-requires 'Text::Xslate', 'v3.5.9';
-
-requires 'Net::SSLeay', '1.92';
-requires 'IO::Socket::SSL', '2.075';
-requires 'HTTP::Tinyish', '0.18';
-requires 'Net::Async::HTTP', '0.50';
-
+requires 'Cpanel::JSON::XS';
+requires 'Crypt::Argon2';
+requires 'Cwd';
+requires 'DBD::SQLite';
+requires 'DBI';
+requires 'Devel::StackTrace::WithLexicals';
+requires 'File::XDG';
+requires 'Future';
+requires 'Future::AsyncAwait';
+requires 'Hash::Ordered';
+requires 'HTML::Escape';
+requires 'HTTP::Parser::XS';
+requires 'HTTP::Tinyish';
+requires 'IO::Async';
+requires 'IO::Async::SSL';
+requires 'IO::Socket::SSL';
+requires 'JSON::MaybeXS';
+requires 'List::AllUtils';
+requires 'meta';
+requires 'MIME::Types';
+requires 'Module::Build::Tiny';
 requires 'Module::Refresh';
+requires 'Mozilla::CA';
+requires 'Net::Async::HTTP';
+requires 'Net::Async::HTTP::Server';
+requires 'Net::Async::WebSocket';
+requires 'Net::SSLeay';
+requires 'Object::Pad';
+requires 'PadWalker';
+requires 'Parallel::Prefork';
+requires 'Path::Tiny';
+requires 'Plack';
+requires 'Server::Starter';
+requires 'SQL::Abstract';
+requires 'Syntax::Keyword::Dynamically';
+requires 'Syntax::Keyword::Try';
+requires 'Test::More';
+requires 'Test::Pod';
+requires 'Text::Xslate';
+requires 'Time::HiRes';
+requires 'Time::Moment';
+requires 'TOML::Tiny';
+
 
 on develop => sub {
   recommends 'Perl::Tidy', '20221112';
@@ -67,7 +57,3 @@ on test => sub {
   requires 'Test::More', '0.96';
   requires 'Test::Pod';
 };
-
-requires 'HTTP::Parser::XS', '0.17';
-requires 'Server::Starter', '0.35';
-requires 'PadWalker'
