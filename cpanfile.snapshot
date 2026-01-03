@@ -4146,12 +4146,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0053
-    pathname: C/CR/CRABAPP/Plack-1.0053-TRIAL.tar.gz
+  Plack-1.0051
+    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0053
+      Plack 1.0051
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -4210,9 +4210,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0053
+      Plack::Request 1.0051
       Plack::Request::Upload undef
-      Plack::Response 1.0053
+      Plack::Response 1.0051
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
