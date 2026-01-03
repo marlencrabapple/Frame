@@ -31,7 +31,7 @@ requires 'Object::Pad';
 requires 'PadWalker';
 requires 'Parallel::Prefork';
 requires 'Path::Tiny';
-requires 'Plack', '1.0051';
+requires 'Plack', '==1.0051';
 requires 'Server::Starter';
 requires 'SQL::Abstract';
 requires 'Syntax::Keyword::Dynamically';
