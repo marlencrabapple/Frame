@@ -43,7 +43,6 @@ requires 'Time::HiRes';
 requires 'Time::Moment';
 requires 'TOML::Tiny';
 
-
 on develop => sub {
   recommends 'Perl::Tidy', '20221112';
   recommends 'Perl::Critic', '1.144';
@@ -56,4 +55,5 @@ on develop => sub {
 on test => sub {
   requires 'Test::More', '0.96';
   requires 'Test::Pod';
-};
+}
+
