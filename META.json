@@ -4,7 +4,7 @@
       "Ian P Bradley <ian.bradley@studiocrabapple.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "App::ModuleBuildTiny version 0.051",
+   "generated_by" : "Dist::Milla version v1.0.22, Dist::Zilla version 6.036, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -13,10 +13,20 @@
       "version" : 2
    },
    "name" : "Frame",
+   "no_index" : {
+      "directory" : [
+         "eg",
+         "examples",
+         "inc",
+         "share",
+         "t",
+         "xt"
+      ]
+   },
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.044"
+            "Module::Build::Tiny" : "0.034"
          }
       },
       "develop" : {
@@ -27,51 +37,35 @@
             "Perl::Tidy" : "20221112"
          },
          "requires" : {
-            "App::ModuleBuildTiny" : "0.051",
-            "Dist::Milla" : "v1.0.21",
-            "Plack::Middleware::Debug" : "0"
+            "Dist::Milla" : "v1.0.22",
+            "Plack::Middleware::Debug" : "0",
+            "Test::Pod" : "1.41"
          }
       },
       "runtime" : {
          "requires" : {
-            "Carp" : "0",
             "Const::Fast" : "0",
             "Const::Fast::Exporter" : "0",
             "Cpanel::JSON::XS" : "0",
             "Crypt::Argon2" : "0",
             "Cwd" : "0",
             "DBD::SQLite" : "0",
-            "DBD::SQLite::Constants" : "0",
             "DBI" : "0",
-            "DBIx::Connector" : "0",
-            "Data::Dumper" : "0",
             "Devel::StackTrace::WithLexicals" : "0",
-            "Encode" : "0",
-            "Exporter" : "0",
-            "File::Basename" : "0",
-            "File::Spec" : "0",
             "File::XDG" : "0",
             "Future" : "0",
             "Future::AsyncAwait" : "0",
             "HTML::Escape" : "0",
-            "HTTP::Date" : "0",
             "HTTP::Parser::XS" : "0",
             "HTTP::Tinyish" : "0",
-            "Hash::MultiValue" : "0",
             "Hash::Ordered" : "0",
-            "Hash::Util" : "0",
             "IO::Async" : "0",
-            "IO::Async::Loop" : "0",
             "IO::Async::SSL" : "0",
-            "IO::Async::Timer::Countdown" : "0",
             "IO::Socket::SSL" : "0",
-            "IO::Socket::UNIX" : "0",
             "JSON::MaybeXS" : "0",
             "List::AllUtils" : "0",
-            "List::Util" : "0",
             "MIME::Types" : "0",
             "Module::Build::Tiny" : "0",
-            "Module::Metadata" : "0",
             "Module::Refresh" : "0",
             "Mozilla::CA" : "0",
             "Net::Async::HTTP" : "0",
@@ -83,14 +77,7 @@
             "Parallel::Prefork" : "0",
             "Path::Tiny" : "0",
             "Plack" : "== 1.0051",
-            "Plack::App::File" : "0",
-            "Plack::Builder" : "0",
-            "Plack::Middleware::Auth::Basic" : "0",
-            "Plack::Middleware::Static" : "0",
-            "Plack::Runner" : "0",
-            "Plack::Util" : "0",
             "SQL::Abstract" : "0",
-            "Scalar::Util" : "0",
             "Server::Starter" : "0",
             "Syntax::Keyword::Dynamically" : "0",
             "Syntax::Keyword::Try" : "0",
@@ -98,149 +85,34 @@
             "Test::More" : "0.96",
             "Test::Pod" : "0",
             "Text::Xslate" : "0",
-            "Tie::Scalar" : "0",
             "Time::HiRes" : "0",
             "Time::Moment" : "0",
-            "Time::Piece" : "0",
-            "URI::Escape" : "0",
-            "constant" : "0",
-            "lib" : "0",
-            "meta" : "0",
-            "parent" : "0",
-            "perl" : "v5.40.0",
-            "strict" : "0",
-            "subs" : "0",
-            "utf8" : "0",
-            "vars" : "0"
+            "meta" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0.96",
+            "Test::Pod" : "0"
          }
       }
    },
-   "provides" : {
-      "Frame" : {
-         "file" : "lib/Frame.pm",
-         "version" : "v0.1.5"
+   "release_status" : "testing",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/marlencrabapple/Frame/issues"
       },
-      "Frame::App" : {
-         "file" : "lib/Frame/App.pm"
-      },
-      "Frame::App::Media::Stream" : {
-         "file" : "lib/Frame/App/Media/Stream.pm"
-      },
-      "Frame::App::Paste" : {
-         "file" : "lib/Frame/App/Paste.pm"
-      },
-      "Frame::App::Static::Index" : {
-         "file" : "lib/Frame/App/Static/Index.pm"
-      },
-      "Frame::Auth" : {
-         "file" : "lib/Frame/Auth.pm"
-      },
-      "Frame::Auth::Config" : {
-         "file" : "lib/Frame/Auth/Config.pm"
-      },
-      "Frame::Base" : {
-         "file" : "lib/Frame/Base.pm"
-      },
-      "Frame::Component" : {
-         "file" : "lib/Frame/Component.pm"
-      },
-      "Frame::Config" : {
-         "file" : "lib/Frame/Config.pm"
-      },
-      "Frame::Controller" : {
-         "file" : "lib/Frame/Controller.pm"
-      },
-      "Frame::Controller::Default" : {
-         "file" : "lib/Frame/Controller/Default.pm"
-      },
-      "Frame::Db" : {
-         "file" : "lib/Frame/Db.pm"
-      },
-      "Frame::Db::Model" : {
-         "file" : "lib/Frame/Db/Model.pm"
-      },
-      "Frame::Db::Pg" : {
-         "file" : "lib/Frame/Db/Pg.pm"
-      },
-      "Frame::Db::SQLite" : {
-         "file" : "lib/Frame/Db/SQLite.pm"
-      },
-      "Frame::Example" : {
-         "file" : "lib/Frame/Example.pm"
-      },
-      "Frame::Example::Controller::Default" : {
-         "file" : "lib/Frame/Example/Controller/Default.pm"
-      },
-      "Frame::Middleware" : {
-         "file" : "lib/Frame/Middleware.pm"
-      },
-      "Frame::Middleware::Auth::Basic" : {
-         "file" : "lib/Frame/Middleware/Auth/Basic.pm"
-      },
-      "Frame::Middleware::Debug::Frame" : {
-         "file" : "lib/Frame/Middleware/Debug/Frame.pm"
-      },
-      "Frame::Request" : {
-         "file" : "lib/Frame/Request.pm"
-      },
-      "Frame::Request::Placeholder" : {
-         "file" : "lib/Frame/Request/Placeholder.pm"
-      },
-      "Frame::Request::Placeholder::Dummy" : {
-         "file" : "lib/Frame/Request/Placeholder/Dummy.pm"
-      },
-      "Frame::Routes" : {
-         "file" : "lib/Frame/Routes.pm"
-      },
-      "Frame::Routes::Common" : {
-         "file" : "lib/Frame/Routes/Common.pm"
-      },
-      "Frame::Routes::Pattern" : {
-         "file" : "lib/Frame/Routes/Pattern.pm"
-      },
-      "Frame::Routes::Route" : {
-         "file" : "lib/Frame/Routes/Route.pm"
-      },
-      "Frame::Routes::Route::Factory" : {
-         "file" : "lib/Frame/Routes/Route/Factory.pm"
-      },
-      "Frame::Runner" : {
-         "file" : "lib/Frame/Runner.pm"
-      },
-      "Frame::Runner::PSGI" : {
-         "file" : "lib/Frame/Runner/PSGI.pm"
-      },
-      "Frame::Server" : {
-         "file" : "lib/Frame/Server.pm"
-      },
-      "Frame::Server::Protocol" : {
-         "file" : "lib/Frame/Server/Protocol.pm"
-      },
-      "Frame::Server::Protocol::HTTP" : {
-         "file" : "lib/Frame/Server/Protocol/HTTP.pm"
-      },
-      "Frame::Server::Protocol::WebSocket" : {
-         "file" : "lib/Frame/Server/Protocol/WebSocket.pm"
-      },
-      "Frame::Server::Request" : {
-         "file" : "lib/Frame/Server/Request.pm"
-      },
-      "Frame::Tx" : {
-         "file" : "lib/Frame/Tx.pm"
-      },
-      "Frame::Util" : {
-         "file" : "lib/Frame/Util.pm"
-      },
-      "Plack::Handler::Frame::Server" : {
-         "file" : "lib/Plack/Handler/Frame/Server.pm"
-      },
-      "srv" : {
-         "file" : "lib/Frame/App/Static/Index.pm"
+      "homepage" : "https://github.com/marlencrabapple/Frame",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/marlencrabapple/Frame.git",
+         "web" : "https://github.com/marlencrabapple/Frame"
       }
    },
-   "release_status" : "stable",
    "version" : "0.01.5",
    "x_generated_by_perl" : "v5.42.0",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.40",
-   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later"
+   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
+   "x_static_install" : 0
 }
+
