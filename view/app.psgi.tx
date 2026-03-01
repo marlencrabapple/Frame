@@ -1,0 +1,13 @@
+use utf8;
+use v5.36;
+use autodie;
+
+use <: $app :>;
+use Plack::Builder;
+
+builder {
+  enable "Plack::Middleware::Static",
+    path => sub { s!^/s/!! }, root => 'static/';
+
+  <: $app :>->new->to_psgi
+}

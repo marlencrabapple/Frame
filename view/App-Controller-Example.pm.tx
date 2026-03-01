@@ -1,0 +1,17 @@
+use Object::Pad;
+
+package <: $app :>::Controller::Example;
+class <: $app :>::Controller::Example :does(Frame::Controller);
+
+use utf8;
+use v5.36;
+use autodie;
+
+: # I should think of something a little more interesting but I'm sleepy
+method default_view ($asdf = 'Lorem Ipsum') {
+  $self->render(template('example.html.tx', {
+    asdf => $asdf
+  }))
+}
+
+1

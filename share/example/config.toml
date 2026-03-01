@@ -1,0 +1,11 @@
+#
+# Example configuration file
+#
+
+charset = "utf-8"
+
+[db]
+  source = "dbi:SQLite:dbname=db.sqlite3"
+  username = ""
+  auth = ""
+  
