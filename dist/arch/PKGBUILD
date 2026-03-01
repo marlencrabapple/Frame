@@ -1,0 +1,63 @@
+# Maintainer: Ian Bradley <crabapp@hikki.tech>
+_pkgname=perl-frame
+pkgname="$_pkgname-git"
+_perl_namespace=Frame
+_perl_module=Frame
+pkgver=1
+pkgrel=1
+pkgdesc="Build system for PKGBUILD based Linux distributions"
+arch=(any)
+license=('Artistic-1.0-Perl' 'GPL-1.0-or-later')
+depends=('perl' 'perl-plack' 'perl-starlet' 'perl-cpanel-json-xs' 'perl-syntax-keyword-try' 'perl-dist-zilla'
+         'perl-io-async'
+         'perl-app-fatpacker' 'perl-module-build' 'perl-dbi'
+	 'perl-inline-c' 'perl-path-tiny' 'perl-net-ssleay' 'perl-module-build-xsutil') 
+makedepends=('git' 'cpanminus')
+options=('!emptydirs' 'staticlibs')
+url="https://cincotuf.lan/user/crabapp/Frame"
+_commit=9500a8a112da3d49c9858493ec0e7a3fc742367c
+source=("$_pkgname::git+$url#commit=$_commit")
+sha512sums=('cb99060250312df7888fc57299625dbf6f5d755910fd69fd7874c95d2da94413ca605336bcdc4efe4a0eb811fd7d9a64c9aca676e119ec79d834d5bdc252276e')
+b2sums=('e10e44eef3d9f9cbb82dcf5c6f6536b63e0a7530505e15096e93535a694cdbada77a20e2647636680386e82cd6c1c287573418357aa268f46937f997ead39593')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  (
+    set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+      printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+  )
+}
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+
+  unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+
+  export PERL5LIB="$(pwd)/local/lib/perl5"
+  export PERL_CPANM_OPT="-L$(pwd)/local \
+   --verbose \
+   --save-dists .\
+   --self-contained \
+   --with-develop \
+   --with-config \
+   --with-all-features"
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  cpanm Net::SSLeay --notest
+  cpanm --installdeps .
+  perl Build.PL -prefix=/usr
+  ./Build build
+}
+
+check() {
+  cd "$srcdir/$_pkgname"
+  ./Build testall
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+  INSTALL_BASE=/usr ./Build install --prefix=/usr  --destdir "$pkgdir" -DESTDIR="$pkgdir"
+}

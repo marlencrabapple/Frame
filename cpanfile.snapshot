@@ -10,24 +10,27 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-Cmd-0.338
-    pathname: R/RJ/RJBS/App-Cmd-0.338.tar.gz
+  App-Cmd-0.339
+    pathname: R/RJ/RJBS/App-Cmd-0.339.tar.gz
     provides:
-      App::Cmd 0.338
-      App::Cmd::ArgProcessor 0.338
-      App::Cmd::Command 0.338
-      App::Cmd::Command::commands 0.338
-      App::Cmd::Command::help 0.338
-      App::Cmd::Command::version 0.338
-      App::Cmd::Plugin 0.338
-      App::Cmd::Setup 0.338
-      App::Cmd::Simple 0.338
-      App::Cmd::Subdispatch 0.338
-      App::Cmd::Subdispatch::DashedStyle 0.338
-      App::Cmd::Tester 0.338
-      App::Cmd::Tester::CaptureExternal 0.338
-      App::Cmd::Tester::Exited 0.338
-      App::Cmd::Tester::Result 0.338
+      App::Cmd 0.339
+      App::Cmd::ArgProcessor 0.339
+      App::Cmd::Command 0.339
+      App::Cmd::Command::commands 0.339
+      App::Cmd::Command::help 0.339
+      App::Cmd::Command::version 0.339
+      App::Cmd::Plugin 0.339
+      App::Cmd::Setup 0.339
+      App::Cmd::Simple 0.339
+      App::Cmd::Subdispatch 0.339
+      App::Cmd::Subdispatch::DashedStyle 0.339
+      App::Cmd::Tester 0.339
+      App::Cmd::Tester::CaptureExternal 0.339
+      App::Cmd::Tester::Exited 0.339
+      App::Cmd::Tester::Result 0.339
+      Palette undef
+      Palette::Command::paint undef
+      Palette::Command::show undef
     requirements:
       Capture::Tiny 0.13
       Carp 0
@@ -99,10 +102,10 @@ DISTRIBUTIONS
       Sub::Quote 1.005000
       Test::Builder 0
       Types::Standard 0
-  CPAN-Uploader-0.103018
-    pathname: R/RJ/RJBS/CPAN-Uploader-0.103018.tar.gz
+  CPAN-Uploader-0.103019
+    pathname: R/RJ/RJBS/CPAN-Uploader-0.103019.tar.gz
     provides:
-      CPAN::Uploader 0.103018
+      CPAN::Uploader 0.103019
     requirements:
       Carp 0
       Data::Dumper 0
@@ -1079,23 +1082,23 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       PadWalker 1.98
       perl 5.008001
-  Dist-Build-0.025
-    pathname: L/LE/LEONT/Dist-Build-0.025.tar.gz
+  Dist-Build-0.026
+    pathname: L/LE/LEONT/Dist-Build-0.026.tar.gz
     provides:
-      Dist::Build 0.025
-      Dist::Build::Core 0.025
-      Dist::Build::Serializer 0.025
-      Dist::Build::ShareDir 0.025
-      Dist::Build::Util 0.025
-      Dist::Build::XS 0.025
-      Dist::Build::XS::Alien 0.025
-      Dist::Build::XS::Conf 0.025
-      Dist::Build::XS::Export 0.025
-      Dist::Build::XS::Import 0.025
-      Dist::Build::XS::WriteConstants 0.025
+      Dist::Build 0.026
+      Dist::Build::Core 0.026
+      Dist::Build::Serializer 0.026
+      Dist::Build::ShareDir 0.026
+      Dist::Build::Util 0.026
+      Dist::Build::XS 0.026
+      Dist::Build::XS::Alien 0.026
+      Dist::Build::XS::Conf 0.026
+      Dist::Build::XS::Export 0.026
+      Dist::Build::XS::Import 0.026
+      Dist::Build::XS::WriteConstants 0.026
     requirements:
       CPAN::Meta 2.142060
-      ExtUtils::Builder 0.019
+      ExtUtils::Builder 0.020
       ExtUtils::Builder::Compiler 0.034
       ExtUtils::Config 0
       ExtUtils::Helpers 0.028
@@ -1165,152 +1168,152 @@ DISTRIBUTIONS
       Module::Build 0.3601
       Module::CPANfile 0.9025
       perl 5.012
-  Dist-Zilla-6.036
-    pathname: R/RJ/RJBS/Dist-Zilla-6.036.tar.gz
+  Dist-Zilla-6.037
+    pathname: R/RJ/RJBS/Dist-Zilla-6.037.tar.gz
     provides:
-      Dist::Zilla 6.036
-      Dist::Zilla::App 6.036
-      Dist::Zilla::App::Command 6.036
-      Dist::Zilla::App::Command::add 6.036
-      Dist::Zilla::App::Command::authordeps 6.036
-      Dist::Zilla::App::Command::build 6.036
-      Dist::Zilla::App::Command::clean 6.036
-      Dist::Zilla::App::Command::install 6.036
-      Dist::Zilla::App::Command::listdeps 6.036
-      Dist::Zilla::App::Command::new 6.036
-      Dist::Zilla::App::Command::nop 6.036
-      Dist::Zilla::App::Command::release 6.036
-      Dist::Zilla::App::Command::run 6.036
-      Dist::Zilla::App::Command::setup 6.036
-      Dist::Zilla::App::Command::smoke 6.036
-      Dist::Zilla::App::Command::test 6.036
-      Dist::Zilla::App::Command::version 6.036
-      Dist::Zilla::App::Tester 6.036
-      Dist::Zilla::App::Tester::Result 6.036
-      Dist::Zilla::Chrome::Term 6.036
-      Dist::Zilla::Chrome::Test 6.036
-      Dist::Zilla::Dist::Builder 6.036
-      Dist::Zilla::Dist::Minter 6.036
-      Dist::Zilla::File::FromCode 6.036
-      Dist::Zilla::File::InMemory 6.036
-      Dist::Zilla::File::OnDisk 6.036
-      Dist::Zilla::MVP::Assembler 6.036
-      Dist::Zilla::MVP::Assembler::GlobalConfig 6.036
-      Dist::Zilla::MVP::Assembler::Zilla 6.036
-      Dist::Zilla::MVP::Reader::Finder 6.036
-      Dist::Zilla::MVP::Reader::Perl 6.036
-      Dist::Zilla::MVP::RootSection 6.036
-      Dist::Zilla::MVP::Section 6.036
-      Dist::Zilla::MintingProfile::Default 6.036
-      Dist::Zilla::Path 6.036
-      Dist::Zilla::Plugin::AutoPrereqs 6.036
-      Dist::Zilla::Plugin::AutoVersion 6.036
-      Dist::Zilla::Plugin::CPANFile 6.036
-      Dist::Zilla::Plugin::ConfirmRelease 6.036
-      Dist::Zilla::Plugin::DistINI 6.036
-      Dist::Zilla::Plugin::Encoding 6.036
-      Dist::Zilla::Plugin::ExecDir 6.036
-      Dist::Zilla::Plugin::ExtraTests 6.036
-      Dist::Zilla::Plugin::FakeRelease 6.036
-      Dist::Zilla::Plugin::FileFinder::ByName 6.036
-      Dist::Zilla::Plugin::FileFinder::Filter 6.036
-      Dist::Zilla::Plugin::FinderCode 6.036
-      Dist::Zilla::Plugin::GatherDir 6.036
-      Dist::Zilla::Plugin::GatherDir::Template 6.036
-      Dist::Zilla::Plugin::GatherFile 6.036
-      Dist::Zilla::Plugin::GenerateFile 6.036
-      Dist::Zilla::Plugin::InlineFiles 6.036
-      Dist::Zilla::Plugin::License 6.036
-      Dist::Zilla::Plugin::MakeMaker 6.036
-      Dist::Zilla::Plugin::MakeMaker::Runner 6.036
-      Dist::Zilla::Plugin::Manifest 6.036
-      Dist::Zilla::Plugin::ManifestSkip 6.036
-      Dist::Zilla::Plugin::MetaConfig 6.036
-      Dist::Zilla::Plugin::MetaJSON 6.036
-      Dist::Zilla::Plugin::MetaNoIndex 6.036
-      Dist::Zilla::Plugin::MetaResources 6.036
-      Dist::Zilla::Plugin::MetaTests 6.036
-      Dist::Zilla::Plugin::MetaYAML 6.036
-      Dist::Zilla::Plugin::ModuleBuild 6.036
-      Dist::Zilla::Plugin::ModuleShareDirs 6.036
-      Dist::Zilla::Plugin::NextRelease 6.036
-      Dist::Zilla::Plugin::PkgDist 6.036
-      Dist::Zilla::Plugin::PkgVersion 6.036
-      Dist::Zilla::Plugin::PodCoverageTests 6.036
-      Dist::Zilla::Plugin::PodSyntaxTests 6.036
-      Dist::Zilla::Plugin::PodVersion 6.036
-      Dist::Zilla::Plugin::Prereqs 6.036
-      Dist::Zilla::Plugin::PruneCruft 6.036
-      Dist::Zilla::Plugin::PruneFiles 6.036
-      Dist::Zilla::Plugin::Readme 6.036
-      Dist::Zilla::Plugin::RemovePrereqs 6.036
-      Dist::Zilla::Plugin::ShareDir 6.036
-      Dist::Zilla::Plugin::TemplateModule 6.036
-      Dist::Zilla::Plugin::TestRelease 6.036
-      Dist::Zilla::Plugin::UploadToCPAN 6.036
-      Dist::Zilla::PluginBundle::Basic 6.036
-      Dist::Zilla::PluginBundle::Classic 6.036
-      Dist::Zilla::PluginBundle::FakeClassic 6.036
-      Dist::Zilla::PluginBundle::Filter 6.036
-      Dist::Zilla::Pragmas 6.036
-      Dist::Zilla::Prereqs 6.036
-      Dist::Zilla::Role::AfterBuild 6.036
-      Dist::Zilla::Role::AfterMint 6.036
-      Dist::Zilla::Role::AfterRelease 6.036
-      Dist::Zilla::Role::ArchiveBuilder 6.036
-      Dist::Zilla::Role::BeforeArchive 6.036
-      Dist::Zilla::Role::BeforeBuild 6.036
-      Dist::Zilla::Role::BeforeMint 6.036
-      Dist::Zilla::Role::BeforeRelease 6.036
-      Dist::Zilla::Role::BuildPL 6.036
-      Dist::Zilla::Role::BuildRunner 6.036
-      Dist::Zilla::Role::Chrome 6.036
-      Dist::Zilla::Role::ConfigDumper 6.036
-      Dist::Zilla::Role::EncodingProvider 6.036
-      Dist::Zilla::Role::ExecFiles 6.036
-      Dist::Zilla::Role::File 6.036
-      Dist::Zilla::Role::FileFinder 6.036
-      Dist::Zilla::Role::FileFinderUser 6.036
-      Dist::Zilla::Role::FileGatherer 6.036
-      Dist::Zilla::Role::FileInjector 6.036
-      Dist::Zilla::Role::FileMunger 6.036
-      Dist::Zilla::Role::FilePruner 6.036
-      Dist::Zilla::Role::InstallTool 6.036
-      Dist::Zilla::Role::LicenseProvider 6.036
-      Dist::Zilla::Role::MetaProvider 6.036
-      Dist::Zilla::Role::MintingProfile 6.036
-      Dist::Zilla::Role::MintingProfile::ShareDir 6.036
-      Dist::Zilla::Role::ModuleMaker 6.036
-      Dist::Zilla::Role::MutableFile 6.036
-      Dist::Zilla::Role::NameProvider 6.036
-      Dist::Zilla::Role::PPI 6.036
-      Dist::Zilla::Role::Plugin 6.036
-      Dist::Zilla::Role::PluginBundle 6.036
-      Dist::Zilla::Role::PluginBundle::Easy 6.036
-      Dist::Zilla::Role::PrereqScanner 6.036
-      Dist::Zilla::Role::PrereqSource 6.036
-      Dist::Zilla::Role::ReleaseStatusProvider 6.036
-      Dist::Zilla::Role::Releaser 6.036
-      Dist::Zilla::Role::ShareDir 6.036
-      Dist::Zilla::Role::Stash 6.036
-      Dist::Zilla::Role::Stash::Authors 6.036
-      Dist::Zilla::Role::Stash::Login 6.036
-      Dist::Zilla::Role::StubBuild 6.036
-      Dist::Zilla::Role::TestRunner 6.036
-      Dist::Zilla::Role::TextTemplate 6.036
-      Dist::Zilla::Role::VersionProvider 6.036
-      Dist::Zilla::Stash::Mint 6.036
-      Dist::Zilla::Stash::PAUSE 6.036
-      Dist::Zilla::Stash::Rights 6.036
-      Dist::Zilla::Stash::User 6.036
-      Dist::Zilla::Tester 6.036
-      Dist::Zilla::Tester::_Builder 6.036
-      Dist::Zilla::Tester::_Minter 6.036
-      Dist::Zilla::Tutorial 6.036
-      Dist::Zilla::Types 6.036
-      Dist::Zilla::Util 6.036
-      Dist::Zilla::Util::AuthorDeps 6.036
-      Test::DZil 6.036
+      Dist::Zilla 6.037
+      Dist::Zilla::App 6.037
+      Dist::Zilla::App::Command 6.037
+      Dist::Zilla::App::Command::add 6.037
+      Dist::Zilla::App::Command::authordeps 6.037
+      Dist::Zilla::App::Command::build 6.037
+      Dist::Zilla::App::Command::clean 6.037
+      Dist::Zilla::App::Command::install 6.037
+      Dist::Zilla::App::Command::listdeps 6.037
+      Dist::Zilla::App::Command::new 6.037
+      Dist::Zilla::App::Command::nop 6.037
+      Dist::Zilla::App::Command::release 6.037
+      Dist::Zilla::App::Command::run 6.037
+      Dist::Zilla::App::Command::setup 6.037
+      Dist::Zilla::App::Command::smoke 6.037
+      Dist::Zilla::App::Command::test 6.037
+      Dist::Zilla::App::Command::version 6.037
+      Dist::Zilla::App::Tester 6.037
+      Dist::Zilla::App::Tester::Result 6.037
+      Dist::Zilla::Chrome::Term 6.037
+      Dist::Zilla::Chrome::Test 6.037
+      Dist::Zilla::Dist::Builder 6.037
+      Dist::Zilla::Dist::Minter 6.037
+      Dist::Zilla::File::FromCode 6.037
+      Dist::Zilla::File::InMemory 6.037
+      Dist::Zilla::File::OnDisk 6.037
+      Dist::Zilla::MVP::Assembler 6.037
+      Dist::Zilla::MVP::Assembler::GlobalConfig 6.037
+      Dist::Zilla::MVP::Assembler::Zilla 6.037
+      Dist::Zilla::MVP::Reader::Finder 6.037
+      Dist::Zilla::MVP::Reader::Perl 6.037
+      Dist::Zilla::MVP::RootSection 6.037
+      Dist::Zilla::MVP::Section 6.037
+      Dist::Zilla::MintingProfile::Default 6.037
+      Dist::Zilla::Path 6.037
+      Dist::Zilla::Plugin::AutoPrereqs 6.037
+      Dist::Zilla::Plugin::AutoVersion 6.037
+      Dist::Zilla::Plugin::CPANFile 6.037
+      Dist::Zilla::Plugin::ConfirmRelease 6.037
+      Dist::Zilla::Plugin::DistINI 6.037
+      Dist::Zilla::Plugin::Encoding 6.037
+      Dist::Zilla::Plugin::ExecDir 6.037
+      Dist::Zilla::Plugin::ExtraTests 6.037
+      Dist::Zilla::Plugin::FakeRelease 6.037
+      Dist::Zilla::Plugin::FileFinder::ByName 6.037
+      Dist::Zilla::Plugin::FileFinder::Filter 6.037
+      Dist::Zilla::Plugin::FinderCode 6.037
+      Dist::Zilla::Plugin::GatherDir 6.037
+      Dist::Zilla::Plugin::GatherDir::Template 6.037
+      Dist::Zilla::Plugin::GatherFile 6.037
+      Dist::Zilla::Plugin::GenerateFile 6.037
+      Dist::Zilla::Plugin::InlineFiles 6.037
+      Dist::Zilla::Plugin::License 6.037
+      Dist::Zilla::Plugin::MakeMaker 6.037
+      Dist::Zilla::Plugin::MakeMaker::Runner 6.037
+      Dist::Zilla::Plugin::Manifest 6.037
+      Dist::Zilla::Plugin::ManifestSkip 6.037
+      Dist::Zilla::Plugin::MetaConfig 6.037
+      Dist::Zilla::Plugin::MetaJSON 6.037
+      Dist::Zilla::Plugin::MetaNoIndex 6.037
+      Dist::Zilla::Plugin::MetaResources 6.037
+      Dist::Zilla::Plugin::MetaTests 6.037
+      Dist::Zilla::Plugin::MetaYAML 6.037
+      Dist::Zilla::Plugin::ModuleBuild 6.037
+      Dist::Zilla::Plugin::ModuleShareDirs 6.037
+      Dist::Zilla::Plugin::NextRelease 6.037
+      Dist::Zilla::Plugin::PkgDist 6.037
+      Dist::Zilla::Plugin::PkgVersion 6.037
+      Dist::Zilla::Plugin::PodCoverageTests 6.037
+      Dist::Zilla::Plugin::PodSyntaxTests 6.037
+      Dist::Zilla::Plugin::PodVersion 6.037
+      Dist::Zilla::Plugin::Prereqs 6.037
+      Dist::Zilla::Plugin::PruneCruft 6.037
+      Dist::Zilla::Plugin::PruneFiles 6.037
+      Dist::Zilla::Plugin::Readme 6.037
+      Dist::Zilla::Plugin::RemovePrereqs 6.037
+      Dist::Zilla::Plugin::ShareDir 6.037
+      Dist::Zilla::Plugin::TemplateModule 6.037
+      Dist::Zilla::Plugin::TestRelease 6.037
+      Dist::Zilla::Plugin::UploadToCPAN 6.037
+      Dist::Zilla::PluginBundle::Basic 6.037
+      Dist::Zilla::PluginBundle::Classic 6.037
+      Dist::Zilla::PluginBundle::FakeClassic 6.037
+      Dist::Zilla::PluginBundle::Filter 6.037
+      Dist::Zilla::Pragmas 6.037
+      Dist::Zilla::Prereqs 6.037
+      Dist::Zilla::Role::AfterBuild 6.037
+      Dist::Zilla::Role::AfterMint 6.037
+      Dist::Zilla::Role::AfterRelease 6.037
+      Dist::Zilla::Role::ArchiveBuilder 6.037
+      Dist::Zilla::Role::BeforeArchive 6.037
+      Dist::Zilla::Role::BeforeBuild 6.037
+      Dist::Zilla::Role::BeforeMint 6.037
+      Dist::Zilla::Role::BeforeRelease 6.037
+      Dist::Zilla::Role::BuildPL 6.037
+      Dist::Zilla::Role::BuildRunner 6.037
+      Dist::Zilla::Role::Chrome 6.037
+      Dist::Zilla::Role::ConfigDumper 6.037
+      Dist::Zilla::Role::EncodingProvider 6.037
+      Dist::Zilla::Role::ExecFiles 6.037
+      Dist::Zilla::Role::File 6.037
+      Dist::Zilla::Role::FileFinder 6.037
+      Dist::Zilla::Role::FileFinderUser 6.037
+      Dist::Zilla::Role::FileGatherer 6.037
+      Dist::Zilla::Role::FileInjector 6.037
+      Dist::Zilla::Role::FileMunger 6.037
+      Dist::Zilla::Role::FilePruner 6.037
+      Dist::Zilla::Role::InstallTool 6.037
+      Dist::Zilla::Role::LicenseProvider 6.037
+      Dist::Zilla::Role::MetaProvider 6.037
+      Dist::Zilla::Role::MintingProfile 6.037
+      Dist::Zilla::Role::MintingProfile::ShareDir 6.037
+      Dist::Zilla::Role::ModuleMaker 6.037
+      Dist::Zilla::Role::MutableFile 6.037
+      Dist::Zilla::Role::NameProvider 6.037
+      Dist::Zilla::Role::PPI 6.037
+      Dist::Zilla::Role::Plugin 6.037
+      Dist::Zilla::Role::PluginBundle 6.037
+      Dist::Zilla::Role::PluginBundle::Easy 6.037
+      Dist::Zilla::Role::PrereqScanner 6.037
+      Dist::Zilla::Role::PrereqSource 6.037
+      Dist::Zilla::Role::ReleaseStatusProvider 6.037
+      Dist::Zilla::Role::Releaser 6.037
+      Dist::Zilla::Role::ShareDir 6.037
+      Dist::Zilla::Role::Stash 6.037
+      Dist::Zilla::Role::Stash::Authors 6.037
+      Dist::Zilla::Role::Stash::Login 6.037
+      Dist::Zilla::Role::StubBuild 6.037
+      Dist::Zilla::Role::TestRunner 6.037
+      Dist::Zilla::Role::TextTemplate 6.037
+      Dist::Zilla::Role::VersionProvider 6.037
+      Dist::Zilla::Stash::Mint 6.037
+      Dist::Zilla::Stash::PAUSE 6.037
+      Dist::Zilla::Stash::Rights 6.037
+      Dist::Zilla::Stash::User 6.037
+      Dist::Zilla::Tester 6.037
+      Dist::Zilla::Tester::_Builder 6.037
+      Dist::Zilla::Tester::_Minter 6.037
+      Dist::Zilla::Tutorial 6.037
+      Dist::Zilla::Types 6.037
+      Dist::Zilla::Util 6.037
+      Dist::Zilla::Util::AuthorDeps 6.037
+      Test::DZil 6.037
     requirements:
       App::Cmd::Command::version 0
       App::Cmd::Setup 0.330
@@ -1531,10 +1534,10 @@ DISTRIBUTIONS
       strict 0
       version 0.80
       warnings 0
-  Dist-Zilla-Plugin-Git-Contributors-0.038
-    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Git-Contributors-0.038.tar.gz
+  Dist-Zilla-Plugin-Git-Contributors-0.039
+    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Git-Contributors-0.039.tar.gz
     provides:
-      Dist::Zilla::Plugin::Git::Contributors 0.038
+      Dist::Zilla::Plugin::Git::Contributors 0.039
     requirements:
       Data::Dumper 0
       Dist::Zilla 4.300039
@@ -1551,7 +1554,7 @@ DISTRIBUTIONS
       Unicode::Collate 0.53
       Unicode::Normalize 0
       namespace::autoclean 0
-      perl 5.008
+      perl 5.013010
       strict 0
       version 0
       warnings 0
@@ -1818,51 +1821,38 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
-  ExtUtils-Builder-0.019
-    pathname: L/LE/LEONT/ExtUtils-Builder-0.019.tar.gz
+  ExtUtils-Builder-0.020
+    pathname: L/LE/LEONT/ExtUtils-Builder-0.020.tar.gz
     provides:
-      ExtUtils::Builder 0.019
-      ExtUtils::Builder::Action 0.019
-      ExtUtils::Builder::Action::Code 0.019
-      ExtUtils::Builder::Action::Command 0.019
-      ExtUtils::Builder::Action::Composite 0.019
-      ExtUtils::Builder::Action::Function 0.019
-      ExtUtils::Builder::Action::Perl 0.019
-      ExtUtils::Builder::Action::Primitive 0.019
-      ExtUtils::Builder::CPAN::Tool 0.019
-      ExtUtils::Builder::FileSet 0.019
-      ExtUtils::Builder::FileSet::Filter 0.019
-      ExtUtils::Builder::FileSet::Free 0.019
-      ExtUtils::Builder::FileSet::Subst 0.019
-      ExtUtils::Builder::MakeMaker 0.019
-      ExtUtils::Builder::Node 0.019
-      ExtUtils::Builder::Plan 0.019
-      ExtUtils::Builder::Planner 0.019
-      ExtUtils::Builder::Planner::Extension 0.019
-      ExtUtils::Builder::Serializer 0.019
-      ExtUtils::Builder::Util 0.019
+      ExtUtils::Builder 0.020
+      ExtUtils::Builder::Action 0.020
+      ExtUtils::Builder::Action::Code 0.020
+      ExtUtils::Builder::Action::Command 0.020
+      ExtUtils::Builder::Action::Composite 0.020
+      ExtUtils::Builder::Action::Function 0.020
+      ExtUtils::Builder::Action::Perl 0.020
+      ExtUtils::Builder::Action::Primitive 0.020
+      ExtUtils::Builder::CPAN::Tool 0.020
+      ExtUtils::Builder::FileSet 0.020
+      ExtUtils::Builder::FileSet::Filter 0.020
+      ExtUtils::Builder::FileSet::Free 0.020
+      ExtUtils::Builder::FileSet::Subst 0.020
+      ExtUtils::Builder::MakeMaker 0.020
+      ExtUtils::Builder::Node 0.020
+      ExtUtils::Builder::Plan 0.020
+      ExtUtils::Builder::Planner 0.020
+      ExtUtils::Builder::Planner::Extension 0.020
+      ExtUtils::Builder::Serializer 0.020
+      ExtUtils::Builder::Util 0.020
     requirements:
       CPAN::Meta 0
-      Carp 0
-      Data::Dumper 0
-      Exporter 5.57
-      ExtUtils::Config 0
-      ExtUtils::Config::MakeMaker 0
+      ExtUtils::Config 0.009
       ExtUtils::Helpers 0.027
       ExtUtils::MakeMaker 6.68
-      ExtUtils::Manifest 0
-      File::Basename 0
-      File::Spec 0
-      File::Spec::Unix 0
       List::Util 1.45
       Perl::OSType 0
-      Scalar::Util 0
-      base 0
       parent 0
       perl 5.010
-      strict 0
-      version 0
-      warnings 0
   ExtUtils-Builder-Compiler-0.035
     pathname: L/LE/LEONT/ExtUtils-Builder-Compiler-0.035.tar.gz
     provides:
@@ -2123,12 +2113,12 @@ DISTRIBUTIONS
       XS::Parse::Sublike 0.31
       XS::Parse::Sublike::Builder 0.31
       perl 5.016
-  Getopt-Long-Descriptive-0.116
-    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.116.tar.gz
+  Getopt-Long-Descriptive-0.117
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.117.tar.gz
     provides:
-      Getopt::Long::Descriptive 0.116
-      Getopt::Long::Descriptive::Opts 0.116
-      Getopt::Long::Descriptive::Usage 0.116
+      Getopt::Long::Descriptive 0.117
+      Getopt::Long::Descriptive::Opts 0.117
+      Getopt::Long::Descriptive::Usage 0.117
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -2372,46 +2362,46 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  IO-Async-0.804
-    pathname: P/PE/PEVANS/IO-Async-0.804.tar.gz
+  IO-Async-0.805
+    pathname: P/PE/PEVANS/IO-Async-0.805.tar.gz
     provides:
-      Future::IO::Impl::IOAsync 0.804
-      IO::Async 0.804
-      IO::Async::Channel 0.804
-      IO::Async::Debug 0.804
-      IO::Async::File 0.804
-      IO::Async::FileStream 0.804
-      IO::Async::Function 0.804
-      IO::Async::Future 0.804
-      IO::Async::Handle 0.804
-      IO::Async::Internals::ChildManager 0.804
-      IO::Async::Internals::FunctionWorker 0.804
-      IO::Async::Listener 0.804
-      IO::Async::Loop 0.804
-      IO::Async::Loop::Poll 0.804
-      IO::Async::Loop::Select 0.804
-      IO::Async::LoopTests 0.804
-      IO::Async::Metrics 0.804
-      IO::Async::Notifier 0.804
-      IO::Async::OS 0.804
-      IO::Async::OS::MSWin32 0.804
-      IO::Async::OS::cygwin 0.804
-      IO::Async::OS::linux 0.804
-      IO::Async::PID 0.804
-      IO::Async::Process 0.804
-      IO::Async::Protocol 0.804
-      IO::Async::Protocol::LineStream 0.804
-      IO::Async::Protocol::Stream 0.804
-      IO::Async::Resolver 0.804
-      IO::Async::Routine 0.804
-      IO::Async::Signal 0.804
-      IO::Async::Socket 0.804
-      IO::Async::Stream 0.804
-      IO::Async::Test 0.804
-      IO::Async::Timer 0.804
-      IO::Async::Timer::Absolute 0.804
-      IO::Async::Timer::Countdown 0.804
-      IO::Async::Timer::Periodic 0.804
+      Future::IO::Impl::IOAsync 0.805
+      IO::Async 0.805
+      IO::Async::Channel 0.805
+      IO::Async::Debug 0.805
+      IO::Async::File 0.805
+      IO::Async::FileStream 0.805
+      IO::Async::Function 0.805
+      IO::Async::Future 0.805
+      IO::Async::Handle 0.805
+      IO::Async::Internals::ChildManager 0.805
+      IO::Async::Internals::FunctionWorker 0.805
+      IO::Async::Listener 0.805
+      IO::Async::Loop 0.805
+      IO::Async::Loop::Poll 0.805
+      IO::Async::Loop::Select 0.805
+      IO::Async::LoopTests 0.805
+      IO::Async::Metrics 0.805
+      IO::Async::Notifier 0.805
+      IO::Async::OS 0.805
+      IO::Async::OS::MSWin32 0.805
+      IO::Async::OS::cygwin 0.805
+      IO::Async::OS::linux 0.805
+      IO::Async::PID 0.805
+      IO::Async::Process 0.805
+      IO::Async::Protocol 0.805
+      IO::Async::Protocol::LineStream 0.805
+      IO::Async::Protocol::Stream 0.805
+      IO::Async::Resolver 0.805
+      IO::Async::Routine 0.805
+      IO::Async::Signal 0.805
+      IO::Async::Socket 0.805
+      IO::Async::Stream 0.805
+      IO::Async::Test 0.805
+      IO::Async::Timer 0.805
+      IO::Async::Timer::Absolute 0.805
+      IO::Async::Timer::Countdown 0.805
+      IO::Async::Timer::Periodic 0.805
     requirements:
       Exporter 5.57
       File::stat 0
@@ -2449,18 +2439,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.095
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.095.tar.gz
+  IO-Socket-SSL-2.098
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.098.tar.gz
     provides:
-      IO::Socket::SSL 2.095
+      IO::Socket::SSL 2.098
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.095
-      IO::Socket::SSL::OCSP_Resolver 2.095
+      IO::Socket::SSL::OCSP_Cache 2.098
+      IO::Socket::SSL::OCSP_Resolver 2.098
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.095
-      IO::Socket::SSL::SSL_HANDLE 2.095
-      IO::Socket::SSL::Session_Cache 2.095
-      IO::Socket::SSL::Trace 2.095
+      IO::Socket::SSL::SSL_Context 2.098
+      IO::Socket::SSL::SSL_HANDLE 2.098
+      IO::Socket::SSL::Session_Cache 2.098
+      IO::Socket::SSL::Trace 2.098
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2537,11 +2527,11 @@ DISTRIBUTIONS
       Scalar::Util 0
       perl 5.006002
       strict 0
-  LWP-Protocol-https-6.14
-    pathname: O/OA/OALDERS/LWP-Protocol-https-6.14.tar.gz
+  LWP-Protocol-https-6.15
+    pathname: O/OA/OALDERS/LWP-Protocol-https-6.15.tar.gz
     provides:
-      LWP::Protocol::https 6.14
-      LWP::Protocol::https::Socket 6.14
+      LWP::Protocol::https 6.15
+      LWP::Protocol::https::Socket 6.15
     requirements:
       ExtUtils::MakeMaker 0
       IO::Socket::SSL 1.970
@@ -4146,12 +4136,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0051
-    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
+  Plack-1.0053
+    pathname: C/CR/CRABAPP/Plack-1.0053-TRIAL.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0051
+      Plack 1.0053
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -4210,9 +4200,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0051
+      Plack::Request 1.0053
       Plack::Request::Upload undef
-      Plack::Response 1.0051
+      Plack::Response 1.0053
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
@@ -5299,49 +5289,50 @@ DISTRIBUTIONS
       Time::HiRes 0
       XSLoader 0.02
       perl 5.008001
-  TimeDate-2.33
-    pathname: A/AT/ATOOMIC/TimeDate-2.33.tar.gz
+  TimeDate-2.34
+    pathname: A/AT/ATOOMIC/TimeDate-2.34.tar.gz
     provides:
-      Date::Format 2.24
-      Date::Format::Generic 2.24
-      Date::Language 1.10
-      Date::Language::Afar 0.99
-      Date::Language::Amharic 1.00
-      Date::Language::Austrian 1.01
-      Date::Language::Brazilian 1.01
-      Date::Language::Bulgarian 1.01
-      Date::Language::Chinese 1.00
-      Date::Language::Chinese_GB 1.01
-      Date::Language::Czech 1.01
-      Date::Language::Danish 1.01
-      Date::Language::Dutch 1.02
-      Date::Language::English 1.01
-      Date::Language::Finnish 1.01
-      Date::Language::French 1.04
-      Date::Language::Gedeo 0.99
-      Date::Language::German 1.02
-      Date::Language::Greek 1.00
-      Date::Language::Hungarian 1.01
-      Date::Language::Icelandic 1.01
-      Date::Language::Italian 1.01
-      Date::Language::Norwegian 1.01
-      Date::Language::Occitan 1.04
-      Date::Language::Oromo 0.99
-      Date::Language::Romanian 1.01
-      Date::Language::Russian 1.01
-      Date::Language::Russian_cp1251 1.01
-      Date::Language::Russian_koi8r 1.01
-      Date::Language::Sidama 0.99
-      Date::Language::Somali 0.99
-      Date::Language::Spanish 1.00
-      Date::Language::Swedish 1.01
-      Date::Language::Tigrinya 1.00
-      Date::Language::TigrinyaEritrean 1.00
-      Date::Language::TigrinyaEthiopian 1.00
-      Date::Language::Turkish 1.0
-      Date::Parse 2.33
-      Time::Zone 2.24
-      TimeDate 1.21
+      Date::Format 2.34
+      Date::Format::Generic 2.34
+      Date::Language 2.34
+      Date::Language::Afar 2.34
+      Date::Language::Amharic 2.34
+      Date::Language::Arabic 2.34
+      Date::Language::Austrian 2.34
+      Date::Language::Brazilian 2.34
+      Date::Language::Bulgarian 2.34
+      Date::Language::Chinese 2.34
+      Date::Language::Chinese_GB 2.34
+      Date::Language::Czech 2.34
+      Date::Language::Danish 2.34
+      Date::Language::Dutch 2.34
+      Date::Language::English 2.34
+      Date::Language::Finnish 2.34
+      Date::Language::French 2.34
+      Date::Language::Gedeo 2.34
+      Date::Language::German 2.34
+      Date::Language::Greek 2.34
+      Date::Language::Hungarian 2.34
+      Date::Language::Icelandic 2.34
+      Date::Language::Italian 2.34
+      Date::Language::Norwegian 2.34
+      Date::Language::Occitan 2.34
+      Date::Language::Oromo 2.34
+      Date::Language::Romanian 2.34
+      Date::Language::Russian 2.34
+      Date::Language::Russian_cp1251 2.34
+      Date::Language::Russian_koi8r 2.34
+      Date::Language::Sidama 2.34
+      Date::Language::Somali 2.34
+      Date::Language::Spanish 2.34
+      Date::Language::Swedish 2.34
+      Date::Language::Tigrinya 2.34
+      Date::Language::TigrinyaEritrean 2.34
+      Date::Language::TigrinyaEthiopian 2.34
+      Date::Language::Turkish 2.34
+      Date::Parse 2.34
+      Time::Zone 2.34
+      TimeDate 2.34
     requirements:
       ExtUtils::MakeMaker 0
   Try-Tiny-0.32
@@ -5356,60 +5347,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.010000
-    pathname: T/TO/TOBYINK/Type-Tiny-2.010000.tar.gz
+  Type-Tiny-2.010001
+    pathname: T/TO/TOBYINK/Type-Tiny-2.010001.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.010000
-      Error::TypeTiny 2.010000
-      Error::TypeTiny::Assertion 2.010000
-      Error::TypeTiny::Compilation 2.010000
-      Error::TypeTiny::WrongNumberOfParameters 2.010000
-      Eval::TypeTiny 2.010000
-      Eval::TypeTiny::CodeAccumulator 2.010000
-      Reply::Plugin::TypeTiny 2.010000
-      Test::TypeTiny 2.010000
-      Type::Coercion 2.010000
-      Type::Coercion::FromMoose 2.010000
-      Type::Coercion::Union 2.010000
-      Type::Library 2.010000
-      Type::Params 2.010000
-      Type::Params::Alternatives 2.010000
-      Type::Params::Parameter 2.010000
-      Type::Params::Signature 2.010000
-      Type::Parser 2.010000
-      Type::Parser::AstBuilder 2.010000
-      Type::Parser::Token 2.010000
-      Type::Parser::TokenStream 2.010000
-      Type::Registry 2.010000
-      Type::Tie 2.010000
-      Type::Tie::ARRAY 2.010000
-      Type::Tie::BASE 2.010000
-      Type::Tie::HASH 2.010000
-      Type::Tie::SCALAR 2.010000
-      Type::Tiny 2.010000
-      Type::Tiny::Bitfield 2.010000
-      Type::Tiny::Class 2.010000
-      Type::Tiny::ConstrainedObject 2.010000
-      Type::Tiny::Duck 2.010000
-      Type::Tiny::Enum 2.010000
-      Type::Tiny::Intersection 2.010000
-      Type::Tiny::Role 2.010000
-      Type::Tiny::Union 2.010000
-      Type::Utils 2.010000
-      Types::Common 2.010000
-      Types::Common::Numeric 2.010000
-      Types::Common::String 2.010000
-      Types::Standard 2.010000
-      Types::Standard::ArrayRef 2.010000
-      Types::Standard::CycleTuple 2.010000
-      Types::Standard::Dict 2.010000
-      Types::Standard::HashRef 2.010000
-      Types::Standard::Map 2.010000
-      Types::Standard::ScalarRef 2.010000
-      Types::Standard::StrMatch 2.010000
-      Types::Standard::Tied 2.010000
-      Types::Standard::Tuple 2.010000
-      Types::TypeTiny 2.010000
+      Devel::TypeTiny::Perl58Compat 2.010001
+      Error::TypeTiny 2.010001
+      Error::TypeTiny::Assertion 2.010001
+      Error::TypeTiny::Compilation 2.010001
+      Error::TypeTiny::WrongNumberOfParameters 2.010001
+      Eval::TypeTiny 2.010001
+      Eval::TypeTiny::CodeAccumulator 2.010001
+      Reply::Plugin::TypeTiny 2.010001
+      Test::TypeTiny 2.010001
+      Type::Coercion 2.010001
+      Type::Coercion::FromMoose 2.010001
+      Type::Coercion::Union 2.010001
+      Type::Library 2.010001
+      Type::Params 2.010001
+      Type::Params::Alternatives 2.010001
+      Type::Params::Parameter 2.010001
+      Type::Params::Signature 2.010001
+      Type::Parser 2.010001
+      Type::Parser::AstBuilder 2.010001
+      Type::Parser::Token 2.010001
+      Type::Parser::TokenStream 2.010001
+      Type::Registry 2.010001
+      Type::Tie 2.010001
+      Type::Tie::ARRAY 2.010001
+      Type::Tie::BASE 2.010001
+      Type::Tie::HASH 2.010001
+      Type::Tie::SCALAR 2.010001
+      Type::Tiny 2.010001
+      Type::Tiny::Bitfield 2.010001
+      Type::Tiny::Class 2.010001
+      Type::Tiny::ConstrainedObject 2.010001
+      Type::Tiny::Duck 2.010001
+      Type::Tiny::Enum 2.010001
+      Type::Tiny::Intersection 2.010001
+      Type::Tiny::Role 2.010001
+      Type::Tiny::Union 2.010001
+      Type::Utils 2.010001
+      Types::Common 2.010001
+      Types::Common::Numeric 2.010001
+      Types::Common::String 2.010001
+      Types::Standard 2.010001
+      Types::Standard::ArrayRef 2.010001
+      Types::Standard::CycleTuple 2.010001
+      Types::Standard::Dict 2.010001
+      Types::Standard::HashRef 2.010001
+      Types::Standard::Map 2.010001
+      Types::Standard::ScalarRef 2.010001
+      Types::Standard::StrMatch 2.010001
+      Types::Standard::Tied 2.010001
+      Types::Standard::Tuple 2.010001
+      Types::TypeTiny 2.010001
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17

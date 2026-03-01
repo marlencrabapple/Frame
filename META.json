@@ -34,12 +34,12 @@
       "develop" : {
          "recommends" : {
             "Archive::Tar::Wrapper" : "0",
-            "Perl::Critic" : "1.144",
-            "Perl::Critic::Community" : "v1.0.3",
+            "Perl::Critic" : "0",
+            "Perl::Critic::Community" : "0",
             "Perl::Tidy" : "20221112"
          },
          "requires" : {
-            "Dist::Milla" : "v1.0.21",
+            "Dist::Milla" : "0",
             "Plack::Middleware::Debug" : "0",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion::Fast" : "0.04",
@@ -82,7 +82,7 @@
             "PadWalker" : "0",
             "Parallel::Prefork" : "0",
             "Path::Tiny" : "0",
-            "Plack" : "== 1.0051",
+            "Plack" : "0",
             "SQL::Abstract" : "0",
             "Server::Starter" : "0",
             "Syntax::Keyword::Dynamically" : "0",
@@ -99,7 +99,7 @@
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.96",
+            "Test::More" : "0",
             "Test::Pod" : "0"
          }
       }
