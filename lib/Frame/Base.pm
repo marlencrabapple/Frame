@@ -16,10 +16,17 @@ use Time::HiRes;
 use Module::Metadata;
 use IPC::Nosh::IO;
 
+use Class::Exporter;
+
+use vars '@EXPORT';
+@EXPORT = qw(dmsg json __pkgfn__ callstack);
+
 BEGIN {
+
+    use Class::Exporter;
     require Exporter;
     our @ISA    = qw(Exporter);
-    our @EXPORT = qw(json __pkgfn__ callstack);
+    our @EXPORT = qw(dmsg json __pkgfn__ callstack);
     use subs @EXPORT;
     $^H{ __PACKAGE__ . '/user' } = 1;
 }
@@ -41,6 +48,8 @@ APPLY($mop) {
     use utf8;
     use v5.40;
 
+    use Class::Exporter;
+
     use Exporter 'import';
     our @EXPORT = @{__PACKAGE__::EXPORT};
     $^H{ __PACKAGE__ . '/user' } = 1;
@@ -49,6 +58,7 @@ APPLY($mop) {
 ADJUSTPARAMS($params) {
     use utf8;
     use v5.40;
+    use Class::Exporter;
 
     use Exporter 'import';
     our @EXPORT = @{__PACKAGE__::EXPORT};
