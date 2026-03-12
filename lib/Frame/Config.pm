@@ -63,6 +63,6 @@ ADJUST {
         $_config = { %$_config, %$_config_curr };
     }
 
-    const our $run_config = {%$_config};
+    const our $run_config => {%$_config};
     $config = $run_config
 }
