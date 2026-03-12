@@ -21,7 +21,7 @@ const our $METHRE  => qr/^ptn$/i;
 const our $RERE    => qr/^regexp$/i;
 const our $DASH_RE => qr/=/;
 
-method add ( $methods, $pattern, @args ) {
+method add ( $method, $pattern, @args ) {
     my %route_args = ( factory => $self->app );
     my $opts       = ref $args[$#args] eq 'HASH' ? pop @args : {};
 
@@ -97,9 +97,9 @@ method add ( $methods, $pattern, @args ) {
             );
             $has_args = 1;
         }
-        elsif ( ref $arg eq 'ARRAY' && scalar @$methods == 0 ) {
+        elsif ( ref $arg eq 'ARRAY' && scalar @$method == 0 ) {
             next unless $$arg[0] =~ $METHRE;
-            $route_args{methods} = $arg;
+            $route_args{method} = $arg;
             $has_args = 1;
         }
     }
@@ -108,7 +108,7 @@ method add ( $methods, $pattern, @args ) {
       if !$has_args && !$route_args{eol} && scalar @args == 1;
 
     $route_args{pattern} //= Frame::Routes::Pattern->new( pattern => $pattern );
-    $methods = [@Frame::Routes::Common::METHODS] unless scalar @$methods;
+    $method = [@Frame::Routes::Common::METHODS] unless scalar @$method;
 
     if ( $$opts{prev_stop} ) {
         my @stops;
@@ -122,11 +122,11 @@ method add ( $methods, $pattern, @args ) {
 
     my $route = Frame::Routes::Route->new(
         %route_args, %$opts,
-        methods => $methods,
-        root    => $self
+        method => $method,
+        root   => $self
     );
 
-    foreach my $method (@$methods) {
+    foreach my $method (@$method) {
         my $branch = $route->tree->{$method}[ scalar $route->pattern_arr - 1 ];
 
         $self->tree->{$method}[ scalar $route->pattern_arr - 1 ]

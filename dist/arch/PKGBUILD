@@ -1,63 +1,52 @@
-# Maintainer: Ian Bradley <crabapp@hikki.tech>
-_pkgname=perl-frame
-pkgname="$_pkgname-git"
-_perl_namespace=Frame
-_perl_module=Frame
-pkgver=1
-pkgrel=1
-pkgdesc="Build system for PKGBUILD based Linux distributions"
-arch=(any)
+# Maintainer: Ian Bradley <ian@pennyfoss.org>
+_package="Frame"
+_repo="${_package//::/-}"
+pkgname="perl-${_repo,,*}"
+pkgver=1.03
+_dist="${_repo-${pkgver/%.r*/}}"
+pkgrel=2
+pkgdesc="$_package - hoedown for Perl 5"
+arch=(x86_64 x86_64_v3 aarch64)
 license=('Artistic-1.0-Perl' 'GPL-1.0-or-later')
-depends=('perl' 'perl-plack' 'perl-starlet' 'perl-cpanel-json-xs' 'perl-syntax-keyword-try' 'perl-dist-zilla'
-         'perl-io-async'
-         'perl-app-fatpacker' 'perl-module-build' 'perl-dbi'
-	 'perl-inline-c' 'perl-path-tiny' 'perl-net-ssleay' 'perl-module-build-xsutil') 
-makedepends=('git' 'cpanminus')
+depends=('perl' 'perl-exporter' 'perl-parent')
+makedepends=('perl-extutils-parsexs' 'perl-file-pushd' 'perl-module-build')
 options=('!emptydirs' 'staticlibs')
-url="https://cincotuf.lan/user/crabapp/Frame"
-_commit=9500a8a112da3d49c9858493ec0e7a3fc742367c
-source=("$_pkgname::git+$url#commit=$_commit")
-sha512sums=('cb99060250312df7888fc57299625dbf6f5d755910fd69fd7874c95d2da94413ca605336bcdc4efe4a0eb811fd7d9a64c9aca676e119ec79d834d5bdc252276e')
-b2sums=('e10e44eef3d9f9cbb82dcf5c6f6536b63e0a7530505e15096e93535a694cdbada77a20e2647636680386e82cd6c1c287573418357aa268f46937f997ead39593')
-
-pkgver() {
-  cd "$srcdir/$_pkgname"
-  (
-    set -o pipefail
-    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-      printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
-  )
-}
+url="https://github.com/tokuhirom/Text-Markdown-Hoedown"
+_hoedown_commit=980b9c549b4348d50b683ecee6abee470b98acda
+source=("git+$url.git#tag=$pkgver"
+  "$pkgname-hoedown::git+https://github.com/hoedown/hoedown.git#commit=$_hoedown_commit")
+sha512sums=('2fd14709485cc8bec32c39ba061610bb85aafd7613987b8bda053f5fb4065e367b13bb061a154f68371279b8a339d2b00dbe72eb02ebabd1560d36ef4640a540'
+  '96085fa0863fb488cb41ca761f8658812d3280029f81af0893d20480de12113b7fab854773817349babd92468b941ca32e7369366846c29deab098d0f99ea893')
+b2sums=('37a6cfbc9e7a37f96d8b6a8ae599b1cda88740abce9e35af0314b416f958836784298c6a11f5f91f02d116f7e24cfc2d193c541c24b25b2f01190dfb9f7bb3fb'
+  'ca0ec3d0cdb0ff389634b29b028b899f417431054755191489a25a139104f218596494ac92f7cb61d6d5612d481a73145d8f29d841776de0e0fe587d4f886ba9')
 
 prepare() {
-  cd "$srcdir/$_pkgname"
+  cd "$srcdir/$_repo"
 
   unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+  export PERL_MM_USER_DEFAULT=1 MODULEBUILDRC=/dev/null
 
-  export PERL5LIB="$(pwd)/local/lib/perl5"
-  export PERL_CPANM_OPT="-L$(pwd)/local \
-   --verbose \
-   --save-dists .\
-   --self-contained \
-   --with-develop \
-   --with-config \
-   --with-all-features"
+  git config submodule."hoedown".url "${srcdir}/${pkgname}"-hoedown
+  git -c protocol.file.allow=always submodule update --init --recursive
 }
 
 build() {
-  cd "$srcdir/$_pkgname"
-  cpanm Net::SSLeay --notest
-  cpanm --installdeps .
-  perl Build.PL -prefix=/usr
+  cd "$srcdir/$_repo"
+
+  perl Build.PL --create_packlist=0
   ./Build build
 }
 
 check() {
-  cd "$srcdir/$_pkgname"
-  ./Build testall
+  cd "$srcdir/$_repo"
+  ./Build test
 }
 
 package() {
-  cd "$srcdir/$_pkgname"
-  INSTALL_BASE=/usr ./Build install --prefix=/usr  --destdir "$pkgdir" -DESTDIR="$pkgdir"
+  cd "$srcdir/$_repo"
+
+  ./Build install \
+    --destdir="$pkgdir" \
+    --installdirs=vendor \
+    --verbose
 }

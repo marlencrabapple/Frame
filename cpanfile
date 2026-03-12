@@ -1,4 +1,5 @@
 requires 'Plack';
+requires 'IPC::Nosh', dist => 'CRABAPP/IPC-Nosh-0.01-TRIAL.tar.gz';
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';
 requires 'Cpanel::JSON::XS';
@@ -44,16 +45,17 @@ requires 'Time::Moment';
 requires 'TOML::Tiny';
 
 on develop => sub {
-  recommends 'Perl::Tidy', '20221112';
-  recommends 'Perl::Critic';
-  recommends 'Perl::Critic::Community';
-  requires 'Dist::Milla';
-  requires 'Plack::Middleware::Debug';
-  recommends 'Archive::Tar::Wrapper';
+    recommends 'Perl::Tidy', '20221112';
+    recommends 'Perl::Critic';
+    recommends 'Perl::Critic::Community';
+    requires 'Dist::Milla';
+    requires 'Plack::Middleware::Debug';
+    requires 'Plack::Middleware::REPL';
+    recommends 'Archive::Tar::Wrapper';
 };
 
 on test => sub {
-  requires 'Test::More';
-  requires 'Test::Pod';
+    requires 'Test::More';
+    requires 'Test::Pod';
 }
 
