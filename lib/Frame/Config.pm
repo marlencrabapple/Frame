@@ -10,28 +10,41 @@ use TOML::Tiny qw(from_toml to_toml);
 use Path::Tiny;
 use Const::Fast;
 use Syntax::Keyword::Try;
+use IPC::Nosh::IO;
 
-our $_config_default = { charset => 'utf8' };
+our $_default_config_init = { charset => 'utf8' };
 
 BEGIN {
+
+    const our $default_config_inline => q{
+[default]
+charset = "utf8"
+environment = "devlopment"
+};
+
     try {
         my $error;
 
-        ( $_config_default, $error ) = from_toml(
-            path( $ENV{FRAME_DEFAULT_CONFIG_FILE} // 'config-default.toml' )
-              ->slurp_utf8 );
+        my $default_config_path =
+          path( $ENV{FRAME_DEFAULT_CONFIG_FILE} // 'config-default.toml' );
+
+        ( $_default_config_init, $error ) = from_toml(
+              $default_config_path->exists
+            ? $default_config_path->slurp_utf8
+            : $default_config_inline
+        );
 
         if ($error) {
-            die $error;
+            fatal $error;
         }
     }
     catch ($e) {
         our $_config_default = { charset => 'utf8' };
-        warn $e
+        err "$e"
     }
 }
 
-const our $config_default      => {%$_config_default};
+const our $config_default      => {%$_default_config_init};
 const our $config_default_path => [ 'config-default.toml', 'config.toml' ];
 
 field $config_in : param(config) = $config_default_path;
@@ -52,25 +65,4 @@ ADJUST {
 
     const our $run_config = {%$_config};
     $config = $run_config
-}
-
-const our $defaultconfig_inline => q{
-charset="utf8"
-environment="devlopment"
-
-middleware={ "Plack::Middleware::Debug" => { 
-  enable_if = $ENV{PLACKENV} 
-  },
-  "Plack::Middleware::Static" => {
-    path => www,
-    root => 'static'
-  },
-  "Plack::Middleware::REPL" => {
-    enable_if = $ENV{PLACKENV}
-  },
-
-  "Plack::Middleware::ReverseProxy" => {
-    enable_if => !ENV{REMOTE_ADDR}
-  }
-}
 }

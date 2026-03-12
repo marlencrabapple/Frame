@@ -13,8 +13,7 @@ const our $PATTERN_RE     => qr/([^\/]+)(?:\/)?/;
 const our $PLACEHOLDER_RE => qr/^\:(.+)$/;
 const our $NAME_RE        => qr/[\W]/;
 
-# field $method :param :reader;
-field $methods : param : reader;
+field $method  : param : reader;
 field $pattern : param : reader;
 field $filter  : param : reader   = undef;
 field $dest    : param : reader   = undef;
@@ -36,7 +35,7 @@ ADJUSTPARAMS($params) {
     my $depth = scalar @pattern_arr - 1;
     my $i     = 0;
 
-    foreach my $method (@$methods) {
+    foreach my $method (@$method) {
         my $branches = $self->tree->{$method}[$depth] //= {};
         my $curr     = $branches;
 
@@ -64,8 +63,8 @@ ADJUSTPARAMS($params) {
     continue { $i++ }
 }
 
-method add ( $methods, $pattern, @args ) {
-    $root->add( $methods, $self->pattern->pattern . $pattern,
+method add ( $method, $pattern, @args ) {
+    $root->add( $method, $self->pattern->pattern . $pattern,
         @args, { prev_stop => $self, has_stops => $self->has_stops } );
 }
 
