@@ -49,7 +49,7 @@ ADJUSTPARAMS($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    dmsg( { config => $config, config_default => $config_default } );
+    dmsg $config, $config_default;
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -75,7 +75,7 @@ ADJUSTPARAMS($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        dmsg( { e => $e } )
+        dmsg $e
     }
 
     $routes = Frame::Routes->new( app => $self );

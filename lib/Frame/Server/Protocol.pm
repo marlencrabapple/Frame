@@ -1,6 +1,7 @@
 use Object::Pad ':experimental(:all)';
 
 package Frame::Server::Protocol;
+
 class Frame::Server::Protocol : isa(Net::Async::HTTP::Server::Protocol) :
   does(Frame::Base);
 
@@ -23,7 +24,7 @@ const our $HEADRE           => qr/^(.*?\r\n)/s;
 
 const our @CHUNKRE => ( qr/^(([0-9a-fA-F]+).*\r\n)/, qr/^\r\n/ );
 
-field $read_timeout : accessor : weak;
+field $read_timeout       : accessor : weak;
 field $req_header_timeout : accessor : weak;
 field $keep_alive_timeout : accessor : weak;
 field $inactivity_timeout : accessor : weak;
@@ -45,11 +46,7 @@ method on_read ( $buffref, $eof ) {
     my $readh = $self->read_handle;
 
     my %env = (
-        SERVER_PORT            => $readh->sockport,
-        SERVER_NAME            => $readh->sockhost,
         SCRIPT_NAME            => '',
-        REMOTE_ADDR            => $readh->peerhost,
-        REMOTE_PORT            => $readh->peerport || 0,
         'psgi.version'         => [ 1, 1 ],
         'psgi.errors'          => \*STDERR,
         'psgi.url_scheme'      => $$self{ssl} ? 'https' : 'http',
@@ -63,6 +60,16 @@ method on_read ( $buffref, $eof ) {
         'psgix.io'             => $readh,
         'io.async.loop'        => $self->loop
     );
+
+    if ( $readh->can("sockport") ) {    # INET or IP
+        @env{qw(SERVER_PORT SERVER_NAME REMOTE_ADDR REMOTE_PORT)} = (
+            $readh->sockport, $readh->sockhost,
+            $readh->peerhost, ( $readh->peerport // 0 )
+        );
+    }
+    elsif ( $readh->can("hostpath") ) {    # UNIX
+        @env{qw(SERVER_PORT SERVER_NAME)} = ( $readh->hostpath, 'localhost' );
+    }
 
     my $reqlen = parse_http_request( $$buffref, \%env );
 

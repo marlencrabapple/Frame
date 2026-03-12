@@ -4,7 +4,7 @@
       "Ian P Bradley <ian.bradley@studiocrabapple.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.1.29, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Dist::Milla version v1.0.22, Dist::Zilla version 6.037, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -15,20 +15,18 @@
    "name" : "Frame",
    "no_index" : {
       "directory" : [
-         "t",
-         "xt",
-         "inc",
-         "share",
          "eg",
          "examples",
-         "author",
-         "builder"
+         "inc",
+         "share",
+         "t",
+         "xt"
       ]
    },
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.035"
+            "Module::Build::Tiny" : "0.034"
          }
       },
       "develop" : {
@@ -39,13 +37,9 @@
             "Perl::Tidy" : "20221112"
          },
          "requires" : {
-            "Dist::Milla" : "0",
+            "Dist::Milla" : "v1.0.22",
             "Plack::Middleware::Debug" : "0",
-            "Test::CPAN::Meta" : "0",
-            "Test::MinimumVersion::Fast" : "0.04",
-            "Test::PAUSE::Permissions" : "0.07",
-            "Test::Pod" : "1.41",
-            "Test::Spellunker" : "v0.2.7"
+            "Test::Pod" : "1.41"
          }
       },
       "runtime" : {
@@ -93,8 +87,7 @@
             "Text::Xslate" : "0",
             "Time::HiRes" : "0",
             "Time::Moment" : "0",
-            "meta" : "0",
-            "perl" : "v5.40.0"
+            "meta" : "0"
          }
       },
       "test" : {
@@ -104,7 +97,7 @@
          }
       }
    },
-   "release_status" : "unstable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/marlencrabapple/Frame/issues"
@@ -117,6 +110,9 @@
       }
    },
    "version" : "0.01.5",
-   "x_serialization_backend" : "JSON::PP version 4.16",
-   "x_static_install" : 1
+   "x_generated_by_perl" : "v5.42.1",
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.40",
+   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
+   "x_static_install" : 0
 }
+
