@@ -7,14 +7,20 @@ role Frame::Config;
 use utf8;
 use v5.40;
 
+use TOML::Tiny;
 use Const::Fast;
 
-const our $CONFIG_DEFAULT => <<'...'
+BEGIN {
+    const our $CONFIG_DEFAULT_TOML => <<'...';
 [Frame]
  charset = "utf8"
  plack_env = "development"
 ...
-  ;
+
+}
+
+const our $CONFIG_DEFAULT =>
+  ( from_toml($Frame::Config::CONFIG_DEFAULT_TOML) )[0];
 
 field $config : reader : inheritable { $self->init_config };
 

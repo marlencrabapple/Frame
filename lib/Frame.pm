@@ -29,11 +29,11 @@ const our $CONFIG_DEFAULT => { charset => 'UTF-8' };
 #Frame::Config->config_default;
 const our $UTF8_CHARSET_NAME_RE => qr/^utf-?8$/i;
 
-field $loop    : reader;
-field $ua      : reader;
-field $routes  : reader;
-field $config  : reader = {%$CONFIG_DEFAULT};
-field $charset : reader = 'utf-8';
+field $loop   : reader;
+field $ua     : reader;
+field $routes : reader;
+field $config = {%$CONFIG_DEFAULT};
+field $charset              : reader = 'utf-8';
 field $request_class        : param : reader = 'Frame::Request';
 field $controller_namespace : param : reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';

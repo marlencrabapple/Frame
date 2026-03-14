@@ -3,9 +3,9 @@
 use Object::Pad ':experimental(:all)';
 use lib 'lib';
 
-package Frame::Runner::Example;
+package Frame::Runner::Exec;
 
-class Frame::Runner::Example : does(Frame);
+class Frame::Runner::Exec : does(Frame);
 
 use utf8;
 use v5.40;
@@ -31,7 +31,7 @@ method startup {
     );
 }
 
-package Frame::Runner::Example::CLI;
+package Frame::Runner::Exec::CLI;
 
 use lib 'lib';
 use v5.40;
