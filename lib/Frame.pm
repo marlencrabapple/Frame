@@ -1,7 +1,8 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame : does(Frame::Base);    #: does(Frame::Config);
+role Frame : does(Frame::Base)
+  : does(Frame::Config);
 
 use vars qw / @EXPORT @ISA $VERSION /;
 

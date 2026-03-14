@@ -2,8 +2,7 @@ use Object::Pad ':experimental(:all)';
 
 package Frame::Config;
 use lib 'lib';
-
-class Frame::Config;
+role Frame::Config;
 
 use utf8;
 use v5.40;
