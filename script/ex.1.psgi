@@ -4,13 +4,14 @@ package Example::One;
 
 use lib 'lib';
 
-class Example::One : does(Frame) : does(Frame::Controller);
+class Example::One : does(Frame);
 
 use utf8;
 use v5.40;
 
 use Path::Tiny;
 use TOML::Tiny;
+use IPC::Nosh::IO;
 
 field $root : param //= path('.');
 
@@ -18,7 +19,7 @@ field $root : param //= path('.');
 
 method startup {
     my $r = $self->routes;
-    
+
     $r->get(
         '/:sadf',
         {
@@ -28,25 +29,26 @@ method startup {
         },
         sub ( $self, $sadf ) {
             my $req = $self->req;
-
-            dmsg(
-                {
-                    req                             => $req,
-                    '%Frame::Controller::Default::' =>
-                      \%Frame::Controller::Default::
-                }
-            );
+            dmsg $self, $sadf;
         }
     );
 
-    $r->get( '/media/:id/:slug', 'view_media_item' );
+    $r->get(
+        '/media/:id/:slug',
+        sub ( $id, $slug ) {
+            { id => $id, slug => $slug, controller => $self }
+        }
+    );
 
-    dmsg( { self => $self } );
-    
+    dmsg $self;    #dmsg( { self => $self } );
+
     $self;
 }
 
 method view_media_item ( $id, $slug ) {
-    { id => $id, slug => $slug, controller => $self }
+
 }
 
+package main;
+
+Example::One->new->to_psgi;

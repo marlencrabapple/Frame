@@ -1,8 +1,10 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame : does(Frame::Base) : does(Frame::Config);
-use vars qw/@EXPORT @ISA $VERSION/;
+role Frame : does(Frame::Base);    #: does(Frame::Config);
+
+use vars qw / @EXPORT @ISA $VERSION /;
+
 our $VERSION = '0.01.5';
 
 use utf8;
@@ -14,31 +16,33 @@ use Path::Tiny;
 use Const::Fast;
 use IO::Async::Loop;
 use Net::Async::HTTP;
+use IPC::Nosh::IO;
 use Syntax::Keyword::Try;
 
-use Frame::Config;
+# use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
 
-#use Frame::Controller::Default;
+const our $CONFIG_DEFAULT => { charset => 'UTF-8' };
 
-const our $config_default => $Frame::Config::config_default;
+#Frame::Config->config_default;
+const our $UTF8_CHARSET_NAME_RE => qr/^utf-?8$/i;
 
-field $loop          : reader;
-field $ua            : reader;
-field $routes        : reader;
-field $config        : reader : inheritable;
-field $charset       : reader = 'utf-8';
-field $request_class : param  = 'Frame::Request';
+field $loop    : reader;
+field $ua      : reader;
+field $routes  : reader;
+field $config  : reader = {%$CONFIG_DEFAULT};
+field $charset : reader = 'utf-8';
+field $request_class        : param : reader = 'Frame::Request';
 field $controller_namespace : param : reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
 APPLY {
-  use utf8;
-  use v5.40;
-  use vars qw/@EXPORT @ISA/;
-  use subs 'dmsg'
+    use utf8;
+    use v5.40;
+    use vars qw/@EXPORT @ISA/;
+    use subs 'dmsg'
 }
 
 ADJUSTPARAMS($params) {
@@ -49,7 +53,7 @@ ADJUSTPARAMS($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    dmsg $config, $config_default;
+    dmsg $config, $CONFIG_DEFAULT;
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -105,12 +109,14 @@ method to_app {
     \to_psgi->&*;
 }
 
-method handler ($env) {
-    my $req = $request_class->new( app => $self, env => $env );
-    my $res = $self->dispatch($req);
+method handler ( $env, %opt ) {
+    my $req = $request_class->new( app => $self, env => $env, %opt );
+    my $res = $self->dispatch( $req, %opt );
 
     utf8::encode( $res->[2][0] )
       if $res->[2][0] =~ /[^\x00-\xff]/g;
+
+    #&& $self->charset =~ $UTF8_CHARSET_NAME_RE;
 
     $res;
 }
@@ -138,11 +144,7 @@ method route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
     my $res;
 
-    #if ( blessed $sub ) {
-    #  die ... if $c
-    #}
-
-    dmsg( { c => $c, sub => $sub, route => $route, req => $self } );
+    dmsg $c, $sub, $route, $self;
 
     if ( blessed $c ) {
         my $res =
@@ -158,8 +160,7 @@ method route ( $route, $req ) {
         my $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
     }
 
-    $res = $res->get if $res isa 'Future';
-
+    $res = $res->get if $res isa Future;
     $res;
 }
 
