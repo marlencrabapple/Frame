@@ -14,16 +14,12 @@ use JSON::MaybeXS;
 use Time::Piece;
 use Time::HiRes;
 use Module::Metadata;
-use IPC::Nosh::IO;
-
-use Class::Exporter;
+use IPC::Nosh::Common;
 
 use vars '@EXPORT';
 @EXPORT = qw(dmsg json __pkgfn__ callstack);
 
 BEGIN {
-
-    use Class::Exporter;
     require Exporter;
     our @ISA    = qw(Exporter);
     our @EXPORT = qw(dmsg json __pkgfn__ callstack);
@@ -48,8 +44,6 @@ APPLY($mop) {
     use utf8;
     use v5.40;
 
-    use Class::Exporter;
-
     use Exporter 'import';
     our @EXPORT = @{__PACKAGE__::EXPORT};
     $^H{ __PACKAGE__ . '/user' } = 1;
@@ -58,12 +52,16 @@ APPLY($mop) {
 ADJUSTPARAMS($params) {
     use utf8;
     use v5.40;
-    use Class::Exporter;
-
     use Exporter 'import';
     our @EXPORT = @{__PACKAGE__::EXPORT};
     $^H{ __PACKAGE__ . '/user' } = 1;
 };
+
+field $debug = $ENV{DEBUG} || 1;
+
+field $ddn_uplvl    : param : accessor = 3;
+field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
+field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
 
 sub epoch( $join = '', %opts ) {
     join $join, Time::HiRes::gettimeofday;
@@ -92,6 +90,6 @@ sub callstack ( $class = undef ) {
     @callstack;
 }
 
-const our $defaultconfig_inline => <<'...';
-charset = utf8
-...
+#const our $defaultconfig_inline => <<'...';
+#charset = utf8
+#...

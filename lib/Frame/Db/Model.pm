@@ -12,11 +12,12 @@ use Hash::Ordered;
 use Exporter;
 
 use Frame::Base;
+use IPC::Nosh::Common;
 
 use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
 
-field $table : param;
-field $columns : mutator : param     //= Hash::Ordered->new;
+field $table       : param;
+field $columns     : mutator : param //= Hash::Ordered->new;
 field $constraints : mutator : param //= Hash::Ordered->new;
 
 field $sqla;
@@ -44,7 +45,7 @@ APPLY($mop) {
 
     $^H{"$class/dbmodel"} = 1;
 
-    dmsg({\%^H}) 
+    dmsg \%^H
 }
 
 ADJUST {
@@ -108,37 +109,37 @@ method create_table {
 
 method $type : common ($meta, $val = 'TEXT') { p( $class, $meta, $val ) }
 
-  method $primarykey : common ($meta, $val) {
+method $primarykey : common ($meta, $val) {
 
-  }
+}
 
-  method $foreign : common ($meta, $val) {
+method $foreign : common ($meta, $val) {
 
-  }
+}
 
-  method $autoinc : common ($meta, $val) {
+method $autoinc : common ($meta, $val) {
 
-  }
+}
 
-  method $notnull : common ($meta, $val) {
+method $notnull : common ($meta, $val) {
 
-  }
+}
 
-  # method import :override :common {
-  #   $^H{"$class/dbmodel"}
-  # }
+# method import :override :common {
+#   $^H{"$class/dbmodel"}
+# }
 
-  # method import :common :override {
-  #   $^H{"$class/dbmodel"} = 1;
+# method import :common :override {
+#   $^H{"$class/dbmodel"} = 1;
 
-  #   foreach my $colattr (COLUMN_ATTR) {
-  #     my $method = lc $colattr;
-  #     Object::Pad::MOP::FieldAttr->register(
-  #       $colattr,
-  #       permit_hintkey => "$class/dbmodel",
-  #       apply => sub { $class->$method }
-  #     )
-  #   }
+#   foreach my $colattr (COLUMN_ATTR) {
+#     my $method = lc $colattr;
+#     Object::Pad::MOP::FieldAttr->register(
+#       $colattr,
+#       permit_hintkey => "$class/dbmodel",
+#       apply => sub { $class->$method }
+#     )
+#   }
 
-  #   $^H{"$class/dbmodel"} = 1
-  # }
+#   $^H{"$class/dbmodel"} = 1
+# }

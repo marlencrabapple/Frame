@@ -1,8 +1,7 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame : does(Frame::Base)
-  : does(Frame::Config);
+role Frame : does(Frame::Base);
 
 use vars qw / @EXPORT @ISA $VERSION /;
 
@@ -17,7 +16,7 @@ use Path::Tiny;
 use Const::Fast;
 use IO::Async::Loop;
 use Net::Async::HTTP;
-use IPC::Nosh::IO;
+use IPC::Nosh::Common;
 use Syntax::Keyword::Try;
 
 # use Frame::Config;
@@ -39,13 +38,6 @@ field $controller_namespace : param : reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
-APPLY {
-    use utf8;
-    use v5.40;
-    use vars qw/@EXPORT @ISA/;
-    use subs 'dmsg'
-}
-
 ADJUSTPARAMS($params) {
     unshift @INC, $INC[1];
     $self->app($self);
@@ -54,7 +46,7 @@ ADJUSTPARAMS($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    dmsg $config, $CONFIG_DEFAULT;
+    dmsg $config, $Frame::CONFIG_DEFAULT;
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
