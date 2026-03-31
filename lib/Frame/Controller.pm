@@ -7,7 +7,7 @@ use utf8;
 use v5.40;
 
 use Carp;
-use Encode;
+use Encode qw'encode decode';
 use Text::Xslate;
 use JSON::MaybeXS;
 use Syntax::Keyword::Try;
@@ -21,17 +21,13 @@ const our $tx_default => Text::Xslate->new(
     path  => ['view']
 );
 
-field $config ADJUST { $self->config };
-field $req   : param : reader : weak;
+field $config { $self->config };
+field $req : param : reader : weak;
 field $route : param : reader = undef;
-field $res   : reader;    # :weak;
+field $res : reader { $req->new_response };    # :weak;
 
-ADJUSTPARAMS($params) {
-    $res = $req->new_response
-}
-
-class Frame::Template::Response : isa(Plack::Response) {
-    field $tx : param = $tx_default;
+class Frame::Response : isa(Plack::Response) {
+    field $tx : param //= $Frame::Controller::tx_default;
 
     method render ( $template, $status = 200, %opts ) {
         my $content = $tx->render( $template, delete $opts{template} );

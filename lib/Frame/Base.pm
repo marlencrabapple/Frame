@@ -23,7 +23,7 @@ BEGIN {
     require Exporter;
     our @ISA    = qw(Exporter);
     our @EXPORT = qw(dmsg json __pkgfn__ callstack);
-    use subs @EXPORT;
+    use vars '@EXPORT';
     $^H{ __PACKAGE__ . '/user' } = 1;
 }
 
