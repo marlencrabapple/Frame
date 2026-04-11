@@ -1,7 +1,8 @@
 use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
-role Frame : does(Frame::Base);
+
+class Frame : does(Frame::Base) : abstract;
 
 use vars qw / @EXPORT @ISA $VERSION /;
 
@@ -10,8 +11,8 @@ our $VERSION = '0.01.5';
 use utf8;
 use v5.40;
 
-use Encode;
-use TOML::Tiny qw(from_toml to_toml);
+use Encode     qw'encode decode';
+use TOML::Tiny qw'from_toml to_toml';
 use Path::Tiny;
 use Const::Fast;
 use IO::Async::Loop;
@@ -88,18 +89,18 @@ ADJUSTPARAMS($params) {
     warn __CLASS__
       . "$\::startup did not return a valid value: '$ret'."
       . " Valid values"
-      . "are 1 or the instance of the class its called on."
+      . " are 1 or the instance of the class its called on."
       unless $ret == 1 || ( ref $ret && $ret == $self );
 
     $ret
 }
 
 method to_psgi {
-    sub { $self->handler(shift) }
+    sub ($env) { $self->handler($env) }
 }
 
 method to_app {
-    \to_psgi->&*;
+    $self->to_psgi(@_);
 }
 
 method handler ( $env, %opt ) {
@@ -114,26 +115,7 @@ method handler ( $env, %opt ) {
     $res;
 }
 
-method dispatch ($req) {
-    my $res;
-
-    if ( my $match = $routes->match($req) ) {
-        if ( $match isa 'Plack::Response' ) {
-            $res = $match->finalize;
-        }
-        elsif ( $match isa 'Frame::Routes::Route' ) {
-            $res = $self->route( $match, $req )->finalize;
-        }
-    }
-    else {
-        $res = $default_controller_class->new( app => $self, req => $req )
-          ->render_404->finalize;
-    }
-
-    $res;
-}
-
-method route ( $route, $req ) {
+method $route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
     my $res;
 
@@ -154,6 +136,25 @@ method route ( $route, $req ) {
     }
 
     $res = $res->get if $res isa Future;
+    $res;
+}
+
+method dispatch ($req) {
+    my $res;
+
+    if ( my $match = $routes->match($req) ) {
+        if ( $match isa 'Plack::Response' ) {
+            $res = $match->finalize;
+        }
+        elsif ( $match isa 'Frame::Routes::Route' ) {
+            $res = $self->$route( $match, $req )->finalize;
+        }
+    }
+    else {
+        $res = $default_controller_class->new( app => $self, req => $req )
+          ->render_404->finalize;
+    }
+
     $res;
 }
 

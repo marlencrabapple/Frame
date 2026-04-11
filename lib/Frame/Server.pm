@@ -8,7 +8,7 @@ class Frame::Server
 use utf8;
 use v5.40;
 
-use Carp;
+# use Carp;
 use Const::Fast;
 use Hash::MultiValue;
 
@@ -63,7 +63,7 @@ sub _responder ( $req, $res ) {
     }
 
     if ( !defined $body ) {
-        croak 'Responder given no body in void context'
+        die 'Responder given no body in void context'
           unless defined wantarray;
 
         unless ($has_content_length) {
@@ -82,7 +82,7 @@ sub _responder ( $req, $res ) {
             my $len = 0;
             my $found_undef;
             $len += length( $_ // ( $found_undef++, "" ) ) for @$body;
-            carp "Found undefined value in PSGI body" if $found_undef;
+            warn "Found undefined value in PSGI body" if $found_undef;
 
             push @lines, "Content-Length: $len";
         }
@@ -173,8 +173,6 @@ method on_accept ($conn) {
 
 method on_request ($req) {
     my $env = $$req{req};
-
-    #Frame::Base->dmsg( { req => $req } );
 
     my $res       = Plack::Util::run_app $$self{app}, $env;
     my $responder = sub { _responder( $req, $res ) };

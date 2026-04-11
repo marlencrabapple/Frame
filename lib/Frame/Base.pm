@@ -14,6 +14,7 @@ use JSON::MaybeXS;
 use Time::Piece;
 use Time::HiRes;
 use Module::Metadata;
+use Devel::StackTrace::WithLexicals;
 use IPC::Nosh::Common;
 
 use vars '@EXPORT';

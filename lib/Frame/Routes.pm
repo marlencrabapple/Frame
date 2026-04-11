@@ -50,10 +50,11 @@ method add ( $method, $pattern, @args ) {
             }
         }
         elsif ( !ref $dest ) {
-            const our $DESTRE     => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
-            const our $DESTPKG_RE => s/$DASH_RE/::/g;
+            const my $DESTRE => qr/^(?:([\w\-]+)(?:#))?([\w]+)$/;
 
-            my ( $c, $sub ) = $dest =~ $DESTPKG_RE;
+            const my $DESTPKG_RE => ( $dest =~ s/$DASH_RE/::/gr );
+
+            my ( $c, $sub ) = $dest =~ s/$DASH_RE/::/gr;
 
             if ($c) {
                 $route_args{dest} = {

@@ -6,7 +6,7 @@ role Frame::Controller : does(Frame::Base);
 use utf8;
 use v5.40;
 
-use Carp;
+# use Carp;
 use Encode qw'encode decode';
 use Text::Xslate;
 use JSON::MaybeXS;
@@ -56,7 +56,8 @@ method render (
 {
     #my $class = __CLASS__;
     my $class = __PACKAGE__;
-    carp "An existing response was overwritten by a call to $class->render()."
+
+    warn "An existing response was overwritten by a call to $class->render()."
       . "To disable this warning or change response precedence configure"
       . "'template.default_res' as needed."
       if ( $res && $self->res )
@@ -128,7 +129,7 @@ method url_for ( $name = undef, %vals ) {
 
     foreach my $path_var ( $route->pattern_arr ) {
         if ( my $key = $route->is_placeholder($path_var) ) {
-            croak unless $vals{$key};
+            die "Unknown placeholder" unless $vals{$key};
             push @path_arr, $vals{$key};
         }
         else {

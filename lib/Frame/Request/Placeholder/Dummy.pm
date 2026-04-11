@@ -11,7 +11,7 @@ push @ISA, qw(Tie::StdScalar Frame::Request::Placeholder);
 
 our @EXPORT_OK = qw(allow);
 
-use Carp;
+# use Carp;
 
 our %whitelist = ();    # 'foo::bar' => 'placeholder_key', ...
  # local ${Frame::Request::Placeholder::Dummy::whitelist}{ 'Custom::Class' => 'placeholder_key' }
@@ -19,7 +19,7 @@ our %whitelist = ();    # 'foo::bar' => 'placeholder_key', ...
 
 sub FETCH ($self) {
     untie $self;
-    croak Frame::Request::Placeholder::ribbit(
+    die Frame::Request::Placeholder::ribbit(
         'Illegal usage of placeholder in inline route.')
 
 # unless (caller(1))[0] eq ...

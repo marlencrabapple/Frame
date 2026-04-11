@@ -8,7 +8,6 @@ class Frame::Server::Protocol : isa(Net::Async::HTTP::Server::Protocol) :
 use utf8;
 use v5.40;
 
-use Carp;
 use Plack::Util;
 use Const::Fast;
 use List::Util 'any';

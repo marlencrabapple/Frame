@@ -7,6 +7,7 @@ use utf8;
 use v5.40;
 
 use Const::Fast;
+use IPC::Nosh::Common;
 
 const our @METHODS => qw/GET HEAD POST UPDATE DELETE PUT PATCH CONNECT TRACE/;
 
@@ -80,8 +81,6 @@ method websocket { $self->ws(@_) }
 
 method under ( $pattern, @args ) {
     my $opts = ref $args[$#args] eq 'HASH' ? pop @args : {};
-
-    use subs 'dmsg';
 
     dmsg { 'ref[-1]_args' => ref @args };
 
