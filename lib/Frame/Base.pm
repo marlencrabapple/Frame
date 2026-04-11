@@ -37,7 +37,7 @@ const our $json_default =>
 const our $package => __PACKAGE__;
 
 field $app : weak : param : accessor = undef;
-field $json;
+field $json : accessor { $Frame::Base::json_default };
 field $debug_mode : param : accessor = $DEBUG_MODE;
 field $dev_mode   : param : accessor = $DEV_MODE;
 

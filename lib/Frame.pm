@@ -23,6 +23,7 @@ use Syntax::Keyword::Try;
 # use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
+use Frame::Controller::Default;
 
 const our $CONFIG_DEFAULT => { charset => 'UTF-8' };
 
@@ -47,7 +48,7 @@ ADJUSTPARAMS($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    dmsg $config, $Frame::CONFIG_DEFAULT;
+    # dmsg $config, $Frame::CONFIG_DEFAULT;
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -73,7 +74,8 @@ ADJUSTPARAMS($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        dmsg $e
+
+        #dmsg $e
     }
 
     $routes = Frame::Routes->new( app => $self );
@@ -119,20 +121,22 @@ method $route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
     my $res;
 
-    dmsg $c, $sub, $route, $self;
-
-    if ( blessed $c ) {
-        my $res =
-          $c->$sub( route => $route, req => $req, c => $c, sub => $sub );
+    if ( $c && blessed $c ) {
+        $res = $c->$sub( route => $route, req => $req, c => $c, sub => $sub );
     }
     else {
-        $c = ( $c || $default_controller_class )->new(
+        $c = $default_controller_class->new(
             app   => $self,
             req   => $req,
             route => $route
         );
 
-        my $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
+        $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
+    }
+
+    # TODO: gate auto-json responses behind config option
+    if ( !blessed $res && ref $res ) {
+        $res = $c->render($res);
     }
 
     $res = $res->get if $res isa Future;
@@ -148,12 +152,15 @@ method dispatch ($req) {
         }
         elsif ( $match isa 'Frame::Routes::Route' ) {
             $res = $self->$route( $match, $req )->finalize;
+            dmsg $res;
         }
     }
     else {
         $res = $default_controller_class->new( app => $self, req => $req )
           ->render_404->finalize;
     }
+
+    dmsg $res;
 
     $res;
 }

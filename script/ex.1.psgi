@@ -4,7 +4,7 @@ package Example::One;
 
 use lib 'lib';
 
-class Example::One : does(Frame);
+class Example::One : isa(Frame);
 
 use utf8;
 use v5.40;
@@ -21,24 +21,31 @@ method startup {
     my $r = $self->routes;
 
     $r->get(
-        '/:sadf',
-        {
-            sadf => sub ($val) {
-                dmsg( { self => $self, '%ENV' => \%ENV, val => $val } );
-            }
-        },
-        sub ( $self, $sadf ) {
-            my $req = $self->req;
-            dmsg $self, $sadf;
+        '/',
+        sub {
+            { asf => 'asfd' }
         }
     );
 
-    $r->get(
-        '/media/:id/:slug',
-        sub ( $id, $slug ) {
-            { id => $id, slug => $slug, controller => $self }
-        }
-    );
+    # $r->get(
+    #     '/:sadf',
+    #     {
+    #         sadf => sub ( $self, $req, $val ) {
+    #             dmsg( { self => $self, '%ENV' => \%ENV, val => $val } );
+    #         }
+    #     },
+    #     sub ( $self, $sadf ) {
+    #         my $req = $self->req;
+    #         dmsg $self, $sadf;
+    #     }
+    # );
+
+    # $r->get(
+    #     '/media/:id/:slug',
+    #     sub ( $self, $req, $id, $slug ) {
+    #         { id => $id, slug => $slug, controller => $self }
+    #     }
+    # );
 
     dmsg $self;    #dmsg( { self => $self } );
 

@@ -21,7 +21,7 @@ const our $tx_default => Text::Xslate->new(
     path  => ['view']
 );
 
-field $config { $self->config };
+field $config;                                 #{ $self->config };
 field $req : param : reader : weak;
 field $route : param : reader = undef;
 field $res : reader { $req->new_response };    # :weak;
@@ -59,16 +59,16 @@ method render (
 
     warn "An existing response was overwritten by a call to $class->render()."
       . "To disable this warning or change response precedence configure"
-      . "'template.default_res' as needed."
+      . " 'template.default_res' as needed."
       if ( $res && $self->res )
       && ( !$opts{noop} || $config->{'template'}{default_res} );
 
-    #my $res = $opts{noop} ? $req->new_response : $self->res;
+    # my $res = $opts{noop} ? $req->new_response : $self->res;
 
     dynamically $res =
       ( $opts{noop} || $config->{template}{default_res} eq 'lifecycle' )
       ? $self->res
-      : $res->new_response;
+      : $req->new_response;
 
     $content_type = $res->content_type;
     $opts{charset} //= $self->app->charset;
@@ -84,7 +84,7 @@ method render (
 
         try {
             $res->content_type($content_type);
-            $res->body( json->encode($content) )
+            $res->body( $self->json->encode($content) )
         }
         catch ($e) {
             $self->render_500( undef, $content_type, $headers, $cookies, %opts )
