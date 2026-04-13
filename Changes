@@ -1,6 +1,7 @@
 Revision history for Frame
 
 {{$NEXT}}
+	- Fix regressions and ultra-basic functionality
 
 0.01.5  2025-06-04 01:39:39 PDT
         - 1/2: Clean up Frame::Base and remove most import/preprocesisng code
