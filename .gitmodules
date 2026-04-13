@@ -1,0 +1,3 @@
+[submodule "dist/arch"]
+	path = dist/arch
+	url = https://git.sr.ht/~crabapp/perl-frame.git
