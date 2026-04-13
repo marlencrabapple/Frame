@@ -6,7 +6,7 @@ class Frame : does(Frame::Base) : abstract;
 
 use vars qw / @EXPORT @ISA $VERSION /;
 
-our $VERSION = '0.01.5';
+our $VERSION = '0.1.6';
 
 use utf8;
 use v5.40;

@@ -1,6 +1,8 @@
 Revision history for Frame
 
 {{$NEXT}}
+
+0.1.6  2026-04-13 11:24:14 PDT
 	- Fix regressions and ultra-basic functionality
 
 0.01.5  2025-06-04 01:39:39 PDT
