@@ -117,7 +117,7 @@ method handler ( $env, %opt ) {
     $res;
 }
 
-method $route ( $route, $req ) {
+method route ( $route, $req ) {
     my ( $c, $sub ) = $route->dest->@{qw(c sub)};
     my $res;
 
@@ -151,8 +151,8 @@ method dispatch ($req) {
             $res = $match->finalize;
         }
         elsif ( $match isa 'Frame::Routes::Route' ) {
-            $res = $self->$route( $match, $req )->finalize;
-            dmsg $res;
+            $res = $self->route( $match, $req )->finalize;
+     #       dmsg $res;
         }
     }
     else {
@@ -160,7 +160,7 @@ method dispatch ($req) {
           ->render_404->finalize;
     }
 
-    dmsg $res;
+    #dmsg $res;
 
     $res;
 }
