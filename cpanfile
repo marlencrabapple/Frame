@@ -50,7 +50,7 @@ on develop => sub {
     recommends 'Perl::Critic::Community';
     requires 'Dist::Milla';
     requires 'Plack::Middleware::Debug';
-    requires 'Plack::Middleware::REPL';
+    #requires 'Plack::Middleware::REPL';
     recommends 'Archive::Tar::Wrapper';
 };
 
