@@ -2456,10 +2456,10 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.36
       Test::More 0.96
-  HTTP-Tinyish-0.19
-    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.19.tar.gz
+  HTTP-Tinyish-0.20
+    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.20.tar.gz
     provides:
-      HTTP::Tinyish 0.19
+      HTTP::Tinyish 0.20
       HTTP::Tinyish::Base undef
       HTTP::Tinyish::Curl undef
       HTTP::Tinyish::HTTPTiny undef
@@ -4309,12 +4309,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0051
-    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
+  Plack-1.0054
+    pathname: M/MI/MIYAGAWA/Plack-1.0054.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0051
+      Plack 1.0054
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -4373,9 +4373,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0051
+      Plack::Request 1.0054
       Plack::Request::Upload undef
-      Plack::Response 1.0051
+      Plack::Response 1.0054
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
@@ -5028,18 +5028,20 @@ DISTRIBUTIONS
       Types::Serialiser 0
       parent 0
       perl 5.010000
-  TOML-Tiny-0.20
-    pathname: O/OA/OALDERS/TOML-Tiny-0.20.tar.gz
+  TOML-Tiny-0.21
+    pathname: O/OA/OALDERS/TOML-Tiny-0.21.tar.gz
     provides:
-      TOML::Tiny 0.20
-      TOML::Tiny::Grammar 0.20
-      TOML::Tiny::Parser 0.20
-      TOML::Tiny::Tokenizer 0.20
-      TOML::Tiny::Util 0.20
-      TOML::Tiny::Writer 0.20
+      TOML::Tiny 0.21
+      TOML::Tiny::Grammar 0.21
+      TOML::Tiny::Parser 0.21
+      TOML::Tiny::Tokenizer 0.21
+      TOML::Tiny::Util 0.21
+      TOML::Tiny::Writer 0.21
     requirements:
       Carp 0
       Data::Dumper 0
+      DateTime::Format::ISO8601 0
+      DateTime::Format::RFC3339 0
       Encode 0
       Exporter 0
       ExtUtils::MakeMaker 0
