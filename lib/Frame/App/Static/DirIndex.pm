@@ -1,8 +1,8 @@
 use Object::Pad ':experimental(:all)';
 
-package Frame::App::Static::Index;
+package Frame::App::Static::DirIndex;
 
-class Frame::App::Static::Index : does(Frame);
+class Frame::App::Static::DirIndex : does(Frame);
 
 use utf8;
 use v5.40;
