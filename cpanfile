@@ -1,5 +1,5 @@
 requires 'Plack';
-requires 'IPC::Nosh', dist => 'CRABAPP/IPC-Nosh-0.01-TRIAL.tar.gz';
+requires 'IPC::Nosh';
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';
 requires 'Cpanel::JSON::XS';

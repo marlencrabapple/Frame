@@ -2,21 +2,7 @@ use Object::Pad ':experimental(:all)';
 
 package Frame::App::Static::DirIndex;
 
-class Frame::App::Static::DirIndex : does(Frame);
-
-use utf8;
-use v5.40;
-
-method startup {
-
-}
-
-#!/usr/bin/env perl
-use Object::Pad ':experimental(:all)';
-
-package srv;
-
-class srv : does(Frame);
+class Frame::App::Static::DirIndex   : isa(Frame);
 
 use utf8;
 use v5.40;
@@ -25,36 +11,57 @@ use Cwd;
 use List::Util 'any';
 use Path::Tiny;
 use Const::Fast;
-use File::Basename;
 use Plack::Builder;
 use Plack::App::File;
 use Plack::Middleware::Static;
 use Syntax::Keyword::Dynamically;
 use Plack::Middleware::Auth::Basic;
-use Crypt::Argon2 qw(argon2id_pass argon2_verify);
+use IO::Handle::Common;
 
-class DirIndex : isa(Plack::App::Directory) {
+const our $DEBUG   => $ENV{DEBUG};
+const our $MOUNTRE => qr/^(.+)(?:\:(.+))?$/;
 
+my class DirIndex : isa(Plack::App::Directory) {    #:does(Frame::Controller) {
+    use utf8;
+    use v5.40;
+
+    use IO::Handle::Common;
     use Const::Fast;
+    use Path::Tiny;
+
+    # use parent 'Plack::App::Directory';
 
     const our $dir_page => <<'...';
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <title>%s</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link
-  rel="stylesheet"
-  href="/www/bulma.min.css"
->
+<link rel="stylesheet" href="/static/css/bulma.min.css">
 <style type='text/css'>
-table { width:100%%; }
-.name { text-align:left; }
-.size, .mtime { text-align:right; }
-.type { width:11em; }
-.mtime { width:15em; }
+table {
+  width: 100 % %;
+  }
+
+  . name {
+    text-align : left;
+  }
+
+  . size, . mtime {
+    text-align : right;
+  }
+
+  . type {
+  width: 11 em;
+  }
+
+  . mtime {
+  width: 15 em;
+}
 </style>
 </head>
+
 <body>
 <h1>%s</h1>
 <hr />
@@ -69,37 +76,54 @@ table { width:100%%; }
 </table>
 <hr />
 </body>
+
 </html>
 ...
+
+    use vars '$dir_page';
 
     method BUILDARGS : common (@BUILDARGS) {
         @BUILDARGS;
     }
 
     ADJUST {
-        $Plack::App::Direectory::dir_page = $DirIndex::dir_page;
+        $Plack::App::Directory::dir_page = $dir_page;
     };
 
-    $Plack::App::Direectory::dir_page = $dir_page;
+    $Plack::App::Directory::dir_page = $dir_page;
+
+    method should_handle : override ( $path ) {
+        $path = path($path);
+        $path->is_directory || $path->is_file;
+    }
+
+    method return_dir_redirect ($env) {
+        my $uri = Frame::Request->new($env)->uri;
+        $self->redirect( "$uri/", 301 );
+    }
 
     method serve_path : override ($env, $dir) {
-        $Plack::App::Direectory::dir_page = $dir_page;
+        $dir = path($dir);
+
+        # $self->Frame::App::Static::File::serve_path( $env, $dir )
+        #   if $dir->is_directory;
+
+        $Plack::App::Directory::dir_page = $dir_page;
         Plack::App::Directory::serve_path( $self, $env, $dir );
+
+        # my $dir_url = $env->{SCRIPT_NAME} . $env->{PATH_INFO};
     }
 };
 
-const our $DEBUG   => $ENV{DEBUG};
-const our $MOUNTRE => qr/^(.+)(?:\:(.+))?$/;
+field $srvpath;
+field $mount;
+field $builder = Plack::Builder->new;
 
-our ( $srvpath, $mount ) = $ARGV[-1] =~ $MOUNTRE;
-
-our $builder = Plack::Builder->new;
-
-sub serve_directory ( $path, %args ) {
+method serve_directory ( $path, %args ) {
     ( DirIndex->new( { root => $path } )->to_app, $args{uri} // '/' );
 }
 
-sub init ( $path = path( $srvpath // getcwd ), $uri = $mount // undef ) {
+method init ( $path = path( $srvpath // getcwd ), $uri = $mount // undef ) {
     $builder->add_middleware('Debug')
       unless any { $_ } @ENV{qw'NODEBUG PRODUCTION'};
     $builder->app_middleware('REPL') if $ENV{REPLWARNING};
@@ -108,18 +132,18 @@ sub init ( $path = path( $srvpath // getcwd ), $uri = $mount // undef ) {
       sub ( $unqualified, $sep = qr/_[a-z0-9]+([a-z0-9]|_*)/, @prefix ) {
       };
 
-    $builder->add_middleware(
-        'Auth::Basic',
-        authenticator => sub (@args) {
-            valid_user(@args);
-        }
-    ) unless any { $_ } @ENV{ map { ... } qw(FRAME) };
+    # $builder->add_middleware(
+    #     'Auth::Basic',
+    #     authenticator => sub (@args) {
+    #         valid_user(@args);
+    #     }
+    # ) unless any { $_ } @ENV{ map { ... } qw(FRAME) };
 
     my ( $app, $mount ) = -f $path
-      ? die
+      ? fatal
 "Unimplemented: Virtual directory index for file or list of files is not yet implemented." #serve_file( $path, uri => $uri )
       : -d $path ? serve_directory( $path, uri => $uri )
-      :   die "Path '$path' does not appear to be a file or directory.";
+      :   fatal "Path '$path' does not appear to be a file or directory.";
 
     ...;
 }

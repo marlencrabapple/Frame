@@ -100,6 +100,25 @@ method render (
     $res;
 }
 
+method return_error ( $content, $status, $content_type = undef, %opt ) {
+    $content = { status => $status, msg => $content }
+      if ( $content_type // $req->maybe_ajax ) =~ Frame::Request::JSONRE;
+
+    $self->render( $content, $status, $content_type, %opt, noop => 1 );
+}
+
+method return_500 ( $content = '500 - Internal server error', @args ) {
+    $self->return_error( $content, 500, @args );
+}
+
+method return_404 ( $content = '404 - Page not found', @args ) {
+    $self->return_error( $content, 404, @args );
+}
+
+method return_403 ( $content = '403 - Forbidden', @args ) {
+    $self->return_error( $content, 403, @args );
+}
+
 method render_error ( $content, $status, $content_type = undef, @args ) {
     $content = { status => $status, msg => $content }
       if ( $content_type // $req->maybe_ajax ) =~ Frame::Request::JSONRE;
