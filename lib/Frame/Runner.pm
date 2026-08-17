@@ -18,6 +18,6 @@ use Plack::Builder ();
 use Cwd            qw( abs_path getcwd );
 
 use IPC::Nosh;
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 
 const our $sockscheme_re => qr'^unix://';

@@ -1,5 +1,6 @@
 requires 'Plack';
-requires 'IPC::Nosh';
+requires 'IPC::Nosh', '0.01.3';
+requires 'IO::Handle::Common';
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';
 requires 'Cpanel::JSON::XS';
@@ -8,7 +9,9 @@ requires 'Cwd';
 requires 'DBD::SQLite';
 requires 'DBI';
 requires 'Devel::StackTrace::WithLexicals';
-requires 'File::XDG';
+#requires 'File::XDG';
+#requires 'File::HomeDir';
+requires 'File::ConfigDir';
 requires 'Future';
 requires 'Future::AsyncAwait';
 requires 'Hash::Ordered';

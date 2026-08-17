@@ -17,7 +17,7 @@ use Path::Tiny;
 use Const::Fast;
 use IO::Async::Loop;
 use Net::Async::HTTP;
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 use Syntax::Keyword::Try;
 
 # use Frame::Config;

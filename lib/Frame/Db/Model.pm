@@ -12,7 +12,7 @@ use Hash::Ordered;
 use Exporter;
 
 use Frame::Base;
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 
 use constant COLUMN_ATTR => qw(Type Primary Foreign Autoinc Notnull);
 

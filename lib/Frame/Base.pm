@@ -15,7 +15,7 @@ use Time::Piece;
 use Time::HiRes;
 use Module::Metadata;
 use Devel::StackTrace::WithLexicals;
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 
 use vars '@EXPORT';
 @EXPORT = qw(dmsg json __pkgfn__ callstack);

@@ -12,7 +12,7 @@ use v5.40;
 
 our $VERSION = 0.01;
 
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 use Syntax::Keyword::Dynamically;
 
 field $app;

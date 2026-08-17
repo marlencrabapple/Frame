@@ -11,7 +11,7 @@ use v5.40;
 
 use Path::Tiny;
 use TOML::Tiny;
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 
 field $root : param //= path('.');
 

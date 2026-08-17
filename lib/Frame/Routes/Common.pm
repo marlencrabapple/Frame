@@ -7,7 +7,7 @@ use utf8;
 use v5.40;
 
 use Const::Fast;
-use IPC::Nosh::Common;
+use IO::Handle::Common;
 
 const our @METHODS => qw/GET HEAD POST UPDATE DELETE PUT PATCH CONNECT TRACE/;
 
