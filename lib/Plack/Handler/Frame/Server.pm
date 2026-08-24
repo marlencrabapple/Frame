@@ -15,7 +15,8 @@ use Server::Starter;
 use Frame::Server;
 use IO::Handle::Common;
 use Path::Try;
-use PadWalker qw'var_name';
+
+use Frame::Base qw'refstr';
 
 const our $SIG_RE => qr/^(TERM|USR1)$/;
 const our %MATCH_HOST => (
@@ -43,7 +44,7 @@ field $listen;
 field $ssl_args;
 field $pm_args = {
     trap_signals => {
-        ( 'TERM' x 2 ), HUP => 'TERM'
+        qw'TERM' x 2, HUP => 'TERM'
     }
 };
 
@@ -52,12 +53,6 @@ field $server_ready;
 field $loop = IO::Async::Loop->new;
 field $pm;
 field $server;
-
-my method adjust( $field, $newval //= $field ) {
-    my $name = var_name( 0, $field );
-    eval "$name = \$newval" if $name;
-    $field;
-}
 
 ADJUST : params (:$server_ready) {
     $self->adjust($server_ready)
@@ -83,18 +78,15 @@ ADJUST : params (:$listen, :$port, :$host) {
 
 };
 
-ADJUST:
-params(
-    : $max_workers          = 10,
-    : $spawn_interval       = undef,
-    : $err_respawn_interval = undef
-  )
-{
-    $$pm_args{trap_signals}{USR1}   = [ 'TERM', $spawn_interval ];
-    $$pm_args{spawn_interval}       = $spawn_interval;
-    $$pm_args{err_respawn_interval} = $err_respawn_interval;
+ADJUST : params ( :$max_workers //= 10, %param) {
+    if ( $max_workers > 1 ) {
+        $pm_args->{trap_signals}{USR1} = [ 'TERM', $param{spawn_interval} ];
 
-    $pm = Parallel::Prefork->new($pm_args)
+        $pm_args->@{qw'spawn_interval err_respawn_interval'} =
+          @param{qw'spawn_interval err_respawn_interval'};
+
+        $pm = Parallel::Prefork->new($pm_args);
+    }
 };
 
 method register_service ($psgi) {
@@ -108,4 +100,23 @@ method register_service ($psgi) {
 method run($psgi) {
     $self->register_service($psgi);
 
+    if ( $pm && $pm->isa('Parallel::Prefork') ) {
+        while ( $pm->signal_received !~ SIGRERE ) {
+            $pm->start and next;
+            srand( ( rand() * 2**30 ) ^ $$ ^ time );
+            $loop->run;
+            $pm->finish;
+        }
+        my $timeout =
+            $$pm_args{spawn_interval}
+          ? $$pm_args{spawn_interval} * $max_workers
+          : 1;
+
+        while ( $pm->wait_all_children($timeout) ) {
+            $pm->signal_all_children('TERM');
+        }
+    }
+    else {
+        $loop->run;
+    }
 }

@@ -2133,6 +2133,16 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       base 0
       perl 5.006
+  File-XDG-1.03
+    pathname: P/PL/PLICEASE/File-XDG-1.03.tar.gz
+    provides:
+      File::XDG 1.03
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Path 2.07
+      Path::Tiny 0
+      Ref::Util 0
+      perl 5.006
   File-chdir-0.1011
     pathname: D/DA/DAGOLDEN/File-chdir-0.1011.tar.gz
     provides:
@@ -2205,6 +2215,20 @@ DISTRIBUTIONS
       XS::Parse::Sublike 0.31
       XS::Parse::Sublike::Builder 0.31
       perl 5.016
+  Gazelle-0.50
+    pathname: K/KA/KAZEBURO/Gazelle-0.50.tar.gz
+    provides:
+      Gazelle 0.50
+      Plack::Handler::Gazelle 0.50
+    requirements:
+      ExtUtils::CBuilder 0
+      Guard 0
+      Module::Build 0.4005
+      Parallel::Prefork 0.18
+      Plack 1.0037
+      Server::Starter 0
+      Stream::Buffered 0
+      perl 5.008001
   Getopt-Long-Descriptive-0.117
     pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.117.tar.gz
     provides:
@@ -2248,6 +2272,12 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  Guard-1.023
+    pathname: M/ML/MLEHMANN/Guard-1.023.tar.gz
+    provides:
+      Guard 1.023
+    requirements:
+      ExtUtils::MakeMaker 0
   HTML-Escape-1.11
     pathname: T/TO/TOKUHIROM/HTML-Escape-1.11.tar.gz
     provides:
@@ -2644,6 +2674,53 @@ DISTRIBUTIONS
       JSON::PP 2.27300
       Scalar::Util 0
       perl 5.006
+  Kelp-2.22
+    pathname: B/BR/BRTASTIC/Kelp-2.22.tar.gz
+    provides:
+      Kelp 2.22
+      Kelp::Base undef
+      Kelp::Context undef
+      Kelp::Exception undef
+      Kelp::Generator undef
+      Kelp::Less undef
+      Kelp::Middleware undef
+      Kelp::Module undef
+      Kelp::Module::Config undef
+      Kelp::Module::Config::Less undef
+      Kelp::Module::Config::Null undef
+      Kelp::Module::Encoder undef
+      Kelp::Module::JSON undef
+      Kelp::Module::Logger undef
+      Kelp::Module::Logger::Simple undef
+      Kelp::Module::Null undef
+      Kelp::Module::Routes undef
+      Kelp::Module::Template undef
+      Kelp::Module::Template::Null undef
+      Kelp::Request undef
+      Kelp::Response undef
+      Kelp::Routes undef
+      Kelp::Routes::Controller undef
+      Kelp::Routes::Location undef
+      Kelp::Routes::Pattern undef
+      Kelp::Template undef
+      Kelp::Test undef
+      Kelp::Test::CookieJar undef
+      Kelp::Util undef
+    requirements:
+      Class::Inspector 0
+      ExtUtils::MakeMaker 0
+      HTTP::Message 0
+      Hash::MultiValue 0
+      JSON::MaybeXS 0
+      Log::Dispatch 0
+      Path::Tiny 0
+      Plack 1.0041
+      Template::Tiny 0
+      Test::Deep 1.129
+      Try::Tiny 0
+      URI 0
+      namespace::autoclean 0
+      perl 5.014
   LWP-MediaTypes-6.04
     pathname: O/OA/OALDERS/LWP-MediaTypes-6.04.tar.gz
     provides:
@@ -3121,6 +3198,127 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Mojolicious-9.49
+    pathname: S/SR/SRI/Mojolicious-9.49.tar.gz
+    provides:
+      Mojo undef
+      Mojo::Asset undef
+      Mojo::Asset::File undef
+      Mojo::Asset::Memory undef
+      Mojo::Base undef
+      Mojo::BaseUtil undef
+      Mojo::ByteStream undef
+      Mojo::Cache undef
+      Mojo::Collection undef
+      Mojo::Content undef
+      Mojo::Content::MultiPart undef
+      Mojo::Content::Single undef
+      Mojo::Cookie undef
+      Mojo::Cookie::Request undef
+      Mojo::Cookie::Response undef
+      Mojo::DOM undef
+      Mojo::DOM::CSS undef
+      Mojo::DOM::HTML undef
+      Mojo::Date undef
+      Mojo::DynamicMethods undef
+      Mojo::EventEmitter undef
+      Mojo::Exception undef
+      Mojo::File undef
+      Mojo::Headers undef
+      Mojo::HelloWorld undef
+      Mojo::Home undef
+      Mojo::IOLoop undef
+      Mojo::IOLoop::Client undef
+      Mojo::IOLoop::Server undef
+      Mojo::IOLoop::Stream undef
+      Mojo::IOLoop::Subprocess undef
+      Mojo::IOLoop::TLS undef
+      Mojo::JSON undef
+      Mojo::JSON::Pointer undef
+      Mojo::Loader undef
+      Mojo::Log undef
+      Mojo::Message undef
+      Mojo::Message::Request undef
+      Mojo::Message::Response undef
+      Mojo::Parameters undef
+      Mojo::Path undef
+      Mojo::Promise undef
+      Mojo::Reactor undef
+      Mojo::Reactor::EV undef
+      Mojo::Reactor::Poll undef
+      Mojo::SSE undef
+      Mojo::Server undef
+      Mojo::Server::CGI undef
+      Mojo::Server::Daemon undef
+      Mojo::Server::Hypnotoad undef
+      Mojo::Server::Morbo undef
+      Mojo::Server::Morbo::Backend undef
+      Mojo::Server::Morbo::Backend::Poll undef
+      Mojo::Server::PSGI undef
+      Mojo::Server::Prefork undef
+      Mojo::Template undef
+      Mojo::Transaction undef
+      Mojo::Transaction::HTTP undef
+      Mojo::Transaction::WebSocket undef
+      Mojo::URL undef
+      Mojo::Upload undef
+      Mojo::UserAgent undef
+      Mojo::UserAgent::CookieJar undef
+      Mojo::UserAgent::Proxy undef
+      Mojo::UserAgent::Server undef
+      Mojo::UserAgent::Transactor undef
+      Mojo::Util undef
+      Mojo::WebSocket undef
+      Mojolicious 9.49
+      Mojolicious::Command undef
+      Mojolicious::Command::Author::cpanify undef
+      Mojolicious::Command::Author::generate undef
+      Mojolicious::Command::Author::generate::app undef
+      Mojolicious::Command::Author::generate::dockerfile undef
+      Mojolicious::Command::Author::generate::lite_app undef
+      Mojolicious::Command::Author::generate::makefile undef
+      Mojolicious::Command::Author::generate::plugin undef
+      Mojolicious::Command::Author::inflate undef
+      Mojolicious::Command::cgi undef
+      Mojolicious::Command::daemon undef
+      Mojolicious::Command::eval undef
+      Mojolicious::Command::get undef
+      Mojolicious::Command::prefork undef
+      Mojolicious::Command::psgi undef
+      Mojolicious::Command::routes undef
+      Mojolicious::Command::version undef
+      Mojolicious::Commands undef
+      Mojolicious::Controller undef
+      Mojolicious::Lite undef
+      Mojolicious::Plugin undef
+      Mojolicious::Plugin::Config undef
+      Mojolicious::Plugin::Config::Sandbox undef
+      Mojolicious::Plugin::DefaultHelpers undef
+      Mojolicious::Plugin::EPLRenderer undef
+      Mojolicious::Plugin::EPRenderer undef
+      Mojolicious::Plugin::HeaderCondition undef
+      Mojolicious::Plugin::JSONConfig undef
+      Mojolicious::Plugin::Mount undef
+      Mojolicious::Plugin::NotYAMLConfig undef
+      Mojolicious::Plugin::TagHelpers undef
+      Mojolicious::Plugins undef
+      Mojolicious::Renderer undef
+      Mojolicious::Routes undef
+      Mojolicious::Routes::Match undef
+      Mojolicious::Routes::Pattern undef
+      Mojolicious::Routes::Route undef
+      Mojolicious::Sessions undef
+      Mojolicious::Static undef
+      Mojolicious::Types undef
+      Mojolicious::Validator undef
+      Mojolicious::Validator::Validation undef
+      Test::Mojo undef
+      ojo undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      IO::Socket::IP 0.37
+      Sub::Util 1.41
+      perl 5.016
   Moo-2.005005
     pathname: H/HA/HAARG/Moo-2.005005.tar.gz
     provides:
@@ -3904,6 +4102,43 @@ DISTRIBUTIONS
       Text::Wrap 0
       constant 0
       perl 5.008001
+  Net-Server-2.018
+    pathname: B/BB/BBB/Net-Server-2.018.tar.gz
+    provides:
+      Net::Server 2.018
+      Net::Server::Daemonize 0.06
+      Net::Server::Fork undef
+      Net::Server::HTTP undef
+      Net::Server::INET undef
+      Net::Server::INET::Handle undef
+      Net::Server::IP undef
+      Net::Server::Log::Log::Log4perl undef
+      Net::Server::Log::Sys::Syslog undef
+      Net::Server::MultiType undef
+      Net::Server::Multiplex undef
+      Net::Server::Multiplex::MUX undef
+      Net::Server::PSGI undef
+      Net::Server::PreFork undef
+      Net::Server::PreForkSimple undef
+      Net::Server::Proto undef
+      Net::Server::Proto::SSL undef
+      Net::Server::Proto::SSLEAY undef
+      Net::Server::Proto::TCP undef
+      Net::Server::Proto::UDP undef
+      Net::Server::Proto::UNIX undef
+      Net::Server::Proto::UNIXDGRAM undef
+      Net::Server::SIG 0.03
+      Net::Server::Single undef
+      Net::Server::Thread undef
+      Net::Server::TiedHandle 2.018
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      File::Temp 0
+      IO::Socket 0
+      POSIX 0
+      Socket 0
+      Time::HiRes 0
   Number-Compare-0.03
     pathname: R/RC/RCLAMP/Number-Compare-0.03.tar.gz
     provides:
@@ -4491,6 +4726,26 @@ DISTRIBUTIONS
       Digest::SHA 0
       Module::Build::Tiny 0.035
       Scalar::Util 0
+  Ref-Util-0.204
+    pathname: A/AR/ARC/Ref-Util-0.204.tar.gz
+    provides:
+      Ref::Util 0.204
+      Ref::Util::PP 0.204
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      Ref::Util::XS 0
+      Text::ParseWords 0
+      perl 5.006
+  Ref-Util-XS-0.117
+    pathname: X/XS/XSAWYERX/Ref-Util-XS-0.117.tar.gz
+    provides:
+      Ref::Util::XS 0.117
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      XSLoader 0
+      perl 5.006
   Regexp-Common-2024080801
     pathname: A/AB/ABIGAIL/Regexp-Common-2024080801.tar.gz
     provides:
@@ -4781,6 +5036,39 @@ DISTRIBUTIONS
       strict 0
       version 0.83
       warnings 0
+  Starlet-0.32
+    pathname: K/KA/KAZUHO/Starlet-0.32.tar.gz
+    provides:
+      Plack::Handler::Starlet undef
+      Starlet 0.32
+      Starlet::Server undef
+    requirements:
+      ExtUtils::MakeMaker 6.59
+      LWP::UserAgent 5.8
+      Parallel::Prefork 0.18
+      Plack 0.992
+      Server::Starter 0.06
+      Test::More 0.88
+      Test::TCP 2.1
+      perl 5.008001
+  Starman-0.4018
+    pathname: M/MI/MIYAGAWA/Starman-0.4018.tar.gz
+    provides:
+      HTTP::Server::PSGI::Net::Server::PreFork undef
+      Plack::Handler::Starman undef
+      Starman 0.4018
+      Starman::Server undef
+    requirements:
+      Data::Dump 0
+      HTTP::Date 0
+      HTTP::Parser::XS 0
+      HTTP::Status 0
+      Module::Build::Tiny 0.034
+      Net::Server 2.007
+      Plack 0.9971
+      Test::TCP 2.00
+      parent 0
+      perl 5.008001
   Stream-Buffered-0.03
     pathname: D/DO/DOY/Stream-Buffered-0.03.tar.gz
     provides:
@@ -4915,6 +5203,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
+  Sub-Uplevel-0.2800
+    pathname: D/DA/DAGOLDEN/Sub-Uplevel-0.2800.tar.gz
+    provides:
+      Sub::Uplevel 0.2800
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      constant 0
+      perl 5.006
+      strict 0
+      warnings 0
   Syntax-Keyword-Defer-0.11
     pathname: P/PE/PEVANS/Syntax-Keyword-Defer-0.11.tar.gz
     provides:
@@ -4977,6 +5276,15 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       perl 5.006
       strict 0
+  Template-Tiny-1.16
+    pathname: E/ET/ETHER/Template-Tiny-1.16.tar.gz
+    provides:
+      Template::Tiny 1.16
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      perl 5.006
+      strict 0
   Term-Encoding-0.03
     pathname: M/MI/MIYAGAWA/Term-Encoding-0.03.tar.gz
     provides:
@@ -5003,6 +5311,18 @@ DISTRIBUTIONS
       Term::ReadKey 2.38
     requirements:
       ExtUtils::MakeMaker 6.58
+  Test-CPAN-Meta-0.25
+    pathname: B/BA/BARBIE/Test-CPAN-Meta-0.25.tar.gz
+    provides:
+      Test::CPAN::Meta 0.25
+      Test::CPAN::Meta::Version 0.25
+    requirements:
+      ExtUtils::MakeMaker 0
+      IO::File 0
+      Parse::CPAN::Meta 0.02
+      Test::Builder 0
+      Test::Builder::Tester 0
+      Test::More 0.70
   Test-Deep-1.205
     pathname: R/RJ/RJBS/Test-Deep-1.205.tar.gz
     provides:
@@ -5064,6 +5384,22 @@ DISTRIBUTIONS
       Test::Builder 0
       Test::More 0.96
       perl 5.012
+  Test-Exception-0.43
+    pathname: E/EX/EXODIST/Test-Exception-0.43.tar.gz
+    provides:
+      Test::Exception 0.43
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Sub::Uplevel 0.18
+      Test::Builder 0.7
+      Test::Builder::Tester 1.07
+      Test::Harness 2.03
+      base 0
+      perl 5.006001
+      strict 0
+      warnings 0
   Test-Fatal-0.018
     pathname: R/RJ/RJBS/Test-Fatal-0.018.tar.gz
     provides:
@@ -5206,6 +5542,19 @@ DISTRIBUTIONS
       Storable 2.15
       parent 0.221
       perl 5.008001
+  Thrall-0.0405
+    pathname: D/DE/DEXTER/Thrall-0.0405.tar.gz
+    provides:
+      Plack::Handler::Thrall 0.0405
+      Thrall 0.0405
+      Thrall::Server 0.0405
+    requirements:
+      Module::Build 0
+      Module::CPANfile 0
+      Plack 0.9920
+      Software::License 0
+      perl 5.008001
+      threads 1.73
   Throwable-1.001
     pathname: R/RJ/RJBS/Throwable-1.001.tar.gz
     provides:
