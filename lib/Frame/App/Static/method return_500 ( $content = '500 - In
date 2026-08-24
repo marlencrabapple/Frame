@@ -1,0 +1,11 @@
+method return_500 ( $content = '500 - Internal server error', @args ) {
+    $self->return_error( $content, 500, @args );
+}
+
+method return_404 ( $content = '404 - Page not found', @args ) {
+    $self->return_error( $content, 404, @args );
+}
+
+method return_403 ( $content = '403 - Forbidden', @args ) {
+    $self->return_error( $content, 403, @args );
+}

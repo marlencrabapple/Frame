@@ -35,7 +35,7 @@ requires 'Net::SSLeay';
 requires 'Object::Pad';
 requires 'PadWalker';
 requires 'Parallel::Prefork';
-requires 'Path::Tiny';
+requires 'Path::Try';
 requires 'Server::Starter';
 requires 'SQL::Abstract';
 requires 'Syntax::Keyword::Dynamically';
