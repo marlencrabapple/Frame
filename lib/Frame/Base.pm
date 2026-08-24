@@ -21,13 +21,18 @@ use builtin;
 use parent 'Exporter';
 
 use vars qw'@EXPORT @EXPORT_OK @EXPORT_SUB @EXPORT_COMMON';
-@EXPORT     = qw(dmsg json __pkgfn__ callstack refstr);
+@EXPORT     = qw(dmsg json __pkgfn__ callstack refstr epoch);
 @EXPORT_SUB = qw(@EXPORT);
+
+const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
 
 const our $isnum        => qr/^[0-9]+$/;
 const our %json_default => ( utf8 => 1 );
 
-field $json = JSON::MaybeXS->new( \%json_default );
+const our $package => __PACKAGE__;
+
+field $json //= JSON::MaybeXS->new( \%json_default );
 
 # field $json {
 #     JSON::MaybeXS->new(
@@ -48,7 +53,14 @@ ADJUST : params (%param) {
 
 *debug = \&IO::Handle::Common::debug;
 
+field $debug_mode : param : accessor = $DEBUG_MODE;
+field $dev_mode   : param : accessor = $DEV_MODE;
 field $dev_mode : accessor //= $ENV{PLACK_ENV};
+
+field $ddn_uplvl    : param : accessor = 3;
+field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
+field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
+
 
 ADJUST : params (:$dev_mode //= $ENV{PLACK_ENV}, %param) {
     if ( $dev_mode eq 'development' ) {
