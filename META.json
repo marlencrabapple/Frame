@@ -77,7 +77,7 @@
             "Object::Pad" : "0",
             "PadWalker" : "0",
             "Parallel::Prefork" : "0",
-            "Path::Tiny" : "0",
+            "Path::Try" : "0",
             "Plack" : "0",
             "SQL::Abstract" : "0",
             "Server::Starter" : "0",
@@ -99,7 +99,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/marlencrabapple/Frame/issues"
@@ -115,6 +115,6 @@
    "x_generated_by_perl" : "v5.44.0",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.43",
    "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later",
-   "x_static_install" : 1
+   "x_static_install" : 0
 }
 

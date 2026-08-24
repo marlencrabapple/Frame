@@ -8,7 +8,7 @@ use v5.40;
 
 use Const::Fast;
 use Const::Fast::Exporter;
-use PadWalker      qw(peek_my peek_our);
+use PadWalker      qw(var_name peek_my peek_our);
 use List::AllUtils qw(singleton any);
 use JSON::MaybeXS;
 use Time::Piece;
@@ -17,16 +17,11 @@ use Module::Metadata;
 use Devel::StackTrace::WithLexicals;
 use IO::Handle::Common;
 
-use vars '@EXPORT';
-@EXPORT = qw(dmsg json __pkgfn__ callstack);
+use parent 'Exporter';
 
-BEGIN {
-    require Exporter;
-    our @ISA    = qw(Exporter);
-    our @EXPORT = qw(dmsg json __pkgfn__ callstack);
-    use vars '@EXPORT';
-    $^H{ __PACKAGE__ . '/user' } = 1;
-}
+use vars qw'@EXPORT @EXPORT_OK ';
+@EXPORT    = qw(dmsg json __pkgfn__ callstack refstr adjust epoch);
+@EXPORT_OK = @EXPORT;
 
 const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
 const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
@@ -63,6 +58,16 @@ field $debug = $ENV{DEBUG} || 1;
 field $ddn_uplvl    : param : accessor = 3;
 field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
 field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
+
+method adjust( $field, $newval //= $field ) {
+    my $name = var_name( 0, $field );
+    eval "$name = \$newval" if $name;
+    $field;
+}
+
+sub refstr ($ref) {
+    ( reftype($ref) // '' )
+}
 
 sub epoch( $join = '', %opts ) {
     join $join, Time::HiRes::gettimeofday;
