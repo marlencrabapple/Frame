@@ -59,11 +59,15 @@ field $ddn_uplvl    : param : accessor = 3;
 field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
 field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
 
-method adjust( $field, $newval //= $field ) {
+method $adjust( $field, $newval //= $field ) {
     my $name = var_name( 0, $field );
     eval "$name = \$newval" if $name;
     $field;
 }
+
+# sub adjust ($field, $newval //=$field) {
+#
+# }
 
 sub refstr ($ref) {
     ( reftype($ref) // '' )
