@@ -9,8 +9,8 @@ requires 'Plack';
 
 requires 'IPC::Nosh', '0.01.4', dist => "CRABAPP/IPC-Nosh-0.01.4-TRIAL.tar.gz";
 
-requires 'IO::Handle::Common', '0.01.1',
-  dist => "CRABAPP/IO-Handle-Common-0.01.1-TRIAL.tar.gz";
+requires 'IO::Handle::Common', '0.01_2',
+  dist => "CRABAPP/IO-Handle-Common-0.01_2-TRIAL.tar.gz";
 
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';

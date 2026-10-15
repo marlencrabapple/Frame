@@ -22,7 +22,8 @@ const our $tx_default => Text::Xslate->new(
 );
 
 field $config;                                 #{ $self->config };
-field $req : param : reader : weak;
+field $req   : param : reader : weak;
+field $env   : reader = $req->env;
 field $route : param : reader = undef;
 field $res : reader { $req->new_response };    # :weak;
 

@@ -1,0 +1,13 @@
+: cascade "layout/main.tx"
+
+: override content -> {
+  <ul>
+  : for $modlist -> $mod {
+    <li>
+      <a href="<: $mod.url :>" title="<: $mod.name :>">
+        <: $mod.name :></a><: $mod.name :>
+      </a>
+    </li>
+  : }
+  </ul>
+:}

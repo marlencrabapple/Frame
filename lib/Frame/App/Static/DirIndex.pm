@@ -2,7 +2,7 @@ use Object::Pad ':experimental(:all)';
 
 package Frame::App::Static::DirIndex;
 
-class Frame::App::Static::DirIndex   : isa(Frame);
+class Frame::App::Static::DirIndex : isa(Frame);
 
 use utf8;
 use v5.40;
@@ -11,11 +11,9 @@ use Cwd;
 use List::Util 'any';
 use Path::Tiny;
 use Const::Fast;
-use Plack::Builder;
 use Plack::App::File;
 use Plack::Middleware::Static;
 use Syntax::Keyword::Dynamically;
-use Plack::Middleware::Auth::Basic;
 use IO::Handle::Common;
 
 const our $DEBUG   => $ENV{DEBUG};
@@ -28,8 +26,6 @@ my class DirIndex : isa(Plack::App::Directory) {    #:does(Frame::Controller) {
     use IO::Handle::Common;
     use Const::Fast;
     use Path::Tiny;
-
-    # use parent 'Plack::App::Directory';
 
     const our $dir_page => <<'...';
 <!DOCTYPE html>
