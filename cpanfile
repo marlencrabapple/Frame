@@ -1,5 +1,5 @@
 use utf8;
-use v5.40;
+use v5.44;
 
 use subs qw'requires recommends on';
 
@@ -7,10 +7,30 @@ requires 'perl', 'v5.40';
 
 requires 'Plack';
 
-requires 'IPC::Nosh', '0.01.4', dist => "CRABAPP/IPC-Nosh-0.01.4-TRIAL.tar.gz";
+requires 'perl', 'v5.44';
+requires 'Const::Fast';
 
-requires 'IO::Handle::Common', '0.01_2',
-  dist => "CRABAPP/IO-Handle-Common-0.01_2-TRIAL.tar.gz";
+use Const::Fast;
+
+sub distname ($pkgname) {
+    const my $pkg2dist => qr/::/;
+    ( $pkgname =~ s/$pkg2dist/-/rg );
+}
+
+const our %pinned => (
+    CRABAPP => {
+        'Path::Try'          => '0.01_2',
+        'IO::Handle::Common' => '0.01_3',
+        'IPC::Nosh'          => '0.01.4',
+    }
+);
+
+foreach my ( $author, $modules ) (%pinned) {
+    foreach my ( $name, $ver ) (%$modules) {
+        requires $name, $ver,
+          dist => "$author/" . distname($name) . "-$ver-TRIAL.tar.gz";
+    }
+}
 
 requires 'Const::Fast';
 requires 'Const::Fast::Exporter';

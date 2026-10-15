@@ -549,11 +549,12 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.52
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.52.tar.gz
+  Cpanel-JSON-XS-4.80
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.80.tar.gz
     provides:
-      Cpanel::JSON::XS 4.52
-      Cpanel::JSON::XS::Type undef
+      Cpanel::JSON::XS 4.80
+      Cpanel::JSON::XS::Boolean 4.80
+      Cpanel::JSON::XS::Type 4.80
     requirements:
       Carp 0
       Config 0
@@ -598,10 +599,53 @@ DISTRIBUTIONS
       Test::More 0.88
       Tie::Hash 0
       perl 5.006
-  DBI-1.653
-    pathname: H/HM/HMBRAND/DBI-1.653.tgz
+  DBI-1.655
+    pathname: H/HM/HMBRAND/DBI-1.655.tgz
     provides:
-      DBI 1.653
+      Bundle::DBI 12.008696
+      DBD::DBM 0.08
+      DBD::ExampleP 12.014311
+      DBD::File 0.45
+      DBD::Gofer 0.015327
+      DBD::Gofer::Policy::Base 0.010088
+      DBD::Gofer::Policy::classic 0.010088
+      DBD::Gofer::Policy::pedantic 0.010088
+      DBD::Gofer::Policy::rush 0.010088
+      DBD::Gofer::Transport::Base 0.014121
+      DBD::Gofer::Transport::corostream 2.165300
+      DBD::Gofer::Transport::null 0.010088
+      DBD::Gofer::Transport::pipeone 0.010088
+      DBD::Gofer::Transport::stream 0.014599
+      DBD::Mem 0.001
+      DBD::NullP 12.014715
+      DBD::Proxy 0.2004
+      DBD::Sponge 12.010003
+      DBI 1.655
+      DBI::Const::GetInfo::ANSI 2.008697
+      DBI::Const::GetInfo::ODBC 2.011374
+      DBI::Const::GetInfoReturn 2.008697
+      DBI::Const::GetInfoType 2.008697
+      DBI::DBD 12.015129
+      DBI::DBD::Metadata 2.014214
+      DBI::DBD::SqlEngine 0.06
+      DBI::Gofer::Execute 0.014283
+      DBI::Gofer::Request 0.012537
+      DBI::Gofer::Response 0.011566
+      DBI::Gofer::Serializer::Base 0.009950
+      DBI::Gofer::Serializer::DataDumper 0.009950
+      DBI::Gofer::Serializer::Storable 0.015586
+      DBI::Gofer::Transport::Base 0.012537
+      DBI::Gofer::Transport::pipeone 0.012537
+      DBI::Gofer::Transport::stream 0.012537
+      DBI::Profile 2.015065
+      DBI::ProfileData 2.010008
+      DBI::ProfileDumper 2.015325
+      DBI::ProfileDumper::Apache 2.014121
+      DBI::ProfileSubs 0.009396
+      DBI::ProxyServer 0.3005
+      DBI::PurePerl 2.014286
+      DBI::SQL::Nano 1.015544
+      DBI::Util::CacheMemory 0.010315
     requirements:
       ExtUtils::MakeMaker 6.48
       Module::Load 0.22
@@ -2277,16 +2321,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  Future-0.52
-    pathname: P/PE/PEVANS/Future-0.52.tar.gz
+  Future-0.53
+    pathname: P/PE/PEVANS/Future-0.53.tar.gz
     provides:
-      Future 0.52
-      Future::Exception 0.52
-      Future::Mutex 0.52
-      Future::PP 0.52
-      Future::Utils 0.52
-      Test::Future 0.52
-      Test::Future::Deferred 0.52
+      Future 0.53
+      Future::Exception 0.53
+      Future::Mutex 0.53
+      Future::PP 0.53
+      Future::Utils 0.53
+      Test::Future 0.53
+      Test::Future::Deferred 0.53
     requirements:
       Carp 1.25
       List::Util 1.29
@@ -2684,19 +2728,23 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Handle-Common-0.01-TRIAL
-    pathname: C/CR/CRABAPP/IO-Handle-Common-0.01-TRIAL.tar.gz
+  IO-Handle-Common-0.01_3-TRIAL
+    pathname: C/CR/CRABAPP/IO-Handle-Common-0.01_3-TRIAL.tar.gz
     provides:
-      IO::Handle::Common 0.01
+      IO::Handle::Common 0.01_3
+      IO::Handle::Common::Base undef
       IO::Handle::Common::Handle undef
     requirements:
+      Class::Exporter 0
       Const::Fast 0
       Data::Dumper::Names 0
       Devel::StackTrace::WithLexicals 0
+      Devel::Trace 0
       FileHandle 0
       IO::Handle 0
       List::Util 0
       Module::Build::Tiny 0.034
+      Object::Pad 0
       PadWalker 0
       Path::Tiny 0
       perl v5.40.0
@@ -3212,6 +3260,51 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
+  Module-Build-0.4234
+    pathname: L/LE/LEONT/Module-Build-0.4234.tar.gz
+    provides:
+      Module::Build 0.4234
+      Module::Build::Base 0.4234
+      Module::Build::Compat 0.4234
+      Module::Build::Config 0.4234
+      Module::Build::Cookbook 0.4234
+      Module::Build::Dumper 0.4234
+      Module::Build::Notes 0.4234
+      Module::Build::PPMMaker 0.4234
+      Module::Build::Platform::Default 0.4234
+      Module::Build::Platform::MacOS 0.4234
+      Module::Build::Platform::Unix 0.4234
+      Module::Build::Platform::VMS 0.4234
+      Module::Build::Platform::VOS 0.4234
+      Module::Build::Platform::Windows 0.4234
+      Module::Build::Platform::aix 0.4234
+      Module::Build::Platform::cygwin 0.4234
+      Module::Build::Platform::darwin 0.4234
+      Module::Build::Platform::os2 0.4234
+      Module::Build::PodParser 0.4234
+    requirements:
+      CPAN::Meta 2.142060
+      Cwd 0
+      Data::Dumper 0
+      ExtUtils::CBuilder 0.27
+      ExtUtils::Install 0
+      ExtUtils::Manifest 0
+      ExtUtils::Mkbootstrap 0
+      ExtUtils::ParseXS 2.21
+      File::Basename 0
+      File::Compare 0
+      File::Copy 0
+      File::Find 0
+      File::Path 0
+      File::Spec 0.82
+      Getopt::Long 0
+      Module::Metadata 1.000002
+      Perl::OSType 1
+      TAP::Harness 3.29
+      Text::Abbrev 0
+      Text::ParseWords 0
+      perl 5.006001
+      version 0.87
   Module-Build-Tiny-0.053
     pathname: L/LE/LEONT/Module-Build-Tiny-0.053.tar.gz
     provides:
@@ -4593,14 +4686,14 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  Path-Try-0.01-TRIAL
-    pathname: C/CR/CRABAPP/Path-Try-0.01-TRIAL.tar.gz
+  Path-Try-0.01_2-TRIAL
+    pathname: C/CR/CRABAPP/Path-Try-0.01_2-TRIAL.tar.gz
     provides:
-      Path::Try 0.01
-      Path::Try::Base 0.01
-      Path::Try::Error 0.01
+      Path::Try 0.01_2
+      Path::Try::Base 0.001001
+      Path::Try::Error 0.001001
     requirements:
-      IO::Handle::Common v0.1.1
+      IO::Handle::Common 0.01_2
       Module::Build::Tiny 0.035
       Object::Pad 0
       Path::Tiny 0
@@ -5007,12 +5100,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0054
-    pathname: M/MI/MIYAGAWA/Plack-1.0054.tar.gz
+  Plack-1.0055
+    pathname: M/MI/MIYAGAWA/Plack-1.0055.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0054
+      Plack 1.0055
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -5071,9 +5164,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0054
+      Plack::Request 1.0055
       Plack::Request::Upload undef
-      Plack::Response 1.0054
+      Plack::Response 1.0055
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
