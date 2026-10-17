@@ -143,7 +143,7 @@ method match ($req) {
     my @path =
       $req->path eq '/'
       ? '/'
-      : split '/', substr( $req->path, 1 ), -1;
+      : split qr!/!, substr( $req->path_info, 1 ), -1;
 
     pop @path if $path[-1] eq '';
 
