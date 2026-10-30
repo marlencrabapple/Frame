@@ -14,9 +14,9 @@ field $plenv;
 
 ADJUST {
     $plenv = plenv->new( app => $self );
-}
+};
 
-my class plenv {
+my class plenv :does(Frame::App::perldoc::plenv{
     use IPC::Nosh qw'';
     use IO::Handle::Common;
     use Const::Fast;
@@ -78,11 +78,9 @@ my class plenv {
         my @modlist;
         $self->run('list-modules')->out->lines_utf8;
     }
-}
+};
 
 method plenv {
     $plenv //= plenv->new;
     $plenv;
 }
-
-package asdf

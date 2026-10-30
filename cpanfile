@@ -19,9 +19,9 @@ sub distname ($pkgname) {
 
 const our %pinned => (
     CRABAPP => {
-        'Path::Try'          => '0.01_2',
-        'IO::Handle::Common' => '0.01_3',
-        'IPC::Nosh'          => '0.01.4',
+        'Path::Try'          => '0.01_03',
+        'IO::Handle::Common' => '0.01_05',
+        'IPC::Nosh'          => '0.01_04',
     }
 );
 
