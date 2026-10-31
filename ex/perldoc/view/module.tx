@@ -1,5 +1,0 @@
-: cascade "layout/main.tx"
-
-: override content -> {
-  <: $htmlstr :>
-:}

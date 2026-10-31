@@ -1,7 +1,7 @@
 use Object::Pad ':experimental(:all)';
 
 package Frame::Base;
-role Frame::Base;
+role Frame::Base : does(Adjust::Params);
 
 use utf8;
 use v5.44;
@@ -21,56 +21,21 @@ use builtin;
 use vars '@EXPORT';
 @EXPORT = qw(dmsg json __pkgfn__ callstack refstr);
 
-BEGIN {
-    require Exporter;
-    our @ISA    = qw(Exporter);
-    our @EXPORT = qw(dmsg json __pkgfn__ callstack refstr);
-    use vars '@EXPORT';
-    $^H{ __PACKAGE__ . '/user' } = 1;
-}
+const our $isnum => qr/^[0-9]+$/;
 
-const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
-
-const our %json_default_param =>
-  ( utf8 => 1, $DEV_MODE ? ( pretty => 1 ) : () );
-const our $json_default => JSON::MaybeXS->new( {%json_default_param} );
-
-const our $package => __PACKAGE__;
+# const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+# const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
 
 field $app : weak : param : accessor = undef;
 field $json : accessor { $Frame::Base::json_default };
-field $debug_mode : param : accessor = $DEBUG_MODE;
-field $dev_mode   : param : accessor = $DEV_MODE;
 
-APPLY($class_mop) {
-    use utf8;
-    use v5.44;
+field $debug : accessor //= 0;
 
-    use Exporter 'import';
-    our @EXPORT = @{__PACKAGE__::EXPORT};
-    $^H{ __PACKAGE__ . '/user' } = 1;
+ADJUST : params (%param) { $debug = IO->debug( $param{debug} ) };
 
-    # my @ret = __PACKAGE__->import;
+# *debug = \&IO::Handle::Common::debug;
 
-    # dmsg $class_mop, \@ret;
-    # @ret
-};
-
-ADJUSTPARAMS {
-    use utf8;
-    use v5.44;
-    use Exporter 'import';
-    our @EXPORT = @{__PACKAGE__::EXPORT};
-    $^H{ __PACKAGE__ . '/user' } = 1;
-
-    # my @ret = __PACKAGE__->import;
-
-    # dmsg $self, \@ret;
-    # @ret;
-};
-
-field $debug = $ENV{DEBUG} || 1;
+field $dev_mode : param : accessor //= $ENV{PLACK_ENV};
 
 field $ddn_uplvl    : param : accessor = 3;
 field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;

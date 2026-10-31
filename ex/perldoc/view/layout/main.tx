@@ -1,9 +1,0 @@
-: include "part/header.tx"
-
-<section class="section">
-  <div class="container">
-: block content -> {}
-  </div>
-</section>
-
-: include "part/footer.tx"

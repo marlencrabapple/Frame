@@ -19,6 +19,7 @@ sub distname ($pkgname) {
 
 const our %pinned => (
     CRABAPP => {
+        'Adjust::Params'     => '0.01_02',
         'Path::Try'          => '0.01_03',
         'IO::Handle::Common' => '0.01_05',
         'IPC::Nosh'          => '0.01_04',
@@ -107,7 +108,7 @@ on 'develop' => sub {
 
 on 'test' => sub {
 
-requires 'Test::More';
-requires 'Test::Pod';
+    requires 'Test::More';
+    requires 'Test::Pod';
 }
 

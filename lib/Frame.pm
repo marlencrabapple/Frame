@@ -6,7 +6,7 @@ class Frame : does(Frame::Base) : abstract;
 
 use vars qw / @EXPORT @ISA $VERSION /;
 
-our $VERSION = '0.01_7';
+our $VERSION = '0.01_07';
 
 use utf8;
 use v5.40;
@@ -74,8 +74,7 @@ ADJUSTPARAMS($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-
-        #dmsg $e
+        fatal $e
     }
 
     $routes = Frame::Routes->new( app => $self );
@@ -109,8 +108,10 @@ method handler ( $env, %opt ) {
     my $req = $request_class->new( app => $self, env => $env, %opt );
     my $res = $self->dispatch( $req, %opt );
 
-    utf8::encode( $res->[2][0] )
-      if $res->[2][0] =~ /[^\x00-\xff]/g;
+    if ( refstr( $res[2] ) eq 'ARRAY' ) {
+        utf8::encode( $res->[2][0] )
+          if $res->[2][0] =~ /[^\x00-\xff]/g;
+    }
 
     #&& $self->charset =~ $UTF8_CHARSET_NAME_RE;
 

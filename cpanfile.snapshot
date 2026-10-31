@@ -1,5 +1,16 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
+  Adjust-Params-0.01_05-TRIAL
+    pathname: C/CR/CRABAPP/Adjust-Params-0.01_05-TRIAL.tar.gz
+    provides:
+      Adjust::Params 0.01_05
+    requirements:
+      IO::Handle::Common 0.01_05
+      List::Util 0
+      Module::Build::Tiny 0.035
+      Object::Pad 0
+      PadWalker 0
+      perl v5.44.0
   Apache-LogFormat-Compiler-0.36
     pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.36.tar.gz
     provides:
