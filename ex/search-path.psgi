@@ -22,6 +22,12 @@ field $mount = '/';
 field $found = {};
 field $fsize_human //= 1;
 
+field $lines;
+field $columns;
+field $bytes;
+field $cmp;
+field $verbose;
+
 # field $app { $self };
 
 # field $json {
@@ -35,6 +41,10 @@ field $fsize_human //= 1;
 
 method startup {
     my $r = $self->routes;
+
+    my $mount = $self->under($mount, sub ($self) {
+
+    });
 
     $r->get(
         "$mount/:path",

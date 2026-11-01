@@ -21,7 +21,8 @@ use builtin;
 use parent 'Exporter';
 
 use vars qw'@EXPORT @EXPORT_OK @EXPORT_SUB @EXPORT_COMMON';
-@EXPORT = qw(dmsg json __pkgfn__ callstack refstr);
+@EXPORT     = qw(dmsg json __pkgfn__ callstack refstr);
+@EXPORT_SUB = qw(@EXPORT);
 
 const our $isnum        => qr/^[0-9]+$/;
 const our %json_default => ( utf8 => 1 );
@@ -79,6 +80,7 @@ method export_common : common ($class_mop) {
         $class_mop->add_method( $common, common => 1, sub { $class->$common } );
     }
 }
+
 
 method export_instance {
     ...;

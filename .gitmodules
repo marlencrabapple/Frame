@@ -1,9 +1,8 @@
 [submodule "dist/arch"]
 	path = dist/arch
 	url = https://git.sr.ht/~crabapp/perl-frame.git
-[submodule "ex/perldoc/bulma"]
-	path = ex/perldoc/bulma
-	url = https://github.com/jgthms/bulma.git
-[submodule "ex/ex/perldoc"]
-	path = ex/ex/perldoc
-	url = https://github.com/marlencrabapple/Frame-App-Perldoc
+
+
+[submodule "ex/perldoc"]
+	path = ex/perldoc
+	url = https://github.com/marlencrabapple/Frame-App-Perldoc.git
