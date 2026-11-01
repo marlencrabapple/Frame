@@ -34,15 +34,14 @@ foreach my ( $author, $modules ) (%pinned) {
 }
 
 requires 'Const::Fast';
-requires 'Const::Fast::Exporter';
-requires 'Cpanel::JSON::XS';
+requires 'JSON::MaybeXS';
 requires 'Crypt::Argon2';
 requires 'Cwd';
 
 requires 'DBD::SQLite';
 requires 'DBI';
 
-requires 'Devel::StackTrace::WithLexicals';
+# requires 'Devel::StackTrace::WithLexicals';
 
 requires 'File::ConfigDir';
 requires 'File::HomeDir';
