@@ -2219,6 +2219,30 @@ DISTRIBUTIONS
       Number::Compare 0
       Test::More 0
       Text::Glob 0.07
+  File-HomeDir-1.006
+    pathname: R/RE/REHSACK/File-HomeDir-1.006.tar.gz
+    provides:
+      File::HomeDir 1.006
+      File::HomeDir::Darwin 1.006
+      File::HomeDir::Darwin::Carbon 1.006
+      File::HomeDir::Darwin::Cocoa 1.006
+      File::HomeDir::Driver 1.006
+      File::HomeDir::FreeDesktop 1.006
+      File::HomeDir::MacOS9 1.006
+      File::HomeDir::Test 1.006
+      File::HomeDir::Unix 1.006
+      File::HomeDir::Windows 1.006
+    requirements:
+      Carp 0
+      Cwd 3.12
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Path 2.01
+      File::Spec 3.12
+      File::Temp 0.19
+      File::Which 0.05
+      POSIX 0
+      perl 5.008003
   File-Listing-6.16
     pathname: P/PL/PLICEASE/File-Listing-6.16.tar.gz
     provides:

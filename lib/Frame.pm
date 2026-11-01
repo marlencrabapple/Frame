@@ -9,17 +9,16 @@ use vars qw / @EXPORT @ISA $VERSION /;
 our $VERSION = '0.01_07';
 
 use utf8;
-use v5.40;
+use v5.44;
 
 use Encode     qw'encode decode';
-use TOML::Tiny qw'from_toml to_toml';
-use Path::Tiny;
+use Unicode::UTF8;
+use Path::Try;
 use Const::Fast;
 use IO::Async::Loop;
 use Net::Async::HTTP;
 use IO::Handle::Common;
 use Syntax::Keyword::Try;
-
 # use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
@@ -33,22 +32,22 @@ const our $UTF8_CHARSET_NAME_RE => qr/^utf-?8$/i;
 field $loop   : reader;
 field $ua     : reader;
 field $routes : reader;
-field $config = {%$CONFIG_DEFAULT};
-field $charset              : reader = 'utf-8';
+field $config = { %$CONFIG_DEFAULT };
+field $charset              : reader = 'UTF-8';
 field $request_class        : param : reader = 'Frame::Request';
 field $controller_namespace : param : reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
-ADJUSTPARAMS($params) {
-    unshift @INC, $INC[1];
+#ADJUSTPARAMS($params) {
+ADJUST :params (%param) {
+
+    unshift @INC, $INC[1]; # Is this still necessary at all
     $self->app($self);
 
     $loop = IO::Async::Loop->new;    # This grabs the existing loop
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
-
-    # dmsg $config, $Frame::CONFIG_DEFAULT;
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
@@ -85,24 +84,23 @@ ADJUSTPARAMS($params) {
         routes => $routes
     );
 
-    my $ret = $self->startup(%startup_opts);
+    $self->startup(%startup_opts);
 
-    warn __CLASS__
-      . "$\::startup did not return a valid value: '$ret'."
-      . " Valid values"
-      . " are 1 or the instance of the class its called on."
-      unless $ret == 1 || ( ref $ret && $ret == $self );
+    #error __CLASS__
+    #  . "$\::startup did not return a valid value: '$ret'."
+    #  . " Valid values"
+    #  . " are 1 or the instance of the class its called on."
+    #  unless $ret == 1 || ( ref $ret && $ret == $self );
 
-    $ret
+    #$ret
 }
 
 method to_psgi {
     sub ($env) { $self->handler($env) }
 }
 
-method to_app {
-    $self->to_psgi(@_);
-}
+use subs qw'to_app';
+*to_app = \&to_psgi;
 
 method handler ( $env, %opt ) {
     my $req = $request_class->new( app => $self, env => $env, %opt );
@@ -112,8 +110,6 @@ method handler ( $env, %opt ) {
         utf8::encode( $res->[2][0] )
           if $res->[2][0] =~ /[^\x00-\xff]/g;
     }
-
-    #&& $self->charset =~ $UTF8_CHARSET_NAME_RE;
 
     $res;
 }
@@ -135,7 +131,7 @@ method route ( $route, $req ) {
         $res = $c->$sub( $req->placeholder_values_ord ) // $c->res;
     }
 
-    # TODO: gate auto-json responses behind config option
+    # TODO: consider gating auto serialized JSON responses behind config option
     if ( !blessed $res && ref $res ) {
         $res = $c->render($res);
     }
@@ -153,16 +149,12 @@ method dispatch ($req) {
         }
         elsif ( $match isa 'Frame::Routes::Route' ) {
             $res = $self->route( $match, $req )->finalize;
-
-            #       dmsg $res;
         }
     }
     else {
         $res = $default_controller_class->new( app => $self, req => $req )
           ->render_404->finalize;
     }
-
-    #dmsg $res;
 
     $res;
 }

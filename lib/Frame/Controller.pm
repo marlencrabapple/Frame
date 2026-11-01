@@ -6,14 +6,12 @@ role Frame::Controller : does(Frame::Base);
 use utf8;
 use v5.40;
 
-# use Carp;
 use Encode qw'encode decode';
 use Text::Xslate;
 use JSON::MaybeXS;
 use Syntax::Keyword::Try;
 use Syntax::Keyword::Dynamically;
 use Const::Fast;
-
 use Frame::Request;
 
 const our $tx_default => Text::Xslate->new(
@@ -57,14 +55,6 @@ method render (
 {
     #my $class = __CLASS__;
     my $class = __PACKAGE__;
-
-    warn "An existing response was overwritten by a call to $class->render()."
-      . "To disable this warning or change response precedence configure"
-      . " 'template.default_res' as needed."
-      if ( $res && $self->res )
-      && ( !$opts{noop} || $config->{'template'}{default_res} );
-
-    # my $res = $opts{noop} ? $req->new_response : $self->res;
 
     dynamically $res =
       ( $opts{noop} || $config->{template}{default_res} eq 'lifecycle' )

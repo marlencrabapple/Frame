@@ -18,31 +18,76 @@ use Devel::StackTrace::WithLexicals;
 use IO::Handle::Common;
 use builtin;
 
-use vars '@EXPORT';
+use parent 'Exporter';
+
+use vars qw'@EXPORT @EXPORT_OK @EXPORT_SUB @EXPORT_COMMON';
 @EXPORT = qw(dmsg json __pkgfn__ callstack refstr);
 
-const our $isnum => qr/^[0-9]+$/;
+const our $isnum        => qr/^[0-9]+$/;
+const our %json_default => ( utf8 => 1 );
 
-# const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-# const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
+field $json = JSON::MaybeXS->new( \%json_default );
+
+# field $json {
+#     JSON::MaybeXS->new(
+#         {
+#             $self->is_utf8 ? ( utf8   => 1 ) : (),
+#             $self->devmode ? ( pretty => 1 ) : ()
+#         }
+#     )
+# };
 
 field $app : weak : param : accessor = undef;
-field $json : accessor { $Frame::Base::json_default };
 
 field $debug : accessor //= 0;
+ADJUST : params (%param) {
+    $self->import;
+    $debug = IO->debug( $param{debug} )
+};
 
-ADJUST : params (%param) { $debug = IO->debug( $param{debug} ) };
+*debug = \&IO::Handle::Common::debug;
 
-# *debug = \&IO::Handle::Common::debug;
+field $dev_mode : accessor //= $ENV{PLACK_ENV};
 
-field $dev_mode : param : accessor //= $ENV{PLACK_ENV};
+ADJUST : params (:$dev_mode //= $ENV{PLACK_ENV}, %param) {
+    if ( $dev_mode eq 'development' ) {
+        $self->dev_mode = 1;
+        $json->pretty(1);
+    }
+};
 
-field $ddn_uplvl    : param : accessor = 3;
-field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
-field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
+field $imported : reader;
 
-sub epoch( $join = '', %opts ) {
-    join $join, Time::HiRes::gettimeofday;
+APPLY($class_mop) {
+    __PACKAGE__->apply($class_mop)
+};
+
+method apply : common ($class_mop) {
+    $class->export_sub($class_mop);
+    $class->export_common($class_mop);
+}
+
+method export_sub : common ($class_mop) {
+    foreach my $common (@EXPORT_SUB) {
+        $class_mop->add_method( $common, common => 1, \&$common );
+    }
+}
+
+method export_common : common ($class_mop) {
+    my $class = $class_mop->name;
+    foreach my $common (@EXPORT_COMMON) {
+        $class_mop->add_method( $common, common => 1, sub { $class->$common } );
+    }
+}
+
+method export_instance {
+    ...;
+}
+
+sub epoch( $join = '', %opt ) {
+    my ( $sec, $ms ) = Time::HiRes::gettimeofday;
+    $ms = '0' x ( 6 - length $ms ) . $ms if $opt{uniform} // 1;
+    join $join, $sec, $ms;
 }
 
 sub __pkgfn__ ( $class, $pkgname = undef ) {

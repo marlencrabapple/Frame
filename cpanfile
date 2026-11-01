@@ -19,9 +19,9 @@ sub distname ($pkgname) {
 
 const our %pinned => (
     CRABAPP => {
-        'Adjust::Params'     => '0.01_02',
+        'Adjust::Params'     => '0.01_05',
         'Path::Try'          => '0.01_03',
-        'IO::Handle::Common' => '0.01_05',
+        'IO::Handle::Common' => '0.01_06',
         'IPC::Nosh'          => '0.01_04',
     }
 );
@@ -45,6 +45,7 @@ requires 'DBI';
 requires 'Devel::StackTrace::WithLexicals';
 
 requires 'File::ConfigDir';
+requires 'File::HomeDir';
 
 requires 'Future';
 requires 'Future::AsyncAwait';
@@ -74,6 +75,8 @@ requires 'Net::Async::HTTP';
 requires 'Net::Async::HTTP::Server';
 requires 'Net::Async::WebSocket';
 requires 'Net::SSLeay';
+
+requires 'Unicode::UTF8';
 
 requires 'Object::Pad';
 requires 'PadWalker';
