@@ -11,7 +11,7 @@ our $VERSION = '0.01_07';
 use utf8;
 use v5.44;
 
-use Encode     qw'encode decode';
+use Encode qw'encode decode';
 use Unicode::UTF8;
 use Path::Try;
 use Const::Fast;
@@ -19,6 +19,7 @@ use IO::Async::Loop;
 use Net::Async::HTTP;
 use IO::Handle::Common;
 use Syntax::Keyword::Try;
+
 # use Frame::Config;
 use Frame::Routes;
 use Frame::Request;
@@ -32,7 +33,7 @@ const our $UTF8_CHARSET_NAME_RE => qr/^utf-?8$/i;
 field $loop   : reader;
 field $ua     : reader;
 field $routes : reader;
-field $config = { %$CONFIG_DEFAULT };
+field $config = {%$CONFIG_DEFAULT};
 field $charset              : reader = 'UTF-8';
 field $request_class        : param : reader = 'Frame::Request';
 field $controller_namespace : param : reader = undef;
@@ -40,9 +41,9 @@ field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
 
 #ADJUSTPARAMS($params) {
-ADJUST :params (%param) {
+ADJUST : params (%param) {
 
-    unshift @INC, $INC[1]; # Is this still necessary at all
+    unshift @INC, $INC[1];    # Is this still necessary at all
     $self->app($self);
 
     $loop = IO::Async::Loop->new;    # This grabs the existing loop
@@ -54,8 +55,8 @@ ADJUST :params (%param) {
 
     $controller_namespace //=
       exists $$config{controller_namespace}
-      ? $$config{controller_namespace}
-      : __CLASS__ . '::Controller';
+    ? $$config{controller_namespace}
+    : __CLASS__ . '::Controller';
 
     try {
         my $fn = __CLASS__ . '/Controller.pm';
@@ -73,7 +74,7 @@ ADJUST :params (%param) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        fatal $e
+        error $e
     }
 
     $routes = Frame::Routes->new( app => $self );
@@ -93,9 +94,9 @@ ADJUST :params (%param) {
     #  unless $ret == 1 || ( ref $ret && $ret == $self );
 
     #$ret
-}
+  }
 
-method to_psgi {
+  method to_psgi {
     sub ($env) { $self->handler($env) }
 }
 
@@ -105,8 +106,8 @@ use subs qw'to_app';
 method handler ( $env, %opt ) {
     my $req = $request_class->new( app => $self, env => $env, %opt );
     my $res = $self->dispatch( $req, %opt );
-
-    if ( refstr( $res[2] ) eq 'ARRAY' ) {
+    dmsg $res;
+    if ( refstr( $$res[2] ) eq 'ARRAY' ) {
         utf8::encode( $res->[2][0] )
           if $res->[2][0] =~ /[^\x00-\xff]/g;
     }
