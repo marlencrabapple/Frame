@@ -1,6 +1,8 @@
 [submodule "dist/arch"]
 	path = dist/arch
-	url = https://git.sr.ht/~crabapp/perl-frame
+	url = https://git.sr.ht/~crabapp/perl-frame.git
+
+
 [submodule "ex/perldoc"]
 	path = ex/perldoc
 	url = https://github.com/marlencrabapple/Frame-App-Perldoc.git

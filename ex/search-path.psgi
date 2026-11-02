@@ -3,7 +3,7 @@ use Object::Pad ':experimental(:all)';
 
 package Frame::Example::SearchPath;
 
-class Frame::Example::SearchPath : isa(Frame);
+class Frame::Example::SearchPath : isa(Frame) : does(Frame::Base);
 
 use utf8;
 use v5.44;
@@ -28,15 +28,23 @@ field $bytes;
 field $cmp;
 field $verbose;
 
+# field $app { $self };
+
+# field $json {
+#     JSON::MaybeXS->new(
+#         {
+#             $self->is_utf8 ? ( utf8   => 1 ) : (),
+#             $self->devmode ? ( pretty => 1 ) : ()
+#         }
+#     )
+# };
+
 method startup {
     my $r = $self->routes;
 
-    my $mount = $self->under(
-        $mount,
-        sub ($self) {
+    my $mount = $self->under($mount, sub ($self) {
 
-        }
-    );
+    });
 
     $r->get(
         "$mount/:path",

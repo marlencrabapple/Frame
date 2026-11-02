@@ -7,46 +7,49 @@ use utf8;
 use v5.44;
 
 use Const::Fast;
+use Const::Fast::Exporter;
+use PadWalker      qw(peek_my peek_our);
+use List::AllUtils qw(singleton any);
 use JSON::MaybeXS;
 use Time::Piece;
 use Time::HiRes;
+use Module::Metadata;
+use Devel::StackTrace::WithLexicals;
 use IO::Handle::Common;
-use List::Util qw'any';
 use builtin;
 
 use parent 'Exporter';
 
 use vars qw'@EXPORT @EXPORT_OK @EXPORT_SUB @EXPORT_COMMON';
-@EXPORT     = qw(dmsg json __pkgfn__ callstack refstr epoch);
+@EXPORT     = qw(dmsg json __pkgfn__ callstack refstr);
 @EXPORT_SUB = qw(@EXPORT);
-
-const our $DEV_MODE   => $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-const our $DEBUG_MODE => any { $_ } @ENV{qw'FRAME_DEBUG DEBUG'};
 
 const our $isnum        => qr/^[0-9]+$/;
 const our %json_default => ( utf8 => 1 );
 
-const our $package => __PACKAGE__;
+field $json = JSON::MaybeXS->new( \%json_default );
 
-field $json //= JSON::MaybeXS->new( \%json_default );
+# field $json {
+#     JSON::MaybeXS->new(
+#         {
+#             $self->is_utf8 ? ( utf8   => 1 ) : (),
+#             $self->devmode ? ( pretty => 1 ) : ()
+#         }
+#     )
+# };
 
 field $app : weak : param : accessor = undef;
 
 field $debug : accessor //= 0;
-field $debug_mode : param : accessor = $debug;
-
 ADJUST : params (%param) {
     $self->import;
     $debug = IO->debug( $param{debug} )
 };
 
-APPLY($class_mop) {
-    __PACKAGE__->apply($class_mop)
-};
-
 *debug = \&IO::Handle::Common::debug;
 
-field $dev_mode : accessor //= $DEV_MODE;
+field $dev_mode : accessor //= $ENV{PLACK_ENV};
+
 ADJUST : params (:$dev_mode //= $ENV{PLACK_ENV}, %param) {
     if ( $dev_mode eq 'development' ) {
         $self->dev_mode = 1;
@@ -54,10 +57,11 @@ ADJUST : params (:$dev_mode //= $ENV{PLACK_ENV}, %param) {
     }
 };
 
-field $ddn_uplvl    : param : accessor = 3;
-field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
-field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
-field $imported     : reader;
+field $imported : reader;
+
+APPLY($class_mop) {
+    __PACKAGE__->apply($class_mop)
+};
 
 method apply : common ($class_mop) {
     $class->export_sub($class_mop);
@@ -76,6 +80,7 @@ method export_common : common ($class_mop) {
         $class_mop->add_method( $common, common => 1, sub { $class->$common } );
     }
 }
+
 
 method export_instance {
     ...;

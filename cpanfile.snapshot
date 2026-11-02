@@ -1,12 +1,11 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  Adjust-Params-0.01_06-TRIAL
-    pathname: C/CR/CRABAPP/Adjust-Params-0.01_06-TRIAL.tar.gz
+  Adjust-Params-0.01_05-TRIAL
+    pathname: C/CR/CRABAPP/Adjust-Params-0.01_05-TRIAL.tar.gz
     provides:
-      Adjust::Params 0.01_06
+      Adjust::Params 0.01_05
     requirements:
-      Const::Fast 0
-      IO::Handle::Common 0.01_06
+      IO::Handle::Common 0.01_05
       List::Util 0
       Module::Build::Tiny 0.035
       Object::Pad 0
@@ -2635,10 +2634,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Headers 6
       perl 5.008001
-  HTTP-Parser-XS-0.18
-    pathname: K/KA/KAZUHO/HTTP-Parser-XS-0.18.tar.gz
+  HTTP-Parser-XS-0.17
+    pathname: K/KA/KAZUHO/HTTP-Parser-XS-0.17.tar.gz
     provides:
-      HTTP::Parser::XS 0.18
+      HTTP::Parser::XS 0.17
       HTTP::Parser::XS::PP undef
     requirements:
       ExtUtils::MakeMaker 6.36
@@ -5134,12 +5133,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0057
-    pathname: M/MI/MIYAGAWA/Plack-1.0057.tar.gz
+  Plack-1.0055
+    pathname: M/MI/MIYAGAWA/Plack-1.0055.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0057
+      Plack 1.0055
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -5198,9 +5197,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0057
+      Plack::Request 1.0055
       Plack::Request::Upload undef
-      Plack::Response 1.0057
+      Plack::Response 1.0055
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
