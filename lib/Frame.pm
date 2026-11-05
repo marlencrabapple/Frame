@@ -6,14 +6,15 @@ class Frame : does(Frame::Base) : abstract;
 
 use vars qw / @EXPORT @ISA $VERSION /;
 
-our $VERSION = '0.01_7';
+our $VERSION = '0.01_08';
 
 use utf8;
 use v5.40;
 
-use Encode     qw'encode decode';
-use TOML::Tiny qw'from_toml to_toml';
-use Path::Tiny;
+use Encode        qw'encode decode';
+use Unicode::UTF8 qw'encode_utf8 decode_utf8';
+use TOML::Tiny    qw'from_toml to_toml';
+use Path::Try;
 use Const::Fast;
 use IO::Async::Loop;
 use Net::Async::HTTP;
@@ -48,8 +49,6 @@ ADJUSTPARAMS($params) {
     $ua   = Net::Async::HTTP->new;
     $loop->add($ua);
 
-    # dmsg $config, $Frame::CONFIG_DEFAULT;
-
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
 
@@ -74,8 +73,8 @@ ADJUSTPARAMS($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-
-        #dmsg $e
+        error "Failed to load default controller class: $e";
+        dmsg $self, $e
     }
 
     $routes = Frame::Routes->new( app => $self );
@@ -109,10 +108,10 @@ method handler ( $env, %opt ) {
     my $req = $request_class->new( app => $self, env => $env, %opt );
     my $res = $self->dispatch( $req, %opt );
 
-    utf8::encode( $res->[2][0] )
-      if $res->[2][0] =~ /[^\x00-\xff]/g;
-
-    #&& $self->charset =~ $UTF8_CHARSET_NAME_RE;
+    encode_utf8( $res->[2][0] )
+      if Frame::Base::refstr( $$res[2] ) eq 'ARRAY'
+      && $res->[2][0]   =~ /[^\x00-\xff]/g
+      && $self->charset =~ $UTF8_CHARSET_NAME_RE;
 
     $res;
 }
@@ -152,16 +151,12 @@ method dispatch ($req) {
         }
         elsif ( $match isa 'Frame::Routes::Route' ) {
             $res = $self->route( $match, $req )->finalize;
-
-            #       dmsg $res;
         }
     }
     else {
         $res = $default_controller_class->new( app => $self, req => $req )
           ->render_404->finalize;
     }
-
-    #dmsg $res;
 
     $res;
 }
