@@ -7,14 +7,9 @@ use utf8;
 use v5.44;
 
 use Const::Fast;
-use Const::Fast::Exporter;
-use PadWalker      qw(peek_my peek_our);
-use List::AllUtils qw(singleton any);
+use List::Util qw(any);
 use JSON::MaybeXS;
-use Time::Piece;
 use Time::HiRes;
-use Module::Metadata;
-use Devel::StackTrace::WithLexicals;
 use IO::Handle::Common;
 use builtin;
 
@@ -35,18 +30,20 @@ const our $json_default => JSON::MaybeXS->new( {%json_default_param} );
 
 const our $package => __PACKAGE__;
 
+# field $loop;
 field $app : weak : param : accessor = undef;
 field $json : accessor { $Frame::Base::json_default };
 field $debug_mode : param : accessor = $DEBUG_MODE;
 field $dev_mode   : param : accessor = $DEV_MODE;
 
-field $debug = $ENV{DEBUG} || 1;
+field $debug : reader = $ENV{DEBUG} || 1;
 
 field $ddn_uplvl    : param : accessor = 3;
 field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
 field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
 
 ADJUST {
+    # $loop = $self->loop;
     $self->import;
 };
 
@@ -75,6 +72,11 @@ method export_common : common ($class_mop) {
 method export_instance {
     ...;
 }
+
+# method loop {
+#     $loop //= IO::Async::Loop->new;
+#     $loop;
+# }
 
 sub epoch( $join = '', %opt ) {
     $opt{ms_pad} //= 6;

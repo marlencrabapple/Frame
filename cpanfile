@@ -20,8 +20,9 @@ sub distname ($pkgname) {
 const our %pinned => (
     CRABAPP => {
         'Path::Try'          => '0.01_03',
-        'IO::Handle::Common' => '0.01_05',
+        'IO::Handle::Common' => '0.01_06',
         'IPC::Nosh'          => '0.01_04',
+        'Adjust::Params'     => '0.01_06'
     }
 );
 
@@ -40,10 +41,7 @@ requires 'Cwd';
 
 requires 'DBD::SQLite';
 requires 'DBI';
-
-requires 'Devel::StackTrace::WithLexicals';
-
-requires 'File::ConfigDir';
+requires 'SQL::Abstract';
 
 requires 'Future';
 requires 'Future::AsyncAwait';
@@ -52,46 +50,34 @@ requires 'Hash::Ordered';
 
 requires 'HTML::Escape';
 requires 'HTTP::Parser::XS';
-requires 'HTTP::Tinyish';
 
 requires 'IO::Async';
 requires 'IO::Async::SSL';
 requires 'IO::Socket::SSL';
 
-requires 'JSON::MaybeXS';
-
+requires 'File::ConfigDir';
+requires 'Net::SSLeay';
+requires 'Object::Pad';
 requires 'List::Util';
-
 requires 'meta';
+requires 'Time::HiRes';
+requires 'Time::Moment';
+requires 'Syntax::Keyword::Dynamically';
+requires 'Syntax::Keyword::Try';
 
 requires 'MIME::Types';
 
-requires 'Module::Refresh';
 requires 'Mozilla::CA';
 
 requires 'Net::Async::HTTP';
 requires 'Net::Async::HTTP::Server';
 requires 'Net::Async::WebSocket';
-requires 'Net::SSLeay';
-
-requires 'Object::Pad';
-requires 'PadWalker';
-
 requires 'Parallel::Prefork';
-
-requires 'Path::Try';
-
 requires 'Server::Starter';
 
-requires 'SQL::Abstract';
-
-requires 'Syntax::Keyword::Dynamically';
-requires 'Syntax::Keyword::Try';
-
-requires 'Text::Xslate';
-requires 'Time::HiRes';
-requires 'Time::Moment';
 requires 'TOML::Tiny';
+requires 'JSON::MaybeXS';
+requires 'Text::Xslate';
 
 on 'develop' => sub {
     recommends 'Perl::Tidy', '20221112';
@@ -106,8 +92,7 @@ on 'develop' => sub {
 };
 
 on 'test' => sub {
-
-requires 'Test::More';
-requires 'Test::Pod';
+    requires 'Test::More';
+    requires 'Test::Pod';
 }
 

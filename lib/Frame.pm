@@ -2,7 +2,7 @@ use Object::Pad qw/:experimental(:all)/;
 
 package Frame;
 
-class Frame : does(Frame::Base) : abstract;
+class Frame : does(Frame::Util) : does(Frame::Base) : abstract;
 
 use vars qw / @EXPORT @ISA $VERSION /;
 
@@ -31,35 +31,42 @@ const our $CONFIG_DEFAULT => { charset => 'UTF-8' };
 #Frame::Config->config_default;
 const our $UTF8_CHARSET_NAME_RE => qr/^utf-?8$/i;
 
-field $loop   : reader;
-field $ua     : reader;
+field $loop : reader;
+
+# field $ua     : reader;
 field $routes : reader;
 field $config = {%$CONFIG_DEFAULT};
-field $charset              : reader = 'utf-8';
+field $charset              : param : reader //= $$config{charset};
 field $request_class        : param : reader = 'Frame::Request';
 field $controller_namespace : param : reader = undef;
+field $controller_incpath   : param : reader = undef;
 field $default_controller_class = 'Frame::Controller::Default';
 field $default_controller_meta;
+field $startup_return : reader //= [];
 
-ADJUSTPARAMS($params) {
+ADJUST : params (%param) {
     unshift @INC, $INC[1];
     $self->app($self);
 
     $loop = IO::Async::Loop->new;    # This grabs the existing loop
-    $ua   = Net::Async::HTTP->new;
-    $loop->add($ua);
+                                     #$ua   = Net::Async::HTTP->new;
+                                     # $loop->add($ua);
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};
 
     $controller_namespace //=
       exists $$config{controller_namespace}
-      ? $$config{controller_namespace}
-      : __CLASS__ . '::Controller';
+    ? $$config{controller_namespace}
+    : __CLASS__ . '::Controller';
+
+    $controller_incpath //=
+      exists $$config{controller_incpath}
+    ? $$config{controller_incpath}
+    : __CLASS__ . '/Controller.pm';
 
     try {
-        my $fn = __CLASS__ . '/Controller.pm';
-        require "$fn";
+        require "$controller_incpath";
 
         my $meta = Object::Pad::MOP::Class->create_class(
             __CLASS__ . "::Controller::$self",
@@ -73,28 +80,26 @@ ADJUSTPARAMS($params) {
         $default_controller_class = $meta->name
     }
     catch ($e) {
-        error "Failed to load default controller class: $e";
-        dmsg $self, $e
+        error "Failed to load default controller class: $e" if $self->debug;
+        dmsg $self, $controller_incpath, $controller_namespace, $e
     }
 
     $routes = Frame::Routes->new( app => $self );
 
     my %startup_opts = (
-        params => $params,
+        params => \%param,
         app    => $self,
-        routes => $routes
+        routes => $routes,
+        config => $config
     );
 
-    my $ret = $self->startup(%startup_opts);
+    push @$startup_return, $self->startup(%startup_opts);
+};
 
-    warn __CLASS__
-      . "$\::startup did not return a valid value: '$ret'."
-      . " Valid values"
-      . " are 1 or the instance of the class its called on."
-      unless $ret == 1 || ( ref $ret && $ret == $self );
-
-    $ret
-}
+# method loop {
+#     $loop //= IO::Async::Loop->new;
+#     $loop;
+# }
 
 method to_psgi {
     sub ($env) { $self->handler($env) }
