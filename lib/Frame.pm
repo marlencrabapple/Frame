@@ -31,8 +31,6 @@ const our $CONFIG_DEFAULT => { charset => 'UTF-8' };
 #Frame::Config->config_default;
 const our $UTF8_CHARSET_NAME_RE => qr/^utf-?8$/i;
 
-field $loop : reader;
-
 # field $ua     : reader;
 field $routes : reader;
 field $config = {%$CONFIG_DEFAULT};
@@ -47,10 +45,7 @@ field $startup_return : reader //= [];
 ADJUST : params (%param) {
     unshift @INC, $INC[1];
     $self->app($self);
-
-    $loop = IO::Async::Loop->new;    # This grabs the existing loop
-                                     #$ua   = Net::Async::HTTP->new;
-                                     # $loop->add($ua);
+    my $loop = $self->get_loop;
 
     $charset       = $$config{charset}       if $$config{charset};
     $request_class = $$config{request_class} if exists $$config{request_class};

@@ -30,7 +30,7 @@ const our $json_default => JSON::MaybeXS->new( {%json_default_param} );
 
 const our $package => __PACKAGE__;
 
-# field $loop;
+field $loop;
 field $app : weak : param : accessor = undef;
 field $json : accessor { $Frame::Base::json_default };
 field $debug_mode : param : accessor = $DEBUG_MODE;
@@ -43,7 +43,7 @@ field $trace_indent : param : accessor = $ENV{DEBUG_INDENT}     // 1;
 field $skip_frames  : param : accessor = $ENV{DEBUG_SKIPFRAMES} // 1;
 
 ADJUST {
-    # $loop = $self->loop;
+    # $loop = IO::Async::Loop->new;
     $self->import;
 };
 
@@ -73,10 +73,16 @@ method export_instance {
     ...;
 }
 
-# method loop {
-#     $loop //= IO::Async::Loop->new;
-#     $loop;
-# }
+method get_loop {
+    dmsg $self, $loop, ref $self, refstr($self), $self->isa('Frame');
+
+    return $loop // ( $app ? $app->loop : undef )
+      // fatal( "Event loop for " . __CLASS__ . " is not available yet" )
+      unless $self->isa('Frame');
+
+    $loop //= IO::Async::Loop->new;
+    $loop;
+}
 
 sub epoch( $join = '', %opt ) {
     $opt{ms_pad} //= 6;

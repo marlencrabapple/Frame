@@ -12,7 +12,7 @@ use IO::Async;
 use Const::Fast;
 use Net::Async::HTTP;
 
-# field $_ua = {};
+field $_ua = {};
 
 method slugify : common ($text) {
     $text =~ s/[^a-zA-Z0-9]+/-/g;
@@ -21,27 +21,27 @@ method slugify : common ($text) {
     $text;
 }
 
-# method ua_notifier (%key) {
-#     scalar keys %key ? $_ua->%{%key} : %$_ua;
-# }
+method ua_notifier (%key) {
+    scalar keys %key ? $_ua->%{%key} : %$_ua;
+}
 
-# *ua_list   = \&ua_notifier;
-# *ua_active = \&ua_notifier;
+*ua_list   = \&ua_notifier;
+*ua_active = \&ua_notifier;
 
-# method ua (@opt) {
-#     state $ua;
-#     state $ua_opt //= \@opt;
+method ua (@opt) {
+    state $ua;
+    state $ua_opt //= \@opt;
 
-#     const my @ua_default => ();
+    const my @ua_default => ();
 
-#     if ( !$ua || scalar @opt ) {
-#         if ( $opt[0] eq undef && scalar @opt == 1 ) {
-#             $self->loop->remove($ua);
-#             delete $$_ua{$ua};
-#         }
+    if ( !$ua || scalar @opt ) {
+        if ( $opt[0] eq undef && scalar @opt == 1 ) {
+            $self->loop->remove($ua);
+            delete $$_ua{$ua};
+        }
 
-#         $ua = Net::Async::HTTP->new( @ua_default, @opt );
-#         $self->loop->add($ua);
-#         $$_ua{$ua} = $ua;
-#     }
-# }
+        $ua = Net::Async::HTTP->new( @ua_default, @opt );
+        $self->loop->add($ua);
+        $$_ua{$ua} = $ua;
+    }
+}
